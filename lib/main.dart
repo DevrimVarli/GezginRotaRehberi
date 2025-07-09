@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yeni_tasarim/screens/AnaEkran.dart';
+import 'package:yeni_tasarim/screens/IntroEkran.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:AnaEkran(),
+      home:IntroEkran(),
     );
   }
 }
