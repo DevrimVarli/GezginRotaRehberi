@@ -4,7 +4,7 @@ class arkaPlanWidget extends StatelessWidget {
   final double ekranGenisligi;
   final String resimYolu;
 
-
+//ARKA PLAN FOTOĞRAF
   arkaPlanWidget({required this.ekranYuksekligi, required this.ekranGenisligi,required this.resimYolu});
 
   @override

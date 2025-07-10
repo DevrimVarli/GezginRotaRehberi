@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class baslikTextWidget extends StatelessWidget {
   const baslikTextWidget({super.key});
-
+//BAŞLIK GÖSTERİLİYOR
   @override
   Widget build(BuildContext context) {
     return Positioned(

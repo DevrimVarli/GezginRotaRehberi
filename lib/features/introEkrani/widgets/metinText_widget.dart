@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 class metinText extends StatelessWidget {
   const metinText({super.key});
-
+// METİN GÖSTERİLİYOR
   @override
   Widget build(BuildContext context) {
     return Positioned(

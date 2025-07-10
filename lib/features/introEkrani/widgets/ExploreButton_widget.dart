@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-
+//EXPLORE BUTONU
 import '../../../screens/BottomNavigationBar.dart';
 class ExploreButtonWidget extends StatelessWidget {
   double ekranYuksekligi;
