@@ -3,9 +3,10 @@ class Restorantlar{
   String restoran_ad;
   String restoran_resim;
   String restoran_puan;
-  String? restoranAciklama;
+  String restoranAciklama;
+  int restoranFiyat;
 
   Restorantlar(this.restoran_id, this.restoran_ad, this.restoran_resim,
-      this.restoran_puan,{this.restoranAciklama});
+      this.restoran_puan,this.restoranAciklama,this.restoranFiyat);
 
 }

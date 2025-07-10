@@ -9,6 +9,7 @@ import 'package:yeni_tasarim/repository/AdresRepo.dart';
 
 import '../repository/RestorantRepo.dart';
 import '../repository/otelRepo.dart';
+import 'DetayEkrani.dart';
 
 class AnaEkran extends StatefulWidget {
   const AnaEkran({super.key});
@@ -181,14 +182,20 @@ class _AnaEkranState extends State<AnaEkran> {
                           Restorantlar restorant = restorantlarList[indeks];
                           return Stack(
                             children: [
-                              Container(
-                                width: 230, // Genişliği sabitle
-                                margin: EdgeInsets.only(right: 12),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/${restorant.restoran_resim}"),
-                                    fit: BoxFit.cover,
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DetayEkrani(secilenRestorant: restorant,)));
+
+                          },
+                                child: Container(
+                                  width: 230, // Genişliği sabitle
+                                  margin: EdgeInsets.only(right: 12),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/${restorant.restoran_resim}"),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -239,11 +246,7 @@ class _AnaEkranState extends State<AnaEkran> {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(35),
                                 ),
-                                    child: Center(child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Icon(Icons.favorite,color: Colors.red,)],
-                                    )),
+                                    child: Icon(Icons.favorite,color: Colors.red,),
           
                               )),
                             ],
@@ -274,18 +277,24 @@ class _AnaEkranState extends State<AnaEkran> {
                           return Column(
                             children: [
                               Expanded(
-                                child: Container(
-                                  width: 280, // Genişliği sabitle
-                                  margin: EdgeInsets.only(right: 12),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16),
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/${otel.otel_resim}"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                                child: GestureDetector(
+                                  onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>DetayEkrani(secilenOtel: otel,)));
+                          },
                                   child: Stack(
                                     children: [
+                                      Container(
+                                        width: 280, // Genişliği sabitle
+                                        margin: EdgeInsets.only(right: 12),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(16),
+                                          image: DecorationImage(
+                                            image: AssetImage("assets/${otel.otel_resim}"),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+
+                                      ),
                                       Positioned(
                                           right:23 ,
                                           bottom:1,
@@ -294,18 +303,15 @@ class _AnaEkranState extends State<AnaEkran> {
                                             decoration: BoxDecoration(
                                               color: Colors.grey.shade800,
                                               borderRadius: BorderRadius.circular(16),
-          
+
                                             ),
-                                            child: Center(child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Text(otel.otel_yazi,style: GoogleFonts.roboto(fontSize: 22,color: Colors.white,fontWeight: FontWeight.bold),),
-                                              ],
-                                            )),
-          
+                                            child: Center(child: Text(otel.otel_yazi,style: GoogleFonts.roboto(fontSize: 18,color: Colors.white,fontWeight: FontWeight.bold),)),
+
                                           ))
                                     ],
                                   ),
+
+
                                 ),
                               ),
                               Text(otel.otel_ad,style: GoogleFonts.roboto(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold),),
