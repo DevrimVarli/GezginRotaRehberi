@@ -5,6 +5,10 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:yeni_tasarim/model/Konum.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
+import 'package:yeni_tasarim/repository/AdresRepo.dart';
+
+import '../repository/RestorantRepo.dart';
+import '../repository/otelRepo.dart';
 
 class AnaEkran extends StatefulWidget {
   const AnaEkran({super.key});
@@ -17,38 +21,7 @@ class _AnaEkranState extends State<AnaEkran> {
   List<Restorantlar>restorantlarList=[];
   List<Oteller>otelList=[];
   Konum secilenKonum=Konum(1, "Ankara", "Çankaya");
-
   List<Konum> konumList = [];
-   void  konumlar(){
-    Konum konum1 = Konum(1, "Ankara", "Çankaya");
-    Konum konum2 = Konum(2, "Ankara", "Yenimahalle");
-    Konum konum3 = Konum(3, "Ankara", "Keçiören");
-    Konum konum4 = Konum(4, "Ankara", "Çatalca");
-    konumList.add(konum1);
-    konumList.add(konum2);
-    konumList.add(konum3);
-    konumList.add(konum4);
-  } void  restorantlar(){
-     restorantlarList.addAll([ Restorantlar(1, "Alley Palace", "alley-palace.png", "4.1"),
-     Restorantlar(2, "Coeurdes Alpes", "coeurdes-alpes.png", "4.5"),
-     Restorantlar(3, "Alley Palace", "alley-palace.png", "4.1"),
-     Restorantlar(4, "Coeurdes Alpes", "coeurdes-alpes.png", "4.5"),
-    ]);
-
-
-  }
-  void  oteller(){
-
-     otelList.addAll([
-       Oteller(1, "Explore Aspen", "explore-aspen.png", "4N/5D"),
-     Oteller(2, "Luxurious Aspen", "luxurious-aspen.png", "2N/3D"),
-       Oteller(3, "Explore Aspen", "explore-aspen.png", "4N/5D"),
-     Oteller(4, "Luxurious Aspen", "luxurious-aspen.png", "2N/3D"),
-
-    ]);
-
-
-  }
   List<String>basliklar=["Location", "Hotels","Food","Adventure","Location", "Hotels","Food","Adventure"];
 
   int selectedIndex= 0;
@@ -57,13 +30,11 @@ class _AnaEkranState extends State<AnaEkran> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    konumlar();
-    restorantlar();
-    oteller();
+    AdresRepo().konumlar(konumList);
+    RestorantRepo().restorantlar(restorantlarList);
+    otelRepo().oteller(otelList);
   }
   Widget build(BuildContext context) {
-
-
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
     double ekranGenisligi = MediaQuery.sizeOf(context).width;
     return Scaffold(
