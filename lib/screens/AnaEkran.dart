@@ -29,7 +29,7 @@ class _AnaEkranState extends State<AnaEkran> {
   List<Oteller>otelList=[];
   Konum secilenKonum=Konum(1, "Ankara", "Çankaya");
   List<Konum> konumList = [];
-  List<String>basliklar=["Location", "Hotels","Food","Adventure","Location", "Hotels","Food","Adventure"];
+  List<String> basliklar = ["Location", "Hotels","Food","Adventure","Location", "Hotels","Food","Adventure"];
 
   int selectedIndex= 1;
   @override
@@ -38,8 +38,7 @@ class _AnaEkranState extends State<AnaEkran> {
     // TODO: implement initState
     super.initState();
     AdresRepo().konumlar(konumList);
-    RestorantRepo().restorantlar(restorantlarList);
-    otelRepo().oteller(otelList);
+
   }
 
   Widget build(BuildContext context) {
@@ -48,14 +47,14 @@ class _AnaEkranState extends State<AnaEkran> {
     Widget categoryWidget;
 
     if (basliklar[selectedIndex] == "Hotels") {
-      categoryWidget = OtellerListViewWidget(otelList);
+      categoryWidget = OtellerListViewWidget();
     } else if (basliklar[selectedIndex] == "Food") {
-      categoryWidget = RestorantListViewWidget(restorantlarList);
+      categoryWidget = RestorantListViewWidget();
     } else {
       categoryWidget = Column(
         children: [
-          RestorantListViewWidget(restorantlarList),
-          OtellerListViewWidget(otelList),
+          RestorantListViewWidget(),
+          OtellerListViewWidget(),
 
         ],
       );

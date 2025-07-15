@@ -14,14 +14,14 @@ class ImageWidgets extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         width: ekranGenisligi,
-        height: 380,
+        height: 400,
         child:secilenOtel != null
-            ? Image.asset(
-          "assets/${secilenOtel!.otel_resim}",
+            ? Image.network(
+          secilenOtel!.otel_resim,
           fit: BoxFit.cover,
         )
-            : Image.asset(
-          "assets/${secilenRestorant!.restoran_resim}",
+            : Image.network(
+          secilenRestorant!.restoran_resim,
           fit: BoxFit.cover,
         ),
       ),

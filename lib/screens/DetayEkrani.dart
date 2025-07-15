@@ -26,7 +26,6 @@ class _DetayEkraniState extends State<DetayEkrani> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    IconRepo().imkanlar(imkanList);
 
   }
   @override
@@ -56,7 +55,7 @@ class _DetayEkraniState extends State<DetayEkrani> {
                   ],
                 ),
                 MekanInfoWidgets(secilenRestorant: widget.secilenRestorant,secilenOtel: widget.secilenOtel,),
-                FacilitiesWidgets(ekranGenisligi: ekranGenisligi,imkanList: imkanList,),
+                FacilitiesWidgets(ekranGenisligi: ekranGenisligi,secilenOtel: widget.secilenOtel,secilenRestorant: widget.secilenRestorant,),
 
                 PriceWidgets(ekranGenisligi: ekranGenisligi,secilenOtel: widget.secilenOtel,secilenRestorant: widget.secilenRestorant,),
 

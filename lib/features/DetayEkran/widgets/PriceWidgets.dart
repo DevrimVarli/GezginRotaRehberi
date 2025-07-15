@@ -28,8 +28,8 @@ class PriceWidgets extends StatelessWidget {
               ),
               Text(
                 secilenOtel != null
-                    ? "€${secilenOtel!.otelFiyat.toString()}"
-                    : "€${secilenRestorant!.restoranFiyat}",
+                    ? "€${secilenOtel!.otel_fiyat.toString()}"
+                    : "€${secilenRestorant!.restoran_fiyat}",
                 style: GoogleFonts.roboto(fontSize: 32, color: Colors.greenAccent.shade700, fontWeight: FontWeight.bold),
               ),
             ],

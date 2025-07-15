@@ -23,7 +23,7 @@ class MekanInfoWidgets extends StatelessWidget {
                     ? secilenOtel!.otel_ad
                     : secilenRestorant!.restoran_ad,
                 style: GoogleFonts.montserrat(
-                  fontSize: 24,
+                  fontSize: secilenOtel!=null?secilenOtel!.otel_ad.length>20?16:24:secilenRestorant!.restoran_ad.length>20?16:24,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -31,7 +31,7 @@ class MekanInfoWidgets extends StatelessWidget {
               Text(
                 "Show map",
                 style: GoogleFonts.roboto(
-                  fontSize: 18,
+                  fontSize: 16,
                   color: Colors.blue,
                   fontWeight: FontWeight.bold,
                 ),
@@ -45,7 +45,7 @@ class MekanInfoWidgets extends StatelessWidget {
               SizedBox(width: 4),
               Text(
                 secilenOtel != null
-                    ? secilenOtel!.otel_yazi.toString()
+                    ? secilenOtel!.otel_yildiz.toString()
                     : secilenRestorant!.restoran_puan.toString(),
                 style: GoogleFonts.roboto(fontSize: 18, color: Colors.grey),
               ),
@@ -59,8 +59,8 @@ class MekanInfoWidgets extends StatelessWidget {
           SizedBox(height: 12),
           Text(
             secilenOtel != null
-                ? "${secilenOtel!.otelAciklama}"
-                : "${secilenRestorant!.restoranAciklama}",
+                ? "${secilenOtel!.otel_aciklama}"
+                : "${secilenRestorant!.restoran_aciklama}",
             style: GoogleFonts.roboto(fontSize: 18, color: Colors.grey.shade900),
           ),
           SizedBox(height: 4),

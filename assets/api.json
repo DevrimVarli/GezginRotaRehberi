@@ -1,0 +1,312 @@
+{
+  "oteller": [
+    {
+      "otel_id": 1,
+      "otel_ad": "Royal Capital Hotel & Suit Çekirge",
+      "otel_resim": "https://d3m404n3ahyqc3.cloudfront.net/images/product/1/2/0/2/2/593611/royal_capital_hotel___suit_cekirge_593611.jpg",
+      "otel_yildiz": 5,
+      "otel_fiyat": 2500,
+      "otel_aciklama": "Royal Capital Hotel, modern tasarımı ve lüks hizmetleriyle Çekirge'de misafirlerine konforlu bir konaklama sunmaktadır.",
+      "imkanlar": [
+        {
+          "imkan_id": 1,
+          "imkan_ad": "Heater",
+          "imkan_icon": "wifi"
+        },
+        {
+          "imkan_id": 2,
+          "imkan_ad": "Dinner",
+          "imkan_icon": "lunch_dining"
+        },
+        {
+          "imkan_id": 3,
+          "imkan_ad": "Tub",
+          "imkan_icon": "hot_tub"
+        },
+        {
+          "imkan_id": 4,
+          "imkan_ad": "Pool",
+          "imkan_icon": "pool"
+        }
+      ]
+    },
+    {
+      "otel_id": 2,
+      "otel_ad": "Anatolia Bursa",
+      "otel_resim": "https://media.dev.paximum.com/hotelimages/104218/d3f5c0193c0b07be0012c59dca620c86.jpg",
+      "otel_yildiz": 4,
+      "otel_fiyat": 2320,
+      "otel_aciklama": "Anatolia Bursa, Bursa'nın merkezine yakın konumda, şık ve rahat odalar sunan, misafirlerine kaliteli hizmet sağlayan bir oteldir.",
+      "imkanlar": [
+        {
+          "imkan_id": 1,
+          "imkan_ad": "Heater",
+          "imkan_icon": "wifi"
+        },
+        {
+          "imkan_id": 2,
+          "imkan_ad": "Dinner",
+          "imkan_icon": "lunch_dining"
+        },
+        {
+          "imkan_id": 3,
+          "imkan_ad": "Tub",
+          "imkan_icon": "hot_tub"
+        },
+        {
+          "imkan_id": 4,
+          "imkan_ad": "Pool",
+          "imkan_icon": "pool"
+        }
+      ]
+    },
+    {
+      "otel_id": 3,
+      "otel_ad": "Kayhan City Hotel",
+      "otel_resim": "https://d3m404n3ahyqc3.cloudfront.net/images/product/1/2/0/2/2/22011/kayhan_city_hotel_22011.jpg",
+      "otel_yildiz": 3,
+      "otel_fiyat": 2800,
+      "otel_aciklama": "Kayhan City Hotel, Bursa'nın merkezi bir noktasında yer alır, konuklarına uygun fiyatlarla rahat bir konaklama sunar.",
+      "imkanlar": [
+        {
+          "imkan_id": 1,
+          "imkan_ad": "Heater",
+          "imkan_icon": "wifi"
+        },
+        {
+          "imkan_id": 2,
+          "imkan_ad": "Dinner",
+          "imkan_icon": "lunch_dining"
+        },
+        {
+          "imkan_id": 3,
+          "imkan_ad": "Tub",
+          "imkan_icon": "hot_tub"
+        },
+        {
+          "imkan_id": 4,
+          "imkan_ad": "Pool",
+          "imkan_icon": "pool"
+        }
+      ]
+    },
+    {
+      "otel_id": 4,
+      "otel_ad": "Baia Bursa Hotel",
+      "otel_resim": "https://d3m404n3ahyqc3.cloudfront.net/images/product/1/2/0/2/2/14345/baia_bursa_hotel_14345.jpg",
+      "otel_yildiz": 4,
+      "otel_fiyat": 2700,
+      "otel_aciklama": "Baia Bursa Hotel, modern olanaklar ve rahat odalarıyla Bursalı misafirlerine konforlu bir tatil deneyimi sunuyor.",
+      "imkanlar": [
+        {
+          "imkan_id": 1,
+          "imkan_ad": "Heater",
+          "imkan_icon": "wifi"
+        },
+        {
+          "imkan_id": 2,
+          "imkan_ad": "Dinner",
+          "imkan_icon": "lunch_dining"
+        },
+        {
+          "imkan_id": 3,
+          "imkan_ad": "Tub",
+          "imkan_icon": "hot_tub"
+        },
+        {
+          "imkan_id": 4,
+          "imkan_ad": "Pool",
+          "imkan_icon": "pool"
+        }
+      ]
+    },
+    {
+      "otel_id": 5,
+      "otel_ad": "Swissotel Uludağ Bursa",
+      "otel_resim": "https://d3m404n3ahyqc3.cloudfront.net/images/product/1/2/0/2/2/545004/swissotel_uludag_bursa_545004.jpg",
+      "otel_yildiz": 5,
+      "otel_fiyat": 3000,
+      "otel_aciklama": "Swissotel Uludağ Bursa, dağ manzarası eşliğinde lüks konaklama seçenekleri ve birinci sınıf hizmet sunmaktadır.",
+      "imkanlar": [
+        {
+          "imkan_id": 1,
+          "imkan_ad": "Heater",
+          "imkan_icon": "wifi"
+        },
+        {
+          "imkan_id": 2,
+          "imkan_ad": "Dinner",
+          "imkan_icon": "lunch_dining"
+        },
+        {
+          "imkan_id": 3,
+          "imkan_ad": "Tub",
+          "imkan_icon": "hot_tub"
+        },
+        {
+          "imkan_id": 4,
+          "imkan_ad": "Pool",
+          "imkan_icon": "pool"
+        }
+      ]
+    }
+  ],
+  "restoranlar": [
+    {
+      "restoran_id": 1,
+      "restoran_ad": "Tola Restaurant",
+      "restoran_resim": "https://cdn.endavet.net/firma_ilan/114983/6d5ba9fa-3578-4314-a556-7124dc1213c1_1200x.jpeg",
+      "restoran_puan": "4.5",
+      "restoran_aciklama": "Tola Restaurant Restoranı, uzun yıllardan beri güleryüzlü hizmetini ve birbirinden lezzetli yemek çeşitlerini Bursa, Mudanya’de bulunan mekânında işinin ehli personeli aracılığıyla müşterileriyle buluşturmaktadır.",
+      "restoran_fiyat": 800,
+      "otel_id": 1,
+      "imkanlar": [
+        {
+          "imkan_id": 1,
+          "imkan_ad": "Heater",
+          "imkan_icon": "wifi"
+        },
+        {
+          "imkan_id": 2,
+          "imkan_ad": "Dinner",
+          "imkan_icon": "lunch_dining"
+        },
+        {
+          "imkan_id": 3,
+          "imkan_ad": "Tub",
+          "imkan_icon": "hot_tub"
+        },
+        {
+          "imkan_id": 4,
+          "imkan_ad": "Pool",
+          "imkan_icon": "pool"
+        }
+      ]
+    },
+    {
+      "restoran_id": 2,
+      "restoran_ad": "Zennup 1844",
+      "restoran_resim": "https://cdn.endavet.net/firma_ilan/114976/5f502465-43d7-420f-8834-f5db542a91e6_1200x.jpeg",
+      "restoran_puan": "4.2",
+      "restoran_aciklama": "Zennup 1844 Restoranı, uzun yıllardan beri güleryüzlü hizmetini ve birbirinden lezzetli yemek çeşitlerini Bursa, Nilüfer’de bulunan mekânında işinin ehli personeli aracılığıyla müşterileriyle buluşturmaktadır.",
+      "restoran_fiyat": 1800,
+      "otel_id": 1,
+      "imkanlar": [
+        {
+          "imkan_id": 1,
+          "imkan_ad": "Heater",
+          "imkan_icon": "wifi"
+        },
+        {
+          "imkan_id": 2,
+          "imkan_ad": "Dinner",
+          "imkan_icon": "lunch_dining"
+        },
+        {
+          "imkan_id": 3,
+          "imkan_ad": "Tub",
+          "imkan_icon": "hot_tub"
+        },
+        {
+          "imkan_id": 4,
+          "imkan_ad": "Pool",
+          "imkan_icon": "pool"
+        }
+      ]
+    },
+    {
+      "restoran_id": 3,
+      "restoran_ad": "Luna Bar Restaurant",
+      "restoran_resim": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/5d/02/14/luna-bar-restaurant.jpg?w=1400&h=800&s=1",
+      "restoran_puan": "4.8",
+      "restoran_aciklama": "Havuzbaşı ve göz alıcı Bursa manzarası eşliğinde dünya mutfağından en özel spesiyalleri ve birbirinden lezzetli kokteylleri Luna Bar & Restaurant'ta deneyimleyebilirsiniz.",
+      "restoran_fiyat": 1600,
+      "otel_id": 2,
+      "imkanlar": [
+        {
+          "imkan_id": 1,
+          "imkan_ad": "Heater",
+          "imkan_icon": "wifi"
+        },
+        {
+          "imkan_id": 2,
+          "imkan_ad": "Dinner",
+          "imkan_icon": "lunch_dining"
+        },
+        {
+          "imkan_id": 3,
+          "imkan_ad": "Tub",
+          "imkan_icon": "hot_tub"
+        },
+        {
+          "imkan_id": 4,
+          "imkan_ad": "Pool",
+          "imkan_icon": "pool"
+        }
+      ]
+    },
+    {
+      "restoran_id": 4,
+      "restoran_ad": "Kitap Evi Restaurant",
+      "restoran_resim": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/a2/ab/fe/kitap-evi-hotel-restaurant.jpg?w=1800&h=1000&s=1",
+      "restoran_puan": "4.3",
+      "restoran_aciklama": "Doğum günleri, yıl dönümleri ve daha pek çok kutlama için gidilebilecek harika bir mekân. ",
+      "restoran_fiyat": 1500,
+      "otel_id": 2,
+      "imkanlar": [
+        {
+          "imkan_id": 1,
+          "imkan_ad": "Heater",
+          "imkan_icon": "wifi"
+        },
+        {
+          "imkan_id": 2,
+          "imkan_ad": "Dinner",
+          "imkan_icon": "lunch_dining"
+        },
+        {
+          "imkan_id": 3,
+          "imkan_ad": "Tub",
+          "imkan_icon": "hot_tub"
+        },
+        {
+          "imkan_id": 4,
+          "imkan_ad": "Pool",
+          "imkan_icon": "pool"
+        }
+      ]
+    },
+    {
+      "restoran_id": 5,
+      "restoran_ad": "Da Vittorio Ristorante Italiano",
+      "restoran_resim": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/de/13/b8/da-vittorio-ristorante.jpg?w=1400&h=800&s=1",
+      "restoran_puan": "4.1",
+      "restoran_aciklama": "The philosophy of “Da Vittorio” is using the best ingredients available in Bursa, also importing from Italy to create dishes that are similar to the food prepared by the best chefs of Italy so that you don't have to travel anywhere else to enjoy real Italian cuisine.",
+      "restoran_fiyat": 750,
+      "otel_id": 3,
+      "imkanlar": [
+        {
+          "imkan_id": 1,
+          "imkan_ad": "Heater",
+          "imkan_icon": "wifi"
+        },
+        {
+          "imkan_id": 2,
+          "imkan_ad": "Dinner",
+          "imkan_icon": "lunch_dining"
+        },
+        {
+          "imkan_id": 3,
+          "imkan_ad": "Tub",
+          "imkan_icon": "hot_tub"
+        },
+        {
+          "imkan_id": 4,
+          "imkan_ad": "Pool",
+          "imkan_icon": "pool"
+        }
+      ]
+    }
+  ]
+
+}
