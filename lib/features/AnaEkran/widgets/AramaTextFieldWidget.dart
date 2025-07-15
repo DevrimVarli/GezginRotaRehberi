@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-class AramaTextFieldWidget extends StatelessWidget {
+
+import '../../../providers/all_providers.dart';
+class AramaTextFieldWidget extends ConsumerWidget {
   const AramaTextFieldWidget({super.key});
 //ARAMA İÇİN TEXTFIELD
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Padding(
       padding:  EdgeInsets.symmetric(vertical: 8.0,horizontal: 8 ),
       child: TextField(
+        onChanged: (aramaSonucu){
+          ref.read(aramaSonucuStateProvider.notifier).state=aramaSonucu;
+        },
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.search,size: 32,color:Colors.grey.shade400 ,),
           //labelText: label,

@@ -1,5 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yeni_tasarim/model/Konum.dart';
+import 'package:yeni_tasarim/repository/AdresRepo.dart';
 import 'package:yeni_tasarim/repository/IconRepo.dart';
+import 'package:yeni_tasarim/repository/KategoriRepo.dart';
 
 import '../repository/RestorantRepo.dart';
 import '../repository/otelRepo.dart';
@@ -13,3 +16,12 @@ final restoranFutureProvider=FutureProvider((ref)async{
 final imkanRestFutureProvider=FutureProvider((ref)async{
   return await imkanRepo().imkanlar();
 });
+final kategoriFutureProvider=Provider<List<String>>((ref){
+  return  KategoriRepo().basliklar();
+});
+final secilemKonumStateProvider=StateProvider<Konum>((ref)=>Konum(1, "Ankara", "Çankaya"));
+final konumlarProvider=StateProvider<List<Konum>>((ref){
+  return AdresRepo().konumlar();
+});
+final selectedIndexProvider=StateProvider<int>((ref)=>0);
+final aramaSonucuStateProvider=StateProvider<String>((ref)=>"");

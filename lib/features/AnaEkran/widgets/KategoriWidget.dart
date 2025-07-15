@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
-class KategoriWidget extends StatefulWidget {
-  List<String>basliklar;
-  int selectedIndex;
-  final Function(int) onCategorySelected;
-  KategoriWidget(this.basliklar,this.selectedIndex,this.onCategorySelected);
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../providers/all_providers.dart';
+class KategoriWidget extends ConsumerWidget {
+  KategoriWidget();
 
   @override
-  State<KategoriWidget> createState() => _KategoriWidgetState();
-}
-//KATEGORİLERİ GÖSTERİLİYOR
-class _KategoriWidgetState extends State<KategoriWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
+  Widget build(BuildContext context,WidgetRef ref) {
+    final selectedIndex=ref.watch(selectedIndexProvider);
+    final basliklar=ref.watch(kategoriFutureProvider);
+    return  SizedBox(
       height: 50,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: widget.basliklar.length,
+        itemCount: basliklar.length,
         itemBuilder: (context, index) {
-          final isSelected = widget.selectedIndex == index;
+          final isSelected = selectedIndex == index;
           return Padding(
             padding: const EdgeInsets.only(right: 12),
             child: GestureDetector(
               onTap: () {
-                setState(() {
-                   widget.selectedIndex = index;
-                });
-                widget.onCategorySelected(index);
+                ref.read(selectedIndexProvider.notifier).state = index;
               },
               child: Container(
                 padding:
@@ -36,7 +30,7 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                   borderRadius: BorderRadius.circular(32),
                 ),
                 child: Text(
-                  widget.basliklar[index],
+                  basliklar[index],
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -48,6 +42,6 @@ class _KategoriWidgetState extends State<KategoriWidget> {
           );
         },
       ),
-    );
+    );;
   }
 }

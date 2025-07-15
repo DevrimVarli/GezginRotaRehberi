@@ -1,55 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../model/Konum.dart';
-class AdresPopUpWidget extends StatefulWidget {
-  List<Konum>konumList;
-  Konum secilenKonum;
+import '../../../providers/all_providers.dart';
 
-//ADRES SEÇİMİ İÇİN POPUP
-  AdresPopUpWidget(this.konumList, this.secilenKonum);
-
+class AdresPopUpWidget extends ConsumerWidget {
   @override
-  State<AdresPopUpWidget> createState() => _AdresPopUpWidgetState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final konum = ref.watch(secilemKonumStateProvider);
+    final konumList = ref.watch(konumlarProvider);
 
-class _AdresPopUpWidgetState extends State<AdresPopUpWidget> {
-  @override
-  Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topCenter,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.location_on,color: Colors.blueAccent,),
-          Text("${widget.secilenKonum.ilce_adi},${widget.secilenKonum.sehir_adi}",style:GoogleFonts.roboto(fontSize: 18,color: Colors.black,fontWeight: FontWeight.w500) ,),
-          PopupMenuButton(
-              child: Icon(Icons.keyboard_arrow_down_rounded,size: 25,),
-              itemBuilder: (context)=>[
-                PopupMenuItem(
-                  value: 1,
-                  child: Text("${widget.konumList[0].ilce_adi},${widget.konumList[0].sehir_adi}",style:GoogleFonts.roboto(fontSize: 18,color: Colors.black,fontWeight: FontWeight.w500) ,),),
-                PopupMenuItem(
-                  value:2,
-                  child: Text("${widget.konumList[1].ilce_adi},${widget.konumList[1].sehir_adi}",style:GoogleFonts.roboto(fontSize: 18,color: Colors.black,fontWeight: FontWeight.w500) ,),),
-                PopupMenuItem(
-                  value: 3,
-                  child: Text("${widget.konumList[2].ilce_adi},${widget.konumList[2].sehir_adi}",style:GoogleFonts.roboto(fontSize: 18,color: Colors.black,fontWeight: FontWeight.w500) ,),),
-                PopupMenuItem(
-                  value: 4,
-                  child: Text("${widget.konumList[3].ilce_adi},${widget.konumList[3].sehir_adi}",style:GoogleFonts.roboto(fontSize: 18,color: Colors.black,fontWeight: FontWeight.w500) ,),),
-
-              ],
-              onCanceled: (){
-                print("Seçim iptal edildi");
-              },
-              onSelected: (menuItemValue){
-                setState(() {
-                   widget.secilenKonum=widget.konumList[menuItemValue-1];
-                });
-              }
-
+          Icon(
+            Icons.location_on,
+            color: Colors.blueAccent,
+            size: 30,
           ),
+          SizedBox(width: 8),
+          Text(
+            "${konum.ilce_adi}, ${konum.sehir_adi}",
+            style: GoogleFonts.roboto(
+              fontSize: 18,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(width: 8),
+          PopupMenuButton<Konum>(
+            elevation: 3, // Gölge efekti
+            shadowColor: Colors.black.withOpacity(0.3), // Gölgenin saydamlığı
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15), // Köşe yuvarlama
+            ),
+            color: Colors.white, // Menü arka plan rengi
+            icon: Icon(
+              Icons.keyboard_arrow_down_rounded,
+              size: 30,
+              color: Colors.blueAccent,
+            ),
+            itemBuilder: (BuildContext context) {
+              return konumList.map((Konum konum) {
+                return PopupMenuItem<Konum>(
+                  value: konum,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          color: Colors.blueAccent,
+                          size: 20,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          "${konum.ilce_adi}, ${konum.sehir_adi}",
+                          style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
 
+                      ],
+                    ),
+                  ),
+                );
+              }).toList();
+            },
+            onCanceled: () {
+              print("Seçim iptal edildi");
+            },
+            onSelected: (Konum selectedKonum) {
+              ref.read(secilemKonumStateProvider.notifier).state = selectedKonum;
+            },
+          ),
         ],
       ),
     );

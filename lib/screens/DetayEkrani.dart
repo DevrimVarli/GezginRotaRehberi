@@ -21,13 +21,6 @@ class DetayEkrani extends StatefulWidget {
 }
 
 class _DetayEkraniState extends State<DetayEkrani> {
-  List<Imkanlar>imkanList=[];
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-  }
   @override
   Widget build(BuildContext context) {
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;

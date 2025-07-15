@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/AdresPopUpWidget.dart';
@@ -13,35 +14,18 @@ import 'package:yeni_tasarim/model/oteller.dart';
 import 'package:yeni_tasarim/repository/AdresRepo.dart';
 
 import '../features/AnaEkran/widgets/OtellerListViewWidget.dart';
+import '../providers/all_providers.dart';
 import '../repository/RestorantRepo.dart';
 import '../repository/otelRepo.dart';
 import 'DetayEkrani.dart';
 
-class AnaEkran extends StatefulWidget {
+class AnaEkran extends ConsumerWidget {
   const AnaEkran({super.key});
 
   @override
-  State<AnaEkran> createState() => _AnaEkranState();
-}
-
-class _AnaEkranState extends State<AnaEkran> {
-  List<Restorantlar>restorantlarList=[];
-  List<Oteller>otelList=[];
-  Konum secilenKonum=Konum(1, "Ankara", "Çankaya");
-  List<Konum> konumList = [];
-  List<String> basliklar = ["Location", "Hotels","Food","Adventure","Location", "Hotels","Food","Adventure"];
-
-  int selectedIndex= 1;
-  @override
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    AdresRepo().konumlar(konumList);
-
-  }
-
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final selectedIndex=ref.watch(selectedIndexProvider);
+    final basliklar=ref.watch(kategoriFutureProvider);
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
     double ekranGenisligi = MediaQuery.sizeOf(context).width;
     Widget categoryWidget;
@@ -62,16 +46,14 @@ class _AnaEkranState extends State<AnaEkran> {
 
     return Scaffold(
       backgroundColor:Colors.white10 ,
-      appBar: PreferredSize(preferredSize: Size.fromHeight(ekranYuksekligi/10),child: AppBarWidget(konumList,secilenKonum,ekranYuksekligi)),
+      appBar: PreferredSize(preferredSize: Size.fromHeight(ekranYuksekligi/10),child: AppBarWidget(ekranYuksekligi)),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
             children: [
-             AramaTextFieldWidget(),
-             KategoriWidget(basliklar, selectedIndex,(indeks){setState(() {
-               selectedIndex=indeks;
-             });}) ,
+              AramaTextFieldWidget(),
+              KategoriWidget() ,
               categoryWidget
 
 

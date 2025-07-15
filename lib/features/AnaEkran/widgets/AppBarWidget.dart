@@ -4,10 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../model/Konum.dart';
 import 'AdresPopUpWidget.dart';
 class AppBarWidget extends StatefulWidget {
-  List<Konum>konumList;
-  Konum secilenKonum;
   double ekranYuksekligi;
-  AppBarWidget(this.konumList, this.secilenKonum, this.ekranYuksekligi);
+  AppBarWidget(this.ekranYuksekligi);
 //APPBAR İÇERİĞİ GÖSTERİLİYOR
   @override
   State<AppBarWidget> createState() => _AppBarWidgetState();
@@ -26,7 +24,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
         ],
       ),
       actions: [
-        AdresPopUpWidget(widget.konumList, widget.secilenKonum),
+        AdresPopUpWidget(),
       ],
     );
   }
