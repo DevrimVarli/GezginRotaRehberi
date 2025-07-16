@@ -23,11 +23,11 @@ class AnaEkran extends ConsumerWidget {
   const AnaEkran({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    final selectedIndex=ref.watch(selectedIndexProvider);
-    final basliklar=ref.watch(kategoriFutureProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedIndex = ref.watch(selectedIndexProvider);
+    final basliklar = ref.watch(kategoriFutureProvider);
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
-    double ekranGenisligi = MediaQuery.sizeOf(context).width;
+
     Widget categoryWidget;
 
     if (basliklar[selectedIndex] == "Hotels") {
@@ -39,32 +39,34 @@ class AnaEkran extends ConsumerWidget {
         children: [
           RestorantListViewWidget(),
           OtellerListViewWidget(),
-
         ],
       );
     }
 
     return Scaffold(
-      backgroundColor:Colors.white10 ,
-      appBar: PreferredSize(preferredSize: Size.fromHeight(ekranYuksekligi/10),child: AppBarWidget(ekranYuksekligi)),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
-            children: [
-              AramaTextFieldWidget(),
-              KategoriWidget() ,
-              categoryWidget
-
-
-
-
-
-
-
-            ],
+      backgroundColor: Colors.white10,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(ekranYuksekligi / 10),
+        child: AppBarWidget(ekranYuksekligi),
+      ),
+      body: CustomScrollView(
+        slivers: [
+          // Arama alanı sabit kalsın
+          SliverToBoxAdapter(
+            child: AramaTextFieldWidget(),
           ),
-        ),
+          // Kategori alanı sabit kalsın
+          SliverToBoxAdapter(
+            child: KategoriWidget(),
+          ),
+          // İçerik (scroll edilebilir)
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: categoryWidget,
+            ),
+          ),
+        ],
       ),
     );
   }

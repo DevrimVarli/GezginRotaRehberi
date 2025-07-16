@@ -28,37 +28,73 @@ class _DetayEkraniState extends State<DetayEkrani> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        children:[ Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(
-                  clipBehavior: Clip.none,
+      body: SafeArea(
+        bottom: false,
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 16, right: 16, top: 16, bottom: 100),
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
-                    // Arka plan resim
-                   ImageWidgets(secilenOtel: widget.secilenOtel, secilenRestorant: widget.secilenRestorant, ekranGenisligi: ekranGenisligi),
+                    Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        // Resim alanı
+                        ImageWidgets(
+                          secilenOtel: widget.secilenOtel,
+                          secilenRestorant: widget.secilenRestorant,
+                          ekranGenisligi: ekranGenisligi,
+                        ),
+                        // Geri butonu
+                        ArrowBackButtonWidgets(),
+                        // Favori butonu
+                        FavoriteButtonWidgets(),
+                      ],
+                    ),
 
-                    // Geri butonu (sol üst)
-                   ArrowBackButtonWidgets(),
+                    // Mekan bilgileri
+                    MekanInfoWidgets(
+                      secilenRestorant: widget.secilenRestorant,
+                      secilenOtel: widget.secilenOtel,
+                    ),
 
-                    // Favori butonu (sağ alt, biraz dışarı taşıyor)
-                    FavoriteButtonWidgets(),
+                    // İmkanlar listesi
+                    FacilitiesWidgets(
+                      ekranGenisligi: ekranGenisligi,
+                      secilenOtel: widget.secilenOtel,
+                      secilenRestorant: widget.secilenRestorant,
+                    ),
                   ],
                 ),
-                MekanInfoWidgets(secilenRestorant: widget.secilenRestorant,secilenOtel: widget.secilenOtel,),
-                FacilitiesWidgets(ekranGenisligi: ekranGenisligi,secilenOtel: widget.secilenOtel,secilenRestorant: widget.secilenRestorant,),
-
-                PriceWidgets(ekranGenisligi: ekranGenisligi,secilenOtel: widget.secilenOtel,secilenRestorant: widget.secilenRestorant,),
-
-
-              ],
+              ),
             ),
-          ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10,
+                      offset: Offset(0, -2),
+                    ),
+                  ],
+                ),
+                child: PriceWidgets(
+                  ekranGenisligi: ekranGenisligi,
+                  secilenOtel: widget.secilenOtel,
+                  secilenRestorant: widget.secilenRestorant,
+                ),
+              ),
+            ),
+          ],
         ),
-
-    ]
       ),
     );
   }
