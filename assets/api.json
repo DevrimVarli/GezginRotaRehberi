@@ -7,6 +7,10 @@
       "otel_yildiz": 5,
       "otel_fiyat": 2500,
       "otel_aciklama": "Royal Capital Hotel, modern tasarımı ve lüks hizmetleriyle Çekirge'de misafirlerine konforlu bir konaklama sunmaktadır.",
+      "konum": {
+        "il": "Bursa",
+        "ilce": "Osmangazi"
+      },
       "imkanlar": [
         {
           "imkan_id": 1,
@@ -37,6 +41,10 @@
       "otel_yildiz": 4,
       "otel_fiyat": 2320,
       "otel_aciklama": "Anatolia Bursa, Bursa'nın merkezine yakın konumda, şık ve rahat odalar sunan, misafirlerine kaliteli hizmet sağlayan bir oteldir.",
+      "konum": {
+        "il": "Bursa",
+        "ilce": "Nilüfer"
+      },
       "imkanlar": [
         {
           "imkan_id": 1,
@@ -67,6 +75,10 @@
       "otel_yildiz": 3,
       "otel_fiyat": 2800,
       "otel_aciklama": "Kayhan City Hotel, Bursa'nın merkezi bir noktasında yer alır, konuklarına uygun fiyatlarla rahat bir konaklama sunar.",
+      "konum": {
+        "il": "Bursa",
+        "ilce": "Osmangazi"
+      },
       "imkanlar": [
         {
           "imkan_id": 1,
@@ -97,6 +109,10 @@
       "otel_yildiz": 4,
       "otel_fiyat": 2700,
       "otel_aciklama": "Baia Bursa Hotel, modern olanaklar ve rahat odalarıyla Bursalı misafirlerine konforlu bir tatil deneyimi sunuyor.",
+      "konum": {
+        "il": "Bursa",
+        "ilce": "Nilüfer"
+      },
       "imkanlar": [
         {
           "imkan_id": 1,
@@ -127,6 +143,10 @@
       "otel_yildiz": 5,
       "otel_fiyat": 3000,
       "otel_aciklama": "Swissotel Uludağ Bursa, dağ manzarası eşliğinde lüks konaklama seçenekleri ve birinci sınıf hizmet sunmaktadır.",
+      "konum": {
+        "il": "Bursa",
+        "ilce": "Osmangazi"
+      },
       "imkanlar": [
         {
           "imkan_id": 1,
@@ -157,9 +177,13 @@
       "restoran_ad": "Tola Restaurant",
       "restoran_resim": "https://cdn.endavet.net/firma_ilan/114983/6d5ba9fa-3578-4314-a556-7124dc1213c1_1200x.jpeg",
       "restoran_puan": "4.5",
-      "restoran_aciklama": "Tola Restaurant Restoranı, uzun yıllardan beri güleryüzlü hizmetini ve birbirinden lezzetli yemek çeşitlerini Bursa, Mudanya’de bulunan mekânında işinin ehli personeli aracılığıyla müşterileriyle buluşturmaktadır.",
+      "restoran_aciklama": "Tola Restaurant Restoranı, uzun yıllardan beri güleryüzlü hizmetini ve birbirinden lezzetli yemek çeşitlerini Bursa, Mudanya'de bulunan mekânında işinin ehli personeli aracılığıyla müşterileriyle buluşturmaktadır.",
       "restoran_fiyat": 800,
       "otel_id": 1,
+      "konum": {
+        "il": "Bursa",
+        "ilce": "Mudanya"
+      },
       "imkanlar": [
         {
           "imkan_id": 1,
@@ -188,9 +212,13 @@
       "restoran_ad": "Zennup 1844",
       "restoran_resim": "https://cdn.endavet.net/firma_ilan/114976/5f502465-43d7-420f-8834-f5db542a91e6_1200x.jpeg",
       "restoran_puan": "4.2",
-      "restoran_aciklama": "Zennup 1844 Restoranı, uzun yıllardan beri güleryüzlü hizmetini ve birbirinden lezzetli yemek çeşitlerini Bursa, Nilüfer’de bulunan mekânında işinin ehli personeli aracılığıyla müşterileriyle buluşturmaktadır.",
+      "restoran_aciklama": "Zennup 1844 Restoranı, uzun yıllardan beri güleryüzlü hizmetini ve birbirinden lezzetli yemek çeşitlerini Bursa, Nilüfer'de bulunan mekânında işinin ehli personeli aracılığıyla müşterileriyle buluşturmaktadır.",
       "restoran_fiyat": 1800,
       "otel_id": 1,
+      "konum": {
+        "il": "Bursa",
+        "ilce": "Nilüfer"
+      },
       "imkanlar": [
         {
           "imkan_id": 1,
@@ -222,6 +250,10 @@
       "restoran_aciklama": "Havuzbaşı ve göz alıcı Bursa manzarası eşliğinde dünya mutfağından en özel spesiyalleri ve birbirinden lezzetli kokteylleri Luna Bar & Restaurant'ta deneyimleyebilirsiniz.",
       "restoran_fiyat": 1600,
       "otel_id": 2,
+      "konum": {
+        "il": "Bursa",
+        "ilce": "Osmangazi"
+      },
       "imkanlar": [
         {
           "imkan_id": 1,
@@ -250,9 +282,13 @@
       "restoran_ad": "Kitap Evi Restaurant",
       "restoran_resim": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/a2/ab/fe/kitap-evi-hotel-restaurant.jpg?w=1800&h=1000&s=1",
       "restoran_puan": "4.3",
-      "restoran_aciklama": "Doğum günleri, yıl dönümleri ve daha pek çok kutlama için gidilebilecek harika bir mekân. ",
+      "restoran_aciklama": "Doğum günleri, yıl dönümleri ve daha pek çok kutlama için gidilebilecek harika bir mekân.",
       "restoran_fiyat": 1500,
       "otel_id": 2,
+      "konum": {
+        "il": "Bursa",
+        "ilce": "Nilüfer"
+      },
       "imkanlar": [
         {
           "imkan_id": 1,
@@ -281,9 +317,13 @@
       "restoran_ad": "Da Vittorio Ristorante Italiano",
       "restoran_resim": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/de/13/b8/da-vittorio-ristorante.jpg?w=1400&h=800&s=1",
       "restoran_puan": "4.1",
-      "restoran_aciklama": "The philosophy of “Da Vittorio” is using the best ingredients available in Bursa, also importing from Italy to create dishes that are similar to the food prepared by the best chefs of Italy so that you don't have to travel anywhere else to enjoy real Italian cuisine.",
+      "restoran_aciklama": "The philosophy of \"Da Vittorio\" is using the best ingredients available in Bursa, also importing from Italy to create dishes that are similar to the food prepared by the best chefs of Italy so that you don't have to travel anywhere else to enjoy real Italian cuisine.",
       "restoran_fiyat": 750,
       "otel_id": 3,
+      "konum": {
+        "il": "Bursa",
+        "ilce": "Osmangazi"
+      },
       "imkanlar": [
         {
           "imkan_id": 1,
@@ -308,5 +348,4 @@
       ]
     }
   ]
-
 }
