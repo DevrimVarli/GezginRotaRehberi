@@ -1,4 +1,5 @@
 import 'Imkanlar.dart';
+import 'Konum.dart';
 
 class Restorantlar {
   int restoran_id;
@@ -8,6 +9,7 @@ class Restorantlar {
   String restoran_aciklama;
   int restoran_fiyat;
   List<Imkanlar> imkanlar;
+  Konum konum;
 
   Restorantlar(
       this.restoran_id,
@@ -16,7 +18,7 @@ class Restorantlar {
       this.restoran_puan,
       this.restoran_aciklama,
       this.restoran_fiyat,
-      this.imkanlar,
+      this.imkanlar, this.konum,
       );
 
   factory Restorantlar.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class Restorantlar {
       json["restoran_aciklama"] as String? ?? 'No description',
       json["restoran_fiyat"] as int? ?? 0,
       List<Imkanlar>.from(json["imkanlar"].map((x) => Imkanlar.fromJson(x))),
+      Konum.fromJson(json["konum"]),
     );
   }
 }

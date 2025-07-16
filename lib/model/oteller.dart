@@ -1,4 +1,5 @@
 import 'package:yeni_tasarim/model/Imkanlar.dart';
+import 'package:yeni_tasarim/model/Konum.dart';
 
 class Oteller {
   int otel_id;
@@ -8,6 +9,7 @@ class Oteller {
   String otel_aciklama;
   int otel_fiyat;
   List<Imkanlar> imkanlar;
+  Konum konum;
 
 
   // Constructor
@@ -18,7 +20,8 @@ class Oteller {
       this.otel_yildiz,
       this.otel_aciklama,
       this.otel_fiyat,
-      this.imkanlar
+      this.imkanlar,
+      this.konum,
 
       );
 
@@ -32,6 +35,7 @@ class Oteller {
       json["otel_aciklama"] as String,
       json["otel_fiyat"] as int,
       List<Imkanlar>.from(json["imkanlar"].map((x) => Imkanlar.fromJson(x))),
+      Konum.fromJson(json["konum"]),
 
     );
   }

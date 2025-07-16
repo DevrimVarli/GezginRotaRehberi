@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yeni_tasarim/model/Konum.dart';
+import 'package:yeni_tasarim/screens/SeeAllEkrani.dart';
 
 import '../../../model/Restorantlar.dart';
 import '../../../providers/all_providers.dart';
@@ -12,11 +14,22 @@ class RestorantListViewWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final aramaSonucu = ref.watch(aramaSonucuStateProvider);
     final restoranListAsync = ref.watch(restoranFutureProvider);
+    final secilenKonum = ref.watch(secilemKonumStateProvider);
+    final seeAll = ref.watch(seeAllStateProvider);
 
     return restoranListAsync.when(
       data: (restoranList) {
         final filteredRestoranList = aramaSonucu.isEmpty
-            ? restoranList
+            ? restoranList.where((restoran) {
+          // Eğer seeAll false ise konuma göre filtrele
+          if (!seeAll && restoran.konum != null && secilenKonum != null) {
+            return restoran.konum.ilce_adi.toLowerCase().contains(
+              secilenKonum.ilce_adi.toLowerCase(),
+            );
+          }
+          // Aksi takdirde tüm otelleri göster
+          return true;
+        }).toList()
             : restoranList.where((restorant) =>
             restorant.restoran_ad.toLowerCase().contains(aramaSonucu.toLowerCase()))
             .toList();
@@ -38,12 +51,17 @@ class RestorantListViewWidget extends ConsumerWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Text(
-                      "See all",
-                      style: GoogleFonts.roboto(
-                        fontSize: 18,
-                        color: Colors.blueAccent,
-                        fontWeight: FontWeight.w500,
+                    TextButton(
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SeeAllEkrani()));
+                      },
+                      child: Text(
+                        "See all",
+                        style: GoogleFonts.roboto(
+                          fontSize: 18,
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],

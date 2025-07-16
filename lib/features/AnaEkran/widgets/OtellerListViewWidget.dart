@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yeni_tasarim/repository/otelRepo.dart';
 
 import '../../../model/oteller.dart';
 import '../../../providers/all_providers.dart';
@@ -12,6 +13,8 @@ class OtellerListViewWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Arama sonuca göre otel listesi
     final aramaSonucu = ref.watch(aramaSonucuStateProvider);
+    final secilenKonum = ref.watch(secilemKonumStateProvider);
+    final seeAll = ref.watch(seeAllStateProvider);
 
     // `otelFutureProvider` AsyncValue döndüğü için burada 'when' fonksiyonunu kullanıyoruz.
     final otelListAsync = ref.watch(otelFutureProvider);
@@ -20,10 +23,22 @@ class OtellerListViewWidget extends ConsumerWidget {
       data: (otelList) {
         // Arama yapılmışsa, listeyi filtrele
         final filteredOtelList = aramaSonucu.isEmpty
-            ? otelList
-            : otelList.where((otel) =>
-            otel.otel_ad.toLowerCase().contains(aramaSonucu.toLowerCase()))
+            ? otelList.where((otel) {
+          // Eğer seeAll false ise konuma göre filtrele
+          if (!seeAll && otel.konum != null && secilenKonum != null) {
+            return otel.konum.ilce_adi.toLowerCase().contains(
+              secilenKonum.ilce_adi.toLowerCase(),
+            );
+          }
+          // Aksi takdirde tüm otelleri göster
+          return true;
+        }).toList()
+            : otelList
+            .where((otel) => otel.otel_ad
+            .toLowerCase()
+            .contains(aramaSonucu.toLowerCase()))
             .toList();
+
 
         return Padding(
           padding: const EdgeInsets.all(8.0),

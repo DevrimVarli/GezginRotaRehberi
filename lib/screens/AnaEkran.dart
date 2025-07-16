@@ -49,24 +49,27 @@ class AnaEkran extends ConsumerWidget {
         preferredSize: Size.fromHeight(ekranYuksekligi / 10),
         child: AppBarWidget(ekranYuksekligi),
       ),
-      body: CustomScrollView(
-        slivers: [
-          // Arama alanı sabit kalsın
-          SliverToBoxAdapter(
-            child: AramaTextFieldWidget(),
-          ),
-          // Kategori alanı sabit kalsın
-          SliverToBoxAdapter(
-            child: KategoriWidget(),
-          ),
-          // İçerik (scroll edilebilir)
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: categoryWidget,
+      body: SafeArea(
+        bottom: false,
+        child: CustomScrollView(
+          slivers: [
+            // Arama alanı sabit kalsın
+            SliverToBoxAdapter(
+              child: AramaTextFieldWidget(),
             ),
-          ),
-        ],
+            // Kategori alanı sabit kalsın
+            SliverToBoxAdapter(
+              child: KategoriWidget(),
+            ),
+            // İçerik (scroll edilebilir)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: categoryWidget,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

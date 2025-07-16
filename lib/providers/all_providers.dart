@@ -19,9 +19,11 @@ final imkanRestFutureProvider=FutureProvider((ref)async{
 final kategoriFutureProvider=Provider<List<String>>((ref){
   return  KategoriRepo().basliklar();
 });
-final secilemKonumStateProvider=StateProvider<Konum>((ref)=>Konum(1, "Ankara", "Çankaya"));
+final secilemKonumStateProvider=StateProvider<Konum>((ref)=>Konum( "Bursa", "Osmangazi"));
 final konumlarProvider=StateProvider<List<Konum>>((ref){
+  ref.keepAlive();
   return AdresRepo().konumlar();
 });
 final selectedIndexProvider=StateProvider<int>((ref)=>0);
 final aramaSonucuStateProvider=StateProvider<String>((ref)=>"");
+final seeAllStateProvider=StateProvider<bool>((ref)=>false);
