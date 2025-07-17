@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:yeni_tasarim/model/Konum.dart';
 import 'package:yeni_tasarim/screens/SeeAllEkrani.dart';
 
@@ -12,6 +13,7 @@ class RestorantListViewWidget extends ConsumerWidget {
   // RESTORANLARI GÖSTERİYOR
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final aramaSonucu = ref.watch(aramaSonucuStateProvider);
     final restoranListAsync = ref.watch(restoranFutureProvider);
     final secilenKonum = ref.watch(secilemKonumStateProvider);
@@ -101,21 +103,23 @@ class RestorantListViewWidget extends ConsumerWidget {
                           left: 5,
                           bottom: 60,
                           child: Container(
-                            height: 40,
                             decoration: BoxDecoration(
-                              color: Colors.black54,
+                              color: HexColor("#4D5652"),
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Center(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    restorant.restoran_ad,
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 22,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      restorant.restoran_ad,
+                                      style: GoogleFonts.roboto(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -130,7 +134,7 @@ class RestorantListViewWidget extends ConsumerWidget {
                             width: 80,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: Colors.black54,
+                              color: HexColor("#4D5652"),
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Center(
@@ -140,14 +144,15 @@ class RestorantListViewWidget extends ConsumerWidget {
                                   Icon(
                                     Icons.star,
                                     color: Colors.yellow,
-                                    size: 18,
+                                    size: 20,
                                   ),
+                                  SizedBox(width: 5,),
                                   Text(
                                     restorant.restoran_puan,
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 22,
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 15,
                                       color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ],
@@ -162,15 +167,32 @@ class RestorantListViewWidget extends ConsumerWidget {
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: HexColor("#4D5652"),
                               borderRadius: BorderRadius.circular(35),
                             ),
-                            child: Icon(
-                              Icons.favorite,
-                              color: Colors.red,
+                            child: IconButton(
+                              onPressed: () {
+                                final favoriNotifier = ref.read(favoriListesiProvider.notifier);
+                                final currentList = [...favoriNotifier.state];
+
+                                if (currentList.contains(restorant.restoran_ad)) {
+                                  currentList.remove(restorant.restoran_ad);
+                                } else {
+                                  currentList.add(restorant.restoran_ad);
+                                }
+
+                                favoriNotifier.state = currentList;
+                              },
+                              icon: Icon(
+                                Icons.favorite,
+                                color: ref.watch(favoriListesiProvider).contains(restorant.restoran_ad)
+                                    ? Colors.blue
+                                    : Colors.white,
+                              ),
                             ),
                           ),
                         ),
+
                       ],
                     );
                   },

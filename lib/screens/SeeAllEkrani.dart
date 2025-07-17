@@ -24,10 +24,21 @@ class SeeAllEkrani extends ConsumerWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(textAlign: TextAlign.center,
-                  "Restoranlar",
-                  style: GoogleFonts.roboto(fontSize: 24,fontWeight: FontWeight.bold),
-                ),
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(Icons.arrow_back_ios,color: Colors.black,)),
+                    Spacer(flex: 2,),
+                    Text(
+                      "Restoranlar",
+                      style: GoogleFonts.roboto(fontSize: 24,fontWeight: FontWeight.bold),
+                    ),
+                    Spacer(flex: 3,)
+                  ],
+                )
               ),
             ),
             RestoranSliver(),

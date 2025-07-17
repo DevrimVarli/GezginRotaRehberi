@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import '../../../providers/all_providers.dart';
 import '../../../screens/DetayEkrani.dart';
@@ -26,7 +27,7 @@ class RestoranSliver extends ConsumerWidget {
                   child: Stack(
                     children: [
                       Container(
-                        height: ekranYuksekligi/3,
+                        height: ekranYuksekligi/4,
                         width: ekranGenisligi, // Genişliği sabitle
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
@@ -37,7 +38,7 @@ class RestoranSliver extends ConsumerWidget {
                         ),
                       ),
                       Container(
-                        height: ekranYuksekligi/3,
+                        height: ekranYuksekligi/4,
                         width: ekranGenisligi, // Genişliği sabitle
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
@@ -109,23 +110,31 @@ class RestoranSliver extends ConsumerWidget {
                         ),
                       ),
                       Positioned(
-                        bottom: 0,
-                        left: 5,
-                        right: 5,
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                colors: [
-                                  Colors.black.withOpacity(0.87),
-                                  Colors.transparent,
-                                ],
+                          bottom: 5,
+                          right: 10,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(32),
+                                color: HexColor("#4D5652"),
                               ),
-                            ),
-                            child: Text(maxLines: 3,restorant.restoran_aciklama,style: GoogleFonts.roboto(fontSize: 18,color: Colors.white,fontWeight: FontWeight.w500),)),
+
+                              child:IconButton(onPressed: (){
+                                final favoriNotifier = ref.read(favoriListesiProvider.notifier);
+                                final currentList = [...favoriNotifier.state];
+
+                                if (currentList.contains(restorant.restoran_ad)) {
+                                  currentList.remove(restorant.restoran_ad);
+                                } else {
+                                  currentList.add(restorant.restoran_ad);
+                                }
+
+                                favoriNotifier.state = currentList;
+                              }, icon: Icon(Icons.favorite,color:ref.watch(favoriListesiProvider).contains(restorant.restoran_ad)
+                                  ? Colors.blue
+                                  : Colors.white,))
+                          )
                       ),
+
 
                     ],
                   ),

@@ -50,7 +50,7 @@ class _DetayEkraniState extends State<DetayEkrani> {
                         // Geri butonu
                         ArrowBackButtonWidgets(),
                         // Favori butonu
-                        FavoriteButtonWidgets(),
+                        FavoriteButtonWidgets(mekanAdi: widget.secilenOtel!=null?widget.secilenOtel!.otel_ad:widget.secilenRestorant!.restoran_ad,),
                       ],
                     ),
 

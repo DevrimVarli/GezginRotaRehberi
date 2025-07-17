@@ -13,7 +13,7 @@ class MekanInfoWidgets extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 32.0,bottom: 24),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // 👈 tüm çocukları sola hizalar
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

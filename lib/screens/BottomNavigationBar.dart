@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yeni_tasarim/screens/AnaEkran.dart';
+import 'package:yeni_tasarim/screens/favorite_page_view.dart';
 
 class Secim extends StatefulWidget {
   const Secim({super.key});
@@ -13,8 +14,8 @@ class _SecimState extends State<Secim> {
   var sayfaListesi = [
     AnaEkran(),
     AnaEkran(),
+    FavoritePageView(),
     AnaEkran(),
-    AnaEkran()
   ];
 
   @override

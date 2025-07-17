@@ -27,3 +27,8 @@ final konumlarProvider=StateProvider<List<Konum>>((ref){
 final selectedIndexProvider=StateProvider<int>((ref)=>0);
 final aramaSonucuStateProvider=StateProvider<String>((ref)=>"");
 final seeAllStateProvider=StateProvider<bool>((ref)=>false);
+final favoriteButtonStateProvider=StateProvider<bool>((ref)=>false);
+final favoriListesiProvider=StateProvider<List<String>>((ref) {
+  ref.keepAlive();
+  return [];
+});

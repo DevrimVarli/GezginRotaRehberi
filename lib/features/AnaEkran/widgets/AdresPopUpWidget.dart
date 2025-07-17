@@ -136,7 +136,7 @@ class AdresPopUpWidget extends ConsumerWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.black.withOpacity(0.5),
+          backgroundColor: Colors.blueAccent.withOpacity(0.65),
           title: Text("Yeni Adres Ekle",style: GoogleFonts.roboto(fontSize: 20,color: Colors.white,fontWeight: FontWeight.w500),),
           content: Column(
             mainAxisSize: MainAxisSize.min,
