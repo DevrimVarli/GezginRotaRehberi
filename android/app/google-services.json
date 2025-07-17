@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "722275017627",
+    "project_id": "yenitasarim-923c4",
+    "storage_bucket": "yenitasarim-923c4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722275017627:android:5f7e884f9bae731e9b373e",
+        "android_client_info": {
+          "package_name": "com.example.yeni_tasarim"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt_1aDWr-_O2rw4K0nKeuYERqT9k-wKcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

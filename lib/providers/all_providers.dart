@@ -6,6 +6,7 @@ import 'package:yeni_tasarim/repository/KategoriRepo.dart';
 
 import '../repository/RestorantRepo.dart';
 import '../repository/otelRepo.dart';
+import '../services/auth_service.dart';
 
 final otelFutureProvider=FutureProvider((ref)async{
   return await otelRepo().oteller();
@@ -32,3 +33,5 @@ final favoriListesiProvider=StateProvider<List<String>>((ref) {
   ref.keepAlive();
   return [];
 });
+final kayitMiProvider=StateProvider<bool>((ref)=>false);
+final authProvider = Provider((ref) => AuthService(ref));

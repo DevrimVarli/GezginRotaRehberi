@@ -5,7 +5,7 @@ import 'package:yeni_tasarim/repository/otelRepo.dart';
 
 import '../../../model/oteller.dart';
 import '../../../providers/all_providers.dart';
-import '../../../screens/DetayEkrani.dart';
+import '../../../screens/detail_screen.dart';
 
 class OtellerListViewWidget extends ConsumerWidget {
   // OTELLERİ GÖSTERİYOR

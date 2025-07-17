@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../../providers/all_providers.dart';
-import '../../../screens/DetayEkrani.dart';
+import '../../../screens/detail_screen.dart';
 class RestoranSliver extends ConsumerWidget {
   const RestoranSliver({super.key});
 

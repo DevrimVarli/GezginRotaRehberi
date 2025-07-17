@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../screens/SeeAllEkrani.dart';
+import '../../../screens/see_all_screen.dart';
 class InfoCard extends StatelessWidget {
   final String title;
   const InfoCard({super.key,required this.title});
@@ -15,7 +15,7 @@ class InfoCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.redAccent.withOpacity(0.3),
+            color: Colors.blue.withOpacity(0.3),
             blurRadius: 20,
             offset: Offset(0, 10),
           ),

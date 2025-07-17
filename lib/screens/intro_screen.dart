@@ -5,8 +5,8 @@ import 'package:yeni_tasarim/features/introEkrani/widgets/ExploreButton_widget.d
 import 'package:yeni_tasarim/features/introEkrani/widgets/arkaPlan_widget.dart';
 import 'package:yeni_tasarim/features/introEkrani/widgets/baslikText_widget.dart';
 import 'package:yeni_tasarim/features/introEkrani/widgets/metinText_widget.dart';
-import 'package:yeni_tasarim/screens/BottomNavigationBar.dart';
-import 'package:yeni_tasarim/screens/AnaEkran.dart';
+import 'package:yeni_tasarim/screens/bottom_navigation_bar_screen.dart';
+import 'package:yeni_tasarim/screens/home_screen.dart';
 
 class IntroEkran extends StatefulWidget {
   const IntroEkran({super.key});

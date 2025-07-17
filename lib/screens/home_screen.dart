@@ -17,7 +17,7 @@ import '../features/AnaEkran/widgets/OtellerListViewWidget.dart';
 import '../providers/all_providers.dart';
 import '../repository/RestorantRepo.dart';
 import '../repository/otelRepo.dart';
-import 'DetayEkrani.dart';
+import 'detail_screen.dart';
 
 class AnaEkran extends ConsumerWidget {
   const AnaEkran({super.key});

@@ -4,15 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_app_bar.dart';
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/info_card.dart';
-import 'package:yeni_tasarim/screens/AnaEkran.dart';
-import 'package:yeni_tasarim/screens/SeeAllEkrani.dart';
+import 'package:yeni_tasarim/screens/home_screen.dart';
+import 'package:yeni_tasarim/screens/see_all_screen.dart';
 
 import '../features/favoriler_ekrani/widgets/custom_otel_button.dart';
 import '../features/favoriler_ekrani/widgets/custom_restoran_button.dart';
 import '../features/favoriler_ekrani/widgets/favori_otel_kartlar.dart';
 import '../features/favoriler_ekrani/widgets/favori_restoran_kartlar.dart';
 import '../providers/all_providers.dart';
-import 'DetayEkrani.dart';
+import 'detail_screen.dart';
 
 class FavoritePageView extends ConsumerWidget {
   const FavoritePageView({super.key});

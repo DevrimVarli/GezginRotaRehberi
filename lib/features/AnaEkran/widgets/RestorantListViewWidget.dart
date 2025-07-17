@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:yeni_tasarim/model/Konum.dart';
-import 'package:yeni_tasarim/screens/SeeAllEkrani.dart';
+import 'package:yeni_tasarim/screens/see_all_screen.dart';
 
 import '../../../model/Restorantlar.dart';
 import '../../../providers/all_providers.dart';
-import '../../../screens/DetayEkrani.dart';
+import '../../../screens/detail_screen.dart';
 
 class RestorantListViewWidget extends ConsumerWidget {
   // RESTORANLARI GÖSTERİYOR

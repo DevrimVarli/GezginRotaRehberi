@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yeni_tasarim/screens/AnaEkran.dart';
+import 'package:yeni_tasarim/screens/home_screen.dart';
 import 'package:yeni_tasarim/screens/favorite_page_view.dart';
+
+import 'login_screen.dart';
 
 class Secim extends StatefulWidget {
   const Secim({super.key});
@@ -15,7 +17,7 @@ class _SecimState extends State<Secim> {
     AnaEkran(),
     AnaEkran(),
     FavoritePageView(),
-    AnaEkran(),
+    LoginScreen(),
   ];
 
   @override
