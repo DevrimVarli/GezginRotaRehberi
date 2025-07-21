@@ -1,8 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/intro_screen.dart';
-import 'package:yeni_tasarim/theme/app_theme.dart';
+import 'package:yeni_tasarim/theme/theme_palette.dart';
+
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized(); // Flutter için gerekli hazırlık
@@ -10,17 +13,35 @@ void main()async {
   runApp(ProviderScope(child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      // main.dart içinde
+      theme: FlexThemeData.light(
+        colors: myLightColors,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          elevatedButtonRadius: 12,
+          inputDecoratorRadius: 12,
+          useTextTheme: true,
+        ),
+      ),
+      darkTheme: FlexThemeData.dark(
+        colors: myDarkColors,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          elevatedButtonRadius: 12,
+          inputDecoratorRadius: 12,
+          useTextTheme: true,
+        ),
+      ),
+
+      themeMode: ref.watch(themeModeProvider),
       home:IntroEkran(),
     );
   }

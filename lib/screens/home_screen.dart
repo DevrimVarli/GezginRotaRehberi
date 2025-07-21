@@ -11,12 +11,12 @@ import 'package:yeni_tasarim/features/AnaEkran/widgets/RestorantListViewWidget.d
 import 'package:yeni_tasarim/model/Konum.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
-import 'package:yeni_tasarim/repository/AdresRepo.dart';
+import 'package:yeni_tasarim/repository/adres_repo.dart';
 
 import '../features/AnaEkran/widgets/OtellerListViewWidget.dart';
 import '../providers/all_providers.dart';
-import '../repository/RestorantRepo.dart';
-import '../repository/otelRepo.dart';
+import '../repository/restoran_repo.dart';
+import '../repository/otel_repo.dart';
 import 'detail_screen.dart';
 
 class AnaEkran extends ConsumerWidget {
@@ -24,6 +24,7 @@ class AnaEkran extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
     final selectedIndex = ref.watch(selectedIndexProvider);
     final basliklar = ref.watch(kategoriFutureProvider);
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
@@ -44,7 +45,7 @@ class AnaEkran extends ConsumerWidget {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white10,
+      backgroundColor: colorScheme.surface,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(ekranYuksekligi / 10),
         child: AppBarWidget(ekranYuksekligi),
@@ -59,7 +60,10 @@ class AnaEkran extends ConsumerWidget {
             ),
             // Kategori alanı sabit kalsın
             SliverToBoxAdapter(
-              child: KategoriWidget(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 8),
+                child: KategoriWidget(),
+              ),
             ),
             // İçerik (scroll edilebilir)
             SliverToBoxAdapter(

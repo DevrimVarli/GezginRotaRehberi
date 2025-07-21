@@ -1,20 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yeni_tasarim/features/SeeAllEkran/widgets/otel_sliver.dart';
-import '../features/SeeAllEkran/widgets/restoran_sliver.dart';
-import '../providers/all_providers.dart';
+import '../features/see_all_screen/widgets/otel_sliver.dart';
+import '../features/see_all_screen/widgets/restoran_sliver.dart';
 
 class SeeAllEkrani extends ConsumerWidget {
   const SeeAllEkrani({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final restoranList = ref.watch(restoranFutureProvider);
-    final otelList = ref.watch(otelFutureProvider);
-    double ekranYuksekligi = MediaQuery.sizeOf(context).height;
-    double ekranGenisligi = MediaQuery.sizeOf(context).width;
-
+final colorScheme=Theme.of(context).colorScheme;
     return Scaffold(
       
       body: SafeArea(
@@ -30,7 +25,7 @@ class SeeAllEkrani extends ConsumerWidget {
                         onPressed: (){
                           Navigator.pop(context);
                         },
-                        icon: Icon(Icons.arrow_back_ios,color: Colors.black,)),
+                        icon: Icon(Icons.arrow_back_ios,color:colorScheme.onSurfaceVariant ,)),
                     Spacer(flex: 2,),
                     Text(
                       "Restoranlar",

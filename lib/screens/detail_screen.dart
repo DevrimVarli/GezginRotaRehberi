@@ -4,17 +4,16 @@ import 'package:yeni_tasarim/features/DetayEkran/widgets/ArrowBackButtonWidgets.
 import 'package:yeni_tasarim/features/DetayEkran/widgets/FavoriteButtonWidgets.dart';
 import 'package:yeni_tasarim/features/DetayEkran/widgets/MekanInfoWidgets.dart';
 import 'package:yeni_tasarim/features/DetayEkran/widgets/PriceWidgets.dart';
-import 'package:yeni_tasarim/model/Imkanlar.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
-import 'package:yeni_tasarim/repository/IconRepo.dart';
+import 'package:yeni_tasarim/model/oteller.dart';
 import '../features/DetayEkran/widgets/FacilitiesWidgets.dart';
 import '../features/DetayEkran/widgets/ImageWidgets.dart';
-import '../model/oteller.dart';
 
 class DetayEkrani extends StatefulWidget {
-  Oteller? secilenOtel;
-  Restorantlar? secilenRestorant;
-  DetayEkrani({super.key, this.secilenOtel, this.secilenRestorant});
+  final Oteller? secilenOtel;
+  final Restorantlar? secilenRestorant;
+
+  const DetayEkrani({super.key, this.secilenOtel, this.secilenRestorant});
 
   @override
   State<DetayEkrani> createState() => _DetayEkraniState();
@@ -23,18 +22,19 @@ class DetayEkrani extends StatefulWidget {
 class _DetayEkraniState extends State<DetayEkrani> {
   @override
   Widget build(BuildContext context) {
-    double ekranYuksekligi = MediaQuery.sizeOf(context).height;
-    double ekranGenisligi = MediaQuery.sizeOf(context).width;
+    final ekranYuksekligi = MediaQuery.sizeOf(context).height;
+    final ekranGenisligi = MediaQuery.sizeOf(context).width;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: colorScheme.background,
       body: SafeArea(
         bottom: false,
         child: Stack(
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                  left: 16, right: 16, top: 16, bottom: 100),
+                  left: 16, right: 16,  bottom: 100),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -47,10 +47,16 @@ class _DetayEkraniState extends State<DetayEkrani> {
                           secilenRestorant: widget.secilenRestorant,
                           ekranGenisligi: ekranGenisligi,
                         ),
+
                         // Geri butonu
-                        ArrowBackButtonWidgets(),
+                        const ArrowBackButtonWidgets(),
+
                         // Favori butonu
-                        FavoriteButtonWidgets(mekanAdi: widget.secilenOtel!=null?widget.secilenOtel!.otel_ad:widget.secilenRestorant!.restoran_ad,),
+                        FavoriteButtonWidgets(
+                          mekanAdi: widget.secilenOtel != null
+                              ? widget.secilenOtel!.otel_ad
+                              : widget.secilenRestorant!.restoran_ad,
+                        ),
                       ],
                     ),
 
@@ -70,19 +76,21 @@ class _DetayEkraniState extends State<DetayEkrani> {
                 ),
               ),
             ),
+
+            // Fiyat kutusu
             Positioned(
               left: 0,
               right: 0,
               bottom: 0,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: colorScheme.surface,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black12,
+                      color: colorScheme.shadow.withOpacity(0.08),
                       blurRadius: 10,
-                      offset: Offset(0, -2),
+                      offset: const Offset(0, -2),
                     ),
                   ],
                 ),

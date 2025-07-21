@@ -3,18 +3,23 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../model/Restorantlar.dart';
 import '../../../model/oteller.dart';
+
 class MekanInfoWidgets extends StatelessWidget {
-  Oteller? secilenOtel;
-  Restorantlar? secilenRestorant;
+  final Oteller? secilenOtel;
+  final Restorantlar? secilenRestorant;
+
   MekanInfoWidgets({super.key, this.secilenOtel, this.secilenRestorant});
-//OTEL VEYA RESTORANT İÇERİĞİ GÖSTERİLİYOR
+
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Padding(
-      padding: const EdgeInsets.only(top: 32.0,bottom: 24),
+      padding: const EdgeInsets.only(top: 32.0, bottom: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Başlık ve Harita Linki
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -23,8 +28,13 @@ class MekanInfoWidgets extends StatelessWidget {
                     ? secilenOtel!.otel_ad
                     : secilenRestorant!.restoran_ad,
                 style: GoogleFonts.montserrat(
-                  fontSize: secilenOtel!=null?secilenOtel!.otel_ad.length>20?16:24:secilenRestorant!.restoran_ad.length>20?16:24,
-                  color: Colors.black,
+                  fontSize: (secilenOtel != null
+                      ? secilenOtel!.otel_ad.length
+                      : secilenRestorant!.restoran_ad.length) >
+                      20
+                      ? 16
+                      : 24,
+                  color: colorScheme.onBackground,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -32,38 +42,56 @@ class MekanInfoWidgets extends StatelessWidget {
                 "Show map",
                 style: GoogleFonts.roboto(
                   fontSize: 16,
-                  color: Colors.blue,
+                  color: colorScheme.primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 8),
+
+          const SizedBox(height: 8),
+
+          // Puan ve yorum sayısı
           Row(
             children: [
-              Icon(Icons.star, color: Colors.yellow),
-              SizedBox(width: 4),
+              const Icon(Icons.star, color: Colors.amber),
+              const SizedBox(width: 4),
               Text(
                 secilenOtel != null
                     ? secilenOtel!.otel_yildiz.toString()
                     : secilenRestorant!.restoran_puan.toString(),
-                style: GoogleFonts.roboto(fontSize: 18, color: Colors.grey),
+                style: GoogleFonts.roboto(
+                  fontSize: 18,
+                  color: colorScheme.outlineVariant,
+                ),
               ),
-              SizedBox(width: 4),
+              const SizedBox(width: 4),
               Text(
                 "(355 Reviews)",
-                style: GoogleFonts.roboto(fontSize: 18, color: Colors.grey),
+                style: GoogleFonts.roboto(
+                  fontSize: 18,
+                  color: colorScheme.outlineVariant,
+                ),
               ),
             ],
           ),
-          SizedBox(height: 12),
+
+          const SizedBox(height: 12),
+
+          // Açıklama
           Text(
             secilenOtel != null
-                ? "${secilenOtel!.otel_aciklama}"
-                : "${secilenRestorant!.restoran_aciklama}",
-            style: GoogleFonts.roboto(fontSize: 18, color: Colors.grey.shade900),
+                ? secilenOtel!.otel_aciklama
+                : secilenRestorant!.restoran_aciklama,
+            style: GoogleFonts.roboto(
+              fontSize: 18,
+              color: colorScheme.onSurface,
+            ),
           ),
-          SizedBox(height: 4),
+
+          const SizedBox(height: 4),
+
+          // "Read more" linki
           TextButton(
             onPressed: () {},
             style: TextButton.styleFrom(
@@ -75,11 +103,14 @@ class MekanInfoWidgets extends StatelessWidget {
                   "Read more",
                   style: GoogleFonts.roboto(
                     fontSize: 18,
-                    color: Colors.blue,
+                    color: colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Icon(Icons.keyboard_arrow_down, color: Colors.blue),
+                Icon(
+                  Icons.keyboard_arrow_down,
+                  color: colorScheme.primary,
+                ),
               ],
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yeni_tasarim/screens/home_screen.dart';
 import 'package:yeni_tasarim/screens/favorite_page_view.dart';
-
+import 'account_and_login_screen.dart';
 import 'login_screen.dart';
 
 class Secim extends StatefulWidget {
@@ -13,28 +13,31 @@ class Secim extends StatefulWidget {
 
 class _SecimState extends State<Secim> {
   int secilenIndex = 0;
-  var sayfaListesi = [
+
+  final sayfaListesi = [
     AnaEkran(),
-    AnaEkran(),
+    AccountAndLoginScreen(),
     FavoritePageView(),
-    LoginScreen(),
+    AccountAndLoginScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: sayfaListesi[secilenIndex],
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.circular(32),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: colorScheme.surface, // tema uyumlu arka plan
             borderRadius: BorderRadius.circular(32),
             boxShadow: [
               BoxShadow(
-                color: Colors.black12,
+                color: colorScheme.shadow.withValues(alpha: 0.1),
                 blurRadius: 12,
-                offset: Offset(0, -2),
+                offset: const Offset(0, -2),
               ),
             ],
           ),
@@ -46,10 +49,10 @@ class _SecimState extends State<Secim> {
                 secilenIndex = index;
               });
             },
-            selectedItemColor: Colors.blue,
-            unselectedItemColor: Colors.grey,
-            backgroundColor: Colors.white, // Container'dan geliyor
-            showSelectedLabels: false, // ✅ Gösterilsin
+            selectedItemColor: colorScheme.primary,
+            unselectedItemColor: colorScheme.outlineVariant,
+            backgroundColor: colorScheme.surface,
+            showSelectedLabels: false,
             showUnselectedLabels: false,
             items: const [
               BottomNavigationBarItem(

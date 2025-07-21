@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+
 class ArrowBackButtonWidgets extends StatelessWidget {
   const ArrowBackButtonWidgets({super.key});
-//Geri Dönüş Butonu Yapıldı
+
   @override
   Widget build(BuildContext context) {
-    return  Positioned(
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Positioned(
       top: 20,
       left: 20,
       child: ClipRRect(
@@ -12,9 +15,13 @@ class ArrowBackButtonWidgets extends StatelessWidget {
         child: Container(
           height: 40,
           width: 40,
-          color: Colors.white,
+          color: colorScheme.surface, // Arka plan temadan
           child: IconButton(
-            icon: Icon(Icons.arrow_back_ios, size: 18, color: Colors.grey),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 18,
+              color: colorScheme.onSurface, // İkon rengi temaya göre
+            ),
             onPressed: () {
               Navigator.pop(context);
             },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yeni_tasarim/repository/otelRepo.dart';
+import 'package:yeni_tasarim/repository/otel_repo.dart';
 
 import '../../../model/oteller.dart';
 import '../../../providers/all_providers.dart';
@@ -51,7 +51,7 @@ class OtellerListViewWidget extends ConsumerWidget {
                   "Recommended",
                   style: GoogleFonts.roboto(
                     fontSize: 24,
-                    color: Colors.black,
+                   // color: Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -97,7 +97,7 @@ class OtellerListViewWidget extends ConsumerWidget {
                           otel.otel_ad,
                           style: GoogleFonts.roboto(
                             fontSize: 22,
-                            color: Colors.black,
+                            //color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

@@ -10,6 +10,7 @@ class RestoranSliver extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
     final restoranList = ref.watch(restoranFutureProvider);
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
     double ekranGenisligi = MediaQuery.sizeOf(context).width;
@@ -55,9 +56,8 @@ class RestoranSliver extends ConsumerWidget {
                         left: 5,
                         top: 10,
                         child: Container(
-                          height: 40,
                           decoration: BoxDecoration(
-                            color: Colors.black54,
+                            color: colorScheme.surface.withOpacity(0.7),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Center(
@@ -68,7 +68,7 @@ class RestoranSliver extends ConsumerWidget {
                                   restorant.restoran_ad,
                                   style: GoogleFonts.roboto(
                                     fontSize: 22,
-                                    color: Colors.white,
+                                    color: colorScheme.onSurface,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -81,10 +81,10 @@ class RestoranSliver extends ConsumerWidget {
                         right: 5,
                         top: 10,
                         child: Container(
-                          width: 80,
-                          height: 40,
+                          width: 60,
+                          height: 30,
                           decoration: BoxDecoration(
-                            color: Colors.black54,
+                            color: colorScheme.surface.withOpacity(0.7),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Center(
@@ -99,8 +99,8 @@ class RestoranSliver extends ConsumerWidget {
                                 Text(
                                   restorant.restoran_puan,
                                   style: GoogleFonts.roboto(
-                                    fontSize: 22,
-                                    color: Colors.white,
+                                    fontSize: 18,
+                                    color: colorScheme.onSurface,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -115,7 +115,7 @@ class RestoranSliver extends ConsumerWidget {
                           child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(32),
-                                color: HexColor("#4D5652"),
+                                color:colorScheme.surface.withOpacity(0.85),
                               ),
 
                               child:IconButton(onPressed: (){
@@ -130,8 +130,8 @@ class RestoranSliver extends ConsumerWidget {
 
                                 favoriNotifier.state = currentList;
                               }, icon: Icon(Icons.favorite,color:ref.watch(favoriListesiProvider).contains(restorant.restoran_ad)
-                                  ? Colors.blue
-                                  : Colors.white,))
+                                  ? colorScheme.primary
+                                  : colorScheme.onSurface,))
                           )
                       ),
 

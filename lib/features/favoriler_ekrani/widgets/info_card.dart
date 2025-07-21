@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../screens/see_all_screen.dart';
+
 class InfoCard extends StatelessWidget {
   final String title;
-  const InfoCard({super.key,required this.title});
+  const InfoCard({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.3),
+            color: colorScheme.primary.withOpacity(0.2),
             blurRadius: 20,
             offset: Offset(0, 10),
           ),
@@ -25,7 +27,7 @@ class InfoCard extends StatelessWidget {
         children: [
           Icon(
             Icons.favorite_border,
-            color: Colors.blue,
+            color: colorScheme.primary,
             size: 72,
           ),
           const SizedBox(height: 20),
@@ -34,7 +36,7 @@ class InfoCard extends StatelessWidget {
             style: GoogleFonts.montserrat(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Colors.blue,
+              color: colorScheme.primary,
             ),
             textAlign: TextAlign.center,
           ),
@@ -43,28 +45,30 @@ class InfoCard extends StatelessWidget {
             "Henüz hiçbir ${title} favorilere eklemediniz.\nKeşfetmeye başlayın!",
             style: GoogleFonts.montserrat(
               fontSize: 16,
-              color: Colors.grey[700],
+              color: colorScheme.onSurface.withOpacity(0.7),
             ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20),
           ElevatedButton.icon(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>SeeAllEkrani()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SeeAllEkrani()));
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: colorScheme.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             ),
-            icon: Icon(Icons.search, color: Colors.white),
+            icon: Icon(Icons.search, color: colorScheme.onPrimary),
             label: Text(
               "Keşfet",
               style: GoogleFonts.montserrat(
                 fontSize: 16,
-                color: Colors.white,
+                color: colorScheme.onPrimary,
               ),
             ),
           ),

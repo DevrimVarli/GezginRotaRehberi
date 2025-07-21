@@ -19,8 +19,8 @@ class _AppBarWidgetState extends State<AppBarWidget> {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Explore",style:GoogleFonts.montserrat(fontSize: 24,color: Colors.black,fontWeight: FontWeight.w500) ,),
-          Text("Aspen",style:GoogleFonts.montserrat(fontSize: 48,color: Colors.black,fontWeight: FontWeight.w500) ,),
+          Text("Explore",style:GoogleFonts.montserrat(fontSize: 24,fontWeight: FontWeight.w500) ,),
+          Text("Aspen",style:GoogleFonts.montserrat(fontSize: 48,fontWeight: FontWeight.w500) ,),
         ],
       ),
       actions: [

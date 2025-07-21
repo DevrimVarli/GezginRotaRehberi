@@ -1,36 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 import '../../../providers/all_providers.dart';
+
 class AramaTextFieldWidget extends ConsumerWidget {
   const AramaTextFieldWidget({super.key});
-//ARAMA İÇİN TEXTFIELD
+
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 8.0,horizontal: 8 ),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
       child: TextField(
-        onChanged: (aramaSonucu){
-          ref.read(aramaSonucuStateProvider.notifier).state=aramaSonucu;
+        onChanged: (aramaSonucu) {
+          ref.read(aramaSonucuStateProvider.notifier).state = aramaSonucu;
         },
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search,size: 32,color:Colors.grey.shade400 ,),
-          //labelText: label,
-          labelStyle:TextStyle( fontSize: 22,color:  HexColor("#3674B5"),fontWeight: FontWeight.bold),
+          prefixIcon: Icon(
+            Icons.search,
+            size: 32,
+            color: colorScheme.outlineVariant, // ikon rengi
+          ),
+          labelStyle: TextStyle(
+            fontSize: 22,
+            color: colorScheme.primary, // tema ana rengi
+            fontWeight: FontWeight.bold,
+          ),
           hintText: "Find things to do",
-          hintStyle: GoogleFonts.roboto(fontSize: 22,color: Colors.grey.shade400,fontWeight: FontWeight.w500),
+          hintStyle: GoogleFonts.roboto(
+            fontSize: 22,
+            color: colorScheme.outlineVariant,
+            fontWeight: FontWeight.w500,
+          ),
           filled: true,
-          fillColor: Color(0xFFE8F0FE),
-          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          fillColor: colorScheme.surfaceContainerHighest.withValues(alpha: 0.72), // zemin
+          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide(color: Colors.transparent, width: 2),
+            borderSide: const BorderSide(color: Colors.transparent, width: 2),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide(color: HexColor("#333446"), width: 2),
+            borderSide: BorderSide(
+              color: colorScheme.primary, // odak rengi tema ile uyumlu
+              width: 2,
+            ),
           ),
         ),
       ),

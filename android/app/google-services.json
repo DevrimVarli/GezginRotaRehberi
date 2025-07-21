@@ -12,7 +12,20 @@
           "package_name": "com.example.yeni_tasarim"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "722275017627-r2v8k38ntpacteet6djskk42nvcdgurl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yeni_tasarim",
+            "certificate_hash": "2654d70566fa0022e4e9fc44159ce09d355e5352"
+          }
+        },
+        {
+          "client_id": "722275017627-spgkcajr3410mpe42j859mrvga0r7bgm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBt_1aDWr-_O2rw4K0nKeuYERqT9k-wKcE"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722275017627-spgkcajr3410mpe42j859mrvga0r7bgm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "722275017627-r3avo3hsotr1spal88p1olj1h0arkk4k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yeniTasarim"
+              }
+            }
+          ]
         }
       }
     }

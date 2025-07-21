@@ -6,8 +6,11 @@ import '../../../model/Konum.dart';
 import '../../../providers/all_providers.dart';
 
 class AdresPopUpWidget extends ConsumerWidget {
+  const AdresPopUpWidget({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
     final konum = ref.watch(secilemKonumStateProvider);
     final konumList = ref.watch(konumlarProvider);
 
@@ -18,33 +21,32 @@ class AdresPopUpWidget extends ConsumerWidget {
         children: [
           Icon(
             Icons.location_on,
-            color: Colors.blueAccent,
+            color: colorScheme.primary,
             size: 28,
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Text(
             "${konum.ilce_adi}, ${konum.sehir_adi}",
             style: GoogleFonts.roboto(
               fontSize: 18,
-              color: Colors.black,
+              color: colorScheme.primary,
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           PopupMenuButton<Konum>(
             elevation: 3,
-            shadowColor: Colors.black.withOpacity(0.3),
+            shadowColor: colorScheme.shadow,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            color: Colors.white,
+            color: colorScheme.background,
             icon: Icon(
               Icons.keyboard_arrow_down_rounded,
               size: 30,
-              color: Colors.blueAccent,
+              color: colorScheme.primary,
             ),
             itemBuilder: (BuildContext context) {
-              // Mevcut konum listesi
               final items = konumList.map((Konum konum) {
                 return PopupMenuItem<Konum>(
                   value: konum,
@@ -54,25 +56,25 @@ class AdresPopUpWidget extends ConsumerWidget {
                       children: [
                         Icon(
                           Icons.location_on,
-                          color: Colors.blueAccent,
+                          color: colorScheme.primary,
                           size: 20,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(
                           "${konum.ilce_adi}, ${konum.sehir_adi}",
                           style: GoogleFonts.roboto(
                             fontSize: 16,
-                            color: Colors.black,
+                            color: colorScheme.primary,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         IconButton(
-                            onPressed: () {
-                              ref.read(konumlarProvider.notifier).state.remove(konum);
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(Icons.delete)
+                          onPressed: () {
+                            ref.read(konumlarProvider.notifier).state.remove(konum);
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.delete, color: colorScheme.onSurfaceVariant),
                         )
                       ],
                     ),
@@ -86,22 +88,22 @@ class AdresPopUpWidget extends ConsumerWidget {
                   height: 48,
                   child: InkWell(
                     onTap: () {
-                      Navigator.pop(context); // Popup'ı kapat
-                      _showAddAddressDialog(context, ref); // Yeni adres ekleme dialogunu göster
+                      Navigator.pop(context);
+                      _showAddAddressDialog(context, ref);
                     },
                     child: Row(
                       children: [
                         Icon(
                           Icons.add,
-                          color: Colors.blueAccent,
+                          color: colorScheme.primary,
                           size: 20,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(
                           "Yeni Adres Ekle",
                           style: GoogleFonts.roboto(
                             fontSize: 16,
-                            color: Colors.blueAccent,
+                            color: colorScheme.primary,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -114,12 +116,12 @@ class AdresPopUpWidget extends ConsumerWidget {
               return items;
             },
             onCanceled: () {
-              print("Seçim iptal edildi");
+              debugPrint("Seçim iptal edildi");
             },
             onSelected: (Konum selectedKonum) {
               ref.read(secilemKonumStateProvider.notifier).state = selectedKonum;
-              if(ref.read(seeAllStateProvider)) {
-                ref.read(seeAllStateProvider.notifier).state = !ref.read(seeAllStateProvider);
+              if (ref.read(seeAllStateProvider)) {
+                ref.read(seeAllStateProvider.notifier).state = false;
               }
             },
           ),
@@ -129,6 +131,7 @@ class AdresPopUpWidget extends ConsumerWidget {
   }
 
   void _showAddAddressDialog(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
     final TextEditingController cityController = TextEditingController();
     final TextEditingController districtController = TextEditingController();
 
@@ -136,28 +139,51 @@ class AdresPopUpWidget extends ConsumerWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.blueAccent.withOpacity(0.65),
-          title: Text("Yeni Adres Ekle",style: GoogleFonts.roboto(fontSize: 20,color: Colors.white,fontWeight: FontWeight.w500),),
+          backgroundColor: colorScheme.surfaceVariant.withOpacity(0.95),
+          title: Text(
+            "Yeni Adres Ekle",
+            style: GoogleFonts.roboto(
+              fontSize: 20,
+              color: colorScheme.onSurface,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: colorScheme.onSurface),
                 controller: cityController,
                 decoration: InputDecoration(
-                  labelStyle: GoogleFonts.roboto(fontSize: 18,color: Colors.white,fontWeight: FontWeight.w500),
-                  hintStyle: GoogleFonts.roboto(fontSize: 18,color: Colors.white,fontWeight: FontWeight.w500),
+                  labelStyle: GoogleFonts.roboto(
+                    fontSize: 18,
+                    color: colorScheme.onSurface,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  hintStyle: GoogleFonts.roboto(
+                    fontSize: 18,
+                    color: colorScheme.onSurface.withOpacity(0.5),
+                    fontWeight: FontWeight.w500,
+                  ),
                   labelText: "Şehir",
                   hintText: "Şehir adını giriniz",
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextField(
-               style: TextStyle(color: Colors.white),
+                style: TextStyle(color: colorScheme.onSurface),
                 controller: districtController,
                 decoration: InputDecoration(
-                  labelStyle: GoogleFonts.roboto(fontSize: 18,color: Colors.white,fontWeight: FontWeight.w500),
-                  hintStyle: GoogleFonts.roboto(fontSize: 18,color: Colors.white,fontWeight: FontWeight.w500),
+                  labelStyle: GoogleFonts.roboto(
+                    fontSize: 18,
+                    color: colorScheme.onSurface,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  hintStyle: GoogleFonts.roboto(
+                    fontSize: 18,
+                    color: colorScheme.onSurface.withOpacity(0.5),
+                    fontWeight: FontWeight.w500,
+                  ),
                   labelText: "İlçe",
                   hintText: "İlçe adını giriniz",
                 ),
@@ -167,21 +193,35 @@ class AdresPopUpWidget extends ConsumerWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text("İptal",style: GoogleFonts.roboto(fontSize: 18,color: Colors.white,fontWeight: FontWeight.w500),),
+              child: Text(
+                "İptal",
+                style: GoogleFonts.roboto(
+                  fontSize: 18,
+                  color: colorScheme.onSurface,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
+                backgroundColor: colorScheme.primary,
               ),
               onPressed: () {
                 final newAddress = Konum(
-                   cityController.text,
-                   districtController.text,
+                  cityController.text,
+                  districtController.text,
                 );
                 ref.read(konumlarProvider.notifier).state.add(newAddress);
                 Navigator.pop(context);
               },
-              child: Text("Ekle",style: GoogleFonts.roboto(fontSize: 18,color: Colors.black,fontWeight: FontWeight.w500),),
+              child: Text(
+                "Ekle",
+                style: GoogleFonts.roboto(
+                  fontSize: 18,
+                  color: colorScheme.onPrimary,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
           ],
         );
