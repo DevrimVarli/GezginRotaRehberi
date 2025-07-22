@@ -22,20 +22,19 @@ class ProfileScreen extends StatelessWidget {
     final user = FirebaseAuth.instance.currentUser!;
     final ekranGenisligi = MediaQuery.sizeOf(context).width;
     final ekranYuksekligi = MediaQuery.sizeOf(context).height;
-
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon:  Icon(Icons.arrow_back_ios, color: colorScheme.onSurface),
         ),
-        title: const Text(
+        title:  Text(
           'Kullanıcı Bilgilerim',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.white),
+          style: textTheme.headlineSmall,
         ),
         centerTitle: true,
-        backgroundColor: Colors.blue,
       ),
       body: FutureBuilder<Map<String, dynamic>?>(
         future: getFirestoreUserData(),
@@ -48,28 +47,49 @@ class ProfileScreen extends StatelessWidget {
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.white,
-              ),
-              height: ekranYuksekligi,
-              width: ekranGenisligi,
-              child: ListView(
-                children: [
-                  _infoTile("Ad Soyad", user.displayName ?? "${firestoreData?['firstName'] ?? ''} ${firestoreData?['lastName'] ?? ''}"),
-                  _divider(ekranGenisligi),
-                  _infoTile("Kullanıcı Adı", firestoreData?['userName'] ?? "Yok"),
-                  _divider(ekranGenisligi),
-                  _infoTile("E-posta", user.email ?? "E-posta yok"),
-                  _divider(ekranGenisligi),
-                  _infoTile("UID (Kullanıcı ID)", user.uid),
-                  _divider(ekranGenisligi),
-                  _infoTile("Telefon Numarası", user.phoneNumber ?? "${firestoreData?['phoneNumber'] ?? ''}"),
-                  _divider(ekranGenisligi),
-                  _infoTile("Profil Fotoğrafı URL", user.photoURL ?? "Yok"),
-                ],
-              ),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: user.photoURL != null
+                      ? NetworkImage(user.photoURL!)
+                      : const NetworkImage("https://sunnysmilesep.com/wp-content/uploads/2019/05/AdobeStock_214746128-1024x683.jpeg"),
+                ),
+                const SizedBox(height: 16),
+                Expanded(
+                  child: ListView(
+                    children: [
+
+                      InfoTile("Ad Soyad", user.displayName ?? "${firestoreData?['firstName'] ?? ''} ${firestoreData?['lastName'] ?? ''}"),
+                    Container(
+                      width: ekranGenisligi,
+                      height: 1.5,
+                      color: colorScheme.onSurface,
+                    ),
+                      InfoTile("Kullanıcı Adı", firestoreData?['userName'] ?? "Yok"),
+                      Container(
+                        width: ekranGenisligi,
+                        height: 1.5,
+                        color: colorScheme.onSurface,
+                      ),
+                      InfoTile("E-posta", user.email ?? "E-posta yok"),
+                      Container(
+                        width: ekranGenisligi,
+                        height: 1.5,
+                        color: colorScheme.onSurface,
+                      ),
+                      InfoTile("UID (Kullanıcı ID)", user.uid),
+                      Container(
+                        width: ekranGenisligi,
+                        height: 1.5,
+                        color: colorScheme.onSurface,
+                      ),
+                      InfoTile("Telefon Numarası", user.phoneNumber ?? "${firestoreData?['phoneNumber'] ?? ''}"),
+
+                    ],
+                  ),
+                ),
+              ],
             ),
           );
         },
@@ -77,18 +97,51 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _divider(double width) {
-    return Container(
-      width: width,
-      height: 1.5,
-      color: Colors.blue.shade100,
-    );
-  }
 
-  Widget _infoTile(String title, String value) {
-    return ListTile(
-      title: Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-      subtitle: Text(value.isNotEmpty ? value : "Bilinmiyor"),
+
+}
+
+class InfoTile extends StatelessWidget {
+  final String title;
+  final String value;
+
+  const InfoTile(this.title, this.value, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(
+        color: colorScheme.onSurface,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: textTheme.labelLarge?.copyWith(
+              color: colorScheme.surface,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            value.isNotEmpty ? value : "Bilinmiyor",
+            style: textTheme.bodyMedium?.copyWith(
+              color: colorScheme.surface.withOpacity(0.9),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
+
+
