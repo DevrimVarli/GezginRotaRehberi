@@ -27,7 +27,7 @@ class FavoriteButtonWidgets extends ConsumerWidget {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: colorScheme.shadow.withOpacity(0.15),
+              color: colorScheme.shadow.withValues(alpha: 0.15),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),

@@ -6,7 +6,7 @@ class metinText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-        top: 653,
+        bottom: 125,
         left: 32,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_favorite_button.dart';
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_star_icon.dart';
-import 'package:yeni_tasarim/model/Restorantlar.dart';
-
 import '../../../providers/all_providers.dart';
 import 'custom_image_card.dart';
 import 'custom_text_name.dart';
-import 'info_card.dart';
 class FavoriRestoranKartlar extends ConsumerWidget {
   final List<dynamic> filteredRestoranList;
   FavoriRestoranKartlar({required this.filteredRestoranList});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final restoranList = ref.watch(restoranFutureProvider);
-    final favoriteList = ref.watch(favoriListesiProvider);
     return  ListView.builder(
       itemCount: filteredRestoranList.length,
       itemBuilder: (context, index) {

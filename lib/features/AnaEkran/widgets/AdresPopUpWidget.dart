@@ -22,18 +22,18 @@ class AdresPopUpWidget extends ConsumerWidget {
           Icon(
             Icons.location_on,
             color: colorScheme.primary,
-            size: 28,
+            size: 20,
           ),
-          const SizedBox(width: 5),
+          const SizedBox(width: 1),
           Text(
             "${konum.ilce_adi}, ${konum.sehir_adi}",
             style: GoogleFonts.roboto(
-              fontSize: 18,
+              fontSize: 15,
               color: colorScheme.primary,
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 2),
           PopupMenuButton<Konum>(
             elevation: 3,
             shadowColor: colorScheme.shadow,

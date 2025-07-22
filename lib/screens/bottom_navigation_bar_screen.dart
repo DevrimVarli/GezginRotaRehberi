@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yeni_tasarim/screens/home_screen.dart';
 import 'package:yeni_tasarim/screens/favorite_page_view.dart';
 import 'account_and_login_screen.dart';
-import 'login_screen.dart';
-
 class Secim extends StatefulWidget {
   const Secim({super.key});
 
@@ -12,7 +10,7 @@ class Secim extends StatefulWidget {
 }
 
 class _SecimState extends State<Secim> {
-  int secilenIndex = 0;
+  int secilenIndex = 3;
 
   final sayfaListesi = [
     AnaEkran(),

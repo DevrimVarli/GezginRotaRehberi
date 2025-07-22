@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yeni_tasarim/model/Konum.dart';
-import 'package:yeni_tasarim/model/hesap_kategori.dart';
 import 'package:yeni_tasarim/repository/adres_repo.dart';
 import 'package:yeni_tasarim/repository/icon_repo.dart';
 import 'package:yeni_tasarim/repository/kategori_repo.dart';
@@ -40,8 +39,14 @@ final authProvider = Provider((ref) => AuthService(ref));
 final userChangesProvider = StreamProvider<User?>((ref) {
   return FirebaseAuth.instance.authStateChanges();
 });
-final hesapKategoriProvider=Provider<List<HesapKategori>>((ref){
-  return [HesapKategori("Seyahatlerim",Icon(Icons.airplane_ticket_outlined)),HesapKategori("Kampanyalarım", Icon(Icons.campaign)),HesapKategori("Favorilerim", Icon(Icons.favorite_border)),HesapKategori("Profilim",Icon(Icons.person_outline)),HesapKategori("Çıkış Yap",Icon(Icons.logout))];
+final generalKategoriProvider=Provider<List<String>>((ref){
+  return ["Seyahatlerim","Kampanyalarım","Favorilerim", "Profilim","Çıkış Yap"];
+});
+final accountKategoriProvider=Provider<List<String>>((ref){
+  return ["Security Settings","Delete Account"];
+});
+final otherKategoriProvider=Provider<List<String>>((ref){
+  return ["FAQ","Privacy Policy","Terms and Conditions"];
 });
 final themeModeProvider = StateProvider<ThemeMode>((ref) {
   return ThemeMode.system; // Başlangıç
@@ -54,6 +59,11 @@ final emailControllerProvider = Provider.autoDispose<TextEditingController>((ref
 
 
 final passwordControllerProvider = Provider.autoDispose<TextEditingController>((ref) {
+  final controller = TextEditingController();
+  ref.onDispose(() => controller.dispose());
+  return controller;
+});
+final newPasswordControllerProvider = Provider.autoDispose<TextEditingController>((ref) {
   final controller = TextEditingController();
   ref.onDispose(() => controller.dispose());
   return controller;
@@ -72,9 +82,15 @@ final lastNameControllerProvider = Provider.autoDispose<TextEditingController>((
   ref.onDispose(() => controller.dispose());
   return controller;
 });
+final phoneNumberControllerProvider = Provider.autoDispose<TextEditingController>((ref) {
+  final controller = TextEditingController();
+  ref.onDispose(() => controller.dispose());
+  return controller;
+});
 
 final userNameControllerProvider = Provider.autoDispose<TextEditingController>((ref) {
   final controller = TextEditingController();
   ref.onDispose(() => controller.dispose());
   return controller;
 });
+final checkBoxStateProvider=StateProvider<bool>((ref)=>false);

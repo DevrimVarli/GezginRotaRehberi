@@ -1,108 +1,181 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:yeni_tasarim/model/hesap_kategori.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/profile_screen.dart';
+import 'package:yeni_tasarim/screens/security_settings.dart';
 
 class AccountScreen extends ConsumerWidget {
   const AccountScreen({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final value = ref.watch(checkBoxStateProvider);
+    double ekranGenisligi = MediaQuery.of(context).size.width;
     final user = FirebaseAuth.instance.currentUser;
-    final hesapKategori=ref.watch(hesapKategoriProvider);
+    final hesapKategori = ref.watch(generalKategoriProvider);
+    final accountKategori = ref.watch(accountKategoriProvider);
+    final otherKategori = ref.watch(otherKategoriProvider);
+    final colorScheme = Theme
+        .of(context)
+        .colorScheme;
+    final textTheme = Theme
+        .of(context)
+        .textTheme;
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade100, // Açık mavi arka plan
-      appBar: AppBar(
-        title: Text("Hesabım", style: TextStyle(color: Colors.white,fontSize: 28,fontWeight: FontWeight.w500)),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
-      ),
-      body: user == null
-          ? Center(child: Text("Kullanıcı bilgisi bulunamadı."))
-          :Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
+        appBar: AppBar(
+          title: Text("Profile", style: GoogleFonts.roboto(fontSize: 24,)),
+          centerTitle: true,
+          backgroundColor: colorScheme.surface,
+        ),
+        body: user == null
+            ? Center(child: Text("Kullanıcı bilgisi bulunamadı."))
+            :Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
+            child: ListView(
               children: [
+                Text("General",style: textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),),
+                ...hesapKategori.map((kategori) => buildKategoriSatiri(
+                  kategori,
+                  ekranGenisligi,
+                  context,
+                  colorScheme,
+                  textTheme,
+                  ref,
+                )),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: Column(
                     children: [
-                      Text("Merhaba",style: TextStyle(color: Colors.grey.shade800,fontSize: 20,fontWeight: FontWeight.w500),),
-                      SizedBox(width: 10,),
-                      Text(user.displayName ?? "",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),),
+                      Container(
+                        color: colorScheme.surface.withValues(alpha: 0.1),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 3.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "Notification",
+                                  style: textTheme.bodyLarge,
+                                ),
+                              ),
+                              Switch.adaptive(
+                                activeColor: colorScheme.onSurface,
+                                activeTrackColor: colorScheme.primary,
+                                inactiveThumbColor: colorScheme.onSurface,
+                                inactiveTrackColor: colorScheme.surface.withValues(alpha: 0.15),
+                                value: value,
+                                onChanged: (val) {
+                                  ref.read(checkBoxStateProvider.notifier).state = val;
+                                  ref.read(themeModeProvider.notifier).state=val?ThemeMode.dark:ThemeMode.light;
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 1,
+                        width: ekranGenisligi,
+                        color: colorScheme.onSurface.withValues(alpha: 0.2),
+                      ),
                     ],
                   ),
                 ),
-                Expanded(
-                  child: ListView.builder(
-                  itemCount: hesapKategori.length,
-                  itemBuilder: (context,index){
-                    HesapKategori kategori=hesapKategori[index];
-                    return GestureDetector(
-                      onTap:() {
-                        if(kategori.kategori_ad=="Çıkış Yap"){
-                          FirebaseAuth.instance.signOut();
-                        }else if(kategori.kategori_ad=="Profilim"){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
-                        }
-
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 10,right: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.zero,
-                          color: Colors.white,
-                        ),
-                        child:Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Icon(kategori.kategori_icon.icon,color: Colors.grey.shade700,),
-                              SizedBox(width: 10,),
-                              Text(kategori.kategori_ad,style: TextStyle(color: Colors.grey.shade700,fontSize: 20,fontWeight: FontWeight.w500),),
-                              Spacer(),
-                              IconButton(onPressed: (){
-                                if(kategori.kategori_ad=="Çıkış Yap"){
-                                  FirebaseAuth.instance.signOut();
-                                }
-                              },
-                              icon:Icon(Icons.arrow_forward_ios,color: Colors.grey.shade700,size: 18,)
-                              )
-
-                            ],
-                          ),
-                        ) ,
-                      ),
-                    );
-
-                  }),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  child: Text("Account & Security",style: textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),),
                 ),
+                ...accountKategori.map((kategori) => buildKategoriSatiri(
+                  kategori,
+                  ekranGenisligi,
+                  context,
+                  colorScheme,
+                  textTheme,
+                  ref,
+                )),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  child: Text("Other",style: textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),),
+                ),
+                ...otherKategori.map((kategori) => buildKategoriSatiri(
+                  kategori,
+                  ekranGenisligi,
+                  context,
+                  colorScheme,
+                  textTheme,
+                  ref,
+                )),
               ],
             ),
-          )
+          ),
+        ),
+
     );
   }
+  Widget buildKategoriSatiri(
+      var kategori,
+      double ekranGenisligi,
+      BuildContext context,
+      ColorScheme colorScheme,
+      TextTheme textTheme,
+      WidgetRef ref,
+      ) {
+    return GestureDetector(
+      onTap: () {
+        switch (kategori){
+            case "Security Settings":Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SecuritySettings()),
+            );
+              break;
+            case "Delete Account": ref.read(authProvider).deleteAccount(context);
+              break;
+            case "Çıkış Yap":FirebaseAuth.instance.signOut();
+              break;
+            case "Profilim":Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProfileScreen()),
+            );
+              break;
+        }
 
-  // Kart oluşturucu fonksiyon
-  Widget _buildInfoCard({
-    required IconData icon,
-    required String title,
-    required String subtitle,
-  }) {
-    return Card(
-      color: Colors.blue[100],
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: ListTile(
-        leading: Icon(icon, color: Colors.blue[800]),
-        title: Text(title, style: TextStyle(color: Colors.blue[900])),
-        subtitle: Text(subtitle, style: TextStyle(color: Colors.blue[700])),
+      },
+      child: Column(
+        children: [
+          Container(
+            color: colorScheme.surface.withValues(alpha: 0.1),
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    kategori,
+                    style: textTheme.bodyLarge,
+                  ),
+                ),
+                Icon(Icons.arrow_forward_ios,
+                    size: 18, color: colorScheme.onSurface),
+              ],
+            ),
+          ),
+          Container(
+            height: 1,
+            width: ekranGenisligi,
+            color: colorScheme.onSurface.withValues(alpha: 0.2),
+          ),
+        ],
       ),
     );
   }
+
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:yeni_tasarim/features/DetayEkran/widgets/ArrowBackButtonWidgets.dart';
 import 'package:yeni_tasarim/features/DetayEkran/widgets/FavoriteButtonWidgets.dart';
 import 'package:yeni_tasarim/features/DetayEkran/widgets/MekanInfoWidgets.dart';
@@ -22,12 +21,11 @@ class DetayEkrani extends StatefulWidget {
 class _DetayEkraniState extends State<DetayEkrani> {
   @override
   Widget build(BuildContext context) {
-    final ekranYuksekligi = MediaQuery.sizeOf(context).height;
     final ekranGenisligi = MediaQuery.sizeOf(context).width;
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: colorScheme.background,
+      backgroundColor: colorScheme.surface,
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -88,7 +86,7 @@ class _DetayEkraniState extends State<DetayEkrani> {
                   color: colorScheme.surface,
                   boxShadow: [
                     BoxShadow(
-                      color: colorScheme.shadow.withOpacity(0.08),
+                      color: colorScheme.shadow.withValues(alpha: 0.08),
                       blurRadius: 10,
                       offset: const Offset(0, -2),
                     ),

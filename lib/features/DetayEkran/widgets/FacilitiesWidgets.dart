@@ -5,8 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../model/Imkanlar.dart';
 import '../../../model/Restorantlar.dart';
 import '../../../model/oteller.dart';
-import '../../../providers/all_providers.dart';
-
 class FacilitiesWidgets extends ConsumerWidget {
   final Oteller? secilenOtel;
   final Restorantlar? secilenRestorant;
@@ -42,7 +40,7 @@ class FacilitiesWidgets extends ConsumerWidget {
           "Facilities",
           style: GoogleFonts.roboto(
             fontSize: 24,
-            color: colorScheme.onBackground,
+            color: colorScheme.onSurface,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -63,7 +61,7 @@ class FacilitiesWidgets extends ConsumerWidget {
                 width: ekranGenisligi / 4.6,
                 margin: const EdgeInsets.only(right: 8),
                 decoration: BoxDecoration(
-                  color: colorScheme.primary.withOpacity(0.08),
+                  color: colorScheme.primary.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(

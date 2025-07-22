@@ -17,7 +17,7 @@ class CustomRestoranButton extends ConsumerWidget {
       style: TextButton.styleFrom(
         backgroundColor: favoriteButtonState
             ? Colors.transparent
-            : colorScheme.primary.withOpacity(0.75),
+            : colorScheme.primary.withValues(alpha: 0.75),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.zero,
         ),

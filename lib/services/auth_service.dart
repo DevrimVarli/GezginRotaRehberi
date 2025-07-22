@@ -4,16 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:google_sign_in_android/google_sign_in_android.dart';
-
 import 'package:yeni_tasarim/screens/account_screen.dart';
-import 'package:yeni_tasarim/screens/see_all_screen.dart';
+import 'package:yeni_tasarim/screens/bottom_navigation_bar_screen.dart';
 class AuthService {
   final Ref ref;
   AuthService(this.ref);
 
   Future<void> kayitEkle(
-  {required BuildContext context,required String mail,required String password,required String lastName,required String firstName,required String userName}) async {
+  {required BuildContext context,required String mail,required String password,required String lastName,required String firstName,required String userName,required String phoneNumber}) async {
     try {
       UserCredential yetkiSonucu = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: mail, password: password);
@@ -24,7 +22,8 @@ class AuthService {
         "email": mail,
         "lastName":lastName,
         "firstName":firstName,
-        "userName":userName
+        "userName":userName,
+        "phoneNumber":phoneNumber
       });
 
       Navigator.push(
@@ -42,10 +41,7 @@ class AuthService {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => AccountScreen()),
-      );
+
     } catch (hata) {
       Fluttertoast.showToast(msg:"Kullanıcı bilgileri hatalı");
     }
@@ -92,6 +88,128 @@ class AuthService {
       );
     }
   }
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      final email = user?.email;
+
+      if (user != null && email != null) {
+        // Eski şifreyle yeniden kimlik doğrulama
+        final cred = EmailAuthProvider.credential(email: email, password: currentPassword);
+        await user.reauthenticateWithCredential(cred);
+
+        // Yeni şifreyi ayarla
+        await user.updatePassword(newPassword);
+        Fluttertoast.showToast(msg: "Şifre başarıyla güncellendi.");
+      } else {
+        Fluttertoast.showToast(msg: "Kullanıcı oturumu bulunamadı.");
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "Şifre değiştirme hatası: $e");
+    }
+  }
+  Future<void> changeEmail({
+    required String currentPassword,
+    required String newEmail,
+  }) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      final oldEmail = user?.email;
+
+      if (user != null && oldEmail != null) {
+        // Eski şifreyle yeniden kimlik doğrulama
+        final cred = EmailAuthProvider.credential(email: oldEmail, password: currentPassword);
+        await user.reauthenticateWithCredential(cred);
+
+        // E-posta adresini güncelle
+        await user.verifyBeforeUpdateEmail(newEmail);
+        Fluttertoast.showToast(msg: "E-posta doğrulama bağlantısı gönderildi.");
+        // Firestore'daki email bilgisini de güncelle
+        await FirebaseFirestore.instance
+            .collection("Kullanicilar1")
+            .doc(user.uid)
+            .update({"email": newEmail});
+
+      } else {
+        Fluttertoast.showToast(msg: "Kullanıcı oturumu bulunamadı.");
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "E-posta değiştirme hatası: $e");
+    }
+  }
+
+  Future<void> deleteAccount(BuildContext context) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        // Firestore'dan kullanıcı verisini sil
+        await FirebaseFirestore.instance
+            .collection("Kullanicilar1")
+            .doc(user.uid)
+            .delete();
+
+        // Firebase Authentication'dan hesabı sil
+        await user.delete();
+
+        Fluttertoast.showToast(msg: "Hesap başarıyla silindi.");
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Secim()), (route) => false);
+
+      } else {
+        Fluttertoast.showToast(msg: "Kullanıcı bulunamadı.");
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "Hesap silme hatası: $e");
+    }
+  }
+  Future<void> updateUserInfo({
+    required String firstName,
+    required String lastName,
+    required String userName,
+  }) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        // Firestore'daki kullanıcı bilgilerini güncelle
+        await FirebaseFirestore.instance
+            .collection("Kullanicilar1")
+            .doc(user.uid)
+            .update({
+          "firstName": firstName,
+          "lastName": lastName,
+          "userName": userName,
+        });
+
+        // Firebase displayName güncelle (isteğe bağlı)
+        await user.updateDisplayName("$firstName $lastName");
+
+        Fluttertoast.showToast(msg: "Bilgiler güncellendi.");
+      } else {
+        Fluttertoast.showToast(msg: "Kullanıcı bulunamadı.");
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "Güncelleme hatası: $e");
+    }
+  }
+  Future<Map<String, dynamic>?> getFirestoreUserData() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final doc = await FirebaseFirestore.instance
+          .collection("Kullanicilar1")
+          .doc(user.uid)
+          .get();
+      return doc.data();
+    }
+    return null;
+  }
+
+
+
+
 
 
 

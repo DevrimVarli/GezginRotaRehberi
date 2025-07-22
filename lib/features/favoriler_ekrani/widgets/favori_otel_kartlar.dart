@@ -1,8 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../../../providers/all_providers.dart';
 import 'custom_favorite_button.dart';
 import 'custom_image_card.dart';
 import 'custom_star_icon.dart';

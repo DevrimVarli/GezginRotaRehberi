@@ -18,6 +18,6 @@ class CustomThemeChangeButton extends ConsumerWidget {
         ref.read(themeModeProvider.notifier).state =
         current == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
       },
-    );;
+    );
   }
 }

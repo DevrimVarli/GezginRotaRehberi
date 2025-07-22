@@ -1,74 +1,78 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
+  Future<Map<String, dynamic>?> getFirestoreUserData() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final doc = await FirebaseFirestore.instance
+          .collection("Kullanicilar1")
+          .doc(user.uid)
+          .get();
+      return doc.data();
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
-    double ekranGenisligi = MediaQuery.sizeOf(context).width;
-    double ekranYuksekligi = MediaQuery.sizeOf(context).height;
+    final ekranGenisligi = MediaQuery.sizeOf(context).width;
+    final ekranYuksekligi = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
-        title: Text(
+        title: const Text(
           'Kullanıcı Bilgilerim',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.white),
         ),
         centerTitle: true,
         backgroundColor: Colors.blue,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Stack(
-          children: [
-            Container(
+      body: FutureBuilder<Map<String, dynamic>?>(
+        future: getFirestoreUserData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          final firestoreData = snapshot.data;
+
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 color: Colors.white,
               ),
               height: ekranYuksekligi,
               width: ekranGenisligi,
-              child: Column(
+              child: ListView(
                 children: [
-                  ListTile(
-                    title: Text("Ad Soyad", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                    subtitle: Text(user.displayName ?? "Bilinmiyor"),
-                  ),
+                  _infoTile("Ad Soyad", user.displayName ?? "${firestoreData?['firstName'] ?? ''} ${firestoreData?['lastName'] ?? ''}"),
                   _divider(ekranGenisligi),
-                  ListTile(
-                    title: Text("E-posta", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                    subtitle: Text(user.email ?? "E-posta yok"),
-                  ),
+                  _infoTile("Kullanıcı Adı", firestoreData?['userName'] ?? "Yok"),
                   _divider(ekranGenisligi),
-                  ListTile(
-                    title: Text("UID (Kullanıcı ID)", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                    subtitle: Text(user.uid),
-                  ),
+                  _infoTile("E-posta", user.email ?? "E-posta yok"),
                   _divider(ekranGenisligi),
-                  ListTile(
-                    title: Text("Telefon Numarası", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                    subtitle: Text(user.phoneNumber ?? "Numara yok"),
-                  ),
+                  _infoTile("UID (Kullanıcı ID)", user.uid),
                   _divider(ekranGenisligi),
-                  ListTile(
-                    title: Text("Profil Fotoğrafı URL", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                    subtitle: Text(user.photoURL ?? "Yok"),
-                  ),
+                  _infoTile("Telefon Numarası", user.phoneNumber ?? "${firestoreData?['phoneNumber'] ?? ''}"),
                   _divider(ekranGenisligi),
+                  _infoTile("Profil Fotoğrafı URL", user.photoURL ?? "Yok"),
                 ],
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
@@ -76,8 +80,15 @@ class ProfileScreen extends StatelessWidget {
   Widget _divider(double width) {
     return Container(
       width: width,
-      height: 2,
+      height: 1.5,
       color: Colors.blue.shade100,
+    );
+  }
+
+  Widget _infoTile(String title, String value) {
+    return ListTile(
+      title: Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+      subtitle: Text(value.isNotEmpty ? value : "Bilinmiyor"),
     );
   }
 }

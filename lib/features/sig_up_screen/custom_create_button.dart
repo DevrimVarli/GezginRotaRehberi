@@ -16,7 +16,7 @@ class CustomCreateButton extends ConsumerWidget {
     final firstNameController = ref.watch(firstNameControllerProvider);
     final lastNameController = ref.watch(lastNameControllerProvider);
     final userNameController = ref.watch(userNameControllerProvider);
-
+    final phoneNumberController = ref.watch(phoneNumberControllerProvider);
     return SizedBox(
       width: ekranGenisligi / 2.25,
       height: 53,
@@ -24,7 +24,7 @@ class CustomCreateButton extends ConsumerWidget {
         onPressed: () async{
           bool kontrolSonucu=formKey.currentState!.validate();
           if(kontrolSonucu){
-            ref.read(authProvider).kayitEkle(context: context, mail: emailController.text, password: passwordController.text, lastName: lastNameController.text, firstName: firstNameController.text, userName: userNameController.text);
+            ref.read(authProvider).kayitEkle(context: context, mail: emailController.text, password: passwordController.text, lastName: lastNameController.text, firstName: firstNameController.text, userName: userNameController.text,phoneNumber: phoneNumberController.text);
           }
 
 

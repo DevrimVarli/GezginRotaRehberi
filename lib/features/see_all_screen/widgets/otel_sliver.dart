@@ -50,7 +50,7 @@ class OtelSliver extends ConsumerWidget {
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
                           colors: [
-                            Colors.black.withOpacity(0.17),
+                            Colors.black.withValues(alpha: 0.17),
                             Colors.transparent,
                           ],
                         ),
@@ -61,7 +61,7 @@ class OtelSliver extends ConsumerWidget {
                       top: 10,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: colorScheme.surface.withOpacity(0.7),
+                          color: colorScheme.surface.withValues(alpha: 0.7),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -83,7 +83,7 @@ class OtelSliver extends ConsumerWidget {
                         height: 30,
 
                         decoration: BoxDecoration(
-                          color: colorScheme.surface.withOpacity(0.7),
+                          color: colorScheme.surface.withValues(alpha: 0.7),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
@@ -108,7 +108,7 @@ class OtelSliver extends ConsumerWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(32),
-                          color: colorScheme.surface.withOpacity(0.85),
+                          color: colorScheme.surface.withValues(alpha: 0.85),
                         ),
                         child: IconButton(
                           onPressed: () {

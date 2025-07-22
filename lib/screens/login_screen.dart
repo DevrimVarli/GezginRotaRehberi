@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:yeni_tasarim/features/sig_up_screen/custom_sign_up_form.dart';
-import 'package:yeni_tasarim/features/sig_up_screen/custom_text_form_field.dart';
 import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_form.dart';
 import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_log_in_button.dart';
 import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_logo_and_welcome_text.dart';
 import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_sign_in_google_button.dart';
 import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_theme_change_button.dart';
-import 'package:yeni_tasarim/services/validator.dart';
-
 import '../features/sig_up_screen/custom_create_button.dart';
 import '../features/sig_up_screen/custom_sign_in_orientation.dart';
 import '../features/sig_up_screen/custom_text_sign_up.dart';
@@ -27,11 +23,7 @@ class LoginScreen extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     final kayitMi=ref.watch(kayitMiProvider);
     var formKey=GlobalKey<FormState>();
-    final emailController = ref.watch(emailControllerProvider);
-    final passwordController = ref.watch(passwordControllerProvider);
-    final firstNameController = ref.watch(firstNameControllerProvider);
-    final lastNameController = ref.watch(lastNameControllerProvider);
-    final userNameController = ref.watch(userNameControllerProvider);
+
 
     return Scaffold(
       backgroundColor: colorScheme.surface, // tema zemin rengi

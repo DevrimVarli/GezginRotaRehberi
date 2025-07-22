@@ -10,7 +10,7 @@ final FlexSchemeColor myLightColors = FlexSchemeColor(
   primaryContainer: Color(0xFF90CAF9), // Açık mavi arkaplan
   secondary: Color(0xFF00ACC1), // Turkuaz
   secondaryContainer: Color(0xFFB2EBF2),
-  tertiary: Color(0xFF0097A7), // Ek renk
+  tertiary: Colors.green.shade500, // Ek renk
   tertiaryContainer: Color(0xFFB2EBF2),
 );
 

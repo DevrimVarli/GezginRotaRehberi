@@ -1,23 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:yeni_tasarim/features/AnaEkran/widgets/AdresPopUpWidget.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/AppBarWidget.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/AramaTextFieldWidget.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/KategoriWidget.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/RestorantListViewWidget.dart';
-import 'package:yeni_tasarim/model/Konum.dart';
-import 'package:yeni_tasarim/model/Restorantlar.dart';
-import 'package:yeni_tasarim/model/oteller.dart';
-import 'package:yeni_tasarim/repository/adres_repo.dart';
-
 import '../features/AnaEkran/widgets/OtellerListViewWidget.dart';
 import '../providers/all_providers.dart';
-import '../repository/restoran_repo.dart';
-import '../repository/otel_repo.dart';
-import 'detail_screen.dart';
 
 class AnaEkran extends ConsumerWidget {
   const AnaEkran({super.key});

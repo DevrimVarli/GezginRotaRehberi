@@ -16,6 +16,7 @@ class CustomSignUpForm extends ConsumerWidget {
     final firstNameController = ref.watch(firstNameControllerProvider);
     final lastNameController = ref.watch(lastNameControllerProvider);
     final userNameController = ref.watch(userNameControllerProvider);
+    final phoneNumberController = ref.watch(phoneNumberControllerProvider);
 
     return  Form(
         key: formKey,
@@ -26,6 +27,8 @@ class CustomSignUpForm extends ConsumerWidget {
             CustomTextFormField(tfc: lastNameController, validator: lastNameValidator, hintText: "Last Name", obscureText: false, icon:Icon(Icons.person, color: colorScheme.onSurfaceVariant) ,),
             SizedBox(height: 20,),
             CustomTextFormField(tfc: userNameController, validator: userNameValidator, hintText: "User Name", obscureText: false, icon:Icon(Icons.person, color: colorScheme.onSurfaceVariant) ,),
+            SizedBox(height: 20,),
+            CustomTextFormField(tfc: phoneNumberController, validator: phoneNumberValidator, hintText: "Phone Number", obscureText: false, icon:Icon(Icons.phone, color: colorScheme.onSurfaceVariant) ,),
             SizedBox(height: 20,),
             CustomTextFormField(tfc: emailController, validator: mailValidator, hintText: "Email", obscureText: false, icon:Icon(Icons.mail, color: colorScheme.onSurfaceVariant) ,),
             SizedBox(height: 20,),

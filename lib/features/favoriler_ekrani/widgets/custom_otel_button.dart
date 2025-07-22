@@ -16,7 +16,7 @@ class CustomOtelButton extends ConsumerWidget {
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: favoriteButtonState
-            ? colorScheme.primary.withOpacity(0.75)
+            ? colorScheme.primary.withValues(alpha: 0.75)
             : Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.zero,

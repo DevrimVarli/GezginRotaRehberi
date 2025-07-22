@@ -34,7 +34,7 @@ class MekanInfoWidgets extends StatelessWidget {
                       20
                       ? 16
                       : 24,
-                  color: colorScheme.onBackground,
+                  color: colorScheme.onSurface,
                   fontWeight: FontWeight.bold,
                 ),
               ),

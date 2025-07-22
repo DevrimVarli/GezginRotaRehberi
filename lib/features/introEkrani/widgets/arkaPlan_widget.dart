@@ -9,7 +9,7 @@ class arkaPlanWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         height:ekranYuksekligi ,
         width: ekranGenisligi,
         child: Image(image: AssetImage(resimYolu),fit: BoxFit.fill),
