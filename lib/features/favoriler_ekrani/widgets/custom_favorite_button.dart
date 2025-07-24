@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../providers/all_providers.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
 class CustomFavoriteButton extends ConsumerWidget {
-  String mekan_ad;
   CustomFavoriteButton({super.key,required this.mekan_ad});
+  String mekan_ad;
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     return Positioned(
         bottom: 5,
         right: 10,
-        child: Container(
+        child: DecoratedBox(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(32),
               color: Colors.white,
             ),
 
             child:IconButton(onPressed: (){
-              final favoriNotifier = ref.read(favoriListesiProvider.notifier);
-              final currentList = [...favoriNotifier.state]; // yeni referans oluştur
-              currentList.remove(mekan_ad); // elemanı çıkar
+              StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
+              List<String> currentList = <String>[...favoriNotifier.state] // yeni referans oluştur
+              ..remove(mekan_ad); // elemanı çıkar
               favoriNotifier.state = currentList;
-            }, icon: Icon(Icons.favorite,color: Colors.blue,))
-        )
+            }, icon: const Icon(Icons.favorite,color: Colors.blue,),),
+        ),
     );
   }
 }

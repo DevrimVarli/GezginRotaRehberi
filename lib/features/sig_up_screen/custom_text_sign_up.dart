@@ -5,11 +5,11 @@ class CustomTextSignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Column(
-      children: [
+      children: <Widget>[
         Text("Let's Get Started",style: GoogleFonts.montserrat(fontSize: 24,fontWeight: FontWeight.bold)),
-        Text("Create an account on MNZL to get all features",style: GoogleFonts.montserrat(fontSize: 14,fontWeight: FontWeight.bold,color:colorScheme.onSurfaceVariant.withValues(alpha: 0.7) )),
+        Text('Create an account on MNZL to get all features',style: GoogleFonts.montserrat(fontSize: 14,fontWeight: FontWeight.bold,color:colorScheme.onSurfaceVariant.withValues(alpha: 0.7) )),
       ],
     );
   }

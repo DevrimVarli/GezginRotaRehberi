@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class CustomImageCard extends StatelessWidget {
-  String mekan_resim;
   CustomImageCard({super.key, required this.mekan_resim});
+  String mekan_resim;
 
   @override
   Widget build(BuildContext context) {

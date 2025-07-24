@@ -1,13 +1,15 @@
-class Konum{
-  String sehir_adi;
-  String ilce_adi;
+class Konum {
+  Konum(this.sehirAdi, this.ilceAdi);
 
-  Konum(this.sehir_adi, this.ilce_adi);
-
-  factory Konum.fromJson(Map<String, dynamic> json) {
+  factory Konum.fromJson(Map<String, Object?> json) {
     return Konum(
-      json['il'],
-      json['ilce'],
+      // JSON'dan 'sehir_adi' değerini alıyoruz
+      json['il'] is String ? json['il']! as String : 'No City', // Eğer sehir_adi yoksa 'No City' döndür
+      // JSON'dan 'ilce_adi' değerini alıyoruz
+      json['ilce'] is String ? json['ilce']! as String : 'No District', // Eğer ilce_adi yoksa 'No District' döndür
     );
   }
+
+  String sehirAdi;
+  String ilceAdi;
 }

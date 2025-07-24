@@ -5,7 +5,7 @@ class ArrowBackButtonWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Positioned(
       top: 20,

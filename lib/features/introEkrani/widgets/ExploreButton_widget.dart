@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 //EXPLORE BUTONU
-import '../../../screens/bottom_navigation_bar_screen.dart';
+import 'package:yeni_tasarim/screens/bottom_navigation_bar_screen.dart';
 class ExploreButtonWidget extends StatelessWidget {
+  ExploreButtonWidget({super.key, required this.ekranYuksekligi,required this.ekranGenisligi});
   double ekranYuksekligi;
   double ekranGenisligi;
-  ExploreButtonWidget({required this.ekranYuksekligi,required this.ekranGenisligi});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,14 @@ class ExploreButtonWidget extends StatelessWidget {
           height: ekranYuksekligi/20,
           child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  backgroundColor:HexColor("#176FF2"),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                  )
+                  backgroundColor:HexColor('#176FF2'),
+                  shape: const RoundedRectangleBorder(
+                    
+                  ),
               ),
               onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Secim()));
-              }, child: Text("Explore",style: GoogleFonts.montserrat(fontSize: 24,color: Colors.white,fontWeight: FontWeight.bold),)),
-        ));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>const Secim()));
+              }, child: Text('Explore',style: GoogleFonts.montserrat(fontSize: 24,color: Colors.white,fontWeight: FontWeight.bold),),),
+        ),);
   }
 }

@@ -6,37 +6,37 @@ import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_log_in_butto
 import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_logo_and_welcome_text.dart';
 import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_sign_in_google_button.dart';
 import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_theme_change_button.dart';
-import '../features/sig_up_screen/custom_create_button.dart';
-import '../features/sig_up_screen/custom_sign_in_orientation.dart';
-import '../features/sig_up_screen/custom_text_sign_up.dart';
-import '../features/sign_in_screen/widgets/custom_sign_up_button.dart';
-import '../providers/all_providers.dart';
+import 'package:yeni_tasarim/features/sig_up_screen/custom_create_button.dart';
+import 'package:yeni_tasarim/features/sig_up_screen/custom_sign_in_orientation.dart';
+import 'package:yeni_tasarim/features/sig_up_screen/custom_text_sign_up.dart';
+import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_sign_up_button.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final ekranGenisligi = MediaQuery.sizeOf(context).width;
-    final ekranYuksekligi = MediaQuery.sizeOf(context).height;
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    final kayitMi=ref.watch(kayitMiProvider);
-    var formKey=GlobalKey<FormState>();
+    double ekranGenisligi = MediaQuery.sizeOf(context).width;
+    double ekranYuksekligi = MediaQuery.sizeOf(context).height;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
+    bool kayitMi=ref.watch(kayitMiProvider);
+    GlobalKey<FormState> formKey=GlobalKey<FormState>();
 
 
     return Scaffold(
       backgroundColor: colorScheme.surface, // tema zemin rengi
       body:kayitMi? Center(
         child: Padding(
-          padding: const EdgeInsets.all(18.0),
+          padding: const EdgeInsets.all(18),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-             CustomTextSignUp(),
+            children: <Widget>[
+             const CustomTextSignUp(),
              CustomSignUpForm(formKey: formKey),
               CustomCreateButton(formKey: formKey),
-             CustomSignInOrientation(),
+             const CustomSignInOrientation(),
 
 
             ],
@@ -50,7 +50,7 @@ class LoginScreen extends ConsumerWidget {
           decoration: BoxDecoration(
             color: colorScheme.surface,
             borderRadius: BorderRadius.circular(20),
-            boxShadow: [
+            boxShadow: <BoxShadow>[
               BoxShadow(
                 color: colorScheme.shadow.withValues(alpha: 0.05),
                 blurRadius: 20,
@@ -61,16 +61,16 @@ class LoginScreen extends ConsumerWidget {
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+            children: <Widget>[
               // Sayfa body’sinin üstüne ekle (Stack yerine Row da olur)
-              Align(
+              const Align(
                 alignment: Alignment.topRight,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 16.0, right: 16.0),
+                  padding: EdgeInsets.only(top: 16, right: 16),
                   child: CustomThemeChangeButton(),
                 ),
               ),
-              CustomLogoAndWelcomeText(),
+              const CustomLogoAndWelcomeText(),
               // Username
               CustomForm(formKey: formKey),
 
@@ -80,7 +80,7 @@ class LoginScreen extends ConsumerWidget {
                 child: TextButton(
                   onPressed: () {},
                   child: Text(
-                    "Forgot Password?",
+                    'Forgot Password?',
                     style: textTheme.labelMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                       color: colorScheme.primary,
@@ -93,17 +93,17 @@ class LoginScreen extends ConsumerWidget {
               CustomLogInButton(formKey: formKey),
 
               Text(
-                "OR sign up using",
+                'OR sign up using',
                 style: textTheme.bodyMedium?.copyWith(
                   color: colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
               ),
 
               // Google Button
-              CustomSignInGoogleButton(),
+              const CustomSignInGoogleButton(),
 
               // Sign Up Row
-              CustomSignUpButton(),
+              const CustomSignUpButton(),
             ],
           ),
         ),

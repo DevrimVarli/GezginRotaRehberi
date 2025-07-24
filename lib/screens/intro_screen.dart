@@ -19,10 +19,10 @@ class _IntroEkranState extends State<IntroEkran> {
     double ekranGenisligi = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
-        children: [
-          arkaPlanWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi, resimYolu: "assets/anaEkran.png"),
-          baslikTextWidget(),
-          metinText(),
+        children: <Widget>[
+          arkaPlanWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi, resimYolu: 'assets/anaEkran.png'),
+          const baslikTextWidget(),
+          const metinText(),
           ExploreButtonWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi),
 
 

@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../model/Restorantlar.dart';
-import '../../../model/oteller.dart';
+import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/model/oteller.dart';
 
 class PriceWidgets extends StatelessWidget {
-  final Oteller? secilenOtel;
-  final Restorantlar? secilenRestorant;
-  final double ekranGenisligi;
 
-  PriceWidgets({
+  const PriceWidgets({
     super.key,
     this.secilenOtel,
     this.secilenRestorant,
     required this.ekranGenisligi,
   });
+  final Oteller? secilenOtel;
+  final Restorantlar? secilenRestorant;
+  final double ekranGenisligi;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Container(
       width: ekranGenisligi,
@@ -28,7 +28,7 @@ class PriceWidgets extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorScheme.surface, // zemin temadan
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
+        boxShadow: <BoxShadow>[
           BoxShadow(
             color: colorScheme.shadow.withValues(alpha: 0.05),
             blurRadius: 8,
@@ -38,14 +38,14 @@ class PriceWidgets extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: <Widget>[
           // Price Texts
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               Text(
-                "Price",
+                'Price',
                 style: GoogleFonts.roboto(
                   fontSize: 18,
                   color: colorScheme.onSurface,
@@ -54,8 +54,8 @@ class PriceWidgets extends StatelessWidget {
               ),
               Text(
                 secilenOtel != null
-                    ? "€${secilenOtel!.otel_fiyat.toString()}"
-                    : "€${secilenRestorant!.restoran_fiyat}",
+                    ? '€${secilenOtel!.otel_fiyat}'
+                    : '€${secilenRestorant!.restoran_fiyat}',
                 style: GoogleFonts.roboto(
                   fontSize: 32,
                   color: colorScheme.tertiary, // Öne çıkan fiyat rengi
@@ -79,7 +79,7 @@ class PriceWidgets extends StatelessWidget {
                 ),
               ),
               child: Text(
-                "Book Now →",
+                'Book Now →',
                 style: GoogleFonts.roboto(
                   fontSize: 20,
                   color: colorScheme.onPrimary,

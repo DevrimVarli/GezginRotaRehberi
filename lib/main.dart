@@ -6,11 +6,10 @@ import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/intro_screen.dart';
 import 'package:yeni_tasarim/theme/theme_palette.dart';
 
-
 void main()async {
   WidgetsFlutterBinding.ensureInitialized(); // Flutter için gerekli hazırlık
   await Firebase.initializeApp(); // Firebase'i başlatıyoruz
-  runApp(ProviderScope(child: const MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
@@ -24,7 +23,6 @@ class MyApp extends ConsumerWidget {
       // main.dart içinde
       theme: FlexThemeData.light(
         colors: myLightColors,
-        useMaterial3: true,
         subThemesData: const FlexSubThemesData(
           elevatedButtonRadius: 12,
           inputDecoratorRadius: 12,
@@ -33,7 +31,6 @@ class MyApp extends ConsumerWidget {
       ),
       darkTheme: FlexThemeData.dark(
         colors: myDarkColors,
-        useMaterial3: true,
         subThemesData: const FlexSubThemesData(
           elevatedButtonRadius: 12,
           inputDecoratorRadius: 12,
@@ -42,8 +39,7 @@ class MyApp extends ConsumerWidget {
       ),
 
       themeMode: ref.watch(themeModeProvider),
-      home:IntroEkran(),
+      home:const IntroEkran(),
     );
   }
 }
-

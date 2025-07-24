@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../providers/all_providers.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
 class KategoriWidget extends ConsumerWidget {
-  KategoriWidget();
+  const KategoriWidget({super.key});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final colorScheme=Theme.of(context).colorScheme;
-    final selectedIndex=ref.watch(selectedIndexProvider);
-    final basliklar=ref.watch(kategoriFutureProvider);
+    ColorScheme colorScheme=Theme.of(context).colorScheme;
+    int selectedIndex=ref.watch(selectedIndexProvider);
+    List<String> basliklar=ref.watch(kategoriFutureProvider);
     return  SizedBox(
       height: 50,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: basliklar.length,
-        itemBuilder: (context, index) {
-          final isSelected = selectedIndex == index;
+        itemBuilder: (BuildContext context, int index) {
+          bool isSelected = selectedIndex == index;
           return GestureDetector(
             onTap: () {
               ref.read(selectedIndexProvider.notifier).state = index;
@@ -40,6 +40,6 @@ class KategoriWidget extends ConsumerWidget {
           );
         },
       ),
-    );;
+    );
   }
 }

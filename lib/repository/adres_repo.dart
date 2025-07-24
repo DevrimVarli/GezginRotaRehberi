@@ -1,14 +1,14 @@
-import '../model/Konum.dart';
+import 'package:yeni_tasarim/model/Konum.dart';
 
 class AdresRepo{
-  List<Konum>konumList=[];
+  List<Konum>konumList=<Konum>[];
   List<Konum>  konumlar(){
-    Konum konum1 = Konum("Bursa", "Osmangazi");
-    Konum konum2 = Konum("Bursa", "Nilüfer");
-    Konum konum3 = Konum("Bursa", "Mudanya");
-    konumList.add(konum1);
-    konumList.add(konum2);
-    konumList.add(konum3);
+    Konum konum1 = Konum('Bursa', 'Osmangazi');
+    Konum konum2 = Konum('Bursa', 'Nilüfer');
+    Konum konum3 = Konum('Bursa', 'Mudanya');
+    konumList..add(konum1)
+    ..add(konum2)
+    ..add(konum3);
     return konumList;
   }
   List<Konum> konumEkle(Konum konum){

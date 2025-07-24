@@ -1,91 +1,111 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yeni_tasarim/features/profile_screen/widgets/custom_divider.dart';
+import 'package:yeni_tasarim/features/profile_screen/widgets/custom_info_tile.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
+import 'package:image_picker/image_picker.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
-  Future<Map<String, dynamic>?> getFirestoreUserData() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final doc = await FirebaseFirestore.instance
-          .collection("Kullanicilar1")
-          .doc(user.uid)
-          .get();
-      return doc.data();
-    }
-    return null;
-  }
-
   @override
-  Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
-    final ekranGenisligi = MediaQuery.sizeOf(context).width;
-    final ekranYuksekligi = MediaQuery.sizeOf(context).height;
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+  Widget build(BuildContext context, WidgetRef ref) {
+    ImagePicker picker = ImagePicker();
+    User user = FirebaseAuth.instance.currentUser!;
+    double ekranGenisligi = MediaQuery.sizeOf(context).width;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
+
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon:  Icon(Icons.arrow_back_ios, color: colorScheme.onSurface),
+          icon: Icon(Icons.arrow_back_ios, color: colorScheme.onSurface),
         ),
-        title:  Text(
+        title: Text(
           'Kullanıcı Bilgilerim',
           style: textTheme.headlineSmall,
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder<Map<String, dynamic>?>(
-        future: getFirestoreUserData(),
-        builder: (context, snapshot) {
+      body: ref.read(authProvider).kullaniciyiBul()?StreamBuilder<DocumentSnapshot>(
+        stream: FirebaseFirestore.instance.collection('Kullanicilar1')
+            .doc(user.uid)
+            .snapshots(), // Stream olarak verileri dinliyoruz
+        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final firestoreData = snapshot.data;
+          if (!snapshot.hasData || !snapshot.data!.exists) {
+            return const Center(child: Text('Veri bulunamadı'));
+          }
+
+          Map<String, dynamic> firestoreData = snapshot.data!.data()! as Map<String, dynamic>;
 
           return Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 60,
-                  backgroundImage: user.photoURL != null
-                      ? NetworkImage(user.photoURL!)
-                      : const NetworkImage("https://sunnysmilesep.com/wp-content/uploads/2019/05/AdobeStock_214746128-1024x683.jpeg"),
+              children: <Widget>[
+                // Profil fotoğrafı gösterimi
+                Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 90,
+                      backgroundColor: Colors.grey[300],
+                      backgroundImage:(firestoreData['profile_picture'] != null &&
+                          firestoreData['profile_picture'].toString().isNotEmpty)
+                          ? NetworkImage(firestoreData['profile_picture'].toString()) // Firestore'dan gelen URL varsa
+                          : const NetworkImage('https://example.com/default_image.jpg'), // Varsayılan bir resim
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Colors.white,
+                        child: IconButton(
+                          icon: const Icon(Icons.delete, size: 20, color: Colors.red),
+                          onPressed: () {
+                            ref.read(authProvider).photoDelete(imageUrl:firestoreData['profile_picture'].toString().isNotEmpty? "${firestoreData['profile_picture']}":'' );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                // Fotoğraf seçme butonu
+                ElevatedButton(
+                  onPressed: () {
+                    ref.read(authProvider).pickAndUploadProfilePicture(picker: picker, user: user);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: const Text('Fotoğraf Seç', style: TextStyle(fontSize: 16)),
                 ),
                 const SizedBox(height: 16),
                 Expanded(
                   child: ListView(
-                    children: [
-
-                      InfoTile("Ad Soyad", user.displayName ?? "${firestoreData?['firstName'] ?? ''} ${firestoreData?['lastName'] ?? ''}"),
-                    Container(
-                      width: ekranGenisligi,
-                      height: 1.5,
-                      color: colorScheme.onSurface,
-                    ),
-                      InfoTile("Kullanıcı Adı", firestoreData?['userName'] ?? "Yok"),
-                      Container(
-                        width: ekranGenisligi,
-                        height: 1.5,
-                        color: colorScheme.onSurface,
-                      ),
-                      InfoTile("E-posta", user.email ?? "E-posta yok"),
-                      Container(
-                        width: ekranGenisligi,
-                        height: 1.5,
-                        color: colorScheme.onSurface,
-                      ),
-                      InfoTile("UID (Kullanıcı ID)", user.uid),
-                      Container(
-                        width: ekranGenisligi,
-                        height: 1.5,
-                        color: colorScheme.onSurface,
-                      ),
-                      InfoTile("Telefon Numarası", user.phoneNumber ?? "${firestoreData?['phoneNumber'] ?? ''}"),
-
+                    children: <Widget>[
+                      // Kullanıcı bilgilerini listelemek
+                      InfoTile('Ad Soyad', user.displayName ?? "${firestoreData['firstName'] ?? ''} ${firestoreData['lastName'] ?? ''}"),
+                      CustomDivider(ekranGenisligi),
+                      InfoTile('Kullanıcı Adı', "${firestoreData['userName'] ?? "Yok"}"),
+                      CustomDivider(ekranGenisligi),
+                      InfoTile('E-posta',"${firestoreData['userName'] ?? "E-posta Yok"}"),
+                      CustomDivider(ekranGenisligi),
+                      InfoTile('UID (Kullanıcı ID)', user.uid),
+                      CustomDivider(ekranGenisligi),
+                      InfoTile('Telefon Numarası', user.phoneNumber ?? "${firestoreData['phoneNumber'] ?? ''}"),
                     ],
                   ),
                 ),
@@ -93,55 +113,45 @@ class ProfileScreen extends StatelessWidget {
             ),
           );
         },
-      ),
+      ): Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: <Widget>[
+                // Profil fotoğrafı gösterimi
+                Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 90,
+                      backgroundColor: Colors.grey[300],
+                      backgroundImage:NetworkImage(user.photoURL.toString())// Varsayılan bir resim
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                // Fotoğraf seçme butonu
+                Text('Hoş Geldiniz',style: textTheme.headlineSmall),
+                const SizedBox(height: 16),
+                Expanded(
+                  child: ListView(
+                    children: <Widget>[
+                      // Kullanıcı bilgilerini listelemek
+                      InfoTile('Ad Soyad', user.displayName ?? ''),
+                      CustomDivider(ekranGenisligi),
+                      InfoTile('Kullanıcı Adı', user.displayName ?? 'Yok'),
+                      CustomDivider(ekranGenisligi),
+                      InfoTile('E-posta', user.email ?? 'E-posta yok'),
+                      CustomDivider(ekranGenisligi),
+                      InfoTile('UID (Kullanıcı ID)', user.uid),
+                      CustomDivider(ekranGenisligi),
+                      InfoTile('Telefon Numarası', user.phoneNumber ??  ''),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
     );
   }
 
-
-
 }
-
-class InfoTile extends StatelessWidget {
-  final String title;
-  final String value;
-
-  const InfoTile(this.title, this.value, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
-        color: colorScheme.onSurface,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: textTheme.labelLarge?.copyWith(
-              color: colorScheme.surface,
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            value.isNotEmpty ? value : "Bilinmiyor",
-            style: textTheme.bodyMedium?.copyWith(
-              color: colorScheme.surface.withOpacity(0.9),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-

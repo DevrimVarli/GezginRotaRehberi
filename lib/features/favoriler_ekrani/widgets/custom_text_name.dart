@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextName extends StatelessWidget {
-  final String mekan_ad;
 
   const CustomTextName({super.key, required this.mekan_ad});
+  final String mekan_ad;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Positioned(
       top: 10,

@@ -1,24 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
-import '../providers/all_providers.dart';
-import 'account_screen.dart';
-import 'login_screen.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
+import 'package:yeni_tasarim/screens/account_screen.dart';
+import 'package:yeni_tasarim/screens/login_screen.dart';
 class AccountAndLoginScreen extends ConsumerWidget {
   const AccountAndLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final userAsync=ref.watch(userChangesProvider);
+    AsyncValue<User?> userAsync=ref.watch(userChangesProvider);
     return userAsync.when(
-        data: (user){
+        data: (User? user){
           if(user!=null){
-            return AccountScreen();
+            return const AccountScreen();
           }else{
-            return LoginScreen();
+            return const LoginScreen();
           }
         },
-        error: (error, stackTrace)=>Center(child: Text(error.toString())),
-        loading: ()=>Center(child: CircularProgressIndicator()));
+        error: (Object error, StackTrace stackTrace)=>Center(child: Text(error.toString())),
+        loading: ()=>const Center(child: CircularProgressIndicator()),);
   }
 }

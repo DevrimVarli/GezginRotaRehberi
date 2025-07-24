@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../providers/all_providers.dart';
-import '../../../screens/detail_screen.dart';
+import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
+import 'package:yeni_tasarim/screens/detail_screen.dart';
 class RestoranSliver extends ConsumerWidget {
   const RestoranSliver({super.key});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final restoranList = ref.watch(restoranFutureProvider);
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    AsyncValue<List<Restorantlar>> restoranList = ref.watch(restoranFutureProvider);
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
     double ekranGenisligi = MediaQuery.sizeOf(context).width;
     return restoranList.when(
-        data: (restoranListe) => SliverList(
+        data: (List<Restorantlar> restoranListe) => SliverList(
           delegate: SliverChildBuilderDelegate(
-                (context, index){
-              final restorant = restoranListe[index];
+                (BuildContext context, int index){
+              Restorantlar restorant = restoranListe[index];
               return Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 8.0,vertical:8 ),
+                padding:  const EdgeInsets.symmetric(horizontal: 8,vertical:8 ),
                 child: GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>DetayEkrani(secilenRestorant: restorant)));
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>DetayEkrani(secilenRestorant: restorant)));
                   },
                   child: Stack(
-                    children: [
+                    children: <Widget>[
                       Container(
                         height: ekranYuksekligi/4,
                         width: ekranGenisligi, // Genişliği sabitle
@@ -44,7 +45,7 @@ class RestoranSliver extends ConsumerWidget {
                           gradient: LinearGradient(
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
-                            colors: [
+                            colors: <Color>[
                               Colors.black.withValues(alpha: 0.17),
                               Colors.transparent,
                             ],
@@ -53,7 +54,7 @@ class RestoranSliver extends ConsumerWidget {
                       Positioned(
                         left: 5,
                         top: 10,
-                        child: Container(
+                        child: DecoratedBox(
                           decoration: BoxDecoration(
                             color: colorScheme.surface.withValues(alpha: 0.7),
                             borderRadius: BorderRadius.circular(16),
@@ -61,7 +62,7 @@ class RestoranSliver extends ConsumerWidget {
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
+                              children: <Widget>[
                                 Text(
                                   restorant.restoran_ad,
                                   style: GoogleFonts.roboto(
@@ -88,8 +89,8 @@ class RestoranSliver extends ConsumerWidget {
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
+                              children: <Widget>[
+                                const Icon(
                                   Icons.star,
                                   color: Colors.yellow,
                                   size: 18,
@@ -110,15 +111,15 @@ class RestoranSliver extends ConsumerWidget {
                       Positioned(
                           bottom: 5,
                           right: 10,
-                          child: Container(
+                          child: DecoratedBox(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(32),
                                 color:colorScheme.surface.withValues(alpha: 0.85),
                               ),
 
                               child:IconButton(onPressed: (){
-                                final favoriNotifier = ref.read(favoriListesiProvider.notifier);
-                                final currentList = [...favoriNotifier.state];
+                                StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
+                                List<String> currentList = <String>[...favoriNotifier.state];
 
                                 if (currentList.contains(restorant.restoran_ad)) {
                                   currentList.remove(restorant.restoran_ad);
@@ -129,8 +130,8 @@ class RestoranSliver extends ConsumerWidget {
                                 favoriNotifier.state = currentList;
                               }, icon: Icon(Icons.favorite,color:ref.watch(favoriListesiProvider).contains(restorant.restoran_ad)
                                   ? colorScheme.primary
-                                  : colorScheme.onSurface,))
-                          )
+                                  : colorScheme.onSurface,),),
+                          ),
                       ),
 
 
@@ -142,10 +143,10 @@ class RestoranSliver extends ConsumerWidget {
             childCount: restoranListe.length,
           ),
         ),
-        error: (error, stackTrace) => SliverFillRemaining(
+        error: (Object error, StackTrace stackTrace) => SliverFillRemaining(
           child: Center(child: Text(error.toString())),
         ),
-        loading: () => SliverFillRemaining(
+        loading: () => const SliverFillRemaining(
           child: Center(child: CircularProgressIndicator()),
         ),
       );

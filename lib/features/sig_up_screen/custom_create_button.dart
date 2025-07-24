@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../providers/all_providers.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
 class CustomCreateButton extends ConsumerWidget {
-  final GlobalKey<FormState> formKey;
   const CustomCreateButton({super.key,required this.formKey});
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final ekranGenisligi = MediaQuery.sizeOf(context).width;
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-    final emailController = ref.watch(emailControllerProvider);
-    final passwordController = ref.watch(passwordControllerProvider);
-    final firstNameController = ref.watch(firstNameControllerProvider);
-    final lastNameController = ref.watch(lastNameControllerProvider);
-    final userNameController = ref.watch(userNameControllerProvider);
-    final phoneNumberController = ref.watch(phoneNumberControllerProvider);
+    double ekranGenisligi = MediaQuery.sizeOf(context).width;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
+    TextEditingController emailController = ref.watch(emailControllerProvider);
+    TextEditingController passwordController = ref.watch(passwordControllerProvider);
+    TextEditingController firstNameController = ref.watch(firstNameControllerProvider);
+    TextEditingController lastNameController = ref.watch(lastNameControllerProvider);
+    TextEditingController userNameController = ref.watch(userNameControllerProvider);
+    TextEditingController phoneNumberController = ref.watch(phoneNumberControllerProvider);
     return SizedBox(
       width: ekranGenisligi / 2.25,
       height: 53,
@@ -36,7 +36,7 @@ class CustomCreateButton extends ConsumerWidget {
           ),
         ),
         child: Text(
-          "CREATE",
+          'CREATE',
           style: textTheme.labelLarge?.copyWith(
             color: colorScheme.onPrimary,
             fontWeight: FontWeight.bold,

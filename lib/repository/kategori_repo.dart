@@ -1,7 +1,7 @@
 
 class KategoriRepo{
  List<String>basliklar(){
-    List<String>baslikList=[ "Location","Hotels","Food","Adventure","Location","Hotels","Food","Adventure"];
+    List<String>baslikList=<String>[ 'Location','Hotels','Food','Adventure','Location','Hotels','Food','Adventure'];
     return baslikList;
   }
 }

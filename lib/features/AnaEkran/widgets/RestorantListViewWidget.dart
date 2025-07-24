@@ -1,66 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../model/Restorantlar.dart';
-import '../../../providers/all_providers.dart';
-import '../../../screens/detail_screen.dart';
-import '../../../screens/see_all_screen.dart';
+import 'package:yeni_tasarim/model/Konum.dart';
+import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
+import 'package:yeni_tasarim/screens/detail_screen.dart';
+import 'package:yeni_tasarim/screens/see_all_screen.dart';
 
 class RestorantListViewWidget extends ConsumerWidget {
+  const RestorantListViewWidget({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    final aramaSonucu = ref.watch(aramaSonucuStateProvider);
-    final restoranListAsync = ref.watch(restoranFutureProvider);
-    final secilenKonum = ref.watch(secilemKonumStateProvider);
-    final seeAll = ref.watch(seeAllStateProvider);
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    String aramaSonucu = ref.watch(aramaSonucuStateProvider);
+    AsyncValue<List<Restorantlar>> restoranListAsync = ref.watch(restoranFutureProvider);
+    Konum secilenKonum = ref.watch(secilemKonumStateProvider);
+    bool seeAll = ref.watch(seeAllStateProvider);
 
     return restoranListAsync.when(
-      data: (restoranList) {
-        final filteredRestoranList = aramaSonucu.isEmpty
-            ? restoranList.where((restoran) {
-          if (!seeAll && restoran.konum != null && secilenKonum != null) {
-            return restoran.konum.ilce_adi
+      data: (List<Restorantlar> restoranList) {
+        List<Restorantlar> filteredRestoranList = aramaSonucu.isEmpty
+            ? restoranList.where((Restorantlar restoran) {
+          if (!seeAll) {
+            return restoran.konum.ilceAdi
                 .toLowerCase()
-                .contains(secilenKonum.ilce_adi.toLowerCase());
+                .contains(secilenKonum.ilceAdi.toLowerCase());
           }
           return true;
         }).toList()
             : restoranList
-            .where((restorant) => restorant.restoran_ad
+            .where((Restorantlar restorant) => restorant.restoran_ad
             .toLowerCase()
-            .contains(aramaSonucu.toLowerCase()))
+            .contains(aramaSonucu.toLowerCase()),)
             .toList();
 
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(
-            children: [
+            children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: <Widget>[
                     Text(
-                      "Popular",
+                      'Popular',
                       style: GoogleFonts.roboto(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
-                        color: colorScheme.onBackground,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SeeAllEkrani()),
+                          MaterialPageRoute<Widget>(builder: (BuildContext context) => const SeeAllEkrani()),
                         );
                       },
                       child: Text(
-                        "See all",
+                        'See all',
                         style: GoogleFonts.roboto(
                           fontSize: 18,
                           color: colorScheme.primary,
@@ -76,18 +76,18 @@ class RestorantListViewWidget extends ConsumerWidget {
                 child: ListView.builder(
                   itemCount: filteredRestoranList.length,
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, indeks) {
+                  itemBuilder: (BuildContext context, int indeks) {
                     Restorantlar restorant = filteredRestoranList[indeks];
-                    final isFavorite = ref.watch(favoriListesiProvider).contains(restorant.restoran_ad);
+                    bool isFavorite = ref.watch(favoriListesiProvider).contains(restorant.restoran_ad);
 
                     return Stack(
-                      children: [
+                      children: <Widget>[
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => DetayEkrani(secilenRestorant: restorant),
+                              MaterialPageRoute<Widget>(
+                                builder: (BuildContext context) => DetayEkrani(secilenRestorant: restorant),
                               ),
                             );
                           },
@@ -135,8 +135,8 @@ class RestorantListViewWidget extends ConsumerWidget {
                             child: Center(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
+                                children: <Widget>[
+                                  const Icon(
                                     Icons.star,
                                     color: Colors.amber,
                                     size: 20,
@@ -167,8 +167,8 @@ class RestorantListViewWidget extends ConsumerWidget {
                             ),
                             child: IconButton(
                               onPressed: () {
-                                final favoriNotifier = ref.read(favoriListesiProvider.notifier);
-                                final currentList = [...favoriNotifier.state];
+                                StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
+                                List<String> currentList = <String>[...favoriNotifier.state];
 
                                 if (currentList.contains(restorant.restoran_ad)) {
                                   currentList.remove(restorant.restoran_ad);
@@ -196,7 +196,7 @@ class RestorantListViewWidget extends ConsumerWidget {
           ),
         );
       },
-      error: (error, stackTrace) => Center(child: Text(error.toString())),
+      error: (Object error, StackTrace stackTrace) => Center(child: Text(error.toString())),
       loading: () => const Center(child: CircularProgressIndicator()),
     );
   }

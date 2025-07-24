@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../model/Imkanlar.dart';
-import '../../../model/Restorantlar.dart';
-import '../../../model/oteller.dart';
+import 'package:yeni_tasarim/model/Imkanlar.dart';
+import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/model/oteller.dart';
 class FacilitiesWidgets extends ConsumerWidget {
-  final Oteller? secilenOtel;
-  final Restorantlar? secilenRestorant;
-  final double ekranGenisligi;
 
-  FacilitiesWidgets({
+  const FacilitiesWidgets({
     super.key,
     required this.ekranGenisligi,
     this.secilenOtel,
     this.secilenRestorant,
   });
+  final Oteller? secilenOtel;
+  final Restorantlar? secilenRestorant;
+  final double ekranGenisligi;
 
   Icon iconuBuL(String gelenVeri) {
-    if (gelenVeri == "wifi") {
+    if (gelenVeri == 'wifi') {
       return const Icon(Icons.wifi);
-    } else if (gelenVeri == "hot_tub") {
+    } else if (gelenVeri == 'hot_tub') {
       return const Icon(Icons.hot_tub);
-    } else if (gelenVeri == "pool") {
+    } else if (gelenVeri == 'pool') {
       return const Icon(Icons.pool);
     } else {
       return const Icon(Icons.lunch_dining);
@@ -31,13 +31,13 @@ class FacilitiesWidgets extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         Text(
-          "Facilities",
+          'Facilities',
           style: GoogleFonts.roboto(
             fontSize: 24,
             color: colorScheme.onSurface,
@@ -52,8 +52,8 @@ class FacilitiesWidgets extends ConsumerWidget {
             itemCount: (secilenOtel != null)
                 ? secilenOtel!.imkanlar.length
                 : secilenRestorant!.imkanlar.length,
-            itemBuilder: (context, indeks) {
-              final Imkanlar imkan = (secilenOtel != null)
+            itemBuilder: (BuildContext context, int indeks) {
+              Imkanlar imkan = (secilenOtel != null)
                   ? secilenOtel!.imkanlar[indeks]
                   : secilenRestorant!.imkanlar[indeks];
 
@@ -66,8 +66,8 @@ class FacilitiesWidgets extends ConsumerWidget {
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    iconuBuL(imkan.imkan_icon),
+                  children: <Widget>[
+                    iconuBuL(imkan.imkanIcon),
                     const SizedBox(height: 4),
                     Text(
                       imkan.imkanAdi,

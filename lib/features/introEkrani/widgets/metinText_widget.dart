@@ -10,22 +10,22 @@ class metinText extends StatelessWidget {
         left: 32,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Plan your",style: GoogleFonts.montserrat(
+          children: <Widget>[
+            Text('Plan your',style: GoogleFonts.montserrat(
                 fontSize: 36,
-                color: Colors.white
+                color: Colors.white,
             ),),
-            Text("Luxurious",style: GoogleFonts.montserrat(
+            Text('Luxurious',style: GoogleFonts.montserrat(
               fontSize: 48,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),),
-            Text("Vacation",style: GoogleFonts.montserrat(
+            Text('Vacation',style: GoogleFonts.montserrat(
                 fontSize: 48,
                 color: Colors.white,
-                fontWeight: FontWeight.bold
+                fontWeight: FontWeight.bold,
             ),),
           ],
-        ));
+        ),);
   }
 }

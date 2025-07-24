@@ -4,13 +4,13 @@ class baslikTextWidget extends StatelessWidget {
 //BAŞLIK GÖSTERİLİYOR
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    return const Positioned(
         top: 93,
         left: 53,
-        child: Text("Aspen",style: TextStyle(
-          fontFamily: "Hiatus",
+        child: Text('Aspen',style: TextStyle(
+          fontFamily: 'Hiatus',
           color: Colors.white,
           fontSize: 150,
-        ),));
+        ),),);
   }
 }

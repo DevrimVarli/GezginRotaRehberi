@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../providers/all_providers.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
 
 class AramaTextFieldWidget extends ConsumerWidget {
   const AramaTextFieldWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: TextField(
-        onChanged: (aramaSonucu) {
+        onChanged: (String aramaSonucu) {
           ref.read(aramaSonucuStateProvider.notifier).state = aramaSonucu;
         },
         decoration: InputDecoration(
@@ -28,7 +28,7 @@ class AramaTextFieldWidget extends ConsumerWidget {
             color: colorScheme.primary, // tema ana rengi
             fontWeight: FontWeight.bold,
           ),
-          hintText: "Find things to do",
+          hintText: 'Find things to do',
           hintStyle: GoogleFonts.roboto(
             fontSize: 22,
             color: colorScheme.outlineVariant,

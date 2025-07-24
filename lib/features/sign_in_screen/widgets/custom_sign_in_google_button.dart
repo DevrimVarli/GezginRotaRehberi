@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../providers/all_providers.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
 class CustomSignInGoogleButton extends ConsumerWidget {
   const CustomSignInGoogleButton({super.key});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
     return SizedBox(
       width: double.infinity,
       child: OutlinedButton.icon(
@@ -23,7 +22,7 @@ class CustomSignInGoogleButton extends ConsumerWidget {
           ),
         ),
         label: Text(
-          "Sign in with Google",
+          'Sign in with Google',
           style: textTheme.labelLarge?.copyWith(
             color: colorScheme.primary,
           ),

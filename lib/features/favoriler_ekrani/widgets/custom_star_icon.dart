@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomStarIcon extends StatelessWidget {
-  final String mekan_puan;
 
   const CustomStarIcon({super.key, required this.mekan_puan});
+  final String mekan_puan;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Positioned(
       top: 10,
@@ -20,7 +20,7 @@ class CustomStarIcon extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
-          children: [
+          children: <Widget>[
             const Icon(
               Icons.star,
               color: Colors.amber,

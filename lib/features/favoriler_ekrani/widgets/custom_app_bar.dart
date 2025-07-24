@@ -6,10 +6,10 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
     return AppBar(
       title: Text(
-        "Favoriler",
+        'Favoriler',
         style: GoogleFonts.roboto(
           fontWeight: FontWeight.w500,
           fontSize: 36,

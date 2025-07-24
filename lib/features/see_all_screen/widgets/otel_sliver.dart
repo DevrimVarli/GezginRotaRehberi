@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../providers/all_providers.dart';
-import '../../../screens/detail_screen.dart';
+import 'package:yeni_tasarim/model/oteller.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
+import 'package:yeni_tasarim/screens/detail_screen.dart';
 
 class OtelSliver extends ConsumerWidget {
   const OtelSliver({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final otelList = ref.watch(otelFutureProvider);
-    final colorScheme = Theme.of(context).colorScheme;
+    AsyncValue<List<Oteller>> otelList = ref.watch(otelFutureProvider);
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
     double ekranGenisligi = MediaQuery.sizeOf(context).width;
 
     return otelList.when(
-      data: (otelListe) => SliverList(
+      data: (List<Oteller> otelListe) => SliverList(
         delegate: SliverChildBuilderDelegate(
-              (context, index) {
-            final otel = otelListe[index];
+              (BuildContext context, int index) {
+            Oteller otel = otelListe[index];
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DetayEkrani(secilenOtel: otel)),
+                    MaterialPageRoute(builder: (BuildContext context) => DetayEkrani(secilenOtel: otel)),
                   );
                 },
                 child: Stack(
-                  children: [
+                  children: <Widget>[
                     Container(
                       height: ekranYuksekligi / 4,
                       width: ekranGenisligi,
@@ -49,7 +50,7 @@ class OtelSliver extends ConsumerWidget {
                         gradient: LinearGradient(
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
-                          colors: [
+                          colors: <Color>[
                             Colors.black.withValues(alpha: 0.17),
                             Colors.transparent,
                           ],
@@ -88,8 +89,8 @@ class OtelSliver extends ConsumerWidget {
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.star, color: Colors.amber, size: 18),
+                          children: <Widget>[
+                            const Icon(Icons.star, color: Colors.amber, size: 18),
                             Text(
                               otel.otel_yildiz.toString(),
                               style: GoogleFonts.roboto(
@@ -105,15 +106,15 @@ class OtelSliver extends ConsumerWidget {
                     Positioned(
                       bottom: 5,
                       right: 10,
-                      child: Container(
+                      child: DecoratedBox(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(32),
                           color: colorScheme.surface.withValues(alpha: 0.85),
                         ),
                         child: IconButton(
                           onPressed: () {
-                            final favoriNotifier = ref.read(favoriListesiProvider.notifier);
-                            final currentList = [...favoriNotifier.state];
+                            StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
+                            List<String> currentList = <String>[...favoriNotifier.state];
 
                             if (currentList.contains(otel.otel_ad)) {
                               currentList.remove(otel.otel_ad);
@@ -140,7 +141,7 @@ class OtelSliver extends ConsumerWidget {
           childCount: otelListe.length,
         ),
       ),
-      error: (error, stackTrace) => SliverFillRemaining(
+      error: (Object error, StackTrace stackTrace) => SliverFillRemaining(
         child: Center(child: Text(error.toString())),
       ),
       loading: () => const SliverFillRemaining(

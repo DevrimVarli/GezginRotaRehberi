@@ -44,6 +44,8 @@ dependencies:
   fluttertoast: ^8.2.12
   google_sign_in: ^6.1.5
   flutter_custom_clippers: ^2.1.0
+  firebase_storage: ^12.4.10
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

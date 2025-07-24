@@ -1,54 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yeni_tasarim/repository/otel_repo.dart';
+import 'package:yeni_tasarim/model/Konum.dart';
 
-import '../../../model/oteller.dart';
-import '../../../providers/all_providers.dart';
-import '../../../screens/detail_screen.dart';
+import 'package:yeni_tasarim/model/oteller.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
+import 'package:yeni_tasarim/screens/detail_screen.dart';
 
 class OtellerListViewWidget extends ConsumerWidget {
+  const OtellerListViewWidget({super.key});
+
   // OTELLERİ GÖSTERİYOR
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Arama sonuca göre otel listesi
-    final aramaSonucu = ref.watch(aramaSonucuStateProvider);
-    final secilenKonum = ref.watch(secilemKonumStateProvider);
-    final seeAll = ref.watch(seeAllStateProvider);
+    String aramaSonucu = ref.watch(aramaSonucuStateProvider);
+    Konum secilenKonum = ref.watch(secilemKonumStateProvider);
+    bool seeAll = ref.watch(seeAllStateProvider);
 
     // `otelFutureProvider` AsyncValue döndüğü için burada 'when' fonksiyonunu kullanıyoruz.
-    final otelListAsync = ref.watch(otelFutureProvider);
+    AsyncValue<List<Oteller>> otelListAsync = ref.watch(otelFutureProvider);
 
     return otelListAsync.when(
-      data: (otelList) {
+      data: (List<Oteller> otelList) {
         // Arama yapılmışsa, listeyi filtrele
-        final filteredOtelList = aramaSonucu.isEmpty
-            ? otelList.where((otel) {
+        List<Oteller> filteredOtelList = aramaSonucu.isEmpty
+            ? otelList.where((Oteller otel) {
           // Eğer seeAll false ise konuma göre filtrele
-          if (!seeAll && otel.konum != null && secilenKonum != null) {
-            return otel.konum.ilce_adi.toLowerCase().contains(
-              secilenKonum.ilce_adi.toLowerCase(),
+          if (!seeAll) {
+            return otel.konum.ilceAdi.toLowerCase().contains(
+              secilenKonum.ilceAdi.toLowerCase(),
             );
           }
           // Aksi takdirde tüm otelleri göster
           return true;
         }).toList()
             : otelList
-            .where((otel) => otel.otel_ad
+            .where((Oteller otel) => otel.otel_ad
             .toLowerCase()
-            .contains(aramaSonucu.toLowerCase()))
+            .contains(aramaSonucu.toLowerCase()),)
             .toList();
 
 
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Recommended",
+                  'Recommended',
                   style: GoogleFonts.roboto(
                     fontSize: 24,
                    // color: Colors.black,
@@ -61,26 +63,26 @@ class OtellerListViewWidget extends ConsumerWidget {
                 child: ListView.builder(
                   itemCount: filteredOtelList.length, // Filtrelenmiş listeyi kullanıyoruz
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, indeks) {
+                  itemBuilder: (BuildContext context, int indeks) {
                     Oteller otel = filteredOtelList[indeks];
                     return Column(
-                      children: [
+                      children: <Widget>[
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
+                                MaterialPageRoute<Widget>(
+                                  builder: (BuildContext context) =>
                                       DetayEkrani(secilenOtel: otel),
                                 ),
                               );
                             },
                             child: Stack(
-                              children: [
+                              children: <Widget>[
                                 Container(
                                   width: 280, // Genişliği sabitle
-                                  margin: EdgeInsets.only(right: 12),
+                                  margin: const EdgeInsets.only(right: 12),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
                                     image: DecorationImage(
@@ -110,8 +112,8 @@ class OtellerListViewWidget extends ConsumerWidget {
           ),
         );
       },
-      error: (error, stackTrace) => Center(child: Text(error.toString())),
-      loading: () => Center(child: CircularProgressIndicator()),
+      error: (Object error, StackTrace stackTrace) => Center(child: Text(error.toString())),
+      loading: () => const Center(child: CircularProgressIndicator()),
     );
   }
 }

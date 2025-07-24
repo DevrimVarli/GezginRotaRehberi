@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 class arkaPlanWidget extends StatelessWidget {
+
+//ARKA PLAN FOTOĞRAF
+  const arkaPlanWidget({super.key, required this.ekranYuksekligi, required this.ekranGenisligi,required this.resimYolu});
   final double ekranYuksekligi;
   final double ekranGenisligi;
   final String resimYolu;
-
-//ARKA PLAN FOTOĞRAF
-  arkaPlanWidget({required this.ekranYuksekligi, required this.ekranGenisligi,required this.resimYolu});
 
   @override
   Widget build(BuildContext context) {

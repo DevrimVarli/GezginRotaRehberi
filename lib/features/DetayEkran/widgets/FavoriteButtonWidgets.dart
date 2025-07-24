@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../providers/all_providers.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
 
 class FavoriteButtonWidgets extends ConsumerWidget {
-  final String mekanAdi;
 
   const FavoriteButtonWidgets({
     super.key,
     required this.mekanAdi,
   });
+  final String mekanAdi;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final isFavori = ref.watch(favoriListesiProvider).contains(mekanAdi);
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    bool isFavori = ref.watch(favoriListesiProvider).contains(mekanAdi);
 
     return Positioned(
       bottom: -20,
@@ -25,7 +25,7 @@ class FavoriteButtonWidgets extends ConsumerWidget {
         decoration: BoxDecoration(
           color: colorScheme.surface, // tema uyumlu arka plan
           shape: BoxShape.circle,
-          boxShadow: [
+          boxShadow: <BoxShadow>[
             BoxShadow(
               color: colorScheme.shadow.withValues(alpha: 0.15),
               blurRadius: 8,
@@ -40,8 +40,8 @@ class FavoriteButtonWidgets extends ConsumerWidget {
             size: 30,
           ),
           onPressed: () {
-            final favoriNotifier = ref.read(favoriListesiProvider.notifier);
-            final currentList = [...favoriNotifier.state];
+            StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
+            List<String> currentList = <String>[...favoriNotifier.state];
 
             if (isFavori) {
               currentList.remove(mekanAdi);

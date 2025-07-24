@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../model/Restorantlar.dart';
-import '../../../model/oteller.dart';
+import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/model/oteller.dart';
 
 class MekanInfoWidgets extends StatelessWidget {
+
+  const MekanInfoWidgets({super.key, this.secilenOtel, this.secilenRestorant});
   final Oteller? secilenOtel;
   final Restorantlar? secilenRestorant;
 
-  MekanInfoWidgets({super.key, this.secilenOtel, this.secilenRestorant});
-
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 32.0, bottom: 24),
+      padding: const EdgeInsets.only(top: 32, bottom: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           // Başlık ve Harita Linki
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: <Widget>[
               Text(
                 secilenOtel != null
                     ? secilenOtel!.otel_ad
@@ -39,7 +39,7 @@ class MekanInfoWidgets extends StatelessWidget {
                 ),
               ),
               Text(
-                "Show map",
+                'Show map',
                 style: GoogleFonts.roboto(
                   fontSize: 16,
                   color: colorScheme.primary,
@@ -53,13 +53,13 @@ class MekanInfoWidgets extends StatelessWidget {
 
           // Puan ve yorum sayısı
           Row(
-            children: [
+            children: <Widget>[
               const Icon(Icons.star, color: Colors.amber),
               const SizedBox(width: 4),
               Text(
                 secilenOtel != null
                     ? secilenOtel!.otel_yildiz.toString()
-                    : secilenRestorant!.restoran_puan.toString(),
+                    : secilenRestorant!.restoran_puan,
                 style: GoogleFonts.roboto(
                   fontSize: 18,
                   color: colorScheme.outlineVariant,
@@ -67,7 +67,7 @@ class MekanInfoWidgets extends StatelessWidget {
               ),
               const SizedBox(width: 4),
               Text(
-                "(355 Reviews)",
+                '(355 Reviews)',
                 style: GoogleFonts.roboto(
                   fontSize: 18,
                   color: colorScheme.outlineVariant,
@@ -98,9 +98,9 @@ class MekanInfoWidgets extends StatelessWidget {
               padding: EdgeInsets.zero,
             ),
             child: Row(
-              children: [
+              children: <Widget>[
                 Text(
-                  "Read more",
+                  'Read more',
                   style: GoogleFonts.roboto(
                     fontSize: 18,
                     color: colorScheme.primary,

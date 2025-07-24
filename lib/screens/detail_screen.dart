@@ -5,14 +5,14 @@ import 'package:yeni_tasarim/features/DetayEkran/widgets/MekanInfoWidgets.dart';
 import 'package:yeni_tasarim/features/DetayEkran/widgets/PriceWidgets.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
-import '../features/DetayEkran/widgets/FacilitiesWidgets.dart';
-import '../features/DetayEkran/widgets/ImageWidgets.dart';
+import 'package:yeni_tasarim/features/DetayEkran/widgets/FacilitiesWidgets.dart';
+import 'package:yeni_tasarim/features/DetayEkran/widgets/ImageWidgets.dart';
 
 class DetayEkrani extends StatefulWidget {
-  final Oteller? secilenOtel;
-  final Restorantlar? secilenRestorant;
 
   const DetayEkrani({super.key, this.secilenOtel, this.secilenRestorant});
+  final Oteller? secilenOtel;
+  final Restorantlar? secilenRestorant;
 
   @override
   State<DetayEkrani> createState() => _DetayEkraniState();
@@ -21,24 +21,24 @@ class DetayEkrani extends StatefulWidget {
 class _DetayEkraniState extends State<DetayEkrani> {
   @override
   Widget build(BuildContext context) {
-    final ekranGenisligi = MediaQuery.sizeOf(context).width;
-    final colorScheme = Theme.of(context).colorScheme;
+    double ekranGenisligi = MediaQuery.sizeOf(context).width;
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
       body: SafeArea(
         bottom: false,
         child: Stack(
-          children: [
+          children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(
-                  left: 16, right: 16,  bottom: 100),
+                  left: 16, right: 16,  bottom: 100,),
               child: SingleChildScrollView(
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     Stack(
                       clipBehavior: Clip.none,
-                      children: [
+                      children: <Widget>[
                         // Resim alanı
                         ImageWidgets(
                           secilenOtel: widget.secilenOtel,
@@ -84,7 +84,7 @@ class _DetayEkraniState extends State<DetayEkrani> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
                   color: colorScheme.surface,
-                  boxShadow: [
+                  boxShadow: <BoxShadow>[
                     BoxShadow(
                       color: colorScheme.shadow.withValues(alpha: 0.08),
                       blurRadius: 10,
