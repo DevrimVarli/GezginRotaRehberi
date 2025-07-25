@@ -30,7 +30,7 @@ class AuthService {
         'userName':userName,
         'phoneNumber':phoneNumber,
       });
-
+      if (!context.mounted) return;
       await Navigator.push(
         context, MaterialPageRoute<Widget>(builder: (BuildContext context) => const AccountScreen()),
       );
@@ -40,7 +40,7 @@ class AuthService {
     }
   }
 
-  Future<void> girisYap(BuildContext context, String email, String password) async {
+  Future<void> girisYap({required BuildContext context,required String email,required String password}) async {
     try {
       UserCredential _ = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
@@ -60,10 +60,11 @@ class AuthService {
 
       // Eğer kullanıcı hesabı seçmeden pencereyi kapatırsa, giriş iptal edilmiş olur
       if (googleUser == null) {
-        // Kullanıcı iptal ettiğinde ekrana uyarı göster
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Giriş iptal edildi')),
-        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Giriş iptal edildi')),
+          );
+        }
         return; // Fonksiyonu durdur
       }
 
@@ -81,15 +82,20 @@ class AuthService {
       await FirebaseAuth.instance.signInWithCredential(credential);
 
       // Giriş başarılıysa kullanıcıya bilgi mesajı göster
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Giriş başarılı: ${userCredential.user?.displayName}')),
-      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Giriş başarılı: ${userCredential.user?.displayName}')),
+        );
+
+      }
 
     } catch (e) {
       // Eğer bir hata olursa, bunu kullanıcıya göster
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Hata: $e')),
-      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Hata: $e')),
+        );
+      }
     }
   }
   Future<void> changePassword({
@@ -110,6 +116,7 @@ class AuthService {
         await user.updatePassword(newPassword);
         await Fluttertoast.showToast(msg: 'Şifre başarıyla güncellendi.');
         await FirebaseAuth.instance.signOut();
+        if (!context.mounted) return;
         await Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute<Widget>(builder: (BuildContext context) => const Secim()),
@@ -145,6 +152,7 @@ class AuthService {
             .doc(user.uid)
             .update(<Object, Object?>{'email': newEmail});
         await FirebaseAuth.instance.signOut();
+        if (!context.mounted) return;
         await Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute<Widget>(builder: (BuildContext context) => const Secim()),
@@ -166,15 +174,15 @@ class AuthService {
 
       if (user != null) {
         // Kullanıcının giriş sağlayıcısını kontrol et
-        final providerId = user.providerData.first.providerId;
+        String providerId = user.providerData.first.providerId;
 
         // Reauthentication işlemi (Google ise özel yapılmalı)
         if (providerId == 'google.com') {
-          final GoogleSignIn googleSignIn = GoogleSignIn();
-          final googleUser = await googleSignIn.signIn();
-          final googleAuth = await googleUser?.authentication;
+           GoogleSignIn googleSignIn = GoogleSignIn();
+          GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+          GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-          final credential = GoogleAuthProvider.credential(
+          OAuthCredential credential = GoogleAuthProvider.credential(
             accessToken: googleAuth?.accessToken,
             idToken: googleAuth?.idToken,
           );
@@ -192,7 +200,7 @@ class AuthService {
         await user.delete();
 
         await Fluttertoast.showToast(msg: 'Hesap başarıyla silindi.');
-
+        if (!context.mounted) return;
         await Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute<Widget>(builder: (BuildContext context) => const Secim()),
@@ -310,7 +318,7 @@ class AuthService {
 
   bool kullaniciyiBul(){
     User user = FirebaseAuth.instance.currentUser!;
-    for (final provider in user.providerData) {
+    for (UserInfo provider in user.providerData) {
       debugPrint('Giriş sağlayıcısı: ${provider.providerId}');
 
       if (provider.providerId == 'google.com') {

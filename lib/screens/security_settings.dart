@@ -30,8 +30,8 @@ class SecuritySettings extends ConsumerWidget {
         }
 
         Map<String, dynamic> data = snapshot.data!;
-        var firstName = data['firstName'] ?? '';
-        var lastName = data['lastName'] ?? '';
+        String firstName = data['firstName'].toString();
+        String lastName = data['lastName'].toString();
 
         return Scaffold(
           appBar: AppBar(
@@ -108,6 +108,7 @@ class SecuritySettings extends ConsumerWidget {
                           );
                         }
                         if (newPasswordController.text.isNotEmpty) {
+                          if (!context.mounted) return;
                           await auth.changePassword(
                             currentPassword: passwordController.text,
                             newPassword: newPasswordController.text,
@@ -116,7 +117,7 @@ class SecuritySettings extends ConsumerWidget {
                         }
                       }
                     },
-                    child: Text('Kaydet',style:textTheme.headlineSmall?.copyWith(color: colorScheme.onSurface,fontWeight: FontWeight.w400),),
+                    child: Text('Kaydet',style:textTheme.headlineSmall?.copyWith(color:Colors.white,fontWeight: FontWeight.w400),),
                   ),
                 ),
               ],
@@ -198,6 +199,7 @@ class SecuritySettings extends ConsumerWidget {
 
                     }
                     if (newPasswordController.text.isNotEmpty) {
+                      if (!context.mounted) return;
                       await auth.changePassword(
                         currentPassword: passwordController.text,
                         newPassword: newPasswordController.text,

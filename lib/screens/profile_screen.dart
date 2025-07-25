@@ -31,11 +31,11 @@ class ProfileScreen extends ConsumerWidget {
         ),
         centerTitle: true,
       ),
-      body: ref.read(authProvider).kullaniciyiBul()?StreamBuilder<DocumentSnapshot>(
+      body: ref.read(authProvider).kullaniciyiBul()?StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance.collection('Kullanicilar1')
             .doc(user.uid)
             .snapshots(), // Stream olarak verileri dinliyoruz
-        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -44,7 +44,7 @@ class ProfileScreen extends ConsumerWidget {
             return const Center(child: Text('Veri bulunamadı'));
           }
 
-          Map<String, dynamic> firestoreData = snapshot.data!.data()! as Map<String, dynamic>;
+          Map<String, dynamic> firestoreData = snapshot.data!.data()!;
 
           return Padding(
             padding: const EdgeInsets.all(16),
@@ -101,7 +101,7 @@ class ProfileScreen extends ConsumerWidget {
                       CustomDivider(ekranGenisligi),
                       InfoTile('Kullanıcı Adı', "${firestoreData['userName'] ?? "Yok"}"),
                       CustomDivider(ekranGenisligi),
-                      InfoTile('E-posta',"${firestoreData['userName'] ?? "E-posta Yok"}"),
+                      InfoTile('E-posta',"${firestoreData['email'] ?? "E-posta Yok"}"),
                       CustomDivider(ekranGenisligi),
                       InfoTile('UID (Kullanıcı ID)', user.uid),
                       CustomDivider(ekranGenisligi),
@@ -124,7 +124,7 @@ class ProfileScreen extends ConsumerWidget {
                     CircleAvatar(
                       radius: 90,
                       backgroundColor: Colors.grey[300],
-                      backgroundImage:NetworkImage(user.photoURL.toString())// Varsayılan bir resim
+                      backgroundImage:NetworkImage(user.photoURL.toString()),// Varsayılan bir resim
                     ),
                   ],
                 ),
@@ -150,7 +150,7 @@ class ProfileScreen extends ConsumerWidget {
                 ),
               ],
             ),
-          )
+          ),
     );
   }
 

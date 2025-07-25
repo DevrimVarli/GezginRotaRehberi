@@ -17,8 +17,6 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    double ekranGenisligi = MediaQuery.sizeOf(context).width;
-    double ekranYuksekligi = MediaQuery.sizeOf(context).height;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     TextTheme textTheme = Theme.of(context).textTheme;
     bool kayitMi=ref.watch(kayitMiProvider);
@@ -27,84 +25,83 @@ class LoginScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: colorScheme.surface, // tema zemin rengi
-      body:kayitMi? Center(
-        child: Padding(
-          padding: const EdgeInsets.all(18),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-             const CustomTextSignUp(),
-             CustomSignUpForm(formKey: formKey),
-              CustomCreateButton(formKey: formKey),
-             const CustomSignInOrientation(),
+      body:kayitMi? Padding(
+        padding: const EdgeInsets.symmetric(vertical:12,horizontal: 12),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+               const CustomTextSignUp(),
+               CustomSignUpForm(formKey: formKey),
+                CustomCreateButton(formKey: formKey),
+               const CustomSignInOrientation(),
 
 
-            ],
+              ],
+            ),
           ),
         ),
-      ): Center(
-        child: Container(
-          height: ekranYuksekligi,
-          width: ekranGenisligi,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: colorScheme.surface,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: colorScheme.shadow.withValues(alpha: 0.05),
-                blurRadius: 20,
-                spreadRadius: 5,
-                offset: const Offset(0, 10),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              // Sayfa body’sinin üstüne ekle (Stack yerine Row da olur)
-              const Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 16, right: 16),
-                  child: CustomThemeChangeButton(),
+      ): Padding(
+        padding: const EdgeInsets.symmetric(vertical:12,horizontal: 12),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                // Sayfa body’sinin üstüne ekle (Stack yerine Row da olur)
+                const Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 5, right: 5),
+                    child: CustomThemeChangeButton(),
+                  ),
                 ),
-              ),
-              const CustomLogoAndWelcomeText(),
-              // Username
-              CustomForm(formKey: formKey),
+                const CustomLogoAndWelcomeText(),
+                // Username
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: CustomForm(formKey: formKey),
+                ),
 
-              // Forgot Password
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Forgot Password?',
-                    style: textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: colorScheme.primary,
+                // Forgot Password
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Forgot Password?',
+                      style: textTheme.labelMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: colorScheme.primary,
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              // Login Button
-              CustomLogInButton(formKey: formKey),
-
-              Text(
-                'OR sign up using',
-                style: textTheme.bodyMedium?.copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.8),
+                // Login Button
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: CustomLogInButton(formKey: formKey),
                 ),
-              ),
 
-              // Google Button
-              const CustomSignInGoogleButton(),
+                Text(
+                  'OR sign up using',
+                  style: textTheme.bodyMedium?.copyWith(
+                    color: colorScheme.onSurface.withValues(alpha: 0.8),
+                  ),
+                ),
 
-              // Sign Up Row
-              const CustomSignUpButton(),
-            ],
+                // Google Button
+                const Padding(
+                  padding: EdgeInsets.all(8),
+                  child: CustomSignInGoogleButton(),
+                ),
+
+                // Sign Up Row
+                const CustomSignUpButton(),
+              ],
+            ),
           ),
         ),
       ),

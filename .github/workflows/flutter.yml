@@ -1,0 +1,33 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo'yu klonla
+        uses: actions/checkout@v3
+
+      - name: Flutter kurulumu
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.13.0'  # Kullandığın versiyonu gir
+
+      - name: Bağımlılıkları yükle
+        run: flutter pub get
+
+      - name: Kod analizi yap (lint)
+        run: flutter analyze
+
+      - name: Testleri çalıştır
+        run: flutter test
+
+      - name: APK derle
+        run: flutter build apk --release
+

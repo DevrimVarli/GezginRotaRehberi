@@ -17,19 +17,22 @@ class _IntroEkranState extends State<IntroEkran> {
   Widget build(BuildContext context) {
     double ekranYuksekligi = MediaQuery.of(context).size.height;
     double ekranGenisligi = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          arkaPlanWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi, resimYolu: 'assets/anaEkran.png'),
-          const baslikTextWidget(),
-          const metinText(),
-          ExploreButtonWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi),
-
-
-        ],
-         
+    return SafeArea(
+      bottom: false,
+      child: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            arkaPlanWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi, resimYolu: 'assets/anaEkran.png'),
+            const baslikTextWidget(),
+            const metinText(),
+            ExploreButtonWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi),
+      
+      
+          ],
+           
+        ),
+      
       ),
-
     );
   }
 }
