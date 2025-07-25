@@ -3,12 +3,12 @@ import 'package:yeni_tasarim/model/Konum.dart';
 
 class Restorantlar {
   Restorantlar(
-      this.restoran_id,
-      this.restoran_ad,
-      this.restoran_resim,
-      this.restoran_puan,
-      this.restoran_aciklama,
-      this.restoran_fiyat,
+      this.restoranId,
+      this.restoranAd,
+      this.restoranResim,
+      this.restoranPuan,
+      this.restoranAciklama,
+      this.restoranFiyat,
       this.imkanlar,
       this.konum,
       );
@@ -29,12 +29,12 @@ class Restorantlar {
     );
   }
 
-  int restoran_id;
-  String restoran_ad;
-  String restoran_resim;
-  String restoran_puan;
-  String restoran_aciklama;
-  int restoran_fiyat;
+  int restoranId;
+  String restoranAd;
+  String restoranResim;
+  String restoranPuan;
+  String restoranAciklama;
+  int restoranFiyat;
   List<Imkanlar> imkanlar;
   Konum konum;
 }

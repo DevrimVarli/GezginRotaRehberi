@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:yeni_tasarim/features/AnaEkran/widgets/AdresPopUpWidget.dart';
 class AppBarWidget extends StatefulWidget {
-  AppBarWidget({super.key});
+ const AppBarWidget({super.key});
 
 //APPBAR İÇERİĞİ GÖSTERİLİYOR
   @override

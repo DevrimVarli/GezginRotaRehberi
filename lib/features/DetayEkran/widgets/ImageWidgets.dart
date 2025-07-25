@@ -17,11 +17,11 @@ class ImageWidgets extends StatelessWidget {
         height: 400,
         child:secilenOtel != null
             ? Image.network(
-          secilenOtel!.otel_resim,
+          secilenOtel!.otelResim,
           fit: BoxFit.cover,
         )
             : Image.network(
-          secilenRestorant!.restoran_resim,
+          secilenRestorant!.restoranResim,
           fit: BoxFit.cover,
         ),
       ),

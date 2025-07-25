@@ -54,8 +54,8 @@ class PriceWidgets extends StatelessWidget {
               ),
               Text(
                 secilenOtel != null
-                    ? '€${secilenOtel!.otel_fiyat}'
-                    : '€${secilenRestorant!.restoran_fiyat}',
+                    ? '€${secilenOtel!.otelFiyat}'
+                    : '€${secilenRestorant!.restoranFiyat}',
                 style: GoogleFonts.roboto(
                   fontSize: 32,
                   color: colorScheme.tertiary, // Öne çıkan fiyat rengi

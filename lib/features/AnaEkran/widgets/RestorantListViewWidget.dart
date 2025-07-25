@@ -30,7 +30,7 @@ class RestorantListViewWidget extends ConsumerWidget {
           return true;
         }).toList()
             : restoranList
-            .where((Restorantlar restorant) => restorant.restoran_ad
+            .where((Restorantlar restorant) => restorant.restoranAd
             .toLowerCase()
             .contains(aramaSonucu.toLowerCase()),)
             .toList();
@@ -78,7 +78,7 @@ class RestorantListViewWidget extends ConsumerWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int indeks) {
                     Restorantlar restorant = filteredRestoranList[indeks];
-                    bool isFavorite = ref.watch(favoriListesiProvider).contains(restorant.restoran_ad);
+                    bool isFavorite = ref.watch(favoriListesiProvider).contains(restorant.restoranAd);
 
                     return Stack(
                       children: <Widget>[
@@ -97,7 +97,7 @@ class RestorantListViewWidget extends ConsumerWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
                               image: DecorationImage(
-                                image: NetworkImage(restorant.restoran_resim),
+                                image: NetworkImage(restorant.restoranResim),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -113,7 +113,7 @@ class RestorantListViewWidget extends ConsumerWidget {
                             ),
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                             child: Text(
-                              restorant.restoran_ad,
+                              restorant.restoranAd,
                               style: GoogleFonts.roboto(
                                 fontSize: 14,
                                 color: colorScheme.onSurface,
@@ -143,7 +143,7 @@ class RestorantListViewWidget extends ConsumerWidget {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    restorant.restoran_puan,
+                                    restorant.restoranPuan,
                                     style: GoogleFonts.montserrat(
                                       fontSize: 15,
                                       color: colorScheme.onSurface,
@@ -170,10 +170,10 @@ class RestorantListViewWidget extends ConsumerWidget {
                                 StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
                                 List<String> currentList = <String>[...favoriNotifier.state];
 
-                                if (currentList.contains(restorant.restoran_ad)) {
-                                  currentList.remove(restorant.restoran_ad);
+                                if (currentList.contains(restorant.restoranAd)) {
+                                  currentList.remove(restorant.restoranAd);
                                 } else {
-                                  currentList.add(restorant.restoran_ad);
+                                  currentList.add(restorant.restoranAd);
                                 }
 
                                 favoriNotifier.state = currentList;

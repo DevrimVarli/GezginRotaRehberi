@@ -37,7 +37,7 @@ class OtelSliver extends ConsumerWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         image: DecorationImage(
-                          image: NetworkImage(otel.otel_resim),
+                          image: NetworkImage(otel.otelResim),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -67,7 +67,7 @@ class OtelSliver extends ConsumerWidget {
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         child: Text(
-                          otel.otel_ad,
+                          otel.otelAd,
                           style: GoogleFonts.roboto(
                             fontSize: 20,
                             color: colorScheme.onSurface,
@@ -92,7 +92,7 @@ class OtelSliver extends ConsumerWidget {
                           children: <Widget>[
                             const Icon(Icons.star, color: Colors.amber, size: 18),
                             Text(
-                              otel.otel_yildiz.toString(),
+                              otel.otelYildiz.toString(),
                               style: GoogleFonts.roboto(
                                 fontSize: 22,
                                 color: colorScheme.onSurface,
@@ -116,17 +116,17 @@ class OtelSliver extends ConsumerWidget {
                             StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
                             List<String> currentList = <String>[...favoriNotifier.state];
 
-                            if (currentList.contains(otel.otel_ad)) {
-                              currentList.remove(otel.otel_ad);
+                            if (currentList.contains(otel.otelAd)) {
+                              currentList.remove(otel.otelAd);
                             } else {
-                              currentList.add(otel.otel_ad);
+                              currentList.add(otel.otelAd);
                             }
 
                             favoriNotifier.state = currentList;
                           },
                           icon: Icon(
                             Icons.favorite,
-                            color: ref.watch(favoriListesiProvider).contains(otel.otel_ad)
+                            color: ref.watch(favoriListesiProvider).contains(otel.otelAd)
                                 ? colorScheme.primary
                                 : colorScheme.onSurface,
                           ),

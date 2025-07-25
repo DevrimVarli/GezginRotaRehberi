@@ -3,13 +3,13 @@ import 'package:yeni_tasarim/model/Konum.dart';
 
 class Oteller {
   // Constructor
-  Oteller(
-      this.otel_id,
-      this.otel_ad,
-      this.otel_resim,
-      this.otel_yildiz,
-      this.otel_aciklama,
-      this.otel_fiyat,
+   Oteller(
+      this.otelId,
+      this.otelAd,
+      this.otelResim,
+      this.otelYildiz,
+      this.otelAciklama,
+      this.otelFiyat,
       this.imkanlar,
       this.konum,
       );
@@ -30,12 +30,12 @@ class Oteller {
     );
   }
 
-  int otel_id;
-  String otel_ad;
-  String otel_resim;
-  int otel_yildiz;
-  String otel_aciklama;
-  int otel_fiyat;
+  int otelId;
+  String otelAd;
+  String otelResim;
+  int otelYildiz;
+  String otelAciklama;
+  int otelFiyat;
   List<Imkanlar> imkanlar;
   Konum konum;
 }

@@ -25,12 +25,12 @@ class MekanInfoWidgets extends StatelessWidget {
             children: <Widget>[
               Text(
                 secilenOtel != null
-                    ? secilenOtel!.otel_ad
-                    : secilenRestorant!.restoran_ad,
+                    ? secilenOtel!.otelAd
+                    : secilenRestorant!.restoranAd,
                 style: GoogleFonts.montserrat(
                   fontSize: (secilenOtel != null
-                      ? secilenOtel!.otel_ad.length
-                      : secilenRestorant!.restoran_ad.length) >
+                      ? secilenOtel!.otelAd.length
+                      : secilenRestorant!.restoranAd.length) >
                       20
                       ? 16
                       : 24,
@@ -58,8 +58,8 @@ class MekanInfoWidgets extends StatelessWidget {
               const SizedBox(width: 4),
               Text(
                 secilenOtel != null
-                    ? secilenOtel!.otel_yildiz.toString()
-                    : secilenRestorant!.restoran_puan,
+                    ? secilenOtel!.otelYildiz.toString()
+                    : secilenRestorant!.restoranPuan,
                 style: GoogleFonts.roboto(
                   fontSize: 18,
                   color: colorScheme.outlineVariant,
@@ -81,8 +81,8 @@ class MekanInfoWidgets extends StatelessWidget {
           // Açıklama
           Text(
             secilenOtel != null
-                ? secilenOtel!.otel_aciklama
-                : secilenRestorant!.restoran_aciklama,
+                ? secilenOtel!.otelAciklama
+                : secilenRestorant!.restoranAciklama,
             style: GoogleFonts.roboto(
               fontSize: 18,
               color: colorScheme.onSurface,

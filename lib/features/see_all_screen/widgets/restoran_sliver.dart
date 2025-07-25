@@ -32,7 +32,7 @@ class RestoranSliver extends ConsumerWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           image: DecorationImage(
-                            image: NetworkImage(restorant.restoran_resim),
+                            image: NetworkImage(restorant.restoranResim),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -64,7 +64,7 @@ class RestoranSliver extends ConsumerWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  restorant.restoran_ad,
+                                  restorant.restoranAd,
                                   style: GoogleFonts.roboto(
                                     fontSize: 22,
                                     color: colorScheme.onSurface,
@@ -96,7 +96,7 @@ class RestoranSliver extends ConsumerWidget {
                                   size: 18,
                                 ),
                                 Text(
-                                  restorant.restoran_puan,
+                                  restorant.restoranPuan,
                                   style: GoogleFonts.roboto(
                                     fontSize: 18,
                                     color: colorScheme.onSurface,
@@ -121,14 +121,14 @@ class RestoranSliver extends ConsumerWidget {
                                 StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
                                 List<String> currentList = <String>[...favoriNotifier.state];
 
-                                if (currentList.contains(restorant.restoran_ad)) {
-                                  currentList.remove(restorant.restoran_ad);
+                                if (currentList.contains(restorant.restoranAd)) {
+                                  currentList.remove(restorant.restoranAd);
                                 } else {
-                                  currentList.add(restorant.restoran_ad);
+                                  currentList.add(restorant.restoranAd);
                                 }
 
                                 favoriNotifier.state = currentList;
-                              }, icon: Icon(Icons.favorite,color:ref.watch(favoriListesiProvider).contains(restorant.restoran_ad)
+                              }, icon: Icon(Icons.favorite,color:ref.watch(favoriListesiProvider).contains(restorant.restoranAd)
                                   ? colorScheme.primary
                                   : colorScheme.onSurface,),),
                           ),

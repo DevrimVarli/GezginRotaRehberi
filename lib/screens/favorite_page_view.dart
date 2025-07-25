@@ -50,7 +50,7 @@ class FavoritePageView extends ConsumerWidget {
                 Container(
                   child: restoranList.when(
                     data: (List<Restorantlar> restoranListe) {
-                      List<Restorantlar> filteredRestoranList =favoriteList.isEmpty?<Restorantlar>[]: restoranListe.where((Restorantlar restoran) => favoriteList.contains(restoran.restoran_ad)).toList();
+                      List<Restorantlar> filteredRestoranList =favoriteList.isEmpty?<Restorantlar>[]: restoranListe.where((Restorantlar restoran) => favoriteList.contains(restoran.restoranAd)).toList();
                       return filteredRestoranList.isEmpty ?const Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -68,7 +68,7 @@ class FavoritePageView extends ConsumerWidget {
                 // Sayfa 2 (Oteller)
                 Container(
                   child: otelList.when(
-                    data: (List<Oteller> otelListe) {List<Oteller> filteredOtelList =favoriteList.isEmpty?<Oteller>[]: otelListe.where((Oteller otel) => favoriteList.contains(otel.otel_ad)).toList();
+                    data: (List<Oteller> otelListe) {List<Oteller> filteredOtelList =favoriteList.isEmpty?<Oteller>[]: otelListe.where((Oteller otel) => favoriteList.contains(otel.otelAd)).toList();
                     return filteredOtelList.isEmpty ?const Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

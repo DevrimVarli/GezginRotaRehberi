@@ -36,7 +36,7 @@ class OtellerListViewWidget extends ConsumerWidget {
           return true;
         }).toList()
             : otelList
-            .where((Oteller otel) => otel.otel_ad
+            .where((Oteller otel) => otel.otelAd
             .toLowerCase()
             .contains(aramaSonucu.toLowerCase()),)
             .toList();
@@ -86,7 +86,7 @@ class OtellerListViewWidget extends ConsumerWidget {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
                                     image: DecorationImage(
-                                      image: NetworkImage(otel.otel_resim),
+                                      image: NetworkImage(otel.otelResim),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -96,7 +96,7 @@ class OtellerListViewWidget extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          otel.otel_ad,
+                          otel.otelAd,
                           style: GoogleFonts.roboto(
                             fontSize: 22,
                             //color: Colors.black,
