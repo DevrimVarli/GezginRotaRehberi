@@ -4,12 +4,11 @@ import 'package:hexcolor/hexcolor.dart';
 //EXPLORE BUTONU
 import 'package:yeni_tasarim/screens/bottom_navigation_bar_screen.dart';
 class ExploreButtonWidget extends StatelessWidget {
-  ExploreButtonWidget({super.key, required this.ekranYuksekligi,required this.ekranGenisligi});
-  double ekranYuksekligi;
-  double ekranGenisligi;
-
+  ExploreButtonWidget({super.key});
   @override
   Widget build(BuildContext context) {
+    double ekranYuksekligi = MediaQuery.of(context).size.height;
+    double ekranGenisligi = MediaQuery.of(context).size.width;
     return Positioned(
         bottom: 50,
         left: 32,
@@ -24,7 +23,7 @@ class ExploreButtonWidget extends StatelessWidget {
                   ),
               ),
               onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>const Secim()));
+                Navigator.pushReplacement(context, MaterialPageRoute<Widget>(builder: (BuildContext context)=>const Secim()));
               }, child: Text('Explore',style: GoogleFonts.montserrat(fontSize: 24,color: Colors.white,fontWeight: FontWeight.bold),),),
         ),);
   }

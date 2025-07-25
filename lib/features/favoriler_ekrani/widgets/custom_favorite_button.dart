@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:yeni_tasarim/providers/all_providers.dart';
 class CustomFavoriteButton extends ConsumerWidget {
-  CustomFavoriteButton({super.key,required this.mekan_ad});
-  String mekan_ad;
+  const CustomFavoriteButton({super.key,required this.mekan_ad});
+  final String mekan_ad;
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {

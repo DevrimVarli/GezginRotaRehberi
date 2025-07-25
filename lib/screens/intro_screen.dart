@@ -25,7 +25,7 @@ class _IntroEkranState extends State<IntroEkran> {
             arkaPlanWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi, resimYolu: 'assets/anaEkran.png'),
             const baslikTextWidget(),
             const metinText(),
-            ExploreButtonWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi),
+            ExploreButtonWidget(),
       
       
           ],

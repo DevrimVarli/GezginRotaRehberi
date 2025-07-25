@@ -26,7 +26,7 @@ class OtelSliver extends ConsumerWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (BuildContext context) => DetayEkrani(secilenOtel: otel)),
+                    MaterialPageRoute<Widget>(builder: (BuildContext context) => DetayEkrani(secilenOtel: otel)),
                   );
                 },
                 child: Stack(

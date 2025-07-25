@@ -22,7 +22,7 @@ class RestoranSliver extends ConsumerWidget {
                 padding:  const EdgeInsets.symmetric(horizontal: 8,vertical:8 ),
                 child: GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>DetayEkrani(secilenRestorant: restorant)));
+                    Navigator.push(context, MaterialPageRoute<Widget>(builder: (BuildContext context)=>DetayEkrani(secilenRestorant: restorant)));
                   },
                   child: Stack(
                     children: <Widget>[

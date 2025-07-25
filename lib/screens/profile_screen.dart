@@ -14,7 +14,6 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ImagePicker picker = ImagePicker();
     User user = FirebaseAuth.instance.currentUser!;
-    double ekranGenisligi = MediaQuery.sizeOf(context).width;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     TextTheme textTheme = Theme.of(context).textTheme;
 
@@ -98,13 +97,13 @@ class ProfileScreen extends ConsumerWidget {
                     children: <Widget>[
                       // Kullanıcı bilgilerini listelemek
                       InfoTile('Ad Soyad', user.displayName ?? "${firestoreData['firstName'] ?? ''} ${firestoreData['lastName'] ?? ''}"),
-                      CustomDivider(ekranGenisligi),
+                      CustomDivider(),
                       InfoTile('Kullanıcı Adı', "${firestoreData['userName'] ?? "Yok"}"),
-                      CustomDivider(ekranGenisligi),
+                      CustomDivider(),
                       InfoTile('E-posta',"${firestoreData['email'] ?? "E-posta Yok"}"),
-                      CustomDivider(ekranGenisligi),
+                      CustomDivider(),
                       InfoTile('UID (Kullanıcı ID)', user.uid),
-                      CustomDivider(ekranGenisligi),
+                      CustomDivider(),
                       InfoTile('Telefon Numarası', user.phoneNumber ?? "${firestoreData['phoneNumber'] ?? ''}"),
                     ],
                   ),
@@ -137,13 +136,13 @@ class ProfileScreen extends ConsumerWidget {
                     children: <Widget>[
                       // Kullanıcı bilgilerini listelemek
                       InfoTile('Ad Soyad', user.displayName ?? ''),
-                      CustomDivider(ekranGenisligi),
+                      CustomDivider(),
                       InfoTile('Kullanıcı Adı', user.displayName ?? 'Yok'),
-                      CustomDivider(ekranGenisligi),
+                      CustomDivider(),
                       InfoTile('E-posta', user.email ?? 'E-posta yok'),
-                      CustomDivider(ekranGenisligi),
+                      CustomDivider(),
                       InfoTile('UID (Kullanıcı ID)', user.uid),
-                      CustomDivider(ekranGenisligi),
+                      CustomDivider(),
                       InfoTile('Telefon Numarası', user.phoneNumber ??  ''),
                     ],
                   ),

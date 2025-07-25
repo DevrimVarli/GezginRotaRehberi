@@ -26,7 +26,7 @@ class MyApp extends ConsumerWidget {
         subThemesData: const FlexSubThemesData(
           elevatedButtonRadius: 12,
           inputDecoratorRadius: 12,
-          useTextTheme: true,
+          useMaterial3Typography: true,
         ),
       ),
       darkTheme: FlexThemeData.dark(
@@ -34,7 +34,7 @@ class MyApp extends ConsumerWidget {
         subThemesData: const FlexSubThemesData(
           elevatedButtonRadius: 12,
           inputDecoratorRadius: 12,
-          useTextTheme: true,
+          useMaterial3Typography: true,
         ),
       ),
 
