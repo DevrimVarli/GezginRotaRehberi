@@ -36,7 +36,7 @@ class AnaEkran extends ConsumerWidget {
       backgroundColor: colorScheme.surface,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(ekranYuksekligi / 10),
-        child: AppBarWidget(ekranYuksekligi),
+        child: AppBarWidget(),
       ),
       body: SafeArea(
         bottom: false,
