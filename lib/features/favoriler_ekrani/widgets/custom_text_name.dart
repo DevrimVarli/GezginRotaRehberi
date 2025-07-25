@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextName extends StatelessWidget {
 
-  const CustomTextName({super.key, required this.mekan_ad});
-  final String mekan_ad;
+  const CustomTextName({super.key, required this.mekanAd});
+  final String mekanAd;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class CustomTextName extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            mekan_ad,
+            mekanAd,
             style: GoogleFonts.montserrat(
               fontSize: 16,
               color: colorScheme.onSurface,

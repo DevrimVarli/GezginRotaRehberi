@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomStarIcon extends StatelessWidget {
 
-  const CustomStarIcon({super.key, required this.mekan_puan});
-  final String mekan_puan;
+  const CustomStarIcon({super.key, required this.mekanPuan});
+  final String mekanPuan;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class CustomStarIcon extends StatelessWidget {
             ),
             const SizedBox(width: 4),
             Text(
-              mekan_puan,
+              mekanPuan,
               style: GoogleFonts.montserrat(
                 fontSize: 16,
                 color: colorScheme.onSurface,

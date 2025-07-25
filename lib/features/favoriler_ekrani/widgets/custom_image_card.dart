@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class CustomImageCard extends StatelessWidget {
-  const CustomImageCard({super.key, required this.mekan_resim});
-  final String mekan_resim;
+  const CustomImageCard({super.key, required this.mekanResim});
+  final String mekanResim;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class CustomImageCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
-          image: NetworkImage(mekan_resim),
+          image: NetworkImage(mekanResim),
           fit: BoxFit.cover,
         ),
       ),

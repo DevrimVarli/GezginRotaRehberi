@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:yeni_tasarim/providers/all_providers.dart';
 class CustomFavoriteButton extends ConsumerWidget {
-  const CustomFavoriteButton({super.key,required this.mekan_ad});
-  final String mekan_ad;
+  const CustomFavoriteButton({super.key,required this.mekanAd});
+  final String mekanAd;
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
@@ -20,7 +20,7 @@ class CustomFavoriteButton extends ConsumerWidget {
             child:IconButton(onPressed: (){
               StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
               List<String> currentList = <String>[...favoriNotifier.state] // yeni referans oluştur
-              ..remove(mekan_ad); // elemanı çıkar
+              ..remove(mekanAd); // elemanı çıkar
               favoriNotifier.state = currentList;
             }, icon: const Icon(Icons.favorite,color: Colors.blue,),),
         ),

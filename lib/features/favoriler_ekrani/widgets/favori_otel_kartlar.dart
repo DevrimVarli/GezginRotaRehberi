@@ -4,25 +4,26 @@ import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_favorite_b
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_image_card.dart';
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_star_icon.dart';
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_text_name.dart';
+import 'package:yeni_tasarim/model/oteller.dart';
 class FavoriOtelKartlar extends ConsumerWidget {
   const FavoriOtelKartlar({super.key,required this.filteredOtelList});
-  final List<dynamic> filteredOtelList;
+  final List<Oteller> filteredOtelList;
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     return ListView.builder(
       itemCount: filteredOtelList.length,
       itemBuilder: (BuildContext context, int index) {
-        var otel = filteredOtelList[index];
+        Oteller otel = filteredOtelList[index];
         return Padding(
           padding: const EdgeInsets.all(8),
           child: Stack(
             children: <Widget>[
 
-              CustomImageCard(mekan_resim: otel.otel_resim.toString(),),
-              CustomStarIcon(mekan_puan: otel.otel_yildiz.toString(),),
-              CustomTextName(mekan_ad: otel.otel_ad.toString(),),
-              CustomFavoriteButton(mekan_ad: otel.otel_ad.toString(),),
+              CustomImageCard(mekanResim: otel.otelResim,),
+              CustomStarIcon(mekanPuan: otel.otelYildiz.toString(),),
+              CustomTextName(mekanAd: otel.otelAd,),
+              CustomFavoriteButton(mekanAd: otel.otelAd),
 
             ],
           ),
