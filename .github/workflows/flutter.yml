@@ -17,7 +17,7 @@ jobs:
       - name: Flutter kurulumu
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.0'  # Kullandığın versiyonu gir
+          flutter-version: '3.7.2'  # Kullandığın versiyonu gir
 
       - name: Bağımlılıkları yükle
         run: flutter pub get
