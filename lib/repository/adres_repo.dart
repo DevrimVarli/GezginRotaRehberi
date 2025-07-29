@@ -3,11 +3,12 @@ import 'package:yeni_tasarim/model/Konum.dart';
 import 'package:yeni_tasarim/model/adres_bilgisi.dart';
 import 'package:yeni_tasarim/model/adres_yaniti.dart';
 import 'package:yeni_tasarim/model/kullanici_konum.dart';
+import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 
 class AdresRepo{
   final Dio dio=Dio();
   List<Konum>konumList=<Konum>[];
-  List<KullaniciKonum>kullaniciKonumList=<KullaniciKonum>[];
+  List<KullaniciKonumFreezed>kullaniciKonumList=<KullaniciKonumFreezed>[];
   List<Konum>  konumlar(){
     Konum konum1 = Konum('Bursa', 'Osmangazi');
     Konum konum2 = Konum('Bursa', 'Nilüfer');
@@ -16,8 +17,8 @@ class AdresRepo{
     ..add(konum2)
     ..add(konum3);
     return konumList;
-  }List<KullaniciKonum>  KullaniciKonumkonumlar(){
-    KullaniciKonum konum1 = KullaniciKonum(disyplayName: 'Devrim',binaNo: '52', katNo: '3', daireNo: '5', adresTarifi: 'dsadadasd', adresBasligi: 'evim', ad: 'Devrim', soyad: 'Varli', cepTelefonu: '05415865175', sokakAdi: '424', mahalleAdi: 'Gölcük', ilceAdi: 'Menemen', sehirAdi: 'İzmir');
+  }List<KullaniciKonumFreezed>  KullaniciKonumkonumlar(){
+    KullaniciKonumFreezed konum1 = KullaniciKonumFreezed(disyplayName: 'Devrim',binaNo: '52', katNo: '3', daireNo: '5', adresTarifi: 'dsadadasd', adresBasligi: 'evim', ad: 'Devrim', soyad: 'Varli', cepTelefonu: '05415865175', sokakAdi: '424', mahalleAdi: 'Gölcük', ilceAdi: 'Menemen', sehirAdi: 'İzmir');
     kullaniciKonumList.add(konum1);
     return kullaniciKonumList;
   }

@@ -37,30 +37,43 @@ class LocationService{
   Future<Position?> konumuAl() async {
     try {
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+      // Konum servisleri kapalıysa, kullanıcıyı yönlendir ve tekrar kontrol et
       if (!serviceEnabled) {
-        throw Exception('Konum servisleri kapalı!');
+        await Geolocator.openLocationSettings();
+        serviceEnabled = await Geolocator.isLocationServiceEnabled(); // tekrar kontrol!
+        if (!serviceEnabled) {
+          await Fluttertoast.showToast(msg: 'Konum servisleri hala kapalı.');
+          return null;
+        }
       }
 
       LocationPermission permission = await Geolocator.checkPermission();
+
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          throw Exception('Konum izni reddedildi.');
+          await Fluttertoast.showToast(msg: 'Konum izni reddedildi.');
+          return null;
         }
       }
 
       if (permission == LocationPermission.deniedForever) {
-        throw Exception('Konum izni kalıcı olarak reddedildi.');
+        await Geolocator.openAppSettings();
+        await Fluttertoast.showToast(msg: 'Konum izni kalıcı olarak reddedildi.');
+        return null;
       }
 
+      // Her şey yolunda → gerçek konumu döndür
       return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
     } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
+      await Fluttertoast.showToast(msg: 'Konum alınamadı: $e');
       return null;
     }
   }
+
 
 }
 

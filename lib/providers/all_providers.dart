@@ -6,6 +6,7 @@ import 'package:yeni_tasarim/model/Konum.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 import 'package:yeni_tasarim/model/adres_bilgisi.dart';
 import 'package:yeni_tasarim/model/kullanici_konum.dart';
+import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
 import 'package:yeni_tasarim/providers/kullanici_konumlar_notifier.dart';
 import 'package:yeni_tasarim/repository/adres_repo.dart';
@@ -35,7 +36,7 @@ final StateProvider<List<Konum>> konumlarProvider=StateProvider<List<Konum>>((Re
   ref.keepAlive();
   return AdresRepo().konumlar();
 });final kullaniciKonumlarProvider =
-StateNotifierProvider<KullaniciKonumlarNotifier, List<KullaniciKonum>>(
+StateNotifierProvider<KullaniciKonumlarNotifier, List<KullaniciKonumFreezed>>(
         (ref) => KullaniciKonumlarNotifier());
 final StateProvider<int> selectedIndexProvider=StateProvider<int>((Ref ref)=>0);
 final StateProvider<String> aramaSonucuStateProvider=StateProvider<String>((Ref ref)=>'');
@@ -165,20 +166,39 @@ final AutoDisposeProvider<TextEditingController> sokakTfc = Provider.autoDispose
   ref.onDispose(controller.dispose);
   return controller;
 });
-final adresBilgileriProvider = Provider<KullaniciKonum>((Ref ref) {
-  return KullaniciKonum(
-    disyplayName: ref.watch(adresTfc).text,
-    sehirAdi: ref.watch(ilTfc).text,
-    ilceAdi: ref.watch(ilceTfc).text,
-    mahalleAdi: ref.watch(mahalleTfc).text,
-    binaNo: ref.watch(binaTfc).text,
-    katNo: ref.watch(katTfc).text,
-    daireNo: ref.watch(daireTfc).text,
-    adresTarifi: ref.watch(adresTarifiTfc).text,
-    adresBasligi: ref.watch(adresBasligiTfc).text,
-    ad: ref.watch(adTfc).text,
-    soyad: ref.watch(soyadTfc).text,
-    cepTelefonu: ref.watch(cepTelefonuTfc).text,
-    sokakAdi: ref.watch(sokakTfc).text,
-  );
+final AutoDisposeProvider<Map<String, TextEditingController>> allTextControllersProvider = Provider.autoDispose<Map<String, TextEditingController>>((Ref ref) {
+  TextEditingController ilce = ref.watch(ilceTfc);
+  TextEditingController il = ref.watch(ilTfc);
+  TextEditingController adres = ref.watch(adresTfc);
+  TextEditingController sokak = ref.watch(sokakTfc);
+  TextEditingController mahalle = ref.watch(mahalleTfc);
+  TextEditingController adresBasligi = ref.watch(adresBasligiTfc);
+  TextEditingController adresTarifi = ref.watch(adresTarifiTfc);
+  TextEditingController ad = ref.watch(adTfc);
+  TextEditingController soyad = ref.watch(soyadTfc);
+  TextEditingController telNo = ref.watch(cepTelefonuTfc);
+  TextEditingController bina = ref.watch(binaTfc);
+  TextEditingController kat = ref.watch(katTfc);
+  TextEditingController daire = ref.watch(daireTfc);
+
+  return {
+    'ilce': ilce,
+    'il': il,
+    'adres': adres,
+    'sokak': sokak,
+    'mahalle': mahalle,
+    'adresBasligi': adresBasligi,
+    'adresTarifi': adresTarifi,
+    'ad': ad,
+    'soyad': soyad,
+    'telNo': telNo,
+    'bina': bina,
+    'kat': kat,
+    'daire': daire,
+
+
+  };
 });
+
+
+

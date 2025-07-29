@@ -19,7 +19,7 @@ class KonumSecPage extends ConsumerStatefulWidget {
 }
 
 class _KonumSecPageState extends ConsumerState<KonumSecPage> {
-  Position? secilenKonum;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -29,15 +29,23 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
 
   Future<void> baslangicKonumunuAl() async {
     Position? konum = await ref.read(locationProvider).konumuAl();
+
+    if (!mounted) return;
+
     if (konum != null) {
-      setState(() {
-        secilenKonum = konum;
-        ref.read(baslangicKonumuProvider.notifier).state = LatLng(konum.latitude, konum.longitude);
-      });
+      ref.read(baslangicKonumuProvider.notifier).state = LatLng(konum.latitude, konum.longitude);
+      ref.read(secilenKonumuProviderLatLng.notifier).state = LatLng(konum.latitude, konum.longitude);
     }
+
+    setState(() {
+      isLoading = false;
+    });
   }
+
+
   @override
   Widget build(BuildContext context) {
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
      LatLng? secilenKonumLatLng = ref.watch(secilenKonumuProviderLatLng);
      LatLng? baslangicKonum = ref.watch(baslangicKonumuProvider);
 
@@ -46,12 +54,22 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
         body: Center(child: CircularProgressIndicator()),
       );
     }
+     if (isLoading ) {
+       return const Scaffold(
+         body: Center(child: CircularProgressIndicator()),
+       );
+     }
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Konum Seç')),
+
+     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: colorScheme.primary,
+          title: const Text('Konum Seç'),
+          centerTitle: true,
+      ),
       body: FlutterMap(
         options: MapOptions(
-          initialCenter: baslangicKonum,
+          initialCenter: LatLng(baslangicKonum.latitude, baslangicKonum.longitude),
           onTap: (TapPosition tapPosition, LatLng point) async {
             ref
                 .read(secilenKonumuProviderLatLng.notifier)
@@ -86,22 +104,21 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor:colorScheme.primary ,
         onPressed: () async{
           if (secilenKonumLatLng != null) {
             AdresRepo adresRepo=AdresRepo();
             AdresYaniti adresYaniti=await adresRepo.konumGetir(secilenKonumLatLng.latitude, secilenKonumLatLng.longitude) ;
             Konum konum=Konum(adresYaniti.adres.sehirAdi,adresYaniti.adres.ilceAdi);
-            //ref.read(kullaniciKonumlarProvider.notifier).state.add(KullaniciKonum(disyplayName: adresYaniti.displayName, binaNo: adresYaniti.adres.binaNo, katNo: adresYaniti.katNo, daireNo: daireNo, adresTarifi: adresTarifi, adresBasligi: adresBasligi, ad: ad, soyad: soyad, cepTelefonu: cepTelefonu, sokakAdi: sokakAdi, mahalleAdi: mahalleAdi, ilceAdi: ilceAdi, sehirAdi: sehirAdi));
-            //KullaniciKonum kullaniciKonum=KullaniciKonum(disyplayName: adresYaniti.displayName,binaNo: adresYaniti.adres.);
-            await Navigator.pushReplacement(context, MaterialPageRoute<Widget>(builder: (BuildContext context)=>AdresScreenDetay(adresAdi:adresYaniti.displayName,ilAdi: konum.sehirAdi,ilceAdi: konum.ilceAdi,mahalleAdi: adresYaniti.adres.mahalleAdi,sokakAdi: adresYaniti.adres.sokakAdi)));
+             await Navigator.pushReplacement(context, MaterialPageRoute<Widget>(builder: (BuildContext context)=>AdresScreenDetay(adresAdi:adresYaniti.displayName,ilAdi: konum.sehirAdi,ilceAdi: konum.ilceAdi,mahalleAdi: adresYaniti.adres.mahalleAdi,sokakAdi: adresYaniti.adres.sokakAdi)));
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Lütfen bir konum seçin')),
             );
           }
         },
-        label: const Text('Seç ve Dön'),
-        icon: const Icon(Icons.check),
+        label: const Text('Seç ve Dön' ),
+        icon:  const Icon(Icons.check),
       ),
     );
   }

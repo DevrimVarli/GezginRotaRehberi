@@ -28,5 +28,5 @@ jobs:
 #      - name: Testleri çalıştır
 #        run: flutter test
 
-      - name: APK derle
-        run: flutter build apk --release
+#      - name: APK derle
+#        run: flutter build apk --release
