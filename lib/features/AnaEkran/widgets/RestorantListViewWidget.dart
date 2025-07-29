@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:yeni_tasarim/model/Konum.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
+import 'package:yeni_tasarim/screens/location_screen.dart';
+import 'package:yeni_tasarim/screens/adreslerim_screen.dart';
 import 'package:yeni_tasarim/screens/detail_screen.dart';
 import 'package:yeni_tasarim/screens/see_all_screen.dart';
 
@@ -44,12 +47,25 @@ class RestorantListViewWidget extends ConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      'Popular',
-                      style: GoogleFonts.roboto(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                        color: colorScheme.onSurface,
+                    GestureDetector(
+                      onTap: () async{
+        Konum konum= await ref.read(locationProvider).getCurrentCityAndDistrict();
+        final result = await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const KonumSecPage()),
+        );
+
+        if (result != null && result is LatLng) {
+          print("Seçilen Konum: Lat=${result.latitude}, Lon=${result.longitude}");
+        }
+        },
+                      child: Text(
+                        'Popular',
+                        style: GoogleFonts.roboto(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          color: colorScheme.onSurface,
+                        ),
                       ),
                     ),
                     TextButton(

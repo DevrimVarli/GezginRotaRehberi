@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:yeni_tasarim/model/Imkanlar.dart';
 import 'package:yeni_tasarim/model/Konum.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/model/adres_bilgisi.dart';
+import 'package:yeni_tasarim/model/kullanici_konum.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
+import 'package:yeni_tasarim/providers/kullanici_konumlar_notifier.dart';
 import 'package:yeni_tasarim/repository/adres_repo.dart';
 import 'package:yeni_tasarim/repository/icon_repo.dart';
 import 'package:yeni_tasarim/repository/kategori_repo.dart';
@@ -11,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:yeni_tasarim/repository/restoran_repo.dart';
 import 'package:yeni_tasarim/repository/otel_repo.dart';
 import 'package:yeni_tasarim/services/auth_service.dart';
+import 'package:yeni_tasarim/services/location_service.dart';
 
 final FutureProvider<List<Oteller>> otelFutureProvider = FutureProvider<List<Oteller>>((Ref ref) async {
   return otelRepo().oteller();
@@ -29,7 +34,9 @@ final StateProvider<Konum> secilemKonumStateProvider=StateProvider<Konum>((Ref r
 final StateProvider<List<Konum>> konumlarProvider=StateProvider<List<Konum>>((Ref ref){
   ref.keepAlive();
   return AdresRepo().konumlar();
-});
+});final kullaniciKonumlarProvider =
+StateNotifierProvider<KullaniciKonumlarNotifier, List<KullaniciKonum>>(
+        (ref) => KullaniciKonumlarNotifier());
 final StateProvider<int> selectedIndexProvider=StateProvider<int>((Ref ref)=>0);
 final StateProvider<String> aramaSonucuStateProvider=StateProvider<String>((Ref ref)=>'');
 final StateProvider<bool> seeAllStateProvider=StateProvider<bool>(( Ref ref)=>false);
@@ -40,6 +47,9 @@ final StateProvider<List<String>> favoriListesiProvider=StateProvider<List<Strin
 });
 final StateProvider<bool> kayitMiProvider=StateProvider<bool>((Ref ref)=>false);
 final Provider<AuthService> authProvider = Provider(AuthService.new);
+final Provider<LocationService> locationProvider = Provider<LocationService>((Ref ref){
+  return LocationService();
+});
 final StreamProvider<User?> userChangesProvider = StreamProvider<User?>((Ref ref) {
   return FirebaseAuth.instance.authStateChanges();
 });
@@ -99,3 +109,76 @@ final AutoDisposeProvider<TextEditingController> userNameControllerProvider = Pr
 });
 final StateProvider<bool> checkBoxStateProvider=StateProvider<bool>((Ref ref)=>false);
 final StateProvider<String> userPhotoProvider=StateProvider<String>((Ref ref)=>'');
+final StateProvider<LatLng> baslangicKonumuProvider=StateProvider<LatLng>((Ref ref)=>const LatLng(41.015137, 28.979530));
+final StateProvider<LatLng> secilenKonumuProviderLatLng=StateProvider<LatLng>((Ref ref)=>const LatLng(41.015137, 28.979530));
+final AutoDisposeProvider<TextEditingController> cepTelefonuTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> soyadTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> adTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> adresBasligiTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> adresTarifiTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> daireTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> katTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> binaTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> mahalleTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> ilceTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> ilTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});final AutoDisposeProvider<TextEditingController> adresTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});
+final AutoDisposeProvider<TextEditingController> sokakTfc = Provider.autoDispose<TextEditingController>((Ref ref) {
+  TextEditingController controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});
+final adresBilgileriProvider = Provider<KullaniciKonum>((Ref ref) {
+  return KullaniciKonum(
+    disyplayName: ref.watch(adresTfc).text,
+    sehirAdi: ref.watch(ilTfc).text,
+    ilceAdi: ref.watch(ilceTfc).text,
+    mahalleAdi: ref.watch(mahalleTfc).text,
+    binaNo: ref.watch(binaTfc).text,
+    katNo: ref.watch(katTfc).text,
+    daireNo: ref.watch(daireTfc).text,
+    adresTarifi: ref.watch(adresTarifiTfc).text,
+    adresBasligi: ref.watch(adresBasligiTfc).text,
+    ad: ref.watch(adTfc).text,
+    soyad: ref.watch(soyadTfc).text,
+    cepTelefonu: ref.watch(cepTelefonuTfc).text,
+    sokakAdi: ref.watch(sokakTfc).text,
+  );
+});

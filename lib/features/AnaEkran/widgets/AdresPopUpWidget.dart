@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:yeni_tasarim/model/Konum.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
+import 'package:yeni_tasarim/screens/location_screen.dart';
+import 'package:yeni_tasarim/screens/adreslerim_screen.dart';
 
 class AdresPopUpWidget extends ConsumerWidget {
   const AdresPopUpWidget({super.key});
@@ -63,7 +65,7 @@ class AdresPopUpWidget extends ConsumerWidget {
                         Text(
                           '${konum.ilceAdi}, ${konum.sehirAdi}',
                           style: GoogleFonts.roboto(
-                            fontSize: 16,
+                            fontSize: 12,
                             color: colorScheme.primary,
                             fontWeight: FontWeight.w500,
                           ),
@@ -87,8 +89,11 @@ class AdresPopUpWidget extends ConsumerWidget {
                 PopupMenuItem<Konum>(
                   child: InkWell(
                     onTap: () {
-                      Navigator.pop(context);
-                      _showAddAddressDialog(context, ref);
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>AdresScreen()));
+                     // Navigator.push(context, MaterialPageRoute<Widget>(builder: (context)=>KonumSecPage()));
+
+                     // _showAddAddressDialog(context, ref);
+                      //Navigator.pop(context);
                     },
                     child: Row(
                       children: <Widget>[
