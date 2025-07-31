@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:yeni_tasarim/providers/all_providers.dart';
 class CustomSignUpButton extends ConsumerWidget {
   const CustomSignUpButton({super.key});

@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/account_screen.dart';
 import 'package:yeni_tasarim/screens/bottom_navigation_bar_screen.dart';
+
 class AuthService {
   AuthService(this.ref);
   final Ref ref;
@@ -65,16 +67,25 @@ class AuthService {
   }
 
 
-  Future<void> girisYap({required BuildContext context,required String email,required String password}) async {
+  Future<void> girisYap({required BuildContext context, required String email, required String password}) async {
     try {
+      // Email ve şifreyi kontrol et
+      if (email.isEmpty || password.isEmpty) {
+        await Fluttertoast.showToast(msg: 'Email veya şifre boş olamaz!');
+        return; // Email veya şifre boşsa, işlemi durdur
+      }
+
+      // Firebase ile giriş yap
       UserCredential _ = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-
     } catch (hata) {
-      await Fluttertoast.showToast(msg:'Kullanıcı bilgileri hatalı');
+      // Hata mesajı: Firebase hatalarını logla
+      print('Giriş hatası: $hata');
+      await Fluttertoast.showToast(msg: 'Kullanıcı bilgileri hatalı');
     }
   }
+
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
       // Google giriş nesnesini oluştur (Google hesabı seçtirir)

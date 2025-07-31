@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
+
 class CustomSignInGoogleButton extends ConsumerWidget {
   const CustomSignInGoogleButton({super.key});
 
