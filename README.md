@@ -1,4 +1,4 @@
-#  ✨ GezginRotaRehberi
+# ✨ GezginRotaRehberi
 
 **GezginRotaRehberi ile**, kullanıcılar çevredeki restoranları, otelleri keşfedebilir, favori yerlerini işaretleyebilir ve profil ayarlarını kolayca yönetebilir.
 
@@ -21,54 +21,35 @@
 
 ## 📸 Uygulama Ekran Görüntüleri
 
-### 🔐 Giriş Ekranı
 <p align="center">
   <img src="assets/screenshots/loginEkran.png" width="250" alt="Login Ekranı">
-</p>
-
-### 🏠 Ana Ekran
-<p align="center">
   <img src="assets/screenshots/anaEkran.png" width="250" alt="Ana Ekran">
-</p>
-
-### 🚀 Intro Ekranı
-<p align="center">
   <img src="assets/screenshots/introEkran.png" width="250" alt="Intro Ekranı">
-</p>
-
-### 👤 Profil Ekranı
-<p align="center">
   <img src="assets/screenshots/profilEkran.png" width="250" alt="Profil Ekranı">
 </p>
 
-### ⭐ Favoriler Ekranı
+<p align="center">
+  **Giriş Ekranı** | **Ana Ekran** | **Intro Ekranı** | **Profil Ekranı**
+</p>
+
 <p align="center">
   <img src="assets/screenshots/favoriteEkran.png" width="250" alt="Favori Ekranı">
-</p>
-
-### 🗺️ Harita Ekranı
-<p align="center">
   <img src="assets/screenshots/haritaEkrani.png" width="250" alt="Harita Ekranı">
-</p>
-
-### 📝 Detay Ekranı
-<p align="center">
   <img src="assets/screenshots/detayEkran.png" width="250" alt="Detay Ekranı">
-</p>
-
-### 🧾 Hesap Bilgileri
-<p align="center">
   <img src="assets/screenshots/accountInfoEkran.png" width="250" alt="Account Info Ekranı">
 </p>
 
-### ➕ Adres Ekleme
 <p align="center">
-  <img src="assets/screenshots/adresEklemeEkrani.png" width="250" alt="Adres Ekleme Ekranı">
+  **Favori Ekranı** | **Harita Ekranı** | **Detay Ekranı** | **Account Info Ekranı**
 </p>
 
-### 📍 Adreslerim
 <p align="center">
+  <img src="assets/screenshots/adresEklemeEkrani.png" width="250" alt="Adres Ekleme Ekranı">
   <img src="assets/screenshots/adreslerimEkran.png" width="250" alt="Adreslerim Ekranı">
+</p>
+
+<p align="center">
+  **Adres Ekleme Ekranı** | **Adreslerim Ekranı**
 </p>
 
 ---
@@ -83,3 +64,4 @@
 - **Adres Girişi**: Form tabanlı inputlarla; adres kaydetme/düzenleme iş akışı.
 
 ---
+
