@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/src/consumer.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yeni_tasarim/screens/home_screen.dart';
 import 'package:yeni_tasarim/screens/favorite_page_view.dart';
 import 'package:yeni_tasarim/screens/account_and_login_screen.dart';
@@ -13,7 +13,7 @@ class Secim extends StatefulWidget {
 class _SecimState extends State<Secim> {
   int secilenIndex = 3;
 
-  final List<ConsumerWidget> sayfaListesi = <ConsumerWidget>[
+  final  List<ConsumerStatefulWidget> sayfaListesi =<ConsumerStatefulWidget>[
     const AnaEkran(),
     const AccountAndLoginScreen(),
     const FavoritePageView(),

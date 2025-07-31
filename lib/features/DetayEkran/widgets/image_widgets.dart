@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
+import 'package:flutter/material.dart';
+
 class ImageWidgets extends StatelessWidget {
   const ImageWidgets({super.key, this.secilenOtel, this.secilenRestorant, required this.ekranGenisligi});
   final Oteller? secilenOtel;

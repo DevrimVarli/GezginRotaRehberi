@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:yeni_tasarim/features/AnaEkran/widgets/AdresPopUpWidget.dart';
+import 'package:yeni_tasarim/features/AnaEkran/widgets/adres_pop_up_widgets.dart';
 class AppBarWidget extends StatefulWidget {
  const AppBarWidget({super.key});
 

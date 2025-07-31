@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_ce/hive.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 import 'package:yeni_tasarim/model/hive/hive_registrar.g.dart';
 import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
@@ -17,7 +15,8 @@ void main()async {
      ..init(Directory.current.path)
      ..registerAdapters();
   await Hive.initFlutter();
-  final box=await Hive.openBox<KullaniciKonumFreezed>('konumlar');
+  await Hive.openBox<KullaniciKonumFreezed>('konumlar');
+  await Hive.openBox<String>('favoriler');
   WidgetsFlutterBinding.ensureInitialized(); // Flutter için gerekli hazırlık
   await Firebase.initializeApp();
   runApp(const ProviderScope(child: MyApp()));

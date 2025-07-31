@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yeni_tasarim/features/introEkrani/widgets/ExploreButton_widget.dart';
-import 'package:yeni_tasarim/features/introEkrani/widgets/arkaPlan_widget.dart';
-import 'package:yeni_tasarim/features/introEkrani/widgets/baslikText_widget.dart';
-import 'package:yeni_tasarim/features/introEkrani/widgets/metinText_widget.dart';
+import 'package:yeni_tasarim/features/introEkrani/widgets/explore_button_widgets.dart';
+import 'package:yeni_tasarim/features/introEkrani/widgets/arka_plan_widget.dart';
+import 'package:yeni_tasarim/features/introEkrani/widgets/baslik_text_widgets.dart';
+import 'package:yeni_tasarim/features/introEkrani/widgets/metin_text.dart';
 
 
 class IntroEkran extends StatefulWidget {
@@ -22,10 +22,10 @@ class _IntroEkranState extends State<IntroEkran> {
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-            arkaPlanWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi, resimYolu: 'assets/anaEkran.png'),
-            const baslikTextWidget(),
-            const metinText(),
-            ExploreButtonWidget(),
+            ArkaPlanWidget(ekranYuksekligi: ekranYuksekligi, ekranGenisligi: ekranGenisligi, resimYolu: 'assets/anaEkran.png'),
+            const BaslikTextWidget(),
+            const MetinText(),
+            const ExploreButtonWidget(),
       
       
           ],

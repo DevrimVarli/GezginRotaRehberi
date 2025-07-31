@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yeni_tasarim/features/AnaEkran/widgets/AppBarWidget.dart';
-import 'package:yeni_tasarim/features/AnaEkran/widgets/AramaTextFieldWidget.dart';
-import 'package:yeni_tasarim/features/AnaEkran/widgets/KategoriWidget.dart';
-import 'package:yeni_tasarim/features/AnaEkran/widgets/RestorantListViewWidget.dart';
-import 'package:yeni_tasarim/features/AnaEkran/widgets/OtellerListViewWidget.dart';
+import 'package:yeni_tasarim/features/AnaEkran/widgets/app_bar_widgets.dart';
+import 'package:yeni_tasarim/features/AnaEkran/widgets/arama_text_field_widgets.dart';
+import 'package:yeni_tasarim/features/AnaEkran/widgets/kategori_widgets.dart';
+import 'package:yeni_tasarim/features/AnaEkran/widgets/restorant_list_view_widgets.dart';
+import 'package:yeni_tasarim/features/AnaEkran/widgets/oteller_list_view_widgets.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 
 class AnaEkran extends ConsumerWidget {
@@ -36,7 +36,7 @@ class AnaEkran extends ConsumerWidget {
       backgroundColor: colorScheme.surface,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(ekranYuksekligi / 10),
-        child: AppBarWidget(),
+        child: const AppBarWidget(),
       ),
       body: SafeArea(
         bottom: false,

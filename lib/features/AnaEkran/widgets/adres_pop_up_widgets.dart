@@ -1,6 +1,8 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yeni_tasarim/model/Konum.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/adreslerim_screen.dart';
@@ -16,7 +18,7 @@ class AdresPopUpWidget extends ConsumerWidget {
       alignment: Alignment.topLeft,
       child: GestureDetector(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute<Widget>(builder: (context)=>const AdresScreen()));
+          Navigator.push(context, MaterialPageRoute<Widget>(builder: (BuildContext context)=>const AdresScreen()));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

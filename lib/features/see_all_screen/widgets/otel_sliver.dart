@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/detail_screen.dart';
@@ -10,6 +11,7 @@ class OtelSliver extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Box<String> box = Hive.box<String>('favoriler');
     AsyncValue<List<Oteller>> otelList = ref.watch(otelFutureProvider);
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
@@ -111,25 +113,25 @@ class OtelSliver extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(32),
                           color: colorScheme.surface.withValues(alpha: 0.85),
                         ),
-                        child: IconButton(
-                          onPressed: () {
-                            StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
-                            List<String> currentList = <String>[...favoriNotifier.state];
+                        child: ValueListenableBuilder<Box<String>>(
+                          valueListenable: box.listenable(),
+                          builder: (BuildContext context, Box<String> favoriBox, _) {
+                            bool isFavori = favoriBox.values.contains(otel.otelAd);
 
-                            if (currentList.contains(otel.otelAd)) {
-                              currentList.remove(otel.otelAd);
-                            } else {
-                              currentList.add(otel.otelAd);
-                            }
-
-                            favoriNotifier.state = currentList;
+                            return IconButton(
+                              onPressed: () {
+                                if (isFavori) {
+                                  box.delete(otel.otelAd);
+                                } else {
+                                  box.put(otel.otelAd, otel.otelAd);
+                                }
+                              },
+                              icon: Icon(
+                                Icons.favorite,
+                                color: isFavori ? colorScheme.primary : colorScheme.onSurface,
+                              ),
+                            );
                           },
-                          icon: Icon(
-                            Icons.favorite,
-                            color: ref.watch(favoriListesiProvider).contains(otel.otelAd)
-                                ? colorScheme.primary
-                                : colorScheme.onSurface,
-                          ),
                         ),
                       ),
                     ),

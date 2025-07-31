@@ -14,7 +14,7 @@ class InfoTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: colorScheme.onSurface,
+        color: colorScheme.onSurface.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -23,7 +23,7 @@ class InfoTile extends StatelessWidget {
           Text(
             title,
             style: textTheme.labelLarge?.copyWith(
-              color: colorScheme.surface,
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.w600,
               fontSize: 14,
             ),
@@ -32,7 +32,7 @@ class InfoTile extends StatelessWidget {
           Text(
             value.isNotEmpty ? value : 'Bilinmiyor',
             style: textTheme.bodyMedium?.copyWith(
-              color: colorScheme.surface.withValues(alpha: 0.9),
+              color: colorScheme.onSurface.withValues(alpha: 0.9),
             ),
           ),
         ],

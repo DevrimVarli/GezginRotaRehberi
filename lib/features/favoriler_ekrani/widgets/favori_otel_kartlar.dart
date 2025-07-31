@@ -17,15 +17,17 @@ class FavoriOtelKartlar extends ConsumerWidget {
         Oteller otel = filteredOtelList[index];
         return Padding(
           padding: const EdgeInsets.all(8),
-          child: Stack(
-            children: <Widget>[
-
-              CustomImageCard(mekanResim: otel.otelResim,),
-              CustomStarIcon(mekanPuan: otel.otelYildiz.toString(),),
-              CustomTextName(mekanAd: otel.otelAd,),
-              CustomFavoriteButton(mekanAd: otel.otelAd),
-
-            ],
+          child: GestureDetector(
+            child: Stack(
+              children: <Widget>[
+            
+                CustomImageCard(mekanResim: otel.otelResim,),
+                CustomStarIcon(mekanPuan: otel.otelYildiz.toString(),),
+                CustomTextName(mekanAd: otel.otelAd,),
+                CustomFavoriteButton(mekanAd: otel.otelAd),
+            
+              ],
+            ),
           ),
         );
       },

@@ -3,7 +3,7 @@ import 'package:yeni_tasarim/model/Konum.dart';
 
 class Oteller {
   // Constructor
-   Oteller(
+  Oteller(
       this.otelId,
       this.otelAd,
       this.otelResim,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-class arkaPlanWidget extends StatelessWidget {
+class ArkaPlanWidget extends StatelessWidget {
 
 //ARKA PLAN FOTOĞRAF
-  const arkaPlanWidget({super.key, required this.ekranYuksekligi, required this.ekranGenisligi,required this.resimYolu});
+  const ArkaPlanWidget({super.key, required this.ekranYuksekligi, required this.ekranGenisligi,required this.resimYolu});
   final double ekranYuksekligi;
   final double ekranGenisligi;
   final String resimYolu;

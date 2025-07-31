@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 
+
 class ResetoranRepo {
   Future<List<Restorantlar>> restorantlar() async {
     // JSON dosyasını yükleyin

@@ -1,7 +1,7 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:yeni_tasarim/model/Konum.dart';
+import 'package:yeni_tasarim/model/konum.dart';
 
 //
 class LocationService{
@@ -21,7 +21,12 @@ class LocationService{
     }
 
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 10,
+        timeLimit: Duration(seconds: 10),
+      ),
+    );
 
     List<Placemark> placemarks = await placemarkFromCoordinates(
       position.latitude,
@@ -66,7 +71,11 @@ class LocationService{
 
       // Her şey yolunda → gerçek konumu döndür
       return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+          distanceFilter: 10,
+          timeLimit: Duration(seconds: 10),
+        ),
       );
     } catch (e) {
       await Fluttertoast.showToast(msg: 'Konum alınamadı: $e');
@@ -76,7 +85,3 @@ class LocationService{
 
 
 }
-
-
-
-

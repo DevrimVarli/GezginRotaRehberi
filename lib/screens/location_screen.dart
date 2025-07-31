@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yeni_tasarim/model/Konum.dart';
+import 'package:yeni_tasarim/model/konum.dart';
 import 'package:yeni_tasarim/model/adres_yaniti.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/repository/adres_repo.dart';
@@ -75,16 +74,16 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
                 .read(secilenKonumuProviderLatLng.notifier)
                 .state = point;
 
-            Konum konum = await loca().konumuver(
-                point.latitude, point.longitude);
+            /*Konum konum = await loca().konumuver(
+                point.latitude, point.longitude,);*/
 
-            print("İl: ${konum.sehirAdi}");
+            /*print("İl: ${konum.sehirAdi}");
             print("İlçe: ${konum.ilceAdi}");
             print("Lat: ${point.latitude}");
-            print("Lng: ${point.longitude}");
+            print("Lng: ${point.longitude}");*/
           },
         ),
-        children: [
+        children: <Widget>[
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.uygulaman',
@@ -97,7 +96,7 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
                   width: 80,
                   height: 80,
                   child: const Icon(
-                      Icons.location_pin, size: 40, color: Colors.red),
+                      Icons.location_pin, size: 40, color: Colors.red,),
                 ),
               ],
             ),
@@ -110,6 +109,7 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
             AdresRepo adresRepo=AdresRepo();
             AdresYaniti adresYaniti=await adresRepo.konumGetir(secilenKonumLatLng.latitude, secilenKonumLatLng.longitude) ;
             Konum konum=Konum(adresYaniti.adres.sehirAdi,adresYaniti.adres.ilceAdi);
+             if (!context.mounted) return;
              await Navigator.pushReplacement(context, MaterialPageRoute<Widget>(builder: (BuildContext context)=>AdresScreenDetay(adresAdi:adresYaniti.displayName,ilAdi: konum.sehirAdi,ilceAdi: konum.ilceAdi,mahalleAdi: adresYaniti.adres.mahalleAdi,sokakAdi: adresYaniti.adres.sokakAdi)));
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -124,7 +124,7 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
   }
 }
 
-  class loca {
+  /*class loca {
   loca();
 
   Future<Konum> konumuver(double lat, double long) async {
@@ -132,4 +132,4 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
     Placemark place = placemarks.first;
     return Konum(place.administrativeArea.toString(), place.subAdministrativeArea.toString());
   }
-}
+}*/

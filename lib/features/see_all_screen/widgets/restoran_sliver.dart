@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
+
 import 'package:yeni_tasarim/providers/all_providers.dart';
+
 import 'package:yeni_tasarim/screens/detail_screen.dart';
 class RestoranSliver extends ConsumerWidget {
   const RestoranSliver({super.key});
@@ -13,6 +16,7 @@ class RestoranSliver extends ConsumerWidget {
     AsyncValue<List<Restorantlar>> restoranList = ref.watch(restoranFutureProvider);
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
     double ekranGenisligi = MediaQuery.sizeOf(context).width;
+    Box<String> box = Hive.box<String>('favoriler');
     return restoranList.when(
         data: (List<Restorantlar> restoranListe) => SliverList(
           delegate: SliverChildBuilderDelegate(
@@ -117,20 +121,27 @@ class RestoranSliver extends ConsumerWidget {
                                 color:colorScheme.surface.withValues(alpha: 0.85),
                               ),
 
-                              child:IconButton(onPressed: (){
-                                StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
-                                List<String> currentList = <String>[...favoriNotifier.state];
+                            child: ValueListenableBuilder<Box<String>>(
+                              valueListenable: box.listenable(),
+                              builder: (BuildContext context, Box<String> favoriBox, _) {
+                                bool isFavori = favoriBox.values.contains(restorant.restoranAd);
 
-                                if (currentList.contains(restorant.restoranAd)) {
-                                  currentList.remove(restorant.restoranAd);
-                                } else {
-                                  currentList.add(restorant.restoranAd);
-                                }
+                                return IconButton(
+                                  onPressed: () {
+                                    if (isFavori) {
+                                      box.delete(restorant.restoranAd);
+                                    } else {
+                                      box.put(restorant.restoranAd, restorant.restoranAd);
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.favorite,
+                                    color: isFavori ? colorScheme.primary : colorScheme.onSurface,
+                                  ),
+                                );
+                              },
+                            ),
 
-                                favoriNotifier.state = currentList;
-                              }, icon: Icon(Icons.favorite,color:ref.watch(favoriListesiProvider).contains(restorant.restoranAd)
-                                  ? colorScheme.primary
-                                  : colorScheme.onSurface,),),
                           ),
                       ),
 

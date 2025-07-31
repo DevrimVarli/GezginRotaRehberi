@@ -4,7 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 //EXPLORE BUTONU
 import 'package:yeni_tasarim/screens/bottom_navigation_bar_screen.dart';
 class ExploreButtonWidget extends StatelessWidget {
-  ExploreButtonWidget({super.key});
+  const ExploreButtonWidget({super.key});
   @override
   Widget build(BuildContext context) {
     double ekranYuksekligi = MediaQuery.of(context).size.height;

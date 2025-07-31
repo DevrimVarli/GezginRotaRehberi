@@ -1,12 +1,13 @@
+
 import 'package:flutter/material.dart';
-import 'package:yeni_tasarim/features/DetayEkran/widgets/ArrowBackButtonWidgets.dart';
-import 'package:yeni_tasarim/features/DetayEkran/widgets/FavoriteButtonWidgets.dart';
-import 'package:yeni_tasarim/features/DetayEkran/widgets/MekanInfoWidgets.dart';
-import 'package:yeni_tasarim/features/DetayEkran/widgets/PriceWidgets.dart';
+import 'package:yeni_tasarim/features/DetayEkran/widgets/arrow_back_button_widgets.dart';
+import 'package:yeni_tasarim/features/DetayEkran/widgets/facilities_widgets.dart';
+import 'package:yeni_tasarim/features/DetayEkran/widgets/favorite_button_widgets.dart';
+import 'package:yeni_tasarim/features/DetayEkran/widgets/image_widgets.dart';
+import 'package:yeni_tasarim/features/DetayEkran/widgets/mekan_info_widgets.dart';
+import 'package:yeni_tasarim/features/DetayEkran/widgets/price_widgets.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
-import 'package:yeni_tasarim/features/DetayEkran/widgets/FacilitiesWidgets.dart';
-import 'package:yeni_tasarim/features/DetayEkran/widgets/ImageWidgets.dart';
 
 class DetayEkrani extends StatefulWidget {
 

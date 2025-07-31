@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 import 'package:yeni_tasarim/model/Konum.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
-import 'package:yeni_tasarim/screens/location_screen.dart';
-import 'package:yeni_tasarim/screens/adreslerim_screen.dart';
 import 'package:yeni_tasarim/screens/detail_screen.dart';
+import 'package:yeni_tasarim/screens/location_screen.dart';
 import 'package:yeni_tasarim/screens/see_all_screen.dart';
 
 class RestorantListViewWidget extends ConsumerWidget {
@@ -15,6 +14,7 @@ class RestorantListViewWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Box<String> box = ref.watch(favorilerProvider);
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     String aramaSonucu = ref.watch(aramaSonucuStateProvider);
     AsyncValue<List<Restorantlar>> restoranListAsync = ref.watch(restoranFutureProvider);
@@ -49,15 +49,12 @@ class RestorantListViewWidget extends ConsumerWidget {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () async{
-        Konum konum= await ref.read(locationProvider).getCurrentCityAndDistrict();
-        final result = await Navigator.push(
+        if (!context.mounted) return;
+        await Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const KonumSecPage()),
+          MaterialPageRoute<Widget>(builder: (BuildContext context) => const KonumSecPage()),
         );
 
-        if (result != null && result is LatLng) {
-          print("Seçilen Konum: Lat=${result.latitude}, Lon=${result.longitude}");
-        }
         },
                       child: Text(
                         'Popular',
@@ -94,8 +91,6 @@ class RestorantListViewWidget extends ConsumerWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int indeks) {
                     Restorantlar restorant = filteredRestoranList[indeks];
-                    bool isFavorite = ref.watch(favoriListesiProvider).contains(restorant.restoranAd);
-
                     return Stack(
                       children: <Widget>[
                         GestureDetector(
@@ -181,26 +176,27 @@ class RestorantListViewWidget extends ConsumerWidget {
                               color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.85),
                               borderRadius: BorderRadius.circular(35),
                             ),
-                            child: IconButton(
-                              onPressed: () {
-                                StateController<List<String>> favoriNotifier = ref.read(favoriListesiProvider.notifier);
-                                List<String> currentList = <String>[...favoriNotifier.state];
+                            child:ValueListenableBuilder<Box<String>>(
+                              valueListenable: box.listenable(),
+                              builder: (BuildContext context, Box<String> favoriBox, _) {
+                                bool isFavori = favoriBox.values.contains(restorant.restoranAd);
 
-                                if (currentList.contains(restorant.restoranAd)) {
-                                  currentList.remove(restorant.restoranAd);
-                                } else {
-                                  currentList.add(restorant.restoranAd);
-                                }
-
-                                favoriNotifier.state = currentList;
+                                return IconButton(
+                                  onPressed: () {
+                                    if (isFavori) {
+                                      box.delete(restorant.restoranAd);
+                                    } else {
+                                      box.put(restorant.restoranAd, restorant.restoranAd);
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.favorite,
+                                    color: isFavori ? colorScheme.primary : colorScheme.onSurface,
+                                  ),
+                                );
                               },
-                              icon: Icon(
-                                Icons.favorite,
-                                color: isFavorite
-                                    ? colorScheme.primary
-                                    : colorScheme.onSurface,
-                              ),
                             ),
+
                           ),
                         ),
                       ],
