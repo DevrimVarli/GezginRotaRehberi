@@ -22,34 +22,34 @@
 ## 📸 Uygulama Ekran Görüntüleri
 
 ### 🔐 Giriş Ekranı
-![Login Ekranı](screenshots/loginEkran.png)
+![Login Ekranı](assets/screenshots/loginEkran.png)
 
 ### 🏠 Ana Ekran
-![Ana Ekran](screenshots/anaEkran.png)
+![Ana Ekran](assets/screenshots/anaEkran.png)
 
 ### 🚀 Intro Ekranı
-![Intro Ekranı](screenshots/introEkran.png)
+![Intro Ekranı](assets/screenshots/introEkran.png)
 
 ### 👤 Profil Ekranı
-![Profil Ekranı](screenshots/profilEkran.png)
+![Profil Ekranı](assets/screenshots/profilEkran.png)
 
 ### ⭐ Favoriler Ekranı
-![Favori Ekranı](screenshots/favoriteEkran.png)
+![Favori Ekranı](assets/screenshots/favoriteEkran.png)
 
 ### 🗺️ Harita Ekranı
-![Harita Ekranı](screenshots/haritaEkrani.png)
+![Harita Ekranı](assets/screenshots/haritaEkrani.png)
 
 ### 📝 Detay Ekranı
-![Detay Ekranı](screenshots/detayEkran.png)
+![Detay Ekranı](assets/screenshots/detayEkran.png)
 
 ### 🧾 Hesap Bilgileri
-![Account Info Ekranı](screenshots/accountInfoEkran.png)
+![Account Info Ekranı](assets/screenshots/accountInfoEkran.png)
 
 ### ➕ Adres Ekleme
-![Adres Ekleme Ekranı](screenshots/adresEklemeEkrani.png)
+![Adres Ekleme Ekranı](assets/screenshots/adresEklemeEkrani.png)
 
 ### 📍 Adreslerim
-![Adreslerim Ekranı](screenshots/adreslerimEkran.png)
+![Adreslerim Ekranı](assets/screenshots/adreslerimEkran.png)
 
 
 ## 🛠️ Teknolojiler / Teknoloji Akışı
