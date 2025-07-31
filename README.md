@@ -21,35 +21,46 @@
 
 ## 📸 Uygulama Ekran Görüntüleri
 
+### 🔐 Giriş Ekranı
 <p align="center">
-  <img src="assets/screenshots/loginEkran.png" width="250" alt="Login Ekranı">
-  <img src="assets/screenshots/anaEkran.png" width="250" alt="Ana Ekran">
+  <img src="assets/screenshots/loginEkran.png" width="250" alt="Login Ekranı" style="margin-right: 15px;">
+  <img src="assets/screenshots/anaEkran.png" width="250" alt="Ana Ekran" style="margin-right: 15px;">
   <img src="assets/screenshots/introEkran.png" width="250" alt="Intro Ekranı">
-  <img src="assets/screenshots/profilEkran.png" width="250" alt="Profil Ekranı">
 </p>
 
 <p align="center">
-  **Giriş Ekranı** | **Ana Ekran** | **Intro Ekranı** | **Profil Ekranı**
+  **Giriş Ekranı** | **Ana Ekran** | **Intro Ekranı**
 </p>
 
+### 👤 Profil Ekranı
 <p align="center">
-  <img src="assets/screenshots/favoriteEkran.png" width="250" alt="Favori Ekranı">
+  <img src="assets/screenshots/profilEkran.png" width="250" alt="Profil Ekranı" style="margin-right: 15px;">
+  <img src="assets/screenshots/favoriteEkran.png" width="250" alt="Favori Ekranı" style="margin-right: 15px;">
   <img src="assets/screenshots/haritaEkrani.png" width="250" alt="Harita Ekranı">
-  <img src="assets/screenshots/detayEkran.png" width="250" alt="Detay Ekranı">
-  <img src="assets/screenshots/accountInfoEkran.png" width="250" alt="Account Info Ekranı">
 </p>
 
 <p align="center">
-  **Favori Ekranı** | **Harita Ekranı** | **Detay Ekranı** | **Account Info Ekranı**
+  **Profil Ekranı** | **Favori Ekranı** | **Harita Ekranı**
 </p>
 
+### 📝 Detay Ekranı
 <p align="center">
+  <img src="assets/screenshots/detayEkran.png" width="250" alt="Detay Ekranı" style="margin-right: 15px;">
+  <img src="assets/screenshots/accountInfoEkran.png" width="250" alt="Account Info Ekranı" style="margin-right: 15px;">
   <img src="assets/screenshots/adresEklemeEkrani.png" width="250" alt="Adres Ekleme Ekranı">
+</p>
+
+<p align="center">
+  **Detay Ekranı** | **Account Info Ekranı** | **Adres Ekleme Ekranı**
+</p>
+
+### 📍 Adreslerim
+<p align="center">
   <img src="assets/screenshots/adreslerimEkran.png" width="250" alt="Adreslerim Ekranı">
 </p>
 
 <p align="center">
-  **Adres Ekleme Ekranı** | **Adreslerim Ekranı**
+  **Adreslerim Ekranı**
 </p>
 
 ---
