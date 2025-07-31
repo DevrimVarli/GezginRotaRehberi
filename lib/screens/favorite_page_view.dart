@@ -18,13 +18,25 @@ class FavoritePageView extends ConsumerStatefulWidget {
 }
 
 class _FavoritePageViewState extends ConsumerState<FavoritePageView> {
+  final PageController _pageController = PageController();
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _pageController.animateToPage(
+        0,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeIn,
+      );
+      ref.read(favoriteButtonStateProvider.notifier).state=false;
+    });
+  }
 
+  @override
   Widget build(BuildContext context) {
     Box<String> box = ref.watch(favorilerProvider);
     AsyncValue<List<Restorantlar>> restoranList = ref.watch(restoranFutureProvider );
     AsyncValue<List<Oteller>> otelList = ref.watch(otelFutureProvider);
-    PageController _pageController = PageController();
     double ekranGenisligi = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar:PreferredSize(preferredSize: Size.fromHeight(ekranGenisligi/10),child: const CustomAppBar()),

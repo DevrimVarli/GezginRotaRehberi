@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:yeni_tasarim/providers/all_providers.dart';
-class CustomCreateButton extends ConsumerWidget {
+
+class CustomCreateButton extends ConsumerStatefulWidget {
   const CustomCreateButton({super.key,required this.formKey});
   final GlobalKey<FormState> formKey;
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  ConsumerState<CustomCreateButton> createState() => _CustomCreateButtonState();
+}
+
+class _CustomCreateButtonState extends ConsumerState<CustomCreateButton> {
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController emailController=ref.watch(emailControllerProvider);
+    TextEditingController passwordController=ref.watch(passwordControllerProvider);
+    TextEditingController firstNameController=ref.watch(firstNameControllerProvider);
+    TextEditingController lastNameController=ref.watch(lastNameControllerProvider);
+    TextEditingController userNameController=ref.watch(userNameControllerProvider);
+    TextEditingController phoneNumberController=ref.watch(phoneNumberControllerProvider);
     double ekranGenisligi = MediaQuery.sizeOf(context).width;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     TextTheme textTheme = Theme.of(context).textTheme;
-    TextEditingController emailController = ref.watch(emailControllerProvider);
-    TextEditingController passwordController = ref.watch(passwordControllerProvider);
-    TextEditingController firstNameController = ref.watch(firstNameControllerProvider);
-    TextEditingController lastNameController = ref.watch(lastNameControllerProvider);
-    TextEditingController userNameController = ref.watch(userNameControllerProvider);
-    TextEditingController phoneNumberController = ref.watch(phoneNumberControllerProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical:12),
       child: SizedBox(
@@ -24,10 +30,23 @@ class CustomCreateButton extends ConsumerWidget {
         height: 53,
         child: ElevatedButton(
           onPressed: () async{
-            bool kontrolSonucu=formKey.currentState!.validate();
-            if(kontrolSonucu){
-              await ref.read(authProvider).kayitEkle(context: context, mail: emailController.text, password: passwordController.text, lastName: lastNameController.text, firstName: firstNameController.text, userName: userNameController.text,phoneNumber: phoneNumberController.text);
+            bool kontrolSonucu=widget.formKey.currentState!.validate();
+            if (kontrolSonucu) {
+              await ref.read(authProvider).kayitEkle(
+                  context: context,
+                  mail: emailController.text,
+                  password: passwordController.text,
+                  lastName: lastNameController.text,
+                  firstName: firstNameController.text,
+                  userName: userNameController.text,
+                  phoneNumber: phoneNumberController.text,
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Lütfen tüm alanları doğru şekilde doldurun!'),),
+              );
             }
+
 
 
           },
@@ -50,3 +69,6 @@ class CustomCreateButton extends ConsumerWidget {
     );
   }
 }
+
+
+

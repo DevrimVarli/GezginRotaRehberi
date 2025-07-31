@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/services/validator.dart';
 import 'package:yeni_tasarim/features/sig_up_screen/custom_text_form_field.dart';
 class CustomSignUpForm extends ConsumerStatefulWidget {
@@ -10,14 +11,14 @@ class CustomSignUpForm extends ConsumerStatefulWidget {
 }
 
 class _CustomSignUpFormState extends ConsumerState<CustomSignUpForm> {
-  TextEditingController emailController =TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController=ref.watch(emailControllerProvider);
+    TextEditingController passwordController=ref.watch(passwordControllerProvider);
+    TextEditingController firstNameController=ref.watch(firstNameControllerProvider);
+    TextEditingController lastNameController=ref.watch(lastNameControllerProvider);
+    TextEditingController userNameController=ref.watch(userNameControllerProvider);
+    TextEditingController phoneNumberController=ref.watch(phoneNumberControllerProvider);
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     return  Form(
       key: widget.formKey,

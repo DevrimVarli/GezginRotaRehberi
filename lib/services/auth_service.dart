@@ -15,30 +15,55 @@ class AuthService {
   AuthService(this.ref);
   final Ref ref;
 
-  Future<void> kayitEkle(
-  {required BuildContext context,required String mail,required String password,required String lastName,required String firstName,required String userName,required String phoneNumber,}) async {
+  Future<void> kayitEkle({
+    required BuildContext context,
+    required String mail,
+    required String password,
+    required String lastName,
+    required String firstName,
+    required String userName,
+    required String phoneNumber,
+  }) async {
     try {
+      // E-posta ve şifre boşluk kontrolü
+      if (mail.isEmpty || password.isEmpty) {
+        Fluttertoast.showToast(msg: 'E-posta ve şifre boş olamaz');
+        return;
+      }
+
+      // Şifre uzunluk kontrolü
+      if (password.length < 6) {
+        Fluttertoast.showToast(msg: 'Şifre en az 6 karakter olmalıdır');
+        return;
+      }
+
+      // Firebase Authentication işlemi
       UserCredential yetkiSonucu = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: mail, password: password);
 
       String uidTutucu = yetkiSonucu.user!.uid;
 
-      await FirebaseFirestore.instance.collection('Kullanicilar1').doc(uidTutucu).set(<String,dynamic >{
+      // Firebase Firestore'a kullanıcı bilgilerini ekleme
+      await FirebaseFirestore.instance.collection('Kullanicilar1').doc(uidTutucu).set(<String, dynamic>{
         'email': mail,
-        'lastName':lastName,
-        'firstName':firstName,
-        'userName':userName,
-        'phoneNumber':phoneNumber,
+        'lastName': lastName,
+        'firstName': firstName,
+        'userName': userName,
+        'phoneNumber': phoneNumber,
       });
+
+      // Navigasyon işlemi
       if (!context.mounted) return;
       await Navigator.push(
-        context, MaterialPageRoute<Widget>(builder: (BuildContext context) => const AccountScreen()),
+        context,
+        MaterialPageRoute<Widget>(builder: (BuildContext context) => const AccountScreen()),
       );
     } on FirebaseAuthException catch (e) {
-      // Hata mesajı
+      // Firebase hatası durumunda mesaj göster
       await Fluttertoast.showToast(msg: e.message ?? 'Firebase hatası');
     }
   }
+
 
   Future<void> girisYap({required BuildContext context,required String email,required String password}) async {
     try {

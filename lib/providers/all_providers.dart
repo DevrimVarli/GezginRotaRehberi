@@ -65,7 +65,7 @@ final Provider<List<String>> otherKategoriProvider=Provider<List<String>>((Ref r
   return <String>['FAQ','Privacy Policy','Terms and Conditions'];
 });
 final StateProvider<ThemeMode> themeModeProvider = StateProvider<ThemeMode>((Ref ref) {
-  return ThemeMode.system; // Başlangıç
+  return ThemeMode.light; // Başlangıç
 });
 final AutoDisposeProvider<TextEditingController> emailControllerProvider = Provider.autoDispose<TextEditingController>((Ref ref) {
   TextEditingController controller = TextEditingController();
