@@ -1,78 +1,74 @@
-# ✨ GezginRotaRehberi
+# ✨ **GezginRotaRehberi** - Keşfet, Favori Yap, Yönlendir!
 
-**GezginRotaRehberi ile**, kullanıcılar çevredeki restoranları, otelleri keşfedebilir, favori yerlerini işaretleyebilir ve profil ayarlarını kolayca yönetebilir.
+**GezginRotaRehberi ile**, kullanıcılar çevredeki **restoranları**, **otelleri** keşfedebilir, favori yerlerini işaretleyebilir ve profil ayarlarını kolayca yönetebilir.
 
 ---
+## 🚀 **Öne Çıkan Özellikler** 🔥
 
-## 🚀 Öne Çıkan Özellikler
+- **Konum Bazlı Keşif**: Kullanıcı, **bulunduğu konuma** göre mekanları filtreleyebilir, *Hotels*, *Food*, *Adventure* gibi kategorilerde önerilere ulaşabilir.
+  
+- **Popüler Mekanlar**: Yüksek kullanıcı yorumlarına ve puanlara sahip mekanlar öne çıkarılır, böylece **en popüler yerler** keşfedilebilir.
 
-- **Konum Bazlı Keşif**: Kullanıcı bulunduğu lokasyona göre mekanları filtreleyebilir, *Hotels*, *Food*, *Adventure* gibi kategorilerde listelenmiş önerilere ulaşabilir.  
-- **Popüler Mekanlar**: Öne çıkarılan restoran ve oteller, kullanıcı yorumları ve puanlarına göre listeleniyor.
-- **Detaylı Mekan Sayfası**: Her mekan için; görsel galeri, kullanıcı oylaması, tanım ve "Book Now"/"Rezervasyon Yap" butonu mevcut.
-- **Favoriler Yönetimi**: Restoran ve otelleri favorilere ekleme, listede gösterme ve hızlı erişim.
-- **Kullanıcı Profili**: Kullanıcı bilgileri, profil fotoğrafı güncelleme, AdSoyad, KullanıcıAdı, e‑posta, UID ve telefon numarası görüntüleme.
+- **Detaylı Mekan Sayfası**: Her mekan için görsel galeri, kullanıcı oylaması, detaylı açıklamalar ve **"Book Now"** butonu ile hızlı rezervasyon yapılabilir.
+
+- **Favoriler Yönetimi**: Mekanları **favorilere ekleyin**, listede gösterin ve favorilere hızla erişin.
+
+- **Kullanıcı Profili**: Profil fotoğrafı güncelleme, **AdSoyad**, **Kullanıcı Adı**, **E-posta**, **UID**, **Telefon Numarası** gibi bilgileri kolayca düzenleyebilirsiniz.
+
 - **Adres Yönetimi**:
-  - Kullanıcı teslimat adreslerini ekleyebilir, düzenleyebilir ya da silebilir.
-  - GPS ile mevcut konum seçme veya manuel adres girişi.
-  - İl/İlçe/Mahalle/Sokak gibi alanlarda veri doğrulama.
-  - Kayıtlı adres başlığını (“evim” gibi) özelleştirebilme.
-
+  - Kullanıcı, teslimat adreslerini **ekleyebilir**, **düzenleyebilir** ya da **silebilir**.
+  - **GPS ile lokasyon seçimi** ya da **manuel adres girişi** yapılabilir.
+  - Kayıtlı adres başlığını (**"evim"** gibi) özelleştirebilirsiniz.
+  
 ---
 
-## 📸 Uygulama Ekran Görüntüleri
+## 📸 **Uygulama Ekran Görüntüleri** 🎨
 
-### 🔐 Giriş Ekranı
+### 🔐 **Giriş Ekranı** - Kendi profilinize hoş bir başlangıç yapın!
 <p align="center">
-  <img src="assets/screenshots/loginEkran.png" width="250" alt="Login Ekranı" style="margin-right: 15px;">
-  <img src="assets/screenshots/anaEkran.png" width="250" alt="Ana Ekran" style="margin-right: 15px;">
-  <img src="assets/screenshots/introEkran.png" width="250" alt="Intro Ekranı">
+  <img src="assets/screenshots/loginEkran.png" width="280" alt="Login Ekranı" style="margin-right: 15px;">
+  <img src="assets/screenshots/anaEkran.png" width="280" alt="Ana Ekran" style="margin-right: 15px;">
+  <img src="assets/screenshots/introEkran.png" width="280" alt="Intro Ekranı">
 </p>
 
 <p align="center">
   **Giriş Ekranı** | **Ana Ekran** | **Intro Ekranı**
 </p>
 
-### 👤 Profil Ekranı
+### 👤 **Profil Ekranı** - Kişisel bilgilerinizi kolayca yönetin
 <p align="center">
-  <img src="assets/screenshots/profilEkran.png" width="250" alt="Profil Ekranı" style="margin-right: 15px;">
-  <img src="assets/screenshots/favoriteEkran.png" width="250" alt="Favori Ekranı" style="margin-right: 15px;">
-  <img src="assets/screenshots/haritaEkrani.png" width="250" alt="Harita Ekranı">
+  <img src="assets/screenshots/profilEkran.png" width="280" alt="Profil Ekranı" style="margin-right: 15px;">
+  <img src="assets/screenshots/favoriteEkran.png" width="280" alt="Favori Ekranı" style="margin-right: 15px;">
+  <img src="assets/screenshots/haritaEkrani.png" width="280" alt="Harita Ekranı">
 </p>
 
 <p align="center">
   **Profil Ekranı** | **Favori Ekranı** | **Harita Ekranı**
 </p>
 
-### 📝 Detay Ekranı
+### 📝 **Detay Ekranı** - Mekanları detaylı şekilde keşfedin
 <p align="center">
-  <img src="assets/screenshots/detayEkran.png" width="250" alt="Detay Ekranı" style="margin-right: 15px;">
-  <img src="assets/screenshots/accountInfoEkran.png" width="250" alt="Account Info Ekranı" style="margin-right: 15px;">
-  <img src="assets/screenshots/adresEklemeEkrani.png" width="250" alt="Adres Ekleme Ekranı">
+  <img src="assets/screenshots/detayEkran.png" width="280" alt="Detay Ekranı" style="margin-right: 15px;">
+  <img src="assets/screenshots/accountInfoEkran.png" width="280" alt="Account Info Ekranı" style="margin-right: 15px;">
+  <img src="assets/screenshots/adresEklemeEkrani.png" width="280" alt="Adres Ekleme Ekranı">
 </p>
 
 <p align="center">
   **Detay Ekranı** | **Account Info Ekranı** | **Adres Ekleme Ekranı**
 </p>
 
-### 📍 Adreslerim
-<p align="center">
-  <img src="assets/screenshots/adreslerimEkran.png" width="250" alt="Adreslerim Ekranı">
-</p>
+---
 
-<p align="center">
-  **Adreslerim Ekranı**
-</p>
+## 🛠️ **Teknolojiler / Teknoloji Akışı** 🔧
+
+- **Platform**: Flutter & Dart 💻
+- **Mobil Tasarım**: Siyah temalı modern UI, **segment kontrol** (Favoriler: Restoranlar / Oteller), dinamik ve kullanıcı dostu tasarım.
+- **Konum Entegrasyonu**: Harita üzerinde **pin ile lokasyon seçimi** yapılabilir (OpenStreetMap veya Google Maps SDK).
+- **Veri Depolama**: **Firebase Auth & Firestore** kullanılarak kullanıcı profil ve favori mekanlar saklanabilir.
+- **Favoriler & Mekan Bilgileri**: **JSON** / **API** yapısıyla mekan bilgileri dinamik şekilde gösterilir (resimler, isimler, puanlar, açıklamalar vs.).
+- **Adres Girişi**: Kullanıcı adres bilgilerini **form tabanlı** girişle kolayca kaydedebilir, düzenleyebilir veya silebilir.
 
 ---
 
-## 🛠️ Teknolojiler / Teknoloji Akışı
-
-- **Platform**: Flutter & Dart
-- **Mobil Tasarım**: Siyah temalı UI, modern widget yapısı, segment kontrol (Favoriler: Restoranlar / Oteller).
-- **Konum Entegrasyonu**: Haritada pin ile lokasyon seçimi (OpenStreetMap veya Google Maps SDK vb).
-- **Veri Depolama**: Kullanıcı profil ve favori mekanlar için Firebase Auth & Firestore ya da benzeri bir backend kullanılabilir.
-- **Favoriler & Mekan Bilgileri**: JSON / API yapısıyla listelenen mekan verisi (resim, isim, puan, açıklama vs.).
-- **Adres Girişi**: Form tabanlı inputlarla; adres kaydetme/düzenleme iş akışı.
-
----
+## 📂 **Proje Yapısı (Öneri)** 🧩
 
