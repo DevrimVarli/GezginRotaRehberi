@@ -19,15 +19,38 @@
 
 ---
 
-## 📱 Ekran Görüntüleri
+## 📸 Uygulama Ekran Görüntüleri
 
-- **Explore**: `Aspen` ana sayfası; kullanıcı konumuna göre popüler ve önerilen mekanlar listeleniyor.  
-- **Mekan Detayı**: Luna Bar Restaurant gibi mekanların iç mekan görüntüleri, puanı (ör. 4.8/5), tanımı ve rezervasyon butonu.  
-- **Favoriler**: Henüz favori olmadığı zaman “Favori restoran bulunamadı” mesajı; favori eklendiğinde listeleniyor (örneğin: Tola Restaurant, Zennup 1844).  
-- **Profil**: Kullanıcı detayları ve profil fotoğrafı bölümü.  
-- **Adres Seçimi/Düzenleme**: Haritada konum seçimi, adres alanlarının girilmesi ve adres kaydetme ekranları.
+### 🔐 Giriş Ekranı
+![Login Ekranı](screenshots/loginEkran.png)
 
----
+### 🏠 Ana Ekran
+![Ana Ekran](screenshots/anaEkran.png)
+
+### 🚀 Intro Ekranı
+![Intro Ekranı](screenshots/introEkran.png)
+
+### 👤 Profil Ekranı
+![Profil Ekranı](screenshots/profilEkran.png)
+
+### ⭐ Favoriler Ekranı
+![Favori Ekranı](screenshots/favoriteEkran.png)
+
+### 🗺️ Harita Ekranı
+![Harita Ekranı](screenshots/haritaEkrani.png)
+
+### 📝 Detay Ekranı
+![Detay Ekranı](screenshots/detayEkran.png)
+
+### 🧾 Hesap Bilgileri
+![Account Info Ekranı](screenshots/accountInfoEkran.png)
+
+### ➕ Adres Ekleme
+![Adres Ekleme Ekranı](screenshots/adresEklemeEkrani.png)
+
+### 📍 Adreslerim
+![Adreslerim Ekranı](screenshots/adreslerimEkran.png)
+
 
 ## 🛠️ Teknolojiler / Teknoloji Akışı
 
