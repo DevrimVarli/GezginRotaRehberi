@@ -23,7 +23,7 @@ class CustomDeleteButton extends ConsumerWidget {
                 imageUrl: firestoreData['profile_picture'].toString().isNotEmpty
                     ? "${firestoreData['profile_picture']}" // Eğer fotoğraf URL'si varsa
                     : '' // Yoksa boş string gönder
-            );
+            ,);
           },
         ),
       ),

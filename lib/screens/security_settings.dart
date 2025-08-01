@@ -48,7 +48,7 @@ class _SecuritySettingsState extends ConsumerState<SecuritySettings> {
         // Firestore’daki kullanıcı verilerini al
         future: ref.read(authProvider).getFirestoreUserData(),
         builder: (BuildContext context,
-            AsyncSnapshot<Map<String, dynamic>?> snapshot) {
+            AsyncSnapshot<Map<String, dynamic>?> snapshot,) {
           // Yükleniyor
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -57,7 +57,7 @@ class _SecuritySettingsState extends ConsumerState<SecuritySettings> {
           // Hata veya veri yoksa
           if (snapshot.hasError || !snapshot.hasData) {
             return const Center(
-                child: Text('Kullanıcı verileri alınamadı.'));
+                child: Text('Kullanıcı verileri alınamadı.'),);
           }
 
           // Firestore’dan gelen kullanıcı verileri
@@ -77,7 +77,7 @@ class _SecuritySettingsState extends ConsumerState<SecuritySettings> {
                   CustomProfilPhoto(user: user, data: data),
                   // Ad Soyad
                   Text('$firstName $lastName',
-                      style: textTheme.headlineSmall),
+                      style: textTheme.headlineSmall,),
                   // E-posta
                   Text(user.email ?? '', style: textTheme.bodyLarge),
                   // Şifre değiştirme formu
@@ -115,7 +115,7 @@ class _SecuritySettingsState extends ConsumerState<SecuritySettings> {
             ),
             // Ad Soyad
             Text(user.displayName.toString(),
-                style: textTheme.headlineSmall),
+                style: textTheme.headlineSmall,),
             // E-posta
             Text(user.email ?? '', style: textTheme.bodyLarge),
             // Şifre değiştirme formu

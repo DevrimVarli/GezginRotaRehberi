@@ -42,7 +42,7 @@ class RestorantListViewWidget extends ConsumerWidget {
             : restoranList
             .where((Restorantlar restorant) => restorant.restoranAd
             .toLowerCase()
-            .contains(aramaSonucu.toLowerCase()))
+            .contains(aramaSonucu.toLowerCase()),)
             .toList();
 
         return Padding(

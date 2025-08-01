@@ -24,7 +24,7 @@ class Oteller {
       json['otel_aciklama'] as String? ?? 'No Description', // 'otel_aciklama' varsa String olarak al, yoksa 'No Description' döndür
       json['otel_fiyat'] as int? ?? 0, // 'otel_fiyat' varsa int olarak al, yoksa 0 döndür
       (json['imkanlar'] as List<dynamic>?) // 'imkanlar' varsa bir liste olarak al
-          ?.map((x) => Imkanlar.fromJson(x as Map<String, dynamic>)) // Her bir öğeyi 'Imkanlar' nesnesine dönüştür
+          ?.map((dynamic x) => Imkanlar.fromJson(x as Map<String, dynamic>)) // Her bir öğeyi 'Imkanlar' nesnesine dönüştür
           .toList() ?? <Imkanlar>[], // Eğer 'imkanlar' null ise boş liste döndür
       json['konum'] != null // Eğer 'konum' varsa, onu 'Konum' nesnesine dönüştür
           ? Konum.fromJson(json['konum'] as Map<String, dynamic>)

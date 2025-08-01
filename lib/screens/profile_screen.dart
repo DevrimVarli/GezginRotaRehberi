@@ -45,7 +45,7 @@ class ProfileScreen extends ConsumerWidget {
             .snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
-            snapshot) {
+            snapshot,) {
           // Veri yüklenirken loading göstergesi
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -83,17 +83,17 @@ class ProfileScreen extends ConsumerWidget {
                       InfoTile(
                           'Ad Soyad',
                           user.displayName ??
-                              "${firestoreData['firstName'] ?? ''} ${firestoreData['lastName'] ?? ''}"),
+                              "${firestoreData['firstName'] ?? ''} ${firestoreData['lastName'] ?? ''}",),
                       const CustomDivider(),
 
                       // Kullanıcı adı
                       InfoTile('Kullanıcı Adı',
-                          "${firestoreData['userName'] ?? "Yok"}"),
+                          "${firestoreData['userName'] ?? "Yok"}",),
                       const CustomDivider(),
 
                       // E-posta
                       InfoTile('E-posta',
-                          "${firestoreData['email'] ?? "E-posta Yok"}"),
+                          "${firestoreData['email'] ?? "E-posta Yok"}",),
                       const CustomDivider(),
 
                       // UID
@@ -104,7 +104,7 @@ class ProfileScreen extends ConsumerWidget {
                       InfoTile(
                           'Telefon Numarası',
                           user.phoneNumber ??
-                              "${firestoreData['phoneNumber'] ?? ''}"),
+                              "${firestoreData['phoneNumber'] ?? ''}",),
                     ],
                   ),
                 ),
@@ -138,15 +138,15 @@ class ProfileScreen extends ConsumerWidget {
                   InfoTile('Ad Soyad', user.displayName ?? ''),
                   const CustomDivider(),
                   InfoTile(
-                      'Kullanıcı Adı', user.displayName ?? 'Yok'),
+                      'Kullanıcı Adı', user.displayName ?? 'Yok',),
                   const CustomDivider(),
                   InfoTile(
-                      'E-posta', user.email ?? 'E-posta yok'),
+                      'E-posta', user.email ?? 'E-posta yok',),
                   const CustomDivider(),
                   InfoTile('UID (Kullanıcı ID)', user.uid),
                   const CustomDivider(),
                   InfoTile(
-                      'Telefon Numarası', user.phoneNumber ?? ''),
+                      'Telefon Numarası', user.phoneNumber ?? '',),
                 ],
               ),
             ),

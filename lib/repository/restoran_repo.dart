@@ -15,7 +15,7 @@ class RestoranRepo {
 
     // 'restoranlar' anahtarındaki veriyi model listesine çevir
     List<Restorantlar> restorantlarList = (jsonData['restoranlar'] as List<dynamic>)
-        .map((json) => Restorantlar.fromJson(json as Map<String, dynamic>))
+        .map((dynamic json) => Restorantlar.fromJson(json as Map<String, dynamic>))
         .toList();
 
     return restorantlarList;

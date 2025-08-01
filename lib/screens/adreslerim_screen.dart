@@ -95,18 +95,18 @@ class AdresScreen extends ConsumerWidget {
                 child: ValueListenableBuilder<Box<KullaniciKonumFreezed>>(
                   valueListenable: box.listenable(),
                   builder: (BuildContext context,
-                      Box<KullaniciKonumFreezed> value, Widget? child) {
-                    final adresListesi = value.values.toList();
+                      Box<KullaniciKonumFreezed> value, Widget? child,) {
+                    List<KullaniciKonumFreezed> adresListesi = value.values.toList();
 
                     if (adresListesi.isEmpty) {
                       return const Center(
-                          child: Text('Henüz kayıtlı adres bulunmuyor.'));
+                          child: Text('Henüz kayıtlı adres bulunmuyor.'),);
                     }
 
                     return ListView.builder(
                       itemCount: adresListesi.length,
                       itemBuilder: (BuildContext context, int indeks) {
-                        final konum = adresListesi[indeks];
+                        KullaniciKonumFreezed konum = adresListesi[indeks];
 
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8),
@@ -135,7 +135,7 @@ class AdresScreen extends ConsumerWidget {
                                     Row(
                                       children: <Widget>[
                                         Text(konum.adresBasligi,
-                                            style: textTheme.titleLarge),
+                                            style: textTheme.titleLarge,),
                                         const Spacer(),
                                         TextButton.icon(
                                           onPressed: () {

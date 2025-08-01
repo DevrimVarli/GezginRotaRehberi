@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 
 /// Kullanıcı konumlarını yöneten StateNotifier sınıfı.
-/// State tipi: List<KullaniciKonumFreezed>
-/// Başlangıç değeri: boş liste
+/// State tipi: List<.KullaniciKonumFreezed>
+/// Başlangıç değeri: boş list
 class KullaniciKonumlarNotifier extends StateNotifier<List<KullaniciKonumFreezed>> {
 
   /// Constructor — boş liste ile başlatır

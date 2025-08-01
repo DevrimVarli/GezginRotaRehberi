@@ -16,7 +16,7 @@ class ImkanRepo {
     // Burada jsonData['imkanlar'] aslında List<dynamic> tipinde olur.
     // Senin kodunda List<Imkanlar> yazıldığı için runtime hatası çıkabilir.
     List<Imkanlar> imkanlarList = (jsonData['imkanlar'] as List<dynamic>)
-        .map((json) => Imkanlar.fromJson(json as Map<String, dynamic>))
+        .map((dynamic json) => Imkanlar.fromJson(json as Map<String, dynamic>))
         .toList();
 
     return imkanlarList;

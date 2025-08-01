@@ -36,7 +36,7 @@ class OtellerListViewWidget extends ConsumerWidget {
         }).toList()
             : otelList
             .where((Oteller otel) =>
-            otel.otelAd.toLowerCase().contains(aramaSonucu.toLowerCase()))
+            otel.otelAd.toLowerCase().contains(aramaSonucu.toLowerCase()),)
             .toList();
 
         return Padding(

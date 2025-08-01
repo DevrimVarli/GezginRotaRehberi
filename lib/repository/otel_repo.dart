@@ -15,7 +15,7 @@ class OtelRepo {
 
     // 'oteller' anahtarındaki veriyi model listesine çevir
     List<Oteller> otellerList = (jsonData['oteller'] as List<dynamic>)
-        .map((json) => Oteller.fromJson(json as Map<String, dynamic>))
+        .map((dynamic json) => Oteller.fromJson(json as Map<String, dynamic>))
         .toList();
 
     return otellerList;
