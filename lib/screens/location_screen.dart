@@ -9,8 +9,11 @@ import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/repository/adres_repo.dart';
 import 'package:yeni_tasarim/screens/adres_ekleme_screen.dart';
 
+/// Harita üzerinde konum seçme ekranı.
+/// - Uygulama açıldığında cihazın mevcut konumunu alır.
+/// - Kullanıcı haritadan başka bir konuma dokunarak seçim yapabilir.
+/// - Seçilen konumun adres bilgisi `AdresRepo` ile alınır ve adres düzenleme ekranına yönlendirilir.
 class KonumSecPage extends ConsumerStatefulWidget {
-
   const KonumSecPage({super.key});
 
   @override
@@ -23,17 +26,18 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
   @override
   void initState() {
     super.initState();
-    baslangicKonumunuAl();
+    _baslangicKonumunuAl();
   }
 
-  Future<void> baslangicKonumunuAl() async {
+  /// Cihazın mevcut konumunu alır ve provider'lara set eder.
+  Future<void> _baslangicKonumunuAl() async {
     Position? konum = await ref.read(locationProvider).konumuAl();
-
     if (!mounted) return;
 
     if (konum != null) {
-      ref.read(baslangicKonumuProvider.notifier).state = LatLng(konum.latitude, konum.longitude);
-      ref.read(secilenKonumuProviderLatLng.notifier).state = LatLng(konum.latitude, konum.longitude);
+      LatLng latLng = LatLng(konum.latitude, konum.longitude);
+      ref.read(baslangicKonumuProvider.notifier).state = latLng;
+      ref.read(secilenKonumuProviderLatLng.notifier).state = latLng;
     }
 
     setState(() {
@@ -41,53 +45,43 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
-     LatLng? secilenKonumLatLng = ref.watch(secilenKonumuProviderLatLng);
-     LatLng? baslangicKonum = ref.watch(baslangicKonumuProvider);
+    LatLng? secilenKonumLatLng = ref.watch(secilenKonumuProviderLatLng);
+    LatLng? baslangicKonum = ref.watch(baslangicKonumuProvider);
 
-    if (baslangicKonum == null) {
+    // Konum yüklenene kadar gösterilecek ekran
+    if (baslangicKonum == null || isLoading) {
       return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       );
     }
-     if (isLoading ) {
-       return const Scaffold(
-         body: Center(child: CircularProgressIndicator()),
-       );
-     }
 
-
-     return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: colorScheme.primary,
-          title: const Text('Konum Seç'),
-          centerTitle: true,
+        title: const Text('Konum Seç'),
+        centerTitle: true,
       ),
       body: FlutterMap(
         options: MapOptions(
+          // Harita ilk açıldığında başlangıç konumunu göster
           initialCenter: LatLng(baslangicKonum.latitude, baslangicKonum.longitude),
-          onTap: (TapPosition tapPosition, LatLng point) async {
-            ref
-                .read(secilenKonumuProviderLatLng.notifier)
-                .state = point;
 
-            /*Konum konum = await loca().konumuver(
-                point.latitude, point.longitude,);*/
-
-            /*print("İl: ${konum.sehirAdi}");
-            print("İlçe: ${konum.ilceAdi}");
-            print("Lat: ${point.latitude}");
-            print("Lng: ${point.longitude}");*/
+          // Haritaya dokunulduğunda seçilen konumu güncelle
+          onTap: (TapPosition tapPosition, LatLng point) {
+            ref.read(secilenKonumuProviderLatLng.notifier).state = point;
           },
         ),
         children: <Widget>[
+          // Harita katmanı
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.uygulaman',
           ),
+
+          // Seçilen konumu işaretle
           if (secilenKonumLatLng != null)
             MarkerLayer(
               markers: <Marker>[
@@ -95,41 +89,56 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
                   point: secilenKonumLatLng,
                   width: 80,
                   height: 80,
-                  child: const Icon(
-                      Icons.location_pin, size: 40, color: Colors.red,),
+                  child: const Icon(Icons.location_pin, size: 40, color: Colors.red),
                 ),
               ],
             ),
         ],
       ),
+
+      // Konumu seçme butonu
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor:colorScheme.primary ,
-        onPressed: () async{
+        backgroundColor: colorScheme.primary,
+        onPressed: () async {
           if (secilenKonumLatLng != null) {
-            AdresRepo adresRepo=AdresRepo();
-            AdresYaniti adresYaniti=await adresRepo.konumGetir(secilenKonumLatLng.latitude, secilenKonumLatLng.longitude) ;
-            Konum konum=Konum(adresYaniti.adres.sehirAdi,adresYaniti.adres.ilceAdi);
-             if (!context.mounted) return;
-             await Navigator.pushReplacement(context, MaterialPageRoute<Widget>(builder: (BuildContext context)=>AdresScreenDetay(adresAdi:adresYaniti.displayName,ilAdi: konum.sehirAdi,ilceAdi: konum.ilceAdi,mahalleAdi: adresYaniti.adres.mahalleAdi,sokakAdi: adresYaniti.adres.sokakAdi)));
+            // Adres bilgisini al
+            AdresRepo adresRepo = AdresRepo();
+            AdresYaniti adresYaniti = await adresRepo.konumGetir(
+              secilenKonumLatLng.latitude,
+              secilenKonumLatLng.longitude,
+            );
+
+            // Sehir ve ilçe bilgilerini modele aktar
+            Konum konum = Konum(
+              adresYaniti.adres.sehirAdi,
+              adresYaniti.adres.ilceAdi,
+            );
+
+            if (!context.mounted) return;
+
+            // Adres düzenleme ekranına yönlendir
+            await Navigator.pushReplacement(
+              context,
+              MaterialPageRoute<Widget>(
+                builder: (BuildContext context) => AdresScreenDetay(
+                  adresAdi: adresYaniti.displayName,
+                  ilAdi: konum.sehirAdi,
+                  ilceAdi: konum.ilceAdi,
+                  mahalleAdi: adresYaniti.adres.mahalleAdi,
+                  sokakAdi: adresYaniti.adres.sokakAdi,
+                ),
+              ),
+            );
           } else {
+            // Konum seçilmediyse uyarı
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Lütfen bir konum seçin')),
             );
           }
         },
-        label: const Text('Seç ve Dön' ),
-        icon:  const Icon(Icons.check),
+        label: const Text('Seç ve Dön'),
+        icon: const Icon(Icons.check),
       ),
     );
   }
 }
-
-  /*class loca {
-  loca();
-
-  Future<Konum> konumuver(double lat, double long) async {
-    List<Placemark> placemarks = await placemarkFromCoordinates(lat, long);
-    Placemark place = placemarks.first;
-    return Konum(place.administrativeArea.toString(), place.subAdministrativeArea.toString());
-  }
-}*/

@@ -1,5 +1,3 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,102 +17,149 @@ import 'package:yeni_tasarim/repository/restoran_repo.dart';
 import 'package:yeni_tasarim/services/auth_service.dart';
 import 'package:yeni_tasarim/services/location_service.dart';
 
+/// Oteller listesini API’den çekmek için FutureProvider
 final FutureProvider<List<Oteller>> otelFutureProvider = FutureProvider<List<Oteller>>((Ref ref) async {
-  return otelRepo().oteller();
+  return OtelRepo().oteller();
 });
 
-final FutureProvider<List<Restorantlar>> restoranFutureProvider=FutureProvider<List<Restorantlar>>((Ref ref)async{
-  return ResetoranRepo().restorantlar();
+/// Restoran listesini API’den çekmek için FutureProvider
+final FutureProvider<List<Restorantlar>> restoranFutureProvider = FutureProvider<List<Restorantlar>>((Ref ref) async {
+  return RestoranRepo().restorantlar();
 });
-final FutureProvider<List<Imkanlar>> imkanRestFutureProvider=FutureProvider<List<Imkanlar>>((Ref ref)async{
+
+/// İmkanlar listesini API’den çeken FutureProvider
+final FutureProvider<List<Imkanlar>> imkanRestFutureProvider = FutureProvider<List<Imkanlar>>((Ref ref) async {
   return ImkanRepo().imkanlar();
 });
-final Provider<List<String>> kategoriFutureProvider=Provider<List<String>>((Ref ref){
-  return  KategoriRepo().basliklar();
+
+/// Kategori başlıklarını sağlayan Provider
+final Provider<List<String>> kategoriFutureProvider = Provider<List<String>>((Ref ref) {
+  return KategoriRepo().basliklar();
 });
-final StateProvider<Konum> secilemKonumStateProvider=StateProvider<Konum>((Ref ref)=>Konum( 'Bursa', 'Osmangazi'));
-final StateProvider<List<Konum>> konumlarProvider=StateProvider<List<Konum>>((Ref ref){
+
+/// Seçili konumu tutan StateProvider (başlangıç: Bursa / Osmangazi)
+final StateProvider<Konum> secilemKonumStateProvider = StateProvider<Konum>((Ref ref) => Konum('Bursa', 'Osmangazi'));
+
+/// Tüm konumları sağlayan StateProvider
+final StateProvider<List<Konum>> konumlarProvider = StateProvider<List<Konum>>((Ref ref) {
   ref.keepAlive();
   return AdresRepo().konumlar();
-});final StateNotifierProvider<KullaniciKonumlarNotifier, List<KullaniciKonumFreezed>> kullaniciKonumlarProvider =
-StateNotifierProvider<KullaniciKonumlarNotifier, List<KullaniciKonumFreezed>>(
-        (Ref ref) => KullaniciKonumlarNotifier(),);
-final StateProvider<int> selectedIndexProvider=StateProvider<int>((Ref ref)=>0);
-final StateProvider<String> aramaSonucuStateProvider=StateProvider<String>((Ref ref)=>'');
-final StateProvider<bool> seeAllStateProvider=StateProvider<bool>(( Ref ref)=>false);
-final StateProvider<bool> favoriteButtonStateProvider=StateProvider<bool>((Ref ref)=>false);
-/*final StateProvider<List<String>> favoriListesiProvider=StateProvider<List<String>>((Ref ref) {
-  ref.keepAlive();
-  return <String>[];
-});*/
-final StateProvider<bool> kayitMiProvider=StateProvider<bool>((Ref ref)=>false);
+});
+
+/// Kullanıcı konumlarını yöneten StateNotifierProvider
+final StateNotifierProvider<KullaniciKonumlarNotifier, List<KullaniciKonumFreezed>> kullaniciKonumlarProvider =
+StateNotifierProvider<KullaniciKonumlarNotifier, List<KullaniciKonumFreezed>>((Ref ref) => KullaniciKonumlarNotifier());
+
+/// Ana sayfa alt menü seçili index
+final StateProvider<int> selectedIndexProvider = StateProvider<int>((Ref ref) => 0);
+
+/// Arama sonuç metnini tutar
+final StateProvider<String> aramaSonucuStateProvider = StateProvider<String>((Ref ref) => '');
+
+/// “See All” butonu açık mı kapalı mı?
+final StateProvider<bool> seeAllStateProvider = StateProvider<bool>((Ref ref) => false);
+
+/// Favori butonu durumu
+final StateProvider<bool> favoriteButtonStateProvider = StateProvider<bool>((Ref ref) => false);
+
+/// Kayıt olma ekranında mıyız kontrolü
+final StateProvider<bool> kayitMiProvider = StateProvider<bool>((Ref ref) => false);
+
+/// AuthService instance’ı
 final Provider<AuthService> authProvider = Provider<AuthService>(AuthService.new);
-final Provider<LocationService> locationProvider = Provider<LocationService>((Ref ref){
+
+/// LocationService instance’ı
+final Provider<LocationService> locationProvider = Provider<LocationService>((Ref ref) {
   return LocationService();
 });
+
+/// Firebase kullanıcı oturum değişikliklerini dinleyen StreamProvider
 final StreamProvider<User?> userChangesProvider = StreamProvider<User?>((Ref ref) {
   return FirebaseAuth.instance.authStateChanges();
 });
-final Provider<List<String>> generalKategoriProvider=Provider<List<String>>((Ref ref){
-  return <String>['Seyahatlerim','Kampanyalarım','Favorilerim', 'Profilim','Çıkış Yap'];
+
+/// Profil ekranı menü kategorileri
+final Provider<List<String>> generalKategoriProvider = Provider<List<String>>((Ref ref) {
+  return <String>['Seyahatlerim', 'Kampanyalarım', 'Favorilerim', 'Profilim', 'Çıkış Yap'];
 });
-final Provider<List<String>> accountKategoriProvider=Provider<List<String>>((Ref ref){
-  return <String>['Security Settings','Delete Account'];
+
+/// Hesap ayarları menüsü
+final Provider<List<String>> accountKategoriProvider = Provider<List<String>>((Ref ref) {
+  return <String>['Security Settings', 'Delete Account'];
 });
-final Provider<List<String>> otherKategoriProvider=Provider<List<String>>((Ref ref){
-  return <String>['FAQ','Privacy Policy','Terms and Conditions'];
+
+/// Diğer bilgiler menüsü
+final Provider<List<String>> otherKategoriProvider = Provider<List<String>>((Ref ref) {
+  return <String>['FAQ', 'Privacy Policy', 'Terms and Conditions'];
 });
+
+/// Tema modu (light/dark)
 final StateProvider<ThemeMode> themeModeProvider = StateProvider<ThemeMode>((Ref ref) {
-  return ThemeMode.light; // Başlangıç
+  return ThemeMode.light;
 });
+
+/// E-mail input controller (autoDispose)
 final AutoDisposeProvider<TextEditingController> emailControllerProvider = Provider.autoDispose<TextEditingController>((Ref ref) {
   TextEditingController controller = TextEditingController();
   ref.onDispose(controller.dispose);
   return controller;
 });
 
-
+/// Şifre input controller
 final AutoDisposeProvider<TextEditingController> passwordControllerProvider = Provider.autoDispose<TextEditingController>((Ref ref) {
   TextEditingController controller = TextEditingController();
   ref.onDispose(controller.dispose);
   return controller;
 });
+
+/// Yeni şifre input controller
 final AutoDisposeProvider<TextEditingController> newPasswordControllerProvider = Provider.autoDispose<TextEditingController>((Ref ref) {
   TextEditingController controller = TextEditingController();
   ref.onDispose(controller.dispose);
   return controller;
 });
 
-
+/// İsim input controller
 final AutoDisposeProvider<TextEditingController> firstNameControllerProvider = Provider.autoDispose<TextEditingController>((Ref ref) {
   TextEditingController controller = TextEditingController();
   ref.onDispose(controller.dispose);
   return controller;
 });
 
-
+/// Soyisim input controller
 final AutoDisposeProvider<TextEditingController> lastNameControllerProvider = Provider.autoDispose<TextEditingController>((Ref ref) {
   TextEditingController controller = TextEditingController();
   ref.onDispose(controller.dispose);
   return controller;
 });
+
+/// Telefon numarası input controller
 final AutoDisposeProvider<TextEditingController> phoneNumberControllerProvider = Provider.autoDispose<TextEditingController>((Ref ref) {
   TextEditingController controller = TextEditingController();
   ref.onDispose(controller.dispose);
   return controller;
 });
 
+/// Kullanıcı adı input controller
 final AutoDisposeProvider<TextEditingController> userNameControllerProvider = Provider.autoDispose<TextEditingController>((Ref ref) {
   TextEditingController controller = TextEditingController();
   ref.onDispose(controller.dispose);
   return controller;
 });
-final StateProvider<bool> checkBoxStateProvider=StateProvider<bool>((Ref ref)=>false);
-final StateProvider<String> userPhotoProvider=StateProvider<String>((Ref ref)=>'');
-final StateProvider<LatLng> baslangicKonumuProvider=StateProvider<LatLng>((Ref ref)=>const LatLng(41.015137, 28.979530));
-final StateProvider<LatLng> secilenKonumuProviderLatLng=StateProvider<LatLng>((Ref ref)=>const LatLng(41.015137, 28.979530));
 
-final StateProvider<Box<String>> favorilerProvider=StateProvider<Box<String>>((Ref ref){
+/// CheckBox durumu (ör. sözleşme onayı)
+final StateProvider<bool> checkBoxStateProvider = StateProvider<bool>((Ref ref) => false);
+
+/// Kullanıcı profil fotoğrafı URL’si
+final StateProvider<String> userPhotoProvider = StateProvider<String>((Ref ref) => '');
+
+/// Başlangıç harita konumu (İstanbul koordinatları)
+final StateProvider<LatLng> baslangicKonumuProvider = StateProvider<LatLng>((Ref ref) => const LatLng(41.015137, 28.979530));
+
+/// Seçilen harita konumu
+final StateProvider<LatLng> secilenKonumuProviderLatLng = StateProvider<LatLng>((Ref ref) => const LatLng(41.015137, 28.979530));
+
+/// Favoriler Hive Box provider
+final StateProvider<Box<String>> favorilerProvider = StateProvider<Box<String>>((Ref ref) {
   return Hive.box<String>('favoriler');
-
 });

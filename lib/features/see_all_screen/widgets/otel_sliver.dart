@@ -11,21 +11,31 @@ class OtelSliver extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Hive'dan favori otellerin listesini alıyoruz
     Box<String> box = Hive.box<String>('favoriler');
+
+    // Oteller listesini alıyoruz
     AsyncValue<List<Oteller>> otelList = ref.watch(otelFutureProvider);
+
+    // Tema renk şeması
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    // Ekranın yüksekliği ve genişliği
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
     double ekranGenisligi = MediaQuery.sizeOf(context).width;
 
+    // Otellerin listesi yüklendiğinde (data), bir SliverList döndürülür
     return otelList.when(
       data: (List<Oteller> otelListe) => SliverList(
         delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
             Oteller otel = otelListe[index];
+
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: GestureDetector(
                 onTap: () {
+                  // Otel kartına tıklanırsa, detay ekranına yönlendirilir
                   Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(builder: (BuildContext context) => DetayEkrani(secilenOtel: otel)),
@@ -33,6 +43,7 @@ class OtelSliver extends ConsumerWidget {
                 },
                 child: Stack(
                   children: <Widget>[
+                    // Otelin resmini gösteren arka plan
                     Container(
                       height: ekranYuksekligi / 4,
                       width: ekranGenisligi,
@@ -44,6 +55,7 @@ class OtelSliver extends ConsumerWidget {
                         ),
                       ),
                     ),
+                    // Resmin üzerine eklenen renkli gradient
                     Container(
                       height: ekranYuksekligi / 4,
                       width: ekranGenisligi,
@@ -59,6 +71,7 @@ class OtelSliver extends ConsumerWidget {
                         ),
                       ),
                     ),
+                    // Otelin adı
                     Positioned(
                       left: 5,
                       top: 10,
@@ -78,13 +91,13 @@ class OtelSliver extends ConsumerWidget {
                         ),
                       ),
                     ),
+                    // Otel puanını gösteren alan
                     Positioned(
                       right: 5,
                       top: 10,
                       child: Container(
                         width: 60,
                         height: 30,
-
                         decoration: BoxDecoration(
                           color: colorScheme.surface.withValues(alpha: 0.7),
                           borderRadius: BorderRadius.circular(16),
@@ -105,6 +118,7 @@ class OtelSliver extends ConsumerWidget {
                         ),
                       ),
                     ),
+                    // Favori ekleme/çıkarma butonu
                     Positioned(
                       bottom: 5,
                       right: 10,
@@ -120,10 +134,11 @@ class OtelSliver extends ConsumerWidget {
 
                             return IconButton(
                               onPressed: () {
+                                // Favorilere ekle/çıkar
                                 if (isFavori) {
-                                  box.delete(otel.otelAd);
+                                  box.delete(otel.otelAd); // Favorilerden çıkar
                                 } else {
-                                  box.put(otel.otelAd, otel.otelAd);
+                                  box.put(otel.otelAd, otel.otelAd); // Favorilere ekle
                                 }
                               },
                               icon: Icon(
@@ -140,14 +155,14 @@ class OtelSliver extends ConsumerWidget {
               ),
             );
           },
-          childCount: otelListe.length,
+          childCount: otelListe.length, // Otellerin toplam sayısı
         ),
       ),
       error: (Object error, StackTrace stackTrace) => SliverFillRemaining(
-        child: Center(child: Text(error.toString())),
+        child: Center(child: Text(error.toString())), // Hata durumu
       ),
       loading: () => const SliverFillRemaining(
-        child: Center(child: CircularProgressIndicator()),
+        child: Center(child: CircularProgressIndicator()), // Yükleniyor durumu
       ),
     );
   }

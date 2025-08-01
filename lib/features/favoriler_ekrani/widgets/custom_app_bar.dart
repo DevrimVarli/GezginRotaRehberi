@@ -6,17 +6,19 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Tema renk düzenini almak için kullanılan değişken
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return AppBar(
       title: Text(
-        'Favoriler',
+        'Favoriler', // AppBar başlığı
         style: GoogleFonts.roboto(
-          fontWeight: FontWeight.w500,
-          fontSize: 36,
-          color: colorScheme.primary,
+          fontWeight: FontWeight.w500, // Yazı kalınlığı
+          fontSize: 36, // Yazı boyutu
+          color: colorScheme.primary, // Yazı rengi, tema ile uyumlu
         ),
       ),
-      centerTitle: true,
+      centerTitle: true, // Başlığın ortalanması
     );
   }
 }

@@ -1,15 +1,19 @@
 class Konum {
+  // Constructor: Konum sınıfının bir örneğini oluşturmak için kullanılan parametreler
   Konum(this.sehirAdi, this.ilceAdi);
 
+  // Factory constructor: JSON verisinden Konum nesnesi oluşturmak için kullanılır
   factory Konum.fromJson(Map<String, Object?> json) {
     return Konum(
-      // JSON'dan 'sehir_adi' değerini alıyoruz
-      json['il'] is String ? json['il']! as String : 'No City', // Eğer sehir_adi yoksa 'No City' döndür
-      // JSON'dan 'ilce_adi' değerini alıyoruz
-      json['ilce'] is String ? json['ilce']! as String : 'No District', // Eğer ilce_adi yoksa 'No District' döndür
+      // JSON'dan 'il' değerini alıyoruz. Eğer değer doğru türde değilse 'No City' döndürüyoruz.
+      json['il'] is String ? json['il']! as String : 'No City',
+
+      // JSON'dan 'ilce' değerini alıyoruz. Eğer değer doğru türde değilse 'No District' döndürüyoruz.
+      json['ilce'] is String ? json['ilce']! as String : 'No District',
     );
   }
 
-  String sehirAdi;
-  String ilceAdi;
+  // Konumun her bileşeni için özellikler
+  String sehirAdi; // Şehir adı
+  String ilceAdi; // İlçe adı
 }

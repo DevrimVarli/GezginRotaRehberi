@@ -9,47 +9,64 @@ class SeeAllEkrani extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-ColorScheme colorScheme=Theme.of(context).colorScheme;
+    // Tema renkleri
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      
       body: SafeArea(
         child: CustomScrollView(
           slivers: <Widget>[
-            // Restoranlar bölümü
+            // --- Restoranlar başlık alanı ---
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Row(
                   children: <Widget>[
+                    // Geri butonu
                     IconButton(
-                        onPressed: (){
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.arrow_back_ios,color:colorScheme.onSurfaceVariant ,),),
-                    const Spacer(flex: 2,),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const Spacer(flex: 2),
+                    // Başlık
                     Text(
                       'Restoranlar',
-                      style: GoogleFonts.roboto(fontSize: 24,fontWeight: FontWeight.bold),
+                      style: GoogleFonts.roboto(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    const Spacer(flex: 3,),
+                    const Spacer(flex: 3),
                   ],
                 ),
               ),
             ),
+
+            // --- Restoran listesi ---
             const RestoranSliver(),
-        
-            // Oteller bölümü
+
+            // --- Oteller başlık alanı ---
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
                   'Oteller',
-                  style: GoogleFonts.roboto(fontSize: 24,fontWeight: FontWeight.bold),
+                  style: GoogleFonts.roboto(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
-           const OtelSliver(),
+
+            // --- Oteller listesi ---
+            const OtelSliver(),
           ],
         ),
       ),

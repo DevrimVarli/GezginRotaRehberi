@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:yeni_tasarim/features/DetayEkran/widgets/arrow_back_button_widgets.dart';
 import 'package:yeni_tasarim/features/DetayEkran/widgets/facilities_widgets.dart';
@@ -9,10 +8,16 @@ import 'package:yeni_tasarim/features/DetayEkran/widgets/price_widgets.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
 
+/// Mekan detay ekranı.
+/// Hem Oteller hem de Restoranlar için ortak kullanılabilir.
+/// Görsel, mekan bilgileri, imkanlar, fiyat ve favori ekleme butonlarını içerir.
 class DetayEkrani extends StatefulWidget {
-
   const DetayEkrani({super.key, this.secilenOtel, this.secilenRestorant});
+
+  /// Kullanıcı otel seçmişse dolu olur
   final Oteller? secilenOtel;
+
+  /// Kullanıcı restoran seçmişse dolu olur
   final Restorantlar? secilenRestorant;
 
   @override
@@ -31,16 +36,16 @@ class _DetayEkraniState extends State<DetayEkrani> {
         bottom: false,
         child: Stack(
           children: <Widget>[
+            // İçerik
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 16, right: 16,  bottom: 100,),
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 100),
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     Stack(
                       clipBehavior: Clip.none,
                       children: <Widget>[
-                        // Resim alanı
+                        // Mekan görseli
                         ImageWidgets(
                           secilenOtel: widget.secilenOtel,
                           secilenRestorant: widget.secilenRestorant,
@@ -59,13 +64,13 @@ class _DetayEkraniState extends State<DetayEkrani> {
                       ],
                     ),
 
-                    // Mekan bilgileri
+                    // Mekan detay bilgileri
                     MekanInfoWidgets(
                       secilenRestorant: widget.secilenRestorant,
                       secilenOtel: widget.secilenOtel,
                     ),
 
-                    // İmkanlar listesi
+                    // İmkanlar
                     FacilitiesWidgets(
                       ekranGenisligi: ekranGenisligi,
                       secilenOtel: widget.secilenOtel,
@@ -76,13 +81,14 @@ class _DetayEkraniState extends State<DetayEkrani> {
               ),
             ),
 
-            // Fiyat kutusu
+            // Sayfanın alt kısmındaki fiyat kutusu
             Positioned(
               left: 0,
               right: 0,
               bottom: 0,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
                   color: colorScheme.surface,
                   boxShadow: <BoxShadow>[

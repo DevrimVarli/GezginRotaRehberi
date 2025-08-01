@@ -7,18 +7,38 @@ class CustomSignInOrientation extends ConsumerWidget {
   const CustomSignInOrientation({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Tema renk şeması
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    // Tema metin stilini alıyoruz
     TextTheme textTheme = Theme.of(context).textTheme;
-    bool kayitMi=ref.watch(kayitMiProvider);
-    return  Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+
+    // Kullanıcı kaydının mı yoksa giriş yapma ekranının mı olduğu bilgisini alıyoruz
+    bool kayitMi = ref.watch(kayitMiProvider);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center, // Elemanları yatayda ortalar
       children: <Widget>[
-        Text('Already have an account?', style: textTheme.bodyMedium),
+        // Kullanıcıya mesaj metni
+        Text(
+          'Already have an account?',
+          style: textTheme.bodyMedium, // Temaya uygun metin stili
+        ),
+        // "Login here" butonu, tıklanınca kayitMi durumu değişir
         TextButton(
-            onPressed: (){
-              ref.read(kayitMiProvider.notifier).state=!kayitMi;
-            }, child: Text('Login here',style: TextStyle(fontSize: 18,color: colorScheme.onSurface,fontWeight: FontWeight.bold),),),
+          onPressed: () {
+            // Kullanıcı butona tıkladığında, kayitMi'nin değerini tersine çeviriyoruz
+            ref.read(kayitMiProvider.notifier).state = !kayitMi;
+          },
+          child: Text(
+            'Login here',
+            style: TextStyle(
+              fontSize: 18, // Metin boyutu
+              color: colorScheme.onSurface, // Metin rengi tema ile uyumlu
+              fontWeight: FontWeight.bold, // Metin kalınlığı
+            ),
+          ),
+        ),
       ],
     );
   }

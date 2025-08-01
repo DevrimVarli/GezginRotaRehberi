@@ -10,15 +10,26 @@ import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/intro_screen.dart';
 import 'package:yeni_tasarim/theme/theme_palette.dart';
 
-void main()async {
+void main() async {
+  // Hive başlatma ve adaptörleri kaydetme
   Hive
-     ..init(Directory.current.path)
-     ..registerAdapters();
+    ..init(Directory.current.path)
+    ..registerAdapters();
+
+  // Flutter için Hive başlatma
   await Hive.initFlutter();
+
+  // Kullanıcı konumları ve favoriler için Hive kutularını açma
   await Hive.openBox<KullaniciKonumFreezed>('konumlar');
   await Hive.openBox<String>('favoriler');
-  WidgetsFlutterBinding.ensureInitialized(); // Flutter için gerekli hazırlık
+
+  // Flutter için gerekli ilk ayarlamalar
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Firebase başlatma
   await Firebase.initializeApp();
+
+  // Riverpod ProviderScope ile uygulamayı başlat
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -26,21 +37,24 @@ class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      // main.dart içinde
+
+      // Light tema
       theme: FlexThemeData.light(
-        colors: myLightColors,
+        colors: myLightColors, // Light renk paleti
         subThemesData: const FlexSubThemesData(
-          elevatedButtonRadius: 12,
-          inputDecoratorRadius: 12,
-          useMaterial3Typography: true,
+          elevatedButtonRadius: 12, // Buton köşe yuvarlatma
+          inputDecoratorRadius: 12, // Input köşe yuvarlatma
+          useMaterial3Typography: true, // Material 3 tipografi
         ),
       ),
+
+      // Dark tema
       darkTheme: FlexThemeData.dark(
-        colors: myDarkColors,
+        colors: myDarkColors, // Dark renk paleti
         subThemesData: const FlexSubThemesData(
           elevatedButtonRadius: 12,
           inputDecoratorRadius: 12,
@@ -48,8 +62,11 @@ class MyApp extends ConsumerWidget {
         ),
       ),
 
+      // Tema modu (Riverpod üzerinden yönetiliyor)
       themeMode: ref.watch(themeModeProvider),
-      home:const IntroEkran(),
+
+      // İlk açılış ekranı
+      home: const IntroEkran(),
     );
   }
 }

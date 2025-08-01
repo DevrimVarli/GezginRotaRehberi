@@ -7,122 +7,201 @@ import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/adres_ekleme_screen.dart';
 import 'package:yeni_tasarim/screens/location_screen.dart';
 
+/// Kullanıcının kayıtlı teslimat adreslerini listeleyen ekran.
+/// Yeni konum ekleme, mevcut konumu kullanma ve adres düzenleme/silme işlemleri yapılabilir.
 class AdresScreen extends ConsumerWidget {
-
-const AdresScreen({super.key});
-
+  const AdresScreen({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-     Box<KullaniciKonumFreezed> box=Hive.box<KullaniciKonumFreezed>('konumlar');
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Hive'da tutulan kayıtlı adresler
+    Box<KullaniciKonumFreezed> box =
+    Hive.box<KullaniciKonumFreezed>('konumlar');
+
+    // Tema bilgileri
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     TextTheme textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Teslimat Adresi',style: textTheme.titleLarge?.copyWith(color: colorScheme.onSurface),),
+        title: Text(
+          'Teslimat Adresi',
+          style: textTheme.titleLarge?.copyWith(color: colorScheme.onSurface),
+        ),
         backgroundColor: colorScheme.surface,
         centerTitle: true,
-        leading:IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios,color: colorScheme.onSurface,)),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(Icons.arrow_back_ios, color: colorScheme.onSurface),
+        ),
       ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Düzenle butonuna basarak konumunu ve adres bilgilerini düzenleyebilir veya adresini silebilirsin',style: textTheme.titleMedium?.copyWith(color: colorScheme.onSurface), ),
+              // Açıklama metni
+              Text(
+                'Düzenle butonuna basarak konumunu ve adres bilgilerini düzenleyebilir veya adresini silebilirsin',
+                style: textTheme.titleMedium
+                    ?.copyWith(color: colorScheme.onSurface),
+              ),
+
+              // Mevcut konumu kullan butonu
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: colorScheme.primary,
                   ),
-                    onPressed: (){},
-                    label:const Text('Mevcut Konumu Kullan',style: TextStyle(color: Colors.white),),
-                    icon: const Icon(Icons.zoom_in_map,color: Colors.white,), ),
+                  onPressed: () {
+                    // TODO: Mevcut konum alma işlevi buraya gelecek
+                  },
+                  icon: const Icon(Icons.zoom_in_map, color: Colors.white),
+                  label: const Text(
+                    'Mevcut Konumu Kullan',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
+
+              // Yeni konum seç butonu
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: colorScheme.primary,
+                    backgroundColor: colorScheme.primary,
                   ),
-                  onPressed: (){
-                    Navigator.pushReplacement(context, MaterialPageRoute<Widget>(builder: (BuildContext context)=>const KonumSecPage()));
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute<Widget>(
+                        builder: (BuildContext context) =>
+                        const KonumSecPage(),
+                      ),
+                    );
                   },
-                  label: const Text('Yeni Konum Seç',style: TextStyle(color: Colors.white),),
-                  icon: const Icon(Icons.location_on,color: Colors.white,),
+                  icon: const Icon(Icons.location_on, color: Colors.white),
+                  label: const Text(
+                    'Yeni Konum Seç',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
-              ValueListenableBuilder<Box<KullaniciKonumFreezed>>(
+
+              // Kayıtlı adres listesi
+              Expanded(
+                child: ValueListenableBuilder<Box<KullaniciKonumFreezed>>(
                   valueListenable: box.listenable(),
-                  builder: (BuildContext context, Box<KullaniciKonumFreezed> value, Widget? child) {
-                    return Flexible(
-                      child: ListView.builder(
-                        itemCount: box.values.toList().length,
-                        itemBuilder:(BuildContext context,int indeks){
-                          KullaniciKonumFreezed konum=box.values.toList()[indeks];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: GestureDetector(
-                              onTap: (){
-                                ref.read(secilemKonumStateProvider.notifier).state=Konum(konum.sehirAdi, konum.ilceAdi) ;
-                                Navigator.pop(context);
-                              },
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: colorScheme.surface,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Row(children: <Widget>[
-                                        Text(konum.adresBasligi,style: textTheme.titleLarge,),
+                  builder: (BuildContext context,
+                      Box<KullaniciKonumFreezed> value, Widget? child) {
+                    final adresListesi = value.values.toList();
+
+                    if (adresListesi.isEmpty) {
+                      return const Center(
+                          child: Text('Henüz kayıtlı adres bulunmuyor.'));
+                    }
+
+                    return ListView.builder(
+                      itemCount: adresListesi.length,
+                      itemBuilder: (BuildContext context, int indeks) {
+                        final konum = adresListesi[indeks];
+
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: GestureDetector(
+                            onTap: () {
+                              // Seçili konumu provider üzerinden güncelle
+                              ref
+                                  .read(secilemKonumStateProvider.notifier)
+                                  .state = Konum(
+                                konum.sehirAdi,
+                                konum.ilceAdi,
+                              );
+                              Navigator.pop(context);
+                            },
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: colorScheme.surface,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    // Başlık + Düzenle butonu
+                                    Row(
+                                      children: <Widget>[
+                                        Text(konum.adresBasligi,
+                                            style: textTheme.titleLarge),
                                         const Spacer(),
-                                        TextButton(
-                                          onPressed: (){
-                                            Navigator.pushReplacement(context, MaterialPageRoute<Widget>(builder: (BuildContext context)=>AdresScreenDetay(kullaniciKonum: konum,)));
-                      
-                                            //Navigator.push(context, MaterialPageRoute<Widget>(builder: (context)=>AdresScreenDetay()));
+                                        TextButton.icon(
+                                          onPressed: () {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute<Widget>(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                    AdresScreenDetay(
+                                                      kullaniciKonum: konum,
+                                                    ),
+                                              ),
+                                            );
                                           },
-                                          child: const Row(
-                                            children: <Widget>[
-                                              Icon(Icons.edit),
-                                              Text('Düzenle'),
-                                            ],
-                                          ),
-                      
+                                          icon: const Icon(Icons.edit),
+                                          label: const Text('Düzenle'),
                                         ),
-                                      ],),
-                                      Text('${konum.mahalleAdi} Mah / ${konum.sehirAdi} / ${konum.ilceAdi}',style: textTheme.titleMedium,),
-                                      Text('${konum.mahalleAdi} Mah / ${konum.sokakAdi} Sokak ',style: textTheme.titleSmall?.copyWith(color: colorScheme.onSurface.withValues(alpha: 0.8),),),
-                                      Text('Bina No:${konum.binaNo}  / Kat:${konum.katNo} / Daire: ${konum.daireNo} ',style: textTheme.titleSmall,),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Text(konum.cepTelefonu,style: textTheme.titleSmall,),
-                                          IconButton(onPressed: (){
+                                      ],
+                                    ),
+
+                                    // Adres bilgileri
+                                    Text(
+                                      '${konum.mahalleAdi} Mah / ${konum.sehirAdi} / ${konum.ilceAdi}',
+                                      style: textTheme.titleMedium,
+                                    ),
+                                    Text(
+                                      '${konum.mahalleAdi} Mah / ${konum.sokakAdi} Sokak',
+                                      style: textTheme.titleSmall?.copyWith(
+                                        color: colorScheme.onSurface
+                                            .withValues(alpha: 0.8),
+                                      ),
+                                    ),
+                                    Text(
+                                      'Bina No: ${konum.binaNo} / Kat: ${konum.katNo} / Daire: ${konum.daireNo}',
+                                      style: textTheme.titleSmall,
+                                    ),
+
+                                    // Telefon + Sil butonu
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(
+                                          konum.cepTelefonu,
+                                          style: textTheme.titleSmall,
+                                        ),
+                                        IconButton(
+                                          onPressed: () {
+                                            // Silme işleminde kullanıcı onayı iste
                                             box.delete(konum.adresBasligi);
                                           },
-                                            icon: const Icon(Icons.delete),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                          icon: const Icon(Icons.delete),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                          );
-                        },),
+                          ),
+                        );
+                      },
                     );
-                  },),
-
-
+                  },
+                ),
+              ),
             ],
           ),
         ),

@@ -5,27 +5,29 @@ import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_image_card
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_star_icon.dart';
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_text_name.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
+
 class FavoriOtelKartlar extends ConsumerWidget {
-  const FavoriOtelKartlar({super.key,required this.filteredOtelList});
+  const FavoriOtelKartlar({super.key, required this.filteredOtelList});
+
+  // Filtrelenmiş otel listesi
   final List<Oteller> filteredOtelList;
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ListView.builder(
-      itemCount: filteredOtelList.length,
+      itemCount: filteredOtelList.length, // Liste eleman sayısı
       itemBuilder: (BuildContext context, int index) {
-        Oteller otel = filteredOtelList[index];
+        Oteller otel = filteredOtelList[index]; // Filtrelenmiş listeden otel alınır
         return Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8), // Kartlar arasında boşluk bırakıyoruz
           child: GestureDetector(
             child: Stack(
               children: <Widget>[
-            
-                CustomImageCard(mekanResim: otel.otelResim,),
-                CustomStarIcon(mekanPuan: otel.otelYildiz.toString(),),
-                CustomTextName(mekanAd: otel.otelAd,),
-                CustomFavoriteButton(mekanAd: otel.otelAd),
-            
+                // Otel resmi, yıldız ikonu, otel adı ve favori butonunu içeren kartlar
+                CustomImageCard(mekanResim: otel.otelResim), // Otel resmini gösteren widget
+                CustomStarIcon(mekanPuan: otel.otelYildiz.toString()), // Yıldız puanını gösteren widget
+                CustomTextName(mekanAd: otel.otelAd), // Otel ismini gösteren widget
+                CustomFavoriteButton(mekanAd: otel.otelAd), // Favori butonu
               ],
             ),
           ),

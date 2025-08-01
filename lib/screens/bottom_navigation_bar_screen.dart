@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:yeni_tasarim/screens/home_screen.dart';
 import 'package:yeni_tasarim/screens/favorite_page_view.dart';
 import 'package:yeni_tasarim/screens/account_and_login_screen.dart';
+
+/// Alt menü (BottomNavigationBar) ile sayfa geçişlerini yöneten ana yapı
 class Secim extends StatefulWidget {
   const Secim({super.key});
 
@@ -11,13 +13,16 @@ class Secim extends StatefulWidget {
 }
 
 class _SecimState extends State<Secim> {
-  int secilenIndex = 3;
+  /// Başlangıçta gösterilecek sayfa index'i
+  /// Genelde 0 (Ana ekran) olur. Şu an 3 olduğu için uygulama ilk açılışta Profil ekranını açıyor.
+  int secilenIndex = 0;
 
-  final  List<ConsumerStatefulWidget> sayfaListesi =<ConsumerStatefulWidget>[
-    const AnaEkran(),
-    const AccountAndLoginScreen(),
-    const FavoritePageView(),
-    const AccountAndLoginScreen(),
+  /// Alt menüdeki sayfaların listesi
+  final List<Widget> sayfaListesi = <Widget>[
+    const AnaEkran(),                // Home
+    const AccountAndLoginScreen(),   // Search / Account
+    const FavoritePageView(),        // Favorites
+    const AccountAndLoginScreen(),   // Profile
   ];
 
   @override
@@ -25,12 +30,15 @@ class _SecimState extends State<Secim> {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
+      /// Seçilen sekmeye karşılık gelen ekran
       body: sayfaListesi[secilenIndex],
+
+      /// Alt menü
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.circular(32),
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: colorScheme.surface, // tema uyumlu arka plan
+            color: colorScheme.surface,
             borderRadius: BorderRadius.circular(32),
             boxShadow: <BoxShadow>[
               BoxShadow(
@@ -55,13 +63,21 @@ class _SecimState extends State<Secim> {
             showUnselectedLabels: false,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: Icon(Icons.mail), label: 'Home',),
+                icon: Icon(Icons.mail),
+                label: 'Home',
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.airplane_ticket_outlined), label: 'Search',),
+                icon: Icon(Icons.airplane_ticket_outlined),
+                label: 'Search',
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite_border), label: 'Favorites',),
+                icon: Icon(Icons.favorite_border),
+                label: 'Favorites',
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person_outline), label: 'Profile',),
+                icon: Icon(Icons.person_outline),
+                label: 'Profile',
+              ),
             ],
           ),
         ),

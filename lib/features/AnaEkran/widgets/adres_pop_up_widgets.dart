@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,34 +10,53 @@ class AdresPopUpWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Tema renk düzeni
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    // Riverpod kullanarak seçilen konumu izliyoruz
     Konum konum = ref.watch(secilemKonumStateProvider);
+
     return Align(
+      // Popup widget'ının konumunu belirliyoruz (üst sola hizalı)
       alignment: Alignment.topLeft,
       child: GestureDetector(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute<Widget>(builder: (BuildContext context)=>const AdresScreen()));
+        // Popup'a tıklandığında adresler ekranına yönlendiren işlem
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute<Widget>(
+              builder: (BuildContext context) => const AdresScreen(),
+            ),
+          );
         },
         child: Row(
+          // İçeriklerin yatayda ortalanmasını sağlar
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // Konum simgesi (harita simgesi)
             Icon(
               Icons.location_on,
-              color: colorScheme.primary,
+              color: colorScheme.primary, // Tema renkleriyle uyumlu
               size: 20,
             ),
-            const SizedBox(width: 1),
+            const SizedBox(width: 1), // Arada küçük boşluk
+            // Konum bilgisi (ilçe ve şehir adı)
             Text(
-              '${konum.ilceAdi}, ${konum.sehirAdi}',
+              '${konum.ilceAdi}, ${konum.sehirAdi}', // Konum bilgisi
               style: GoogleFonts.roboto(
-                fontSize: 15,
-                color: colorScheme.primary,
-                fontWeight: FontWeight.w500,
+                fontSize: 15, // Yazı boyutu
+                color: colorScheme.primary, // Yazı rengi tema ile uyumlu
+                fontWeight: FontWeight.w500, // Yazı kalınlığı
               ),
             ),
-            const SizedBox(width: 2),
-            Icon(Icons.keyboard_arrow_down_outlined,color: colorScheme.primary,size: 20,),
-            const SizedBox(width: 8,),
+            const SizedBox(width: 2), // Arada küçük boşluk
+            // Aşağı ok simgesi
+            Icon(
+              Icons.keyboard_arrow_down_outlined,
+              color: colorScheme.primary, // Tema renkleriyle uyumlu
+              size: 20,
+            ),
+            const SizedBox(width: 8), // Arada boşluk
           ],
         ),
       ),

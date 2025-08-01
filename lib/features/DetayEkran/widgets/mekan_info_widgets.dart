@@ -4,111 +4,118 @@ import 'package:yeni_tasarim/model/Restorantlar.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
 
 class MekanInfoWidgets extends StatelessWidget {
-
   const MekanInfoWidgets({super.key, this.secilenOtel, this.secilenRestorant});
-  final Oteller? secilenOtel;
-  final Restorantlar? secilenRestorant;
+
+  final Oteller? secilenOtel; // Seçilen otel
+  final Restorantlar? secilenRestorant; // Seçilen restoran
 
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 32, bottom: 24),
+      padding: const EdgeInsets.only(top: 32, bottom: 24), // Üst ve alt boşluklar
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start, // Başlık ve içeriklerin sola hizalanması
         children: <Widget>[
-          // Başlık ve Harita Linki
+          // Başlık ve harita linki
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Başlık ve harita linki arasına boşluk
             children: <Widget>[
+              // Otel veya restoran adı
               Text(
                 secilenOtel != null
-                    ? secilenOtel!.otelAd
-                    : secilenRestorant!.restoranAd,
+                    ? secilenOtel!.otelAd // Otel adı
+                    : secilenRestorant!.restoranAd, // Restoran adı
                 style: GoogleFonts.montserrat(
                   fontSize: (secilenOtel != null
                       ? secilenOtel!.otelAd.length
                       : secilenRestorant!.restoranAd.length) >
                       20
-                      ? 16
-                      : 24,
-                  color: colorScheme.onSurface,
-                  fontWeight: FontWeight.bold,
+                      ? 16 // Uzun adlar için font boyutu küçültülür
+                      : 24, // Kısa adlar için font boyutu 24
+                  color: colorScheme.onSurface, // Yazı rengi tema ile uyumlu
+                  fontWeight: FontWeight.bold, // Yazı kalınlığı
                 ),
               ),
+              // Harita linki
               Text(
                 'Show map',
                 style: GoogleFonts.roboto(
                   fontSize: 16,
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.bold,
+                  color: colorScheme.primary, // Tema ile uyumlu renk
+                  fontWeight: FontWeight.bold, // Yazı kalınlığı
                 ),
               ),
             ],
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 8), // Başlık ve puan kısmı arasına boşluk
 
           // Puan ve yorum sayısı
           Row(
             children: <Widget>[
-              const Icon(Icons.star, color: Colors.amber),
-              const SizedBox(width: 4),
+              const Icon(Icons.star, color: Colors.amber), // Yıldız ikonu
+              const SizedBox(width: 4), // İkon ile yazı arasına boşluk
+              // Puan değeri
               Text(
                 secilenOtel != null
-                    ? secilenOtel!.otelYildiz.toString()
-                    : secilenRestorant!.restoranPuan,
+                    ? secilenOtel!.otelYildiz.toString() // Otel puanı
+                    : secilenRestorant!.restoranPuan, // Restoran puanı
                 style: GoogleFonts.roboto(
-                  fontSize: 18,
-                  color: colorScheme.outlineVariant,
+                  fontSize: 18, // Yazı boyutu
+                  color: colorScheme.outlineVariant, // Tema rengi
                 ),
               ),
-              const SizedBox(width: 4),
+              const SizedBox(width: 4), // Puan ile yorum sayısı arasına boşluk
+              // Yorum sayısı
               Text(
-                '(355 Reviews)',
+                '(355 Reviews)', // Sabit yorum sayısı
                 style: GoogleFonts.roboto(
-                  fontSize: 18,
-                  color: colorScheme.outlineVariant,
+                  fontSize: 18, // Yazı boyutu
+                  color: colorScheme.outlineVariant, // Tema rengi
                 ),
               ),
             ],
           ),
 
-          const SizedBox(height: 12),
+          const SizedBox(height: 12), // Puan ve açıklama arasına boşluk
 
-          // Açıklama
+          // Açıklama kısmı
           Text(
             secilenOtel != null
-                ? secilenOtel!.otelAciklama
-                : secilenRestorant!.restoranAciklama,
+                ? secilenOtel!.otelAciklama // Otel açıklaması
+                : secilenRestorant!.restoranAciklama, // Restoran açıklaması
             style: GoogleFonts.roboto(
-              fontSize: 18,
-              color: colorScheme.onSurface,
+              fontSize: 18, // Yazı boyutu
+              color: colorScheme.onSurface, // Yazı rengi
             ),
           ),
 
-          const SizedBox(height: 4),
+          const SizedBox(height: 4), // Açıklama ve "Read more" arasına boşluk
 
           // "Read more" linki
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              // Burada herhangi bir işlem yapılabilir (örneğin açıklamanın tamamını gösterme)
+            },
             style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
+              padding: EdgeInsets.zero, // Padding'i sıfırlıyoruz
             ),
             child: Row(
               children: <Widget>[
                 Text(
-                  'Read more',
+                  'Read more', // Daha fazla oku metni
                   style: GoogleFonts.roboto(
-                    fontSize: 18,
-                    color: colorScheme.primary,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 18, // Yazı boyutu
+                    color: colorScheme.primary, // Tema rengi
+                    fontWeight: FontWeight.bold, // Yazı kalınlığı
                   ),
                 ),
+                // Ok simgesi
                 Icon(
                   Icons.keyboard_arrow_down,
-                  color: colorScheme.primary,
+                  color: colorScheme.primary, // Tema rengi
                 ),
               ],
             ),

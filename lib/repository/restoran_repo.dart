@@ -2,17 +2,19 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
 
-
-class ResetoranRepo {
+/// Restoran verilerini assets/api.json dosyasından okuyan repository sınıfı
+class RestoranRepo {
+  /// assets/api.json içindeki 'restoranlar' listesini Restorantlar model listesine dönüştürür
   Future<List<Restorantlar>> restorantlar() async {
-    // JSON dosyasını yükleyin
+    // JSON dosyasını assets klasöründen yükle
     String jsonString = await rootBundle.loadString('assets/api.json');
 
-    // JSON'u decode edin ve Map<String, dynamic> türüne güvenli bir şekilde cast edin
-    Map<String, dynamic> jsonData = json.decode(jsonString) as Map<String, dynamic>;
+    // JSON stringini Map<String, dynamic> tipine dönüştür
+    Map<String, dynamic> jsonData =
+    json.decode(jsonString) as Map<String, dynamic>;
 
-    // 'imkanlar' anahtarındaki veriyi listeye dönüştürün
-    List<Restorantlar> restorantlarList = (jsonData['restoranlar'] as List)
+    // 'restoranlar' anahtarındaki veriyi model listesine çevir
+    List<Restorantlar> restorantlarList = (jsonData['restoranlar'] as List<dynamic>)
         .map((json) => Restorantlar.fromJson(json as Map<String, dynamic>))
         .toList();
 

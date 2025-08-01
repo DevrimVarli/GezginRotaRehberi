@@ -12,21 +12,27 @@ class CustomChoosePhoto extends ConsumerStatefulWidget {
 }
 
 class _CustomChoosePhotoState extends ConsumerState<CustomChoosePhoto> {
-  ImagePicker picker = ImagePicker();
-  User user = FirebaseAuth.instance.currentUser!;
+  ImagePicker picker = ImagePicker(); // Resim seçmek için kullanılan ImagePicker nesnesi
+  User user = FirebaseAuth.instance.currentUser!; // Firebase'den şu anki kullanıcıyı alıyoruz
+
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
+    TextTheme textTheme = Theme.of(context).textTheme; // Temadaki metin stillerini alıyoruz
     return ElevatedButton(
-        onPressed: () {
-          ref.read(authProvider).pickAndUploadProfilePicture(picker: picker, user: user);
-        },
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
+      onPressed: () {
+        // Butona tıklanıldığında, profil fotoğrafı seçmek ve yüklemek için pickAndUploadProfilePicture fonksiyonu çağrılır
+        ref.read(authProvider).pickAndUploadProfilePicture(picker: picker, user: user);
+      },
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12), // Butonun içindeki padding
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30), // Butonun yuvarlatılmış köşeleri
         ),
-        child:  Text('Fotoğraf Seç', style:textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500) ),);
+      ),
+      child: Text(
+        'Fotoğraf Seç', // Buton metni
+        style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500), // Buton metni için stil
+      ),
+    );
   }
 }

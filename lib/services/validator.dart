@@ -1,24 +1,41 @@
+/// E-posta doğrulama fonksiyonu.
+/// - Boş olamaz.
+/// - '@' ve '.' karakterlerini içermeli.
 String? mailValidator(String? value) {
   if (value == null || value.isEmpty) return 'Boş bırakılamaz.';
   if (!value.contains('@') || !value.contains('.')) return 'Geçersiz mail.';
-  return null;
+  return null; // Geçerli e-posta
 }
-String ? passValidator(String? value){
-  if(value!.length<6){
+
+/// Şifre doğrulama fonksiyonu.
+/// - Boş olamaz.
+/// - En az 6 karakter olmalı.
+String? passValidator(String? value) {
+  if (value!.length < 6) {
     return 'Şifreniz en az 6 haneli olmalıdır.';
   }
-  if(value.isEmpty){
+  if (value.isEmpty) {
     return 'Boş bırakılamaz.';
   }
-  return null;
-}String ? passValidator2(String? value){
+  return null; // Geçerli şifre
+}
+
+/// İkinci şifre alanı doğrulama (örn: şifre tekrar alanı).
+/// Şu anda kontrol yapılmıyor, her zaman null döner.
+String? passValidator2(String? value) {
   return null;
 }
+
+/// Telefon numarası doğrulama.
+/// - Boş olamaz.
+/// - Sadece rakam içermeli.
+/// - 11 haneli olmalı.
+/// - '05' ile başlamalı.
 String? phoneNumberValidator(String? value) {
   if (value == null || value.isEmpty) {
     return 'Telefon numarası boş bırakılamaz.';
   }
-  // Sadece rakam içeriyor mu?
+  // Sadece rakamlardan oluşuyor mu?
   if (!RegExp(r'^\d+$').hasMatch(value)) {
     return 'Telefon numarası sadece rakamlardan oluşmalıdır.';
   }
@@ -28,18 +45,26 @@ String? phoneNumberValidator(String? value) {
   if (!value.startsWith('05')) {
     return 'Telefon numarası 05 ile başlamalıdır.';
   }
-  return null; // Doğruysa null dön
+  return null; // Geçerli numara
 }
 
-String ? firstNameValidator(String? value){
+/// Ad alanı doğrulama.
+/// - Boş olamaz.
+String? firstNameValidator(String? value) {
   if (value == null || value.isEmpty) return 'Boş bırakılamaz.';
   return null;
 }
-String ? lastNameValidator(String? value){
+
+/// Soyad alanı doğrulama.
+/// - Boş olamaz.
+String? lastNameValidator(String? value) {
   if (value == null || value.isEmpty) return 'Boş bırakılamaz.';
   return null;
 }
-String ? userNameValidator(String? value){
+
+/// Kullanıcı adı doğrulama.
+/// - Boş olamaz.
+String? userNameValidator(String? value) {
   if (value == null || value.isEmpty) return 'Boş bırakılamaz.';
   return null;
 }

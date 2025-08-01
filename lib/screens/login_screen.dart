@@ -11,44 +11,57 @@ import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_sign_up_butt
 import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_theme_change_button.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/features/sign_in_screen/widgets/custom_form.dart';
+
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Tema renkleri
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    // Yazı stili
     TextTheme textTheme = Theme.of(context).textTheme;
-    bool kayitMi=ref.watch(kayitMiProvider);
-    GlobalKey<FormState> formKey=GlobalKey<FormState>();
-
+    // Kullanıcı kayıt ekranında mı? giriş ekranında mı?
+    bool kayitMi = ref.watch(kayitMiProvider);
+    // Form doğrulama anahtarı
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      backgroundColor: colorScheme.surface, // tema zemin rengi
-      body:kayitMi? Padding(
-        padding: const EdgeInsets.symmetric(vertical:12,horizontal: 12),
+      // Tema zemin rengi
+      backgroundColor: colorScheme.surface,
+      // Eğer kayıt ekranı ise
+      body: kayitMi
+          ? Padding(
+        padding:
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-               const CustomTextSignUp(),
-               CustomSignUpForm(formKey: formKey),
+                // "Sign Up" başlığı
+                const CustomTextSignUp(),
+                // Kayıt formu
+                CustomSignUpForm(formKey: formKey),
+                // Kayıt ol butonu
                 CustomCreateButton(formKey: formKey),
-               const CustomSignInOrientation(),
-
-
+                // "Already have an account?" yönlendirmesi
+                const CustomSignInOrientation(),
               ],
             ),
           ),
         ),
-      ): Padding(
-        padding: const EdgeInsets.symmetric(vertical:12,horizontal: 12),
+      )
+      // Eğer giriş ekranı ise
+          : Padding(
+        padding:
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // Sayfa body’sinin üstüne ekle (Stack yerine Row da olur)
+                // Tema değiştirme butonu (sağ üst)
                 const Align(
                   alignment: Alignment.topRight,
                   child: Padding(
@@ -56,14 +69,14 @@ class LoginScreen extends ConsumerWidget {
                     child: CustomThemeChangeButton(),
                   ),
                 ),
+                // Logo + Hoş geldiniz yazısı
                 const CustomLogoAndWelcomeText(),
-                // Username
+                // Kullanıcı giriş formu
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: CustomForm(formKey: formKey),
                 ),
-
-                // Forgot Password
+                // Şifremi unuttum butonu
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -77,27 +90,25 @@ class LoginScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
-
-                // Login Button
+                // Giriş yap butonu
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: CustomLogInButton(formKey: formKey),
                 ),
-
+                // Alternatif giriş açıklaması
                 Text(
                   'OR sign up using',
                   style: textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurface.withValues(alpha: 0.8),
+                    color:
+                    colorScheme.onSurface.withValues(alpha: 0.8),
                   ),
                 ),
-
-                // Google Button
+                // Google ile giriş butonu
                 const Padding(
                   padding: EdgeInsets.all(8),
                   child: CustomSignInGoogleButton(),
                 ),
-
-                // Sign Up Row
+                // Kayıt ol yönlendirmesi
                 const CustomSignUpButton(),
               ],
             ),

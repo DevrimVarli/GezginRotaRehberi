@@ -7,23 +7,38 @@ import 'package:yeni_tasarim/features/AnaEkran/widgets/restorant_list_view_widge
 import 'package:yeni_tasarim/features/AnaEkran/widgets/oteller_list_view_widgets.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 
+/// Uygulamanın ana ekranı.
+/// - Arama alanı
+/// - Kategori seçimi
+/// - Restoran veya otel listeleri
 class AnaEkran extends ConsumerWidget {
   const AnaEkran({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Tema renkleri
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    // Seçili kategori index'i
     int selectedIndex = ref.watch(selectedIndexProvider);
+
+    // Kategori başlıkları
     List<String> basliklar = ref.watch(kategoriFutureProvider);
+
+    // Ekran yüksekliği (AppBar boyutunu belirlemek için)
     double ekranYuksekligi = MediaQuery.sizeOf(context).height;
 
+    // Kategoriye göre gösterilecek widget
     Widget categoryWidget;
 
     if (basliklar[selectedIndex] == 'Hotels') {
+      // Sadece oteller listesi
       categoryWidget = const OtellerListViewWidget();
     } else if (basliklar[selectedIndex] == 'Food') {
+      // Sadece restoranlar listesi
       categoryWidget = const RestorantListViewWidget();
     } else {
+      // Hem restoran hem otel listesi
       categoryWidget = const Column(
         children: <Widget>[
           RestorantListViewWidget(),
@@ -42,18 +57,18 @@ class AnaEkran extends ConsumerWidget {
         bottom: false,
         child: CustomScrollView(
           slivers: <Widget>[
-            // Arama alanı sabit kalsın
+            // Arama alanı
             const SliverToBoxAdapter(
               child: AramaTextFieldWidget(),
             ),
-            // Kategori alanı sabit kalsın
+            // Kategori seçim alanı
             const SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5,vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
                 child: KategoriWidget(),
               ),
             ),
-            // İçerik (scroll edilebilir)
+            // İçerik
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(top: 10),
