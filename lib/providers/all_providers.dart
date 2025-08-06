@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:yeni_tasarim/model/Imkanlar.dart';
-import 'package:yeni_tasarim/model/Konum.dart';
-import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/model/imkanlar.dart';
+
+import 'package:yeni_tasarim/model/restorantlar.dart';
+import 'package:yeni_tasarim/model/konum.dart';
 import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
 import 'package:yeni_tasarim/providers/kullanici_konumlar_notifier.dart';

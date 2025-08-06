@@ -58,8 +58,9 @@ class CustomElevatedButtonSecurityScreen extends ConsumerWidget {
 
             // Yeni şifre girildiyse, şifre değiştirme işlemi yapılır
             if (newPasswordController.text.isNotEmpty) {
-              if (!context.mounted)
+              if (!context.mounted) {
                 return; // Eğer context kullanılabilir değilse, işlem yapılmaz
+              }
               await auth.changePassword(
                 currentPassword: passwordController.text, // Şu anki şifre
                 newPassword: newPasswordController.text, // Yeni şifre

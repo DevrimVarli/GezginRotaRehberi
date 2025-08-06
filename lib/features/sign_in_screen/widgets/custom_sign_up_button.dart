@@ -20,7 +20,7 @@ class CustomSignUpButton extends ConsumerWidget {
       children: <Widget>[
         // "Don't have an account?" metni
         Text(
-          "sign_up_orientation".tr(),
+          'sign_up_orientation'.tr(),
           style: textTheme.bodyMedium, // Metin stili
         ),
         // "Sign Up" butonu

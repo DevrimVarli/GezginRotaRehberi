@@ -40,7 +40,7 @@ class InfoCard extends StatelessWidget {
           const SizedBox(height: 20), // İkon ile başlık arasında boşluk
           // Başlık metni (Favori [title] bulunamadı)
           Text(
-            'no_favorites'.tr(namedArgs: {'title': title}),
+            'no_favorites'.tr(namedArgs: <String, String>{'title': title}),
             style: GoogleFonts.montserrat(
               fontSize: 22, // Yazı boyutu
               fontWeight: FontWeight.bold, // Kalın yazı
@@ -51,7 +51,9 @@ class InfoCard extends StatelessWidget {
           const SizedBox(height: 10), // Başlık ile açıklama arasında boşluk
           // Açıklama metni
           Text(
-            'no_favorites_description'.tr(namedArgs: {"title": title}),
+            'no_favorites_description'.tr(
+              namedArgs: <String, String>{'title': title},
+            ),
             style: GoogleFonts.montserrat(
               fontSize: 16, // Yazı boyutu
               color: colorScheme.onSurface.withValues(

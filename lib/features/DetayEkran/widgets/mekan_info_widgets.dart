@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/model/restorantlar.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
 
 class MekanInfoWidgets extends StatelessWidget {

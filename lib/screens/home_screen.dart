@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_ce/hive.dart';
-import 'package:hive_ce_flutter/adapters.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/app_bar_widgets.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/arama_text_field_widgets.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/kategori_widgets.dart';
@@ -48,7 +46,7 @@ class AnaEkran extends ConsumerWidget {
         children: <Widget>[RestorantListViewWidget(), OtellerListViewWidget()],
       );
     }
-    Box<String> box = Hive.box<String>('aramaSonuclari');
+    // Box<String> box = Hive.box<String>('aramaSonuclari');
 
     return Scaffold(
       backgroundColor: colorScheme.surface,

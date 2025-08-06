@@ -16,24 +16,26 @@ Future<void> setupPushNotification() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   // İzin iste
-  NotificationSettings settings = await messaging.requestPermission();
-  print('İzin durumu: ${settings.authorizationStatus}');
+  /* NotificationSettings settings = */
+  await messaging.requestPermission();
+  //print('İzin durumu: ${settings.authorizationStatus}');
 
   // Cihaz token'ı al
-  String? token = await messaging.getToken();
-  print('FCM Token: $token');
+  /* String? token = */
+  await messaging.getToken();
+  //print('FCM Token: $token');
 
   // Önde gelen bildirimleri dinle
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Önde gelen bildirim: ${message.notification?.title}');
+    //print('Önde gelen bildirim: ${message.notification?.title}');
   });
   await FirebaseMessaging.instance.subscribeToTopic('tum_kullanicilar');
-  print('📌 Cihaz tum_kullanicilar konusuna abone oldu');
+  //print('📌 Cihaz tum_kullanicilar konusuna abone oldu');
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print('Arka planda gelen bildirim: ${message.messageId}');
+  //print('Arka planda gelen bildirim: ${message.messageId}');
 }
 
 void main() async {
@@ -60,10 +62,10 @@ void main() async {
   // Riverpod ProviderScope ile uygulamayı başlat
   runApp(
     EasyLocalization(
-      child: ProviderScope(child: MyApp()),
-      supportedLocales: const [Locale("en"), Locale("tr")],
+      supportedLocales: const <Locale>[Locale('en'), Locale('tr')],
       path: 'assets/translations',
-      fallbackLocale: const Locale("tr"),
+      fallbackLocale: const Locale('tr'),
+      child: const ProviderScope(child: MyApp()),
     ),
   );
 }

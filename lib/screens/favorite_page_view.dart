@@ -8,7 +8,7 @@ import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/custom_restoran_b
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/favori_otel_kartlar.dart';
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/favori_restoran_kartlar.dart';
 import 'package:yeni_tasarim/features/favoriler_ekrani/widgets/info_card.dart';
-import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/model/restorantlar.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 

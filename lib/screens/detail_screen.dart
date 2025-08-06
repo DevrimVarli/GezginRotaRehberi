@@ -5,7 +5,7 @@ import 'package:yeni_tasarim/features/DetayEkran/widgets/favorite_button_widgets
 import 'package:yeni_tasarim/features/DetayEkran/widgets/image_widgets.dart';
 import 'package:yeni_tasarim/features/DetayEkran/widgets/mekan_info_widgets.dart';
 import 'package:yeni_tasarim/features/DetayEkran/widgets/price_widgets.dart';
-import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/model/restorantlar.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
 
 /// Mekan detay ekranı.
@@ -57,9 +57,10 @@ class _DetayEkraniState extends State<DetayEkrani> {
 
                         // Favori butonu
                         FavoriteButtonWidgets(
-                          mekanAdi: widget.secilenOtel != null
-                              ? widget.secilenOtel!.otelAd
-                              : widget.secilenRestorant!.restoranAd,
+                          mekanAdi:
+                              widget.secilenOtel != null
+                                  ? widget.secilenOtel!.otelAd
+                                  : widget.secilenRestorant!.restoranAd,
                         ),
                       ],
                     ),
@@ -87,8 +88,10 @@ class _DetayEkraniState extends State<DetayEkrani> {
               right: 0,
               bottom: 0,
               child: Container(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
                   color: colorScheme.surface,
                   boxShadow: <BoxShadow>[

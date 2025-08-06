@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_ce_flutter/adapters.dart';
-import 'package:yeni_tasarim/model/Konum.dart';
-import 'package:yeni_tasarim/model/Restorantlar.dart';
+
+import 'package:yeni_tasarim/model/konum.dart';
+import 'package:yeni_tasarim/model/restorantlar.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/detail_screen.dart';
 import 'package:yeni_tasarim/screens/location_screen.dart';

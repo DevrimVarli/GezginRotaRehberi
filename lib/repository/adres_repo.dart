@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:yeni_tasarim/model/Konum.dart';
+
 import 'package:yeni_tasarim/model/adres_bilgisi.dart';
 import 'package:yeni_tasarim/model/adres_yaniti.dart';
+import 'package:yeni_tasarim/model/konum.dart';
 import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 
 /// Adres verileriyle ilgili işlemleri yöneten repository sınıfı.

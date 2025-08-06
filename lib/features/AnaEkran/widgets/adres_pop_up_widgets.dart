@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yeni_tasarim/model/Konum.dart';
+import 'package:yeni_tasarim/model/konum.dart';
+
 import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/adreslerim_screen.dart';
 

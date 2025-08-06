@@ -69,8 +69,8 @@ class LoginScreen extends ConsumerWidget {
                       children: <Widget>[
                         // Tema değiştirme butonu (sağ üst)
                         Row(
-                          children: [
-                            Spacer(),
+                          children: <Widget>[
+                            const Spacer(),
                             if (context.locale.languageCode == 'tr')
                               TextButton.icon(
                                 onPressed: () {

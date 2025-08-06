@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce_flutter/adapters.dart';
-import 'package:yeni_tasarim/model/Konum.dart';
+import 'package:yeni_tasarim/model/konum.dart';
 import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/screens/adres_ekleme_screen.dart';
@@ -64,7 +64,7 @@ class AdresScreen extends ConsumerWidget {
                   icon: const Icon(Icons.zoom_in_map, color: Colors.white),
                   label: Text(
                     'use_current_location'.tr(),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -87,7 +87,7 @@ class AdresScreen extends ConsumerWidget {
                   icon: const Icon(Icons.location_on, color: Colors.white),
                   label: Text(
                     'choose_new_location'.tr(),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ),

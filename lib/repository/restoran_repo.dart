@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:yeni_tasarim/model/Restorantlar.dart';
+import 'package:yeni_tasarim/model/restorantlar.dart';
 
 /// Restoran verilerini assets/api.json dosyasından okuyan repository sınıfı
 class RestoranRepo {
@@ -11,12 +11,16 @@ class RestoranRepo {
 
     // JSON stringini Map<String, dynamic> tipine dönüştür
     Map<String, dynamic> jsonData =
-    json.decode(jsonString) as Map<String, dynamic>;
+        json.decode(jsonString) as Map<String, dynamic>;
 
     // 'restoranlar' anahtarındaki veriyi model listesine çevir
-    List<Restorantlar> restorantlarList = (jsonData['restoranlar'] as List<dynamic>)
-        .map((dynamic json) => Restorantlar.fromJson(json as Map<String, dynamic>))
-        .toList();
+    List<Restorantlar> restorantlarList =
+        (jsonData['restoranlar'] as List<dynamic>)
+            .map(
+              (dynamic json) =>
+                  Restorantlar.fromJson(json as Map<String, dynamic>),
+            )
+            .toList();
 
     return restorantlarList;
   }

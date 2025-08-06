@@ -143,7 +143,7 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
             );
           }
         },
-        label: Text('select_and_return').tr(),
+        label: const Text('select_and_return').tr(),
         icon: const Icon(Icons.check),
       ),
     );

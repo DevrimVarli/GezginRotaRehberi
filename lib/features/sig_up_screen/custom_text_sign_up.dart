@@ -18,7 +18,7 @@ class CustomTextSignUp extends StatelessWidget {
         children: <Widget>[
           // Başlık metni "Let's Get Started"
           Text(
-            "lets_get_started".tr(),
+            'lets_get_started'.tr(),
             style: GoogleFonts.montserrat(
               fontSize: 24, // Font boyutu
               fontWeight: FontWeight.bold, // Font kalınlığı
