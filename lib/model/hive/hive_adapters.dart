@@ -6,5 +6,6 @@ import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
     <AdapterSpec<dynamic>>[
   AdapterSpec<KullaniciKonumFreezed>(),
       AdapterSpec<String>(),
+      AdapterSpec<String>(),
 ])
 part 'hive_adapters.g.dart';

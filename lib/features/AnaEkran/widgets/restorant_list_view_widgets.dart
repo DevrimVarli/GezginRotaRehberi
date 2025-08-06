@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,29 +22,34 @@ class RestorantListViewWidget extends ConsumerWidget {
 
     // Arama sonucu, seçilen konum, 'See All' durumu gibi verileri provider'lardan alıyoruz
     String aramaSonucu = ref.watch(aramaSonucuStateProvider);
-    AsyncValue<List<Restorantlar>> restoranListAsync = ref.watch(restoranFutureProvider);
+    AsyncValue<List<Restorantlar>> restoranListAsync = ref.watch(
+      restoranFutureProvider,
+    );
     Konum secilenKonum = ref.watch(secilemKonumStateProvider);
     bool seeAll = ref.watch(seeAllStateProvider);
 
     return restoranListAsync.when(
       data: (List<Restorantlar> restoranList) {
         // Arama yapılmışsa, listeyi filtreliyoruz
-        List<Restorantlar> filteredRestoranList = aramaSonucu.isEmpty
-            ? restoranList.where((Restorantlar restoran) {
-          // Eğer 'See All' false ise, konuma göre filtreleme yapıyoruz
-          if (!seeAll) {
-            return restoran.konum.ilceAdi
-                .toLowerCase()
-                .contains(secilenKonum.ilceAdi.toLowerCase());
-          }
-          // Aksi takdirde tüm restoranları gösteriyoruz
-          return true;
-        }).toList()
-            : restoranList
-            .where((Restorantlar restorant) => restorant.restoranAd
-            .toLowerCase()
-            .contains(aramaSonucu.toLowerCase()),)
-            .toList();
+        List<Restorantlar> filteredRestoranList =
+            aramaSonucu.isEmpty
+                ? restoranList.where((Restorantlar restoran) {
+                  // Eğer 'See All' false ise, konuma göre filtreleme yapıyoruz
+                  if (!seeAll) {
+                    return restoran.konum.ilceAdi.toLowerCase().contains(
+                      secilenKonum.ilceAdi.toLowerCase(),
+                    );
+                  }
+                  // Aksi takdirde tüm restoranları gösteriyoruz
+                  return true;
+                }).toList()
+                : restoranList
+                    .where(
+                      (Restorantlar restorant) => restorant.restoranAd
+                          .toLowerCase()
+                          .contains(aramaSonucu.toLowerCase()),
+                    )
+                    .toList();
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -61,12 +67,13 @@ class RestorantListViewWidget extends ConsumerWidget {
                         await Navigator.push(
                           context,
                           MaterialPageRoute<Widget>(
-                            builder: (BuildContext context) => const KonumSecPage(),
+                            builder:
+                                (BuildContext context) => const KonumSecPage(),
                           ),
                         );
                       },
                       child: Text(
-                        'Popular', // Başlık
+                        'popular'.tr(), // Başlık
                         style: GoogleFonts.roboto(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
@@ -80,12 +87,13 @@ class RestorantListViewWidget extends ConsumerWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute<Widget>(
-                            builder: (BuildContext context) => const SeeAllEkrani(),
+                            builder:
+                                (BuildContext context) => const SeeAllEkrani(),
                           ),
                         );
                       },
                       child: Text(
-                        'See all', // Başlık
+                        'see_all'.tr(), // Başlık
                         style: GoogleFonts.roboto(
                           fontSize: 18,
                           color: colorScheme.primary,
@@ -99,7 +107,8 @@ class RestorantListViewWidget extends ConsumerWidget {
               SizedBox(
                 height: 300, // Restoran kartlarının yükseklik değeri
                 child: ListView.builder(
-                  itemCount: filteredRestoranList.length, // Filtrelenmiş restoranlar
+                  itemCount:
+                      filteredRestoranList.length, // Filtrelenmiş restoranlar
                   scrollDirection: Axis.horizontal, // Yatay kaydırma
                   itemBuilder: (BuildContext context, int indeks) {
                     Restorantlar restorant = filteredRestoranList[indeks];
@@ -111,7 +120,10 @@ class RestorantListViewWidget extends ConsumerWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute<Widget>(
-                                builder: (BuildContext context) => DetayEkrani(secilenRestorant: restorant),
+                                builder:
+                                    (BuildContext context) => DetayEkrani(
+                                      secilenRestorant: restorant,
+                                    ),
                               ),
                             );
                           },
@@ -119,9 +131,13 @@ class RestorantListViewWidget extends ConsumerWidget {
                             width: 230, // Kart genişliği
                             margin: const EdgeInsets.only(right: 12),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16), // Yuvarlatılmış köşeler
+                              borderRadius: BorderRadius.circular(
+                                16,
+                              ), // Yuvarlatılmış köşeler
                               image: DecorationImage(
-                                image: NetworkImage(restorant.restoranResim), // Restoran resmi
+                                image: NetworkImage(
+                                  restorant.restoranResim,
+                                ), // Restoran resmi
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -132,10 +148,14 @@ class RestorantListViewWidget extends ConsumerWidget {
                           bottom: 60,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.85),
+                              color: colorScheme.surfaceContainerHighest
+                                  .withValues(alpha: 0.85),
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 6,
+                            ),
                             child: Text(
                               restorant.restoranAd, // Restoran adı
                               style: GoogleFonts.roboto(
@@ -153,7 +173,8 @@ class RestorantListViewWidget extends ConsumerWidget {
                             width: 80,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.85),
+                              color: colorScheme.surfaceContainerHighest
+                                  .withValues(alpha: 0.85),
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Center(
@@ -186,13 +207,20 @@ class RestorantListViewWidget extends ConsumerWidget {
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.85),
+                              color: colorScheme.surfaceContainerHighest
+                                  .withValues(alpha: 0.85),
                               borderRadius: BorderRadius.circular(35),
                             ),
                             child: ValueListenableBuilder<Box<String>>(
                               valueListenable: box.listenable(),
-                              builder: (BuildContext context, Box<String> favoriBox, _) {
-                                bool isFavori = favoriBox.values.contains(restorant.restoranAd);
+                              builder: (
+                                BuildContext context,
+                                Box<String> favoriBox,
+                                _,
+                              ) {
+                                bool isFavori = favoriBox.values.contains(
+                                  restorant.restoranAd,
+                                );
 
                                 return IconButton(
                                   onPressed: () {
@@ -200,12 +228,18 @@ class RestorantListViewWidget extends ConsumerWidget {
                                     if (isFavori) {
                                       box.delete(restorant.restoranAd);
                                     } else {
-                                      box.put(restorant.restoranAd, restorant.restoranAd);
+                                      box.put(
+                                        restorant.restoranAd,
+                                        restorant.restoranAd,
+                                      );
                                     }
                                   },
                                   icon: Icon(
                                     Icons.favorite,
-                                    color: isFavori ? colorScheme.primary : colorScheme.onSurface,
+                                    color:
+                                        isFavori
+                                            ? colorScheme.primary
+                                            : colorScheme.onSurface,
                                   ),
                                 );
                               },
@@ -221,8 +255,13 @@ class RestorantListViewWidget extends ConsumerWidget {
           ),
         );
       },
-      error: (Object error, StackTrace stackTrace) => Center(child: Text(error.toString())), // Hata mesajı
-      loading: () => const Center(child: CircularProgressIndicator()), // Yükleniyor göstergesi
+      error:
+          (Object error, StackTrace stackTrace) =>
+              Center(child: Text(error.toString())), // Hata mesajı
+      loading:
+          () => const Center(
+            child: CircularProgressIndicator(),
+          ), // Yükleniyor göstergesi
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce_flutter/adapters.dart';
@@ -15,8 +16,9 @@ class AdresScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Hive'da tutulan kayıtlı adresler
-    Box<KullaniciKonumFreezed> box =
-    Hive.box<KullaniciKonumFreezed>('konumlar');
+    Box<KullaniciKonumFreezed> box = Hive.box<KullaniciKonumFreezed>(
+      'konumlar',
+    );
 
     // Tema bilgileri
     ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -25,7 +27,7 @@ class AdresScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Teslimat Adresi',
+          'address_info'.tr(),
           style: textTheme.titleLarge?.copyWith(color: colorScheme.onSurface),
         ),
         backgroundColor: colorScheme.surface,
@@ -43,9 +45,10 @@ class AdresScreen extends ConsumerWidget {
             children: <Widget>[
               // Açıklama metni
               Text(
-                'Düzenle butonuna basarak konumunu ve adres bilgilerini düzenleyebilir veya adresini silebilirsin',
-                style: textTheme.titleMedium
-                    ?.copyWith(color: colorScheme.onSurface),
+                'address_description'.tr(),
+                style: textTheme.titleMedium?.copyWith(
+                  color: colorScheme.onSurface,
+                ),
               ),
 
               // Mevcut konumu kullan butonu
@@ -59,8 +62,8 @@ class AdresScreen extends ConsumerWidget {
                     // TODO: Mevcut konum alma işlevi buraya gelecek
                   },
                   icon: const Icon(Icons.zoom_in_map, color: Colors.white),
-                  label: const Text(
-                    'Mevcut Konumu Kullan',
+                  label: Text(
+                    'use_current_location'.tr(),
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -77,14 +80,13 @@ class AdresScreen extends ConsumerWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute<Widget>(
-                        builder: (BuildContext context) =>
-                        const KonumSecPage(),
+                        builder: (BuildContext context) => const KonumSecPage(),
                       ),
                     );
                   },
                   icon: const Icon(Icons.location_on, color: Colors.white),
-                  label: const Text(
-                    'Yeni Konum Seç',
+                  label: Text(
+                    'choose_new_location'.tr(),
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -94,13 +96,16 @@ class AdresScreen extends ConsumerWidget {
               Expanded(
                 child: ValueListenableBuilder<Box<KullaniciKonumFreezed>>(
                   valueListenable: box.listenable(),
-                  builder: (BuildContext context,
-                      Box<KullaniciKonumFreezed> value, Widget? child,) {
-                    List<KullaniciKonumFreezed> adresListesi = value.values.toList();
+                  builder: (
+                    BuildContext context,
+                    Box<KullaniciKonumFreezed> value,
+                    Widget? child,
+                  ) {
+                    List<KullaniciKonumFreezed> adresListesi =
+                        value.values.toList();
 
                     if (adresListesi.isEmpty) {
-                      return const Center(
-                          child: Text('Henüz kayıtlı adres bulunmuyor.'),);
+                      return Center(child: Text('no_address_description'.tr()));
                     }
 
                     return ListView.builder(
@@ -115,10 +120,7 @@ class AdresScreen extends ConsumerWidget {
                               // Seçili konumu provider üzerinden güncelle
                               ref
                                   .read(secilemKonumStateProvider.notifier)
-                                  .state = Konum(
-                                konum.sehirAdi,
-                                konum.ilceAdi,
-                              );
+                                  .state = Konum(konum.sehirAdi, konum.ilceAdi);
                               Navigator.pop(context);
                             },
                             child: DecoratedBox(
@@ -134,8 +136,10 @@ class AdresScreen extends ConsumerWidget {
                                     // Başlık + Düzenle butonu
                                     Row(
                                       children: <Widget>[
-                                        Text(konum.adresBasligi,
-                                            style: textTheme.titleLarge,),
+                                        Text(
+                                          konum.adresBasligi,
+                                          style: textTheme.titleLarge,
+                                        ),
                                         const Spacer(),
                                         TextButton.icon(
                                           onPressed: () {
@@ -144,14 +148,14 @@ class AdresScreen extends ConsumerWidget {
                                               MaterialPageRoute<Widget>(
                                                 builder:
                                                     (BuildContext context) =>
-                                                    AdresScreenDetay(
-                                                      kullaniciKonum: konum,
-                                                    ),
+                                                        AdresScreenDetay(
+                                                          kullaniciKonum: konum,
+                                                        ),
                                               ),
                                             );
                                           },
                                           icon: const Icon(Icons.edit),
-                                          label: const Text('Düzenle'),
+                                          label: Text('edit'.tr()),
                                         ),
                                       ],
                                     ),
@@ -164,8 +168,9 @@ class AdresScreen extends ConsumerWidget {
                                     Text(
                                       '${konum.mahalleAdi} Mah / ${konum.sokakAdi} Sokak',
                                       style: textTheme.titleSmall?.copyWith(
-                                        color: colorScheme.onSurface
-                                            .withValues(alpha: 0.8),
+                                        color: colorScheme.onSurface.withValues(
+                                          alpha: 0.8,
+                                        ),
                                       ),
                                     ),
                                     Text(
@@ -176,7 +181,7 @@ class AdresScreen extends ConsumerWidget {
                                     // Telefon + Sil butonu
                                     Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Text(
                                           konum.cepTelefonu,

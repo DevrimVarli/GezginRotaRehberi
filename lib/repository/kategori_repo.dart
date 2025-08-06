@@ -4,14 +4,14 @@ class KategoriRepo {
   List<String> basliklar() {
     // Kategori isimleri
     List<String> baslikList = <String>[
-      'Location',
-      'Hotels',
-      'Food',
-      'Adventure',
-      'Location',
-      'Hotels',
-      'Food',
-      'Adventure',
+      'location',
+      'hotels',
+      'food',
+      'adventure',
+      'location',
+      'hotels',
+      'food',
+      'adventure',
     ];
 
     return baslikList;

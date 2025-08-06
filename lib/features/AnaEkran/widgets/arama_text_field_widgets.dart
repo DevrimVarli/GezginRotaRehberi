@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_ce/hive.dart';
 
 import 'package:yeni_tasarim/providers/all_providers.dart';
 
@@ -9,6 +10,7 @@ class AramaTextFieldWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Box<String>box = Hive.box<String>('aramaSonuclari');
     // Tema renk düzeni
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     // Ekran yüksekliğini almak için MediaQuery kullanılır
@@ -23,6 +25,25 @@ class AramaTextFieldWidget extends ConsumerWidget {
             // Kullanıcı her arama yaptığında, arama sonucunu 'aramaSonucuStateProvider' ile güncelliyoruz
             ref.read(aramaSonucuStateProvider.notifier).state = aramaSonucu;
           },
+          /*onSubmitted: (String value){
+            if( box.values.toList().length==5){
+              if(box.values.toList().contains(value)){
+                box..delete(value)
+                  ..put(value, value);
+
+              }else{
+              box..delete(box.values.toList()[0])
+              ..put(value, value);}
+            }
+            if(box.values.toList().length<5){
+              box.put(value, value);
+            }
+            if(box.values.toList().contains(value)){
+              box..delete(value)
+              ..put(value, value);
+            }
+
+          },*/
           decoration: InputDecoration(
             prefixIcon: Icon(
               Icons.search, // Arama simgesi

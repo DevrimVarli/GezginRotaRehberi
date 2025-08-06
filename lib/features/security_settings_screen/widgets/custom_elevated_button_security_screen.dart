@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,13 +6,20 @@ import 'package:yeni_tasarim/providers/all_providers.dart';
 import 'package:yeni_tasarim/services/auth_service.dart';
 
 class CustomElevatedButtonSecurityScreen extends ConsumerWidget {
-  const CustomElevatedButtonSecurityScreen({super.key, required this.mailController, required this.passwordController, required this.newPasswordController, required this.formKey});
+  const CustomElevatedButtonSecurityScreen({
+    super.key,
+    required this.mailController,
+    required this.passwordController,
+    required this.newPasswordController,
+    required this.formKey,
+  });
 
   // TextEditingController'lar, kullanıcıdan alınacak verileri temsil eder
   final TextEditingController mailController;
   final TextEditingController passwordController;
   final TextEditingController newPasswordController;
-  final GlobalKey<FormState> formKey; // Formun global key'ini alır, formun durumunu yönetmek için kullanılır
+  final GlobalKey<FormState>
+  formKey; // Formun global key'ini alır, formun durumunu yönetmek için kullanılır
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,12 +37,15 @@ class CustomElevatedButtonSecurityScreen extends ConsumerWidget {
       width: ekranGenisligi / 1.5, // Butonun genişliği ekranın %66'sı kadar
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: colorScheme.primary, // Butonun arka plan rengi, tema ile uyumlu
+          backgroundColor:
+              colorScheme.primary, // Butonun arka plan rengi, tema ile uyumlu
         ),
         onPressed: () async {
           // Eğer form geçerliyse, işlemi yap
           if (formKey.currentState!.validate()) {
-            AuthService auth = ref.read(authProvider); // AuthService'i provider'dan alıyoruz
+            AuthService auth = ref.read(
+              authProvider,
+            ); // AuthService'i provider'dan alıyoruz
 
             // Eğer mail adresi değiştirilmişse, mail değiştirme işlemi yapılır
             if (mailController.text != user.email) {
@@ -47,7 +58,8 @@ class CustomElevatedButtonSecurityScreen extends ConsumerWidget {
 
             // Yeni şifre girildiyse, şifre değiştirme işlemi yapılır
             if (newPasswordController.text.isNotEmpty) {
-              if (!context.mounted) return; // Eğer context kullanılabilir değilse, işlem yapılmaz
+              if (!context.mounted)
+                return; // Eğer context kullanılabilir değilse, işlem yapılmaz
               await auth.changePassword(
                 currentPassword: passwordController.text, // Şu anki şifre
                 newPassword: newPasswordController.text, // Yeni şifre
@@ -57,8 +69,11 @@ class CustomElevatedButtonSecurityScreen extends ConsumerWidget {
           }
         },
         child: Text(
-          'Kaydet', // Buton metni
-          style: textTheme.headlineSmall?.copyWith(color: Colors.white, fontWeight: FontWeight.w400), // Buton metninin stilini belirler
+          'create'.tr(), // Buton metni
+          style: textTheme.headlineSmall?.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w400,
+          ), // Buton metninin stilini belirler
         ),
       ),
     );

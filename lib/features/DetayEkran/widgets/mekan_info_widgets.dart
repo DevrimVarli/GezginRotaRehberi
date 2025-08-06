@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
@@ -14,35 +15,43 @@ class MekanInfoWidgets extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 32, bottom: 24), // Üst ve alt boşluklar
+      padding: const EdgeInsets.only(
+        top: 32,
+        bottom: 24,
+      ), // Üst ve alt boşluklar
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Başlık ve içeriklerin sola hizalanması
+        crossAxisAlignment:
+            CrossAxisAlignment.start, // Başlık ve içeriklerin sola hizalanması
         children: <Widget>[
           // Başlık ve harita linki
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Başlık ve harita linki arasına boşluk
+            mainAxisAlignment:
+                MainAxisAlignment
+                    .spaceBetween, // Başlık ve harita linki arasına boşluk
             children: <Widget>[
               // Otel veya restoran adı
               Text(
                 secilenOtel != null
-                    ? secilenOtel!.otelAd // Otel adı
+                    ? secilenOtel!
+                        .otelAd // Otel adı
                     : secilenRestorant!.restoranAd, // Restoran adı
                 style: GoogleFonts.montserrat(
-                  fontSize: (secilenOtel != null
-                      ? secilenOtel!.otelAd.length
-                      : secilenRestorant!.restoranAd.length) >
-                      20
-                      ? 16 // Uzun adlar için font boyutu küçültülür
-                      : 24, // Kısa adlar için font boyutu 24
+                  fontSize:
+                      (secilenOtel != null
+                                  ? secilenOtel!.otelAd.length
+                                  : secilenRestorant!.restoranAd.length) >
+                              24
+                          ? 14 // Uzun adlar için font boyutu küçültülür
+                          : 24, // Kısa adlar için font boyutu 24
                   color: colorScheme.onSurface, // Yazı rengi tema ile uyumlu
                   fontWeight: FontWeight.bold, // Yazı kalınlığı
                 ),
               ),
               // Harita linki
               Text(
-                'Show map',
+                'show_map'.tr(),
                 style: GoogleFonts.roboto(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: colorScheme.primary, // Tema ile uyumlu renk
                   fontWeight: FontWeight.bold, // Yazı kalınlığı
                 ),
@@ -51,7 +60,6 @@ class MekanInfoWidgets extends StatelessWidget {
           ),
 
           const SizedBox(height: 8), // Başlık ve puan kısmı arasına boşluk
-
           // Puan ve yorum sayısı
           Row(
             children: <Widget>[
@@ -60,7 +68,8 @@ class MekanInfoWidgets extends StatelessWidget {
               // Puan değeri
               Text(
                 secilenOtel != null
-                    ? secilenOtel!.otelYildiz.toString() // Otel puanı
+                    ? secilenOtel!.otelYildiz
+                        .toString() // Otel puanı
                     : secilenRestorant!.restoranPuan, // Restoran puanı
                 style: GoogleFonts.roboto(
                   fontSize: 18, // Yazı boyutu
@@ -70,7 +79,7 @@ class MekanInfoWidgets extends StatelessWidget {
               const SizedBox(width: 4), // Puan ile yorum sayısı arasına boşluk
               // Yorum sayısı
               Text(
-                '(355 Reviews)', // Sabit yorum sayısı
+                'reviews'.tr(), // Sabit yorum sayısı
                 style: GoogleFonts.roboto(
                   fontSize: 18, // Yazı boyutu
                   color: colorScheme.outlineVariant, // Tema rengi
@@ -80,11 +89,11 @@ class MekanInfoWidgets extends StatelessWidget {
           ),
 
           const SizedBox(height: 12), // Puan ve açıklama arasına boşluk
-
           // Açıklama kısmı
           Text(
             secilenOtel != null
-                ? secilenOtel!.otelAciklama // Otel açıklaması
+                ? secilenOtel!
+                    .otelAciklama // Otel açıklaması
                 : secilenRestorant!.restoranAciklama, // Restoran açıklaması
             style: GoogleFonts.roboto(
               fontSize: 18, // Yazı boyutu
@@ -93,7 +102,6 @@ class MekanInfoWidgets extends StatelessWidget {
           ),
 
           const SizedBox(height: 4), // Açıklama ve "Read more" arasına boşluk
-
           // "Read more" linki
           TextButton(
             onPressed: () {
@@ -105,7 +113,7 @@ class MekanInfoWidgets extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Text(
-                  'Read more', // Daha fazla oku metni
+                  'read_more'.tr(), // Daha fazla oku metni
                   style: GoogleFonts.roboto(
                     fontSize: 18, // Yazı boyutu
                     color: colorScheme.primary, // Tema rengi

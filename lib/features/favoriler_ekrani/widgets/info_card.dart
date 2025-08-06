@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yeni_tasarim/screens/see_all_screen.dart';
@@ -5,7 +6,8 @@ import 'package:yeni_tasarim/screens/see_all_screen.dart';
 class InfoCard extends StatelessWidget {
   const InfoCard({super.key, required this.title});
 
-  final String title; // Bu parametre, kartta gösterilecek başlık adını içerir (örneğin, 'Restoranlar' veya 'Oteller')
+  final String
+  title; // Bu parametre, kartta gösterilecek başlık adını içerir (örneğin, 'Restoranlar' veya 'Oteller')
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,9 @@ class InfoCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24), // Yuvarlatılmış köşeler
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: colorScheme.primary.withValues(alpha: 0.2), // Gölge rengi temaya uygun, %20 opaklık
+            color: colorScheme.primary.withValues(
+              alpha: 0.2,
+            ), // Gölge rengi temaya uygun, %20 opaklık
             blurRadius: 20, // Gölgenin bulanıklık miktarı
             offset: const Offset(0, 10), // Gölgenin kayma miktarı
           ),
@@ -36,7 +40,7 @@ class InfoCard extends StatelessWidget {
           const SizedBox(height: 20), // İkon ile başlık arasında boşluk
           // Başlık metni (Favori [title] bulunamadı)
           Text(
-            'Favori $title bulunamadı',
+            'no_favorites'.tr(namedArgs: {'title': title}),
             style: GoogleFonts.montserrat(
               fontSize: 22, // Yazı boyutu
               fontWeight: FontWeight.bold, // Kalın yazı
@@ -47,10 +51,12 @@ class InfoCard extends StatelessWidget {
           const SizedBox(height: 10), // Başlık ile açıklama arasında boşluk
           // Açıklama metni
           Text(
-            'Henüz hiçbir $title favorilere eklemediniz.\nKeşfetmeye başlayın!',
+            'no_favorites_description'.tr(namedArgs: {"title": title}),
             style: GoogleFonts.montserrat(
               fontSize: 16, // Yazı boyutu
-              color: colorScheme.onSurface.withValues(alpha: 0.7), // Yazı rengi yüzeydeki metin rengiyle uyumlu ve %70 opaklıkta
+              color: colorScheme.onSurface.withValues(
+                alpha: 0.7,
+              ), // Yazı rengi yüzeydeki metin rengiyle uyumlu ve %70 opaklıkta
             ),
             textAlign: TextAlign.center, // Metni ortala
           ),
@@ -59,20 +65,33 @@ class InfoCard extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: () {
               // Butona tıklanıldığında "SeeAllEkrani" sayfasına geçiş yapılır
-              Navigator.push(context,
-                MaterialPageRoute<Widget>(builder: (BuildContext context) => const SeeAllEkrani()),
+              Navigator.push(
+                context,
+                MaterialPageRoute<Widget>(
+                  builder: (BuildContext context) => const SeeAllEkrani(),
+                ),
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.primary, // Butonun arka plan rengi tema ile uyumlu
+              backgroundColor:
+                  colorScheme
+                      .primary, // Butonun arka plan rengi tema ile uyumlu
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16), // Yuvarlatılmış köşeler
+                borderRadius: BorderRadius.circular(
+                  16,
+                ), // Yuvarlatılmış köşeler
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), // Butonun içindeki padding
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 12,
+              ), // Butonun içindeki padding
             ),
-            icon: Icon(Icons.search, color: colorScheme.onPrimary), // Arama ikonu
+            icon: Icon(
+              Icons.search,
+              color: colorScheme.onPrimary,
+            ), // Arama ikonu
             label: Text(
-              'Keşfet', // Butonun metni
+              'discover'.tr(), // Butonun metni
               style: GoogleFonts.montserrat(
                 fontSize: 16, // Yazı boyutu
                 color: colorScheme.onPrimary, // Buton metni rengi

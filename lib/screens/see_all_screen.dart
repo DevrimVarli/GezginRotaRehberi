@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,7 +36,7 @@ class SeeAllEkrani extends ConsumerWidget {
                     const Spacer(flex: 2),
                     // Başlık
                     Text(
-                      'Restoranlar',
+                      'food'.tr(),
                       style: GoogleFonts.roboto(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -55,7 +56,7 @@ class SeeAllEkrani extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
-                  'Oteller',
+                  'hotels'.tr(),
                   style: GoogleFonts.roboto(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce/hive.dart';
@@ -30,7 +31,7 @@ class AdresScreenDetay extends ConsumerStatefulWidget {
   /// bu ekran konumdan gelmiş kabul edilir
   bool get konumdanMiGeldi =>
       kullaniciKonum != null &&
-          (adresAdi == null && ilAdi == null && ilceAdi == null);
+      (adresAdi == null && ilAdi == null && ilceAdi == null);
 
   @override
   ConsumerState<AdresScreenDetay> createState() => _AdresScreenDetayState();
@@ -53,41 +54,55 @@ class _AdresScreenDetayState extends ConsumerState<AdresScreenDetay> {
   final TextEditingController sokak = TextEditingController();
 
   // Hive box (adres kayıtlarının tutulduğu yer)
-  final Box<KullaniciKonumFreezed> box = Hive.box<KullaniciKonumFreezed>('konumlar');
+  final Box<KullaniciKonumFreezed> box = Hive.box<KullaniciKonumFreezed>(
+    'konumlar',
+  );
 
   // Form doğrulama anahtarı
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   /// Controller’lara başlangıç değerlerini set eder
   void _setTextValues() {
-    adresim.text = (widget.konumdanMiGeldi
-        ? widget.kullaniciKonum?.disyplayName
-        : widget.adresAdi) ??
+    adresim.text =
+        (widget.konumdanMiGeldi
+            ? widget.kullaniciKonum?.disyplayName
+            : widget.adresAdi) ??
         '';
-    ilim.text = (widget.konumdanMiGeldi
-        ? widget.kullaniciKonum?.sehirAdi
-        : widget.ilAdi) ??
+    ilim.text =
+        (widget.konumdanMiGeldi
+            ? widget.kullaniciKonum?.sehirAdi
+            : widget.ilAdi) ??
         '';
-    ilcem.text = (widget.konumdanMiGeldi
-        ? widget.kullaniciKonum?.ilceAdi
-        : widget.ilceAdi) ??
+    ilcem.text =
+        (widget.konumdanMiGeldi
+            ? widget.kullaniciKonum?.ilceAdi
+            : widget.ilceAdi) ??
         '';
-    mahallem.text = (widget.konumdanMiGeldi
-        ? widget.kullaniciKonum?.mahalleAdi
-        : widget.mahalleAdi) ??
+    mahallem.text =
+        (widget.konumdanMiGeldi
+            ? widget.kullaniciKonum?.mahalleAdi
+            : widget.mahalleAdi) ??
         '';
-    sokak.text = (widget.konumdanMiGeldi
-        ? widget.kullaniciKonum?.sokakAdi
-        : widget.sokakAdi) ??
+    sokak.text =
+        (widget.konumdanMiGeldi
+            ? widget.kullaniciKonum?.sokakAdi
+            : widget.sokakAdi) ??
         '';
-    binam.text = widget.konumdanMiGeldi ? widget.kullaniciKonum?.binaNo ?? '' : '';
-    katm.text = widget.konumdanMiGeldi ? widget.kullaniciKonum?.katNo ?? '' : '';
-    dairem.text = widget.konumdanMiGeldi ? widget.kullaniciKonum?.daireNo ?? '' : '';
-    adresTarifi.text = widget.konumdanMiGeldi ? widget.kullaniciKonum?.adresTarifi ?? '' : '';
-    adresBasligi.text = widget.konumdanMiGeldi ? widget.kullaniciKonum?.adresBasligi ?? '' : '';
+    binam.text =
+        widget.konumdanMiGeldi ? widget.kullaniciKonum?.binaNo ?? '' : '';
+    katm.text =
+        widget.konumdanMiGeldi ? widget.kullaniciKonum?.katNo ?? '' : '';
+    dairem.text =
+        widget.konumdanMiGeldi ? widget.kullaniciKonum?.daireNo ?? '' : '';
+    adresTarifi.text =
+        widget.konumdanMiGeldi ? widget.kullaniciKonum?.adresTarifi ?? '' : '';
+    adresBasligi.text =
+        widget.konumdanMiGeldi ? widget.kullaniciKonum?.adresBasligi ?? '' : '';
     ad.text = widget.konumdanMiGeldi ? widget.kullaniciKonum?.ad ?? '' : '';
-    soyad.text = widget.konumdanMiGeldi ? widget.kullaniciKonum?.soyad ?? '' : '';
-    cepTelefonu.text = widget.konumdanMiGeldi ? widget.kullaniciKonum?.cepTelefonu ?? '' : '';
+    soyad.text =
+        widget.konumdanMiGeldi ? widget.kullaniciKonum?.soyad ?? '' : '';
+    cepTelefonu.text =
+        widget.konumdanMiGeldi ? widget.kullaniciKonum?.cepTelefonu ?? '' : '';
   }
 
   @override
@@ -99,7 +114,7 @@ class _AdresScreenDetayState extends ConsumerState<AdresScreenDetay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Adres Bilgilerini Düzenle')),
+      appBar: AppBar(title: Text('edit_address_title'.tr())),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

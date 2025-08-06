@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,20 +34,28 @@ class KategoriWidget extends ConsumerWidget {
               ref.read(selectedIndexProvider.notifier).state = index;
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // İçerik padding
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 10,
+              ), // İçerik padding
               decoration: BoxDecoration(
                 // Seçili kategoriye farklı renk uygulanacak
                 color: isSelected ? colorScheme.primary : Colors.transparent,
-                borderRadius: BorderRadius.circular(32), // Yuvarlatılmış köşeler
+                borderRadius: BorderRadius.circular(
+                  32,
+                ), // Yuvarlatılmış köşeler
               ),
               child: Text(
-                basliklar[index], // Kategori başlığı
+                basliklar[index].tr(), // Kategori başlığı
                 style: TextStyle(
                   fontWeight: FontWeight.w600, // Yazı kalınlığı
                   fontSize: 16, // Yazı boyutu
-                  color: isSelected
-                      ? colorScheme.onPrimary // Seçili kategorinin yazı rengi
-                      : colorScheme.primary, // Seçili olmayan kategorinin yazı rengi
+                  color:
+                      isSelected
+                          ? colorScheme
+                              .onPrimary // Seçili kategorinin yazı rengi
+                          : colorScheme
+                              .primary, // Seçili olmayan kategorinin yazı rengi
                 ),
               ),
             ),

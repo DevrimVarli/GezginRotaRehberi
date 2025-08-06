@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce_flutter/adapters.dart';
@@ -47,7 +48,9 @@ class _FavoritePageViewState extends ConsumerState<FavoritePageView> {
     Box<String> box = ref.watch(favorilerProvider);
 
     // API / Repository'den restoran ve otel listeleri
-    AsyncValue<List<Restorantlar>> restoranList = ref.watch(restoranFutureProvider);
+    AsyncValue<List<Restorantlar>> restoranList = ref.watch(
+      restoranFutureProvider,
+    );
     AsyncValue<List<Oteller>> otelList = ref.watch(otelFutureProvider);
 
     double ekranGenisligi = MediaQuery.sizeOf(context).width;
@@ -63,8 +66,12 @@ class _FavoritePageViewState extends ConsumerState<FavoritePageView> {
           Flexible(
             child: Row(
               children: <Widget>[
-                Expanded(child: CustomRestoranButton(pageController: _pageController)),
-                Expanded(child: CustomOtelButton(pageController: _pageController)),
+                Expanded(
+                  child: CustomRestoranButton(pageController: _pageController),
+                ),
+                Expanded(
+                  child: CustomOtelButton(pageController: _pageController),
+                ),
               ],
             ),
           ),
@@ -73,7 +80,8 @@ class _FavoritePageViewState extends ConsumerState<FavoritePageView> {
           Flexible(
             flex: 20,
             child: PageView(
-              physics: const NeverScrollableScrollPhysics(), // elle kaydırmayı kapat
+              physics:
+                  const NeverScrollableScrollPhysics(), // elle kaydırmayı kapat
               controller: _pageController,
               children: <Widget>[
                 // Sayfa 1: Restoran Favorileri
@@ -81,30 +89,43 @@ class _FavoritePageViewState extends ConsumerState<FavoritePageView> {
                   data: (List<Restorantlar> restoranListe) {
                     return ValueListenableBuilder<Box<String>>(
                       valueListenable: box.listenable(),
-                      builder: (BuildContext context, Box<String> favoriBox, _) {
+                      builder: (
+                        BuildContext context,
+                        Box<String> favoriBox,
+                        _,
+                      ) {
                         // Favori restoranları filtrele
                         List<Restorantlar> filteredRestoranList =
-                        favoriBox.isEmpty
-                            ? <Restorantlar>[]
-                            : restoranListe.where(
-                              (Restorantlar restoran) =>
-                              favoriBox.values.contains(restoran.restoranAd),
-                        ).toList();
+                            favoriBox.isEmpty
+                                ? <Restorantlar>[]
+                                : restoranListe
+                                    .where(
+                                      (Restorantlar restoran) => favoriBox
+                                          .values
+                                          .contains(restoran.restoranAd),
+                                    )
+                                    .toList();
 
                         return filteredRestoranList.isEmpty
-                            ? const Center(child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                InfoCard(title: 'restoran'),
-                              ],
-                            ),)
-                            : FavoriRestoranKartlar(filteredRestoranList: filteredRestoranList);
+                            ? Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  InfoCard(title: 'restaurant'.tr()),
+                                ],
+                              ),
+                            )
+                            : FavoriRestoranKartlar(
+                              filteredRestoranList: filteredRestoranList,
+                            );
                       },
                     );
                   },
-                  error: (Object error, StackTrace stackTrace) =>
-                      Center(child: Text(error.toString())),
-                  loading: () => const Center(child: CircularProgressIndicator()),
+                  error:
+                      (Object error, StackTrace stackTrace) =>
+                          Center(child: Text(error.toString())),
+                  loading:
+                      () => const Center(child: CircularProgressIndicator()),
                 ),
 
                 // Sayfa 2: Otel Favorileri
@@ -112,30 +133,42 @@ class _FavoritePageViewState extends ConsumerState<FavoritePageView> {
                   data: (List<Oteller> otelListe) {
                     return ValueListenableBuilder<Box<String>>(
                       valueListenable: box.listenable(),
-                      builder: (BuildContext context, Box<String> favoriBox, _) {
+                      builder: (
+                        BuildContext context,
+                        Box<String> favoriBox,
+                        _,
+                      ) {
                         // Favori otelleri filtrele
                         List<Oteller> filteredOtelList =
-                        box.isEmpty
-                            ? <Oteller>[]
-                            : otelListe.where(
-                              (Oteller otel) =>
-                              favoriBox.values.contains(otel.otelAd),
-                        ).toList();
+                            box.isEmpty
+                                ? <Oteller>[]
+                                : otelListe
+                                    .where(
+                                      (Oteller otel) => favoriBox.values
+                                          .contains(otel.otelAd),
+                                    )
+                                    .toList();
 
                         return filteredOtelList.isEmpty
-                            ? const Center(child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                InfoCard(title: 'otel'),
-                              ],
-                            ),)
-                            : FavoriOtelKartlar(filteredOtelList: filteredOtelList);
+                            ? Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  InfoCard(title: 'hotel'.tr()),
+                                ],
+                              ),
+                            )
+                            : FavoriOtelKartlar(
+                              filteredOtelList: filteredOtelList,
+                            );
                       },
                     );
                   },
-                  error: (Object error, StackTrace stackTrace) =>
-                      Center(child: Text(error.toString())),
-                  loading: () => const Center(child: CircularProgressIndicator()),
+                  error:
+                      (Object error, StackTrace stackTrace) =>
+                          Center(child: Text(error.toString())),
+                  loading:
+                      () => const Center(child: CircularProgressIndicator()),
                 ),
               ],
             ),

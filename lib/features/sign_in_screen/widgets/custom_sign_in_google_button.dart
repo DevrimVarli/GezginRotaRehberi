@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
@@ -12,7 +13,9 @@ class CustomSignInGoogleButton extends ConsumerWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
 
     return SizedBox(
-      width: double.infinity, // Butonun genişliğini ekranın tamamına yayacak şekilde ayarlıyoruz
+      width:
+          double
+              .infinity, // Butonun genişliğini ekranın tamamına yayacak şekilde ayarlıyoruz
       child: OutlinedButton.icon(
         onPressed: () async {
           // Butona tıklandığında Google ile giriş yapmayı başlatıyoruz
@@ -26,17 +29,25 @@ class CustomSignInGoogleButton extends ConsumerWidget {
           ),
         ),
         label: Text(
-          'Sign in with Google', // Butonun metni
+          'google_sign_in'.tr(), // Butonun metni
           style: textTheme.labelLarge?.copyWith(
-            color: colorScheme.primary, // Metnin rengi, tema renk şeması ile uyumlu
+            color:
+                colorScheme
+                    .primary, // Metnin rengi, tema renk şeması ile uyumlu
           ),
         ),
         style: OutlinedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 14), // Butonun dikeydeki iç boşluğu
+          padding: const EdgeInsets.symmetric(
+            vertical: 14,
+          ), // Butonun dikeydeki iç boşluğu
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12), // Butonun yuvarlatılmış köşeleri
+            borderRadius: BorderRadius.circular(
+              12,
+            ), // Butonun yuvarlatılmış köşeleri
           ),
-          side: BorderSide(color: colorScheme.outline), // Butonun kenarının rengi, tema ile uyumlu
+          side: BorderSide(
+            color: colorScheme.outline,
+          ), // Butonun kenarının rengi, tema ile uyumlu
         ),
       ),
     );

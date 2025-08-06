@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
@@ -18,11 +19,21 @@ class _CustomSignUpFormState extends ConsumerState<CustomSignUpForm> {
   Widget build(BuildContext context) {
     // TextEditingController'ları Riverpod'dan alıyoruz
     TextEditingController emailController = ref.watch(emailControllerProvider);
-    TextEditingController passwordController = ref.watch(passwordControllerProvider);
-    TextEditingController firstNameController = ref.watch(firstNameControllerProvider);
-    TextEditingController lastNameController = ref.watch(lastNameControllerProvider);
-    TextEditingController userNameController = ref.watch(userNameControllerProvider);
-    TextEditingController phoneNumberController = ref.watch(phoneNumberControllerProvider);
+    TextEditingController passwordController = ref.watch(
+      passwordControllerProvider,
+    );
+    TextEditingController firstNameController = ref.watch(
+      firstNameControllerProvider,
+    );
+    TextEditingController lastNameController = ref.watch(
+      lastNameControllerProvider,
+    );
+    TextEditingController userNameController = ref.watch(
+      userNameControllerProvider,
+    );
+    TextEditingController phoneNumberController = ref.watch(
+      phoneNumberControllerProvider,
+    );
 
     // Tema renk şemasını alıyoruz
     ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -36,7 +47,7 @@ class _CustomSignUpFormState extends ConsumerState<CustomSignUpForm> {
           CustomTextFormField(
             tfc: firstNameController,
             validator: firstNameValidator,
-            hintText: 'First Name',
+            hintText: 'first_name'.tr(),
             obscureText: false,
             icon: Icon(Icons.person, color: colorScheme.onSurfaceVariant),
           ),
@@ -44,7 +55,7 @@ class _CustomSignUpFormState extends ConsumerState<CustomSignUpForm> {
           CustomTextFormField(
             tfc: lastNameController,
             validator: lastNameValidator,
-            hintText: 'Last Name',
+            hintText: 'last_name'.tr(),
             obscureText: false,
             icon: Icon(Icons.person, color: colorScheme.onSurfaceVariant),
           ),
@@ -52,7 +63,7 @@ class _CustomSignUpFormState extends ConsumerState<CustomSignUpForm> {
           CustomTextFormField(
             tfc: userNameController,
             validator: userNameValidator,
-            hintText: 'User Name',
+            hintText: 'user_name'.tr(),
             obscureText: false,
             icon: Icon(Icons.person, color: colorScheme.onSurfaceVariant),
           ),
@@ -60,7 +71,7 @@ class _CustomSignUpFormState extends ConsumerState<CustomSignUpForm> {
           CustomTextFormField(
             tfc: phoneNumberController,
             validator: phoneNumberValidator,
-            hintText: 'Phone Number',
+            hintText: 'phone_number'.tr(),
             obscureText: false,
             icon: Icon(Icons.phone, color: colorScheme.onSurfaceVariant),
           ),
@@ -68,7 +79,7 @@ class _CustomSignUpFormState extends ConsumerState<CustomSignUpForm> {
           CustomTextFormField(
             tfc: emailController,
             validator: mailValidator,
-            hintText: 'Email',
+            hintText: 'email'.tr(),
             obscureText: false,
             icon: Icon(Icons.mail, color: colorScheme.onSurfaceVariant),
           ),
@@ -76,7 +87,7 @@ class _CustomSignUpFormState extends ConsumerState<CustomSignUpForm> {
           CustomTextFormField(
             tfc: passwordController,
             validator: passValidator,
-            hintText: 'Password',
+            hintText: 'password'.tr(),
             obscureText: true,
             icon: Icon(Icons.lock, color: colorScheme.onSurfaceVariant),
           ),

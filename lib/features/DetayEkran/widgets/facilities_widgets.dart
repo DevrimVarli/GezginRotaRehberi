@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,7 +41,7 @@ class FacilitiesWidgets extends ConsumerWidget {
       children: <Widget>[
         // Facilities başlığı
         Text(
-          'Facilities',
+          'facilities'.tr(),
           style: GoogleFonts.roboto(
             fontSize: 24,
             color: colorScheme.onSurface, // Tema rengi ile uyumlu
@@ -52,33 +53,51 @@ class FacilitiesWidgets extends ConsumerWidget {
           height: 100, // Liste yüksekliği
           child: ListView.builder(
             scrollDirection: Axis.horizontal, // Yatay kaydırma
-            itemCount: (secilenOtel != null)
-                ? secilenOtel!.imkanlar.length // Eğer otel seçildiyse otelin imkanları
-                : secilenRestorant!.imkanlar.length, // Eğer restoran seçildiyse restoranın imkanları
+            itemCount:
+                (secilenOtel != null)
+                    ? secilenOtel!
+                        .imkanlar
+                        .length // Eğer otel seçildiyse otelin imkanları
+                    : secilenRestorant!
+                        .imkanlar
+                        .length, // Eğer restoran seçildiyse restoranın imkanları
             itemBuilder: (BuildContext context, int indeks) {
               // İmkanları seçilen otelden veya restorandan alıyoruz
-              Imkanlar imkan = (secilenOtel != null)
-                  ? secilenOtel!.imkanlar[indeks]
-                  : secilenRestorant!.imkanlar[indeks];
+              Imkanlar imkan =
+                  (secilenOtel != null)
+                      ? secilenOtel!.imkanlar[indeks]
+                      : secilenRestorant!.imkanlar[indeks];
 
               return Container(
-                width: ekranGenisligi / 4.6, // Her bir imkanın genişliği ekranın %22'si kadar
-                margin: const EdgeInsets.only(right: 8), // Sağda boşluk bırakıyoruz
+                width:
+                    ekranGenisligi /
+                    4.6, // Her bir imkanın genişliği ekranın %22'si kadar
+                margin: const EdgeInsets.only(
+                  right: 8,
+                ), // Sağda boşluk bırakıyoruz
                 decoration: BoxDecoration(
-                  color: colorScheme.primary.withValues(alpha: 0.08), // Arka plan rengini tema rengi ile uyumlu yapıyoruz
-                  borderRadius: BorderRadius.circular(12), // Yuvarlatılmış köşeler
+                  color: colorScheme.primary.withValues(
+                    alpha: 0.08,
+                  ), // Arka plan rengini tema rengi ile uyumlu yapıyoruz
+                  borderRadius: BorderRadius.circular(
+                    12,
+                  ), // Yuvarlatılmış köşeler
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center, // İçeriği ortalıyoruz
+                  mainAxisAlignment:
+                      MainAxisAlignment.center, // İçeriği ortalıyoruz
                   children: <Widget>[
                     // İmkan ikonunu gösteriyoruz
                     iconuBuL(imkan.imkanIcon),
-                    const SizedBox(height: 4), // İkon ile metin arasına boşluk ekliyoruz
+                    const SizedBox(
+                      height: 4,
+                    ), // İkon ile metin arasına boşluk ekliyoruz
                     // İmkan adı
                     Text(
-                      imkan.imkanAdi,
+                      imkan.imkanAdi.tr(),
                       style: TextStyle(
-                        color: colorScheme.onSurface, // Yazı rengi tema ile uyumlu
+                        color:
+                            colorScheme.onSurface, // Yazı rengi tema ile uyumlu
                         fontSize: 14, // Yazı boyutu
                       ),
                       textAlign: TextAlign.center, // Metni ortalıyoruz

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yeni_tasarim/providers/all_providers.dart';
@@ -19,7 +20,7 @@ class CustomSignUpButton extends ConsumerWidget {
       children: <Widget>[
         // "Don't have an account?" metni
         Text(
-          "Don't have an account?",
+          "sign_up_orientation".tr(),
           style: textTheme.bodyMedium, // Metin stili
         ),
         // "Sign Up" butonu
@@ -29,8 +30,10 @@ class CustomSignUpButton extends ConsumerWidget {
             ref.read(kayitMiProvider.notifier).state = !kayitMi;
           },
           child: Text(
-            'Sign Up',
-            style: TextStyle(color: colorScheme.primary), // Buton metninin rengi tema ile uyumlu
+            'sign_up'.tr(),
+            style: TextStyle(
+              color: colorScheme.primary,
+            ), // Buton metninin rengi tema ile uyumlu
           ),
         ),
       ],

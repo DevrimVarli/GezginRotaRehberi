@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_ce/hive.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/app_bar_widgets.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/arama_text_field_widgets.dart';
 import 'package:yeni_tasarim/features/AnaEkran/widgets/kategori_widgets.dart';
@@ -31,21 +34,21 @@ class AnaEkran extends ConsumerWidget {
     // Kategoriye göre gösterilecek widget
     Widget categoryWidget;
 
-    if (basliklar[selectedIndex] == 'Hotels') {
+    if (basliklar[selectedIndex].tr() == 'Hotels' ||
+        basliklar[selectedIndex].tr() == 'Oteller') {
       // Sadece oteller listesi
       categoryWidget = const OtellerListViewWidget();
-    } else if (basliklar[selectedIndex] == 'Food') {
+    } else if (basliklar[selectedIndex].tr() == 'Restaurants' ||
+        basliklar[selectedIndex].tr() == 'Restoranlar') {
       // Sadece restoranlar listesi
       categoryWidget = const RestorantListViewWidget();
     } else {
       // Hem restoran hem otel listesi
       categoryWidget = const Column(
-        children: <Widget>[
-          RestorantListViewWidget(),
-          OtellerListViewWidget(),
-        ],
+        children: <Widget>[RestorantListViewWidget(), OtellerListViewWidget()],
       );
     }
+    Box<String> box = Hive.box<String>('aramaSonuclari');
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -58,9 +61,36 @@ class AnaEkran extends ConsumerWidget {
         child: CustomScrollView(
           slivers: <Widget>[
             // Arama alanı
-            const SliverToBoxAdapter(
-              child: AramaTextFieldWidget(),
-            ),
+            const SliverToBoxAdapter(child: AramaTextFieldWidget()),
+            /*SliverToBoxAdapter(
+             child: ValueListenableBuilder<Box<String>>(
+              valueListenable: box.listenable(),
+               builder: (BuildContext context, Box<String> value, Widget? child){
+                Iterable<String>aramaSonuclari = value.values.toList().reversed;
+                return  SizedBox(
+                 height: 50,
+                 child: ListView.builder(
+                 scrollDirection: Axis.horizontal,
+                 itemCount: aramaSonuclari.length,
+                 itemBuilder: (context, index) {
+                 return Padding(
+                   padding: const EdgeInsets.all(8),
+                   child: Row(
+                     children: [
+                       Text(aramaSonuclari.elementAt(index)),
+                       if(box.values.toList().isNotEmpty) IconButton(onPressed: (){box.delete(aramaSonuclari.elementAt(index));}, icon: const Icon(Icons.delete))
+                     ],
+                   ),
+                 );
+                 },
+                 ),
+                 );
+               },
+             ),
+
+
+            ),*/
+
             // Kategori seçim alanı
             const SliverToBoxAdapter(
               child: Padding(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,109 +34,158 @@ class AccountScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile', style: GoogleFonts.roboto(fontSize: 24)),
+        title: Text('profile'.tr(), style: GoogleFonts.roboto(fontSize: 24)),
         centerTitle: true,
         backgroundColor: colorScheme.surface,
       ),
-      body: user == null
-          ? const Center(child: Text('Kullanıcı bilgisi bulunamadı.'))
-          : Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-        child: ListView(
-          children: <Widget>[
-            // General
-            Text(
-              'General',
-              style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w500),
-            ),
-            ...hesapKategori.map((String kategori) =>
-                buildKategoriSatiri(kategori, ekranGenisligi, context, colorScheme, textTheme, ref),),
+      body:
+          user == null
+              ? const Center(child: Text('Kullanıcı bilgisi bulunamadı.'))
+              : Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 20,
+                ),
+                child: ListView(
+                  children: <Widget>[
+                    // General
+                    Text(
+                      'general'.tr(),
+                      style: textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    ...hesapKategori.map(
+                      (String kategori) => buildKategoriSatiri(
+                        kategori.tr(),
+                        ekranGenisligi,
+                        context,
+                        colorScheme,
+                        textTheme,
+                        ref,
+                      ),
+                    ),
 
-            // Bildirim ayarı
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: Column(
-                children: <Widget>[
-                  ColoredBox(
-                    color: colorScheme.surface.withValues(alpha: 0.1),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 3),
-                      child: Row(
+                    // Bildirim ayarı
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: Column(
                         children: <Widget>[
-                          Expanded(child: Text('Notification', style: textTheme.bodyLarge)),
-                          Switch.adaptive(
-                            activeColor: colorScheme.onSurface,
-                            activeTrackColor: colorScheme.primary,
-                            inactiveThumbColor: colorScheme.onSurface,
-                            inactiveTrackColor: colorScheme.surface.withValues(alpha: 0.15),
-                            value: value,
-                            onChanged: (bool val) {
-                              ref.read(checkBoxStateProvider.notifier).state = val;
-                              ref.read(themeModeProvider.notifier).state =
-                              val ? ThemeMode.dark : ThemeMode.light;
-                            },
+                          ColoredBox(
+                            color: colorScheme.surface.withValues(alpha: 0.1),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 3),
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(
+                                      'notification'.tr(),
+                                      style: textTheme.bodyLarge,
+                                    ),
+                                  ),
+                                  Switch.adaptive(
+                                    activeColor: colorScheme.onSurface,
+                                    activeTrackColor: colorScheme.primary,
+                                    inactiveThumbColor: colorScheme.onSurface,
+                                    inactiveTrackColor: colorScheme.surface
+                                        .withValues(alpha: 0.15),
+                                    value: value,
+                                    onChanged: (bool val) {
+                                      ref
+                                          .read(checkBoxStateProvider.notifier)
+                                          .state = val;
+                                      ref
+                                          .read(themeModeProvider.notifier)
+                                          .state = val
+                                              ? ThemeMode.dark
+                                              : ThemeMode.light;
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Divider(
+                            color: colorScheme.onSurface.withValues(alpha: 0.2),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  Divider(color: colorScheme.onSurface.withValues(alpha: 0.2)),
-                ],
-              ),
-            ),
 
-            // Account & Security
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Text(
-                'Account & Security',
-                style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w500),
-              ),
-            ),
-            ...accountKategori.map((String kategori) =>
-                buildKategoriSatiri(kategori, ekranGenisligi, context, colorScheme, textTheme, ref),),
+                    // Account & Security
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Text(
+                        'account_security'.tr(),
+                        style: textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    ...accountKategori.map(
+                      (String kategori) => buildKategoriSatiri(
+                        kategori.tr(),
+                        ekranGenisligi,
+                        context,
+                        colorScheme,
+                        textTheme,
+                        ref,
+                      ),
+                    ),
 
-            // Other
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Text(
-                'Other',
-                style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w500),
+                    // Other
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Text(
+                        'other'.tr(),
+                        style: textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    ...otherKategori.map(
+                      (String kategori) => buildKategoriSatiri(
+                        kategori.tr(),
+                        ekranGenisligi,
+                        context,
+                        colorScheme,
+                        textTheme,
+                        ref,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            ...otherKategori.map((String kategori) =>
-                buildKategoriSatiri(kategori, ekranGenisligi, context, colorScheme, textTheme, ref),),
-          ],
-        ),
-      ),
     );
   }
 
   /// Kategori satır widget'ı
   Widget buildKategoriSatiri(
-      String kategori,
-      double ekranGenisligi,
-      BuildContext context,
-      ColorScheme colorScheme,
-      TextTheme textTheme,
-      WidgetRef ref,
-      ) {
+    String kategori,
+    double ekranGenisligi,
+    BuildContext context,
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+    WidgetRef ref,
+  ) {
     return GestureDetector(
       onTap: () {
         switch (kategori) {
-          case 'Security Settings':
+          case 'Security Settings' || 'Güvenlik Ayarları':
             Navigator.push(
               context,
-              MaterialPageRoute<Widget>(builder: (_) => const SecuritySettings()),
+              MaterialPageRoute<Widget>(
+                builder: (_) => const SecuritySettings(),
+              ),
             );
 
-          case 'Delete Account':
+          case 'Delete Account' || 'Hesabı Sil':
             ref.read(authProvider).deleteAccount(context);
 
-          case 'Çıkış Yap':
+          case 'Çıkış Yap' || 'Logout':
             FirebaseAuth.instance.signOut();
 
-          case 'Profilim':
+          case 'Profilim' || 'My Profile':
             Navigator.push(
               context,
               MaterialPageRoute<Widget>(builder: (_) => const ProfileScreen()),
@@ -150,7 +200,11 @@ class AccountScreen extends ConsumerWidget {
             child: Row(
               children: <Widget>[
                 Expanded(child: Text(kategori, style: textTheme.bodyLarge)),
-                Icon(Icons.arrow_forward_ios, size: 18, color: colorScheme.onSurface),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 18,
+                  color: colorScheme.onSurface,
+                ),
               ],
             ),
           ),

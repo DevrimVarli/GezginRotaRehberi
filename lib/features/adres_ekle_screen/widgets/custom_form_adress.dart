@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:yeni_tasarim/features/adres_ekle_screen/widgets/custom_text_form_field.dart';
 import 'package:yeni_tasarim/services/validator.dart';
 
 class CustomFormAdress extends StatelessWidget {
-
   const CustomFormAdress({
     required this.adresim,
     required this.ilim,
@@ -51,15 +51,19 @@ class CustomFormAdress extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Form(
-      key: formKey, // Formun geçerliliğini kontrol etmek için kullanılan form key
+      key:
+          formKey, // Formun geçerliliğini kontrol etmek için kullanılan form key
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Dikeyde ortalanmış düzen
+        mainAxisAlignment:
+            MainAxisAlignment.spaceEvenly, // Dikeyde ortalanmış düzen
         children: <Widget>[
           // Başlık
           Text(
-            'Adres Bilgileri',
+            'address_info'.tr(),
             style: textTheme.titleMedium?.copyWith(
-              color: colorScheme.primary, // Başlık rengini tema ile uyumlu yapıyoruz
+              color:
+                  colorScheme
+                      .primary, // Başlık rengini tema ile uyumlu yapıyoruz
             ),
           ),
           // Adres alanı (Cadde, Sokak ve Diğer Bilgiler)
@@ -67,7 +71,7 @@ class CustomFormAdress extends StatelessWidget {
             controller: adresim,
             textTheme: textTheme,
             colorScheme: colorScheme,
-            label: 'Adres (Cadde,Sokak ve Diğer Bilgiler)', // Etiket
+            label: 'address_placeholder'.tr(), // Etiket
             validator: firstNameValidator, // Doğrulama fonksiyonu
             readOnly: false, // Kullanıcı adresi girebilir
           ),
@@ -80,7 +84,7 @@ class CustomFormAdress extends StatelessWidget {
                   controller: ilim,
                   textTheme: textTheme,
                   colorScheme: colorScheme,
-                  label: 'İl',
+                  label: 'province'.tr(),
                   validator: firstNameValidator,
                   readOnly: false,
                 ),
@@ -90,7 +94,7 @@ class CustomFormAdress extends StatelessWidget {
                   controller: ilcem,
                   textTheme: textTheme,
                   colorScheme: colorScheme,
-                  label: 'İlçe',
+                  label: 'district'.tr(),
                   validator: firstNameValidator,
                   readOnly: false,
                 ),
@@ -106,7 +110,7 @@ class CustomFormAdress extends StatelessWidget {
                   controller: mahallem,
                   textTheme: textTheme,
                   colorScheme: colorScheme,
-                  label: 'Mahalle',
+                  label: 'neighborhood'.tr(),
                   validator: firstNameValidator,
                   readOnly: false,
                 ),
@@ -116,7 +120,7 @@ class CustomFormAdress extends StatelessWidget {
                   controller: sokak,
                   textTheme: textTheme,
                   colorScheme: colorScheme,
-                  label: 'Sokak',
+                  label: 'street'.tr(),
                   validator: firstNameValidator,
                   readOnly: false,
                 ),
@@ -132,7 +136,7 @@ class CustomFormAdress extends StatelessWidget {
                   controller: binam,
                   textTheme: textTheme,
                   colorScheme: colorScheme,
-                  label: 'Bina No',
+                  label: 'building_number'.tr(),
                   validator: firstNameValidator,
                   readOnly: false,
                 ),
@@ -142,7 +146,7 @@ class CustomFormAdress extends StatelessWidget {
                   controller: katm,
                   textTheme: textTheme,
                   colorScheme: colorScheme,
-                  label: 'Kat',
+                  label: 'floor'.tr(),
                   validator: firstNameValidator,
                   readOnly: false,
                 ),
@@ -152,7 +156,7 @@ class CustomFormAdress extends StatelessWidget {
                   controller: dairem,
                   textTheme: textTheme,
                   colorScheme: colorScheme,
-                  label: 'Daire No',
+                  label: 'apartment_number'.tr(),
                   validator: firstNameValidator,
                   readOnly: false,
                 ),
@@ -164,7 +168,7 @@ class CustomFormAdress extends StatelessWidget {
             controller: adresTarifi,
             textTheme: textTheme,
             colorScheme: colorScheme,
-            label: 'Adres Tarifi',
+            label: 'address_recipe'.tr(),
             validator: firstNameValidator,
             readOnly: false,
           ),
@@ -173,16 +177,14 @@ class CustomFormAdress extends StatelessWidget {
             controller: adresBasligi,
             textTheme: textTheme,
             colorScheme: colorScheme,
-            label: 'Adres Başlığı',
+            label: 'address_title'.tr(),
             validator: firstNameValidator,
             readOnly: konumdanMiGeldi, // Eğer konumdan geldiyse readonly
           ),
           // İletişim Bilgileri başlığı
           Text(
-            'İletişim Bilgileri',
-            style: textTheme.titleMedium?.copyWith(
-              color: colorScheme.primary,
-            ),
+            'contact_info'.tr(),
+            style: textTheme.titleMedium?.copyWith(color: colorScheme.primary),
           ),
           // Ad ve Soyad için iki yan yana form alanı
           Row(
@@ -193,7 +195,7 @@ class CustomFormAdress extends StatelessWidget {
                   controller: ad,
                   textTheme: textTheme,
                   colorScheme: colorScheme,
-                  label: 'Ad',
+                  label: 'first_name'.tr(),
                   validator: firstNameValidator,
                   readOnly: false,
                 ),
@@ -203,7 +205,7 @@ class CustomFormAdress extends StatelessWidget {
                   controller: soyad,
                   textTheme: textTheme,
                   colorScheme: colorScheme,
-                  label: 'Soyad',
+                  label: 'last_name'.tr(),
                   validator: firstNameValidator,
                   readOnly: false,
                 ),
@@ -215,7 +217,7 @@ class CustomFormAdress extends StatelessWidget {
             controller: cepTelefonu,
             textTheme: textTheme,
             colorScheme: colorScheme,
-            label: 'Cep Telefonu',
+            label: 'phone_number'.tr(),
             validator: phoneNumberValidator, // Telefon numarası doğrulaması
             readOnly: false,
           ),

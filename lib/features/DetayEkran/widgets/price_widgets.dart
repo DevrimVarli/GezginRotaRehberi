@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yeni_tasarim/model/Restorantlar.dart';
@@ -12,7 +13,8 @@ class PriceWidgets extends StatelessWidget {
   });
 
   final Oteller? secilenOtel; // Seçilen otel (null olabileceği için opsiyonel)
-  final Restorantlar? secilenRestorant; // Seçilen restoran (null olabileceği için opsiyonel)
+  final Restorantlar?
+  secilenRestorant; // Seçilen restoran (null olabileceği için opsiyonel)
   final double ekranGenisligi; // Ekran genişliği
 
   @override
@@ -21,33 +23,43 @@ class PriceWidgets extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Container(
-      width: ekranGenisligi, // Ekran genişliğine uyacak şekilde boyutlandırıyoruz
+      width:
+          ekranGenisligi, // Ekran genişliğine uyacak şekilde boyutlandırıyoruz
       height: 80, // Sabit yükseklik
-      margin: const EdgeInsets.symmetric(horizontal: 20), // Yatayda boşluk ekliyoruz
-      padding: const EdgeInsets.symmetric(horizontal: 12), // İçerideki boşluklar
+      margin: const EdgeInsets.symmetric(
+        horizontal: 20,
+      ), // Yatayda boşluk ekliyoruz
+      padding: const EdgeInsets.symmetric(
+        horizontal: 12,
+      ), // İçerideki boşluklar
       decoration: BoxDecoration(
         color: colorScheme.surface, // Arka plan rengini temadan alıyoruz
         borderRadius: BorderRadius.circular(16), // Yuvarlak köşeler
         boxShadow: <BoxShadow>[
           // Gölge efekti ekliyoruz
           BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.05), // Gölge rengini tema ile uyumlu yapıyoruz
+            color: colorScheme.shadow.withValues(
+              alpha: 0.05,
+            ), // Gölge rengini tema ile uyumlu yapıyoruz
             blurRadius: 8, // Gölgenin bulanıklık miktarı
             offset: const Offset(0, 2), // Gölgenin kayma miktarı
           ),
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Elemanlar arasında boşluk bırakıyoruz
+        mainAxisAlignment:
+            MainAxisAlignment
+                .spaceBetween, // Elemanlar arasında boşluk bırakıyoruz
         children: <Widget>[
           // Fiyat bilgisi kısmı
           Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Yükseklik ortalamayı sağlıyoruz
+            mainAxisAlignment:
+                MainAxisAlignment.center, // Yükseklik ortalamayı sağlıyoruz
             crossAxisAlignment: CrossAxisAlignment.start, // Soldan hizalama
             children: <Widget>[
               // Fiyat metni
               Text(
-                'Price',
+                'price'.tr(),
                 style: GoogleFonts.roboto(
                   fontSize: 18, // Yazı boyutu
                   color: colorScheme.onSurface, // Yazı rengi tema ile uyumlu
@@ -78,13 +90,18 @@ class PriceWidgets extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: colorScheme.primary, // Butonun arka plan rengi
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12), // Buton içi padding
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ), // Buton içi padding
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12), // Yuvarlatılmış köşeler
+                  borderRadius: BorderRadius.circular(
+                    12,
+                  ), // Yuvarlatılmış köşeler
                 ),
               ),
               child: Text(
-                'Book Now →', // Buton metni
+                'book_now'.tr(), // Buton metni
                 style: GoogleFonts.roboto(
                   fontSize: 20, // Yazı boyutu
                   color: colorScheme.onPrimary, // Yazı rengi tema ile uyumlu

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -53,21 +54,22 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
 
     // Konum yüklenene kadar gösterilecek ekran
     if (baslangicKonum == null || isLoading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorScheme.primary,
-        title: const Text('Konum Seç'),
+        title: Text('choose_location'.tr()),
         centerTitle: true,
       ),
       body: FlutterMap(
         options: MapOptions(
           // Harita ilk açıldığında başlangıç konumunu göster
-          initialCenter: LatLng(baslangicKonum.latitude, baslangicKonum.longitude),
+          initialCenter: LatLng(
+            baslangicKonum.latitude,
+            baslangicKonum.longitude,
+          ),
 
           // Haritaya dokunulduğunda seçilen konumu güncelle
           onTap: (TapPosition tapPosition, LatLng point) {
@@ -78,7 +80,7 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
           // Harita katmanı
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName: 'com.example.uygulaman',
+            userAgentPackageName: 'com.example.yeni_tasarim',
           ),
 
           // Seçilen konumu işaretle
@@ -89,7 +91,11 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
                   point: secilenKonumLatLng,
                   width: 80,
                   height: 80,
-                  child: const Icon(Icons.location_pin, size: 40, color: Colors.red),
+                  child: const Icon(
+                    Icons.location_pin,
+                    size: 40,
+                    color: Colors.red,
+                  ),
                 ),
               ],
             ),
@@ -120,13 +126,14 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
             await Navigator.pushReplacement(
               context,
               MaterialPageRoute<Widget>(
-                builder: (BuildContext context) => AdresScreenDetay(
-                  adresAdi: adresYaniti.displayName,
-                  ilAdi: konum.sehirAdi,
-                  ilceAdi: konum.ilceAdi,
-                  mahalleAdi: adresYaniti.adres.mahalleAdi,
-                  sokakAdi: adresYaniti.adres.sokakAdi,
-                ),
+                builder:
+                    (BuildContext context) => AdresScreenDetay(
+                      adresAdi: adresYaniti.displayName,
+                      ilAdi: konum.sehirAdi,
+                      ilceAdi: konum.ilceAdi,
+                      mahalleAdi: adresYaniti.adres.mahalleAdi,
+                      sokakAdi: adresYaniti.adres.sokakAdi,
+                    ),
               ),
             );
           } else {
@@ -136,7 +143,7 @@ class _KonumSecPageState extends ConsumerState<KonumSecPage> {
             );
           }
         },
-        label: const Text('Seç ve Dön'),
+        label: Text('select_and_return').tr(),
         icon: const Icon(Icons.check),
       ),
     );

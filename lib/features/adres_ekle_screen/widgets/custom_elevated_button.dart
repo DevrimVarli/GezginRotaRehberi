@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 import 'package:yeni_tasarim/screens/adreslerim_screen.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-
   const CustomElevatedButton({
     required this.formKey,
     required this.adresim,
@@ -55,9 +55,13 @@ class CustomElevatedButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: colorScheme.primary, // Butonun arka plan rengini tema renklerinden alır
+          backgroundColor:
+              colorScheme
+                  .primary, // Butonun arka plan rengini tema renklerinden alır
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8), // Butonun köşe yuvarlama oranı
+            borderRadius: BorderRadius.circular(
+              8,
+            ), // Butonun köşe yuvarlama oranı
           ),
         ),
         onPressed: () async {
@@ -95,7 +99,7 @@ class CustomElevatedButton extends StatelessWidget {
         },
         child: Text(
           // Butonun etiketi, "Kaydet" veya "Adresimi Kaydet" olarak değişir
-          konumdanMiGeldi ? 'Kaydet' : 'Adresimi Kaydet',
+          konumdanMiGeldi ? 'create'.tr() : 'save_address'.tr(),
           style: textTheme.titleMedium?.copyWith(
             color: Colors.white, // Buton üzerindeki yazının rengi
           ),

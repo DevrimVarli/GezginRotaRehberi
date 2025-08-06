@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,7 +22,7 @@ class CustomSignInOrientation extends ConsumerWidget {
       children: <Widget>[
         // Kullanıcıya mesaj metni
         Text(
-          'Already have an account?',
+          'already'.tr(),
           style: textTheme.bodyMedium, // Temaya uygun metin stili
         ),
         // "Login here" butonu, tıklanınca kayitMi durumu değişir
@@ -31,7 +32,7 @@ class CustomSignInOrientation extends ConsumerWidget {
             ref.read(kayitMiProvider.notifier).state = !kayitMi;
           },
           child: Text(
-            'Login here',
+            'login_here'.tr(),
             style: TextStyle(
               fontSize: 18, // Metin boyutu
               color: colorScheme.onSurface, // Metin rengi tema ile uyumlu

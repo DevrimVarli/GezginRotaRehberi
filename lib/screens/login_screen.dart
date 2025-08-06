@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yeni_tasarim/features/sig_up_screen/custom_create_button.dart';
@@ -30,91 +31,119 @@ class LoginScreen extends ConsumerWidget {
       // Tema zemin rengi
       backgroundColor: colorScheme.surface,
       // Eğer kayıt ekranı ise
-      body: kayitMi
-          ? Padding(
-        padding:
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                // "Sign Up" başlığı
-                const CustomTextSignUp(),
-                // Kayıt formu
-                CustomSignUpForm(formKey: formKey),
-                // Kayıt ol butonu
-                CustomCreateButton(formKey: formKey),
-                // "Already have an account?" yönlendirmesi
-                const CustomSignInOrientation(),
-              ],
-            ),
-          ),
-        ),
-      )
-      // Eğer giriş ekranı ise
-          : Padding(
-        padding:
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // Tema değiştirme butonu (sağ üst)
-                const Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 5, right: 5),
-                    child: CustomThemeChangeButton(),
-                  ),
+      body:
+          kayitMi
+              ? Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 12,
                 ),
-                // Logo + Hoş geldiniz yazısı
-                const CustomLogoAndWelcomeText(),
-                // Kullanıcı giriş formu
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: CustomForm(formKey: formKey),
-                ),
-                // Şifremi unuttum butonu
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Forgot Password?',
-                      style: textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: colorScheme.primary,
-                      ),
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        // "Sign Up" başlığı
+                        const CustomTextSignUp(),
+                        // Kayıt formu
+                        CustomSignUpForm(formKey: formKey),
+                        // Kayıt ol butonu
+                        CustomCreateButton(formKey: formKey),
+                        // "Already have an account?" yönlendirmesi
+                        const CustomSignInOrientation(),
+                      ],
                     ),
                   ),
                 ),
-                // Giriş yap butonu
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: CustomLogInButton(formKey: formKey),
+              )
+              // Eğer giriş ekranı ise
+              : Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 12,
                 ),
-                // Alternatif giriş açıklaması
-                Text(
-                  'OR sign up using',
-                  style: textTheme.bodyMedium?.copyWith(
-                    color:
-                    colorScheme.onSurface.withValues(alpha: 0.8),
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        // Tema değiştirme butonu (sağ üst)
+                        Row(
+                          children: [
+                            Spacer(),
+                            if (context.locale.languageCode == 'tr')
+                              TextButton.icon(
+                                onPressed: () {
+                                  context.setLocale(const Locale('en'));
+                                },
+                                label: const Text(
+                                  'TR',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                icon: const Icon(Icons.language),
+                              )
+                            else
+                              TextButton.icon(
+                                onPressed: () {
+                                  context.setLocale(const Locale('tr'));
+                                },
+                                label: const Text(
+                                  'EN',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                icon: const Icon(Icons.language),
+                              ),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 5, right: 5),
+                              child: CustomThemeChangeButton(),
+                            ),
+                          ],
+                        ),
+                        // Logo + Hoş geldiniz yazısı
+                        const CustomLogoAndWelcomeText(),
+                        // Kullanıcı giriş formu
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: CustomForm(formKey: formKey),
+                        ),
+                        // Şifremi unuttum butonu
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'forgot_password'.tr(),
+                              style: textTheme.labelMedium?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                        ),
+                        // Giriş yap butonu
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: CustomLogInButton(formKey: formKey),
+                        ),
+                        // Alternatif giriş açıklaması
+                        Text(
+                          'sign_up_using'.tr(),
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.onSurface.withValues(alpha: 0.8),
+                          ),
+                        ),
+                        // Google ile giriş butonu
+                        const Padding(
+                          padding: EdgeInsets.all(8),
+                          child: CustomSignInGoogleButton(),
+                        ),
+                        // Kayıt ol yönlendirmesi
+                        const CustomSignUpButton(),
+                      ],
+                    ),
                   ),
                 ),
-                // Google ile giriş butonu
-                const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: CustomSignInGoogleButton(),
-                ),
-                // Kayıt ol yönlendirmesi
-                const CustomSignUpButton(),
-              ],
-            ),
-          ),
-        ),
-      ),
+              ),
     );
   }
 }

@@ -1,12 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
 import 'package:yeni_tasarim/providers/all_providers.dart';
 
 class CustomRestoranButton extends ConsumerWidget {
-
   const CustomRestoranButton({super.key, required this.pageController});
-  final PageController pageController; // Sayfa kontrolcüsü, sayfalar arasında geçişi sağlar.
+  final PageController
+  pageController; // Sayfa kontrolcüsü, sayfalar arasında geçişi sağlar.
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,10 +20,15 @@ class CustomRestoranButton extends ConsumerWidget {
     return TextButton(
       style: TextButton.styleFrom(
         // Butonun arka plan rengi, favori durumuna göre değişiyor
-        backgroundColor: favoriteButtonState
-            ? Colors.transparent // Favori değilse şeffaf
-            : colorScheme.primary.withValues(alpha: 0.75), // Favori ise ana renk tonu
-        shape: const RoundedRectangleBorder( // Butonun kenarlarını yuvarlatıyoruz
+        backgroundColor:
+            favoriteButtonState
+                ? Colors
+                    .transparent // Favori değilse şeffaf
+                : colorScheme.primary.withValues(
+                  alpha: 0.75,
+                ), // Favori ise ana renk tonu
+        shape: const RoundedRectangleBorder(
+          // Butonun kenarlarını yuvarlatıyoruz
         ),
       ),
       onPressed: () {
@@ -35,11 +41,14 @@ class CustomRestoranButton extends ConsumerWidget {
         );
       },
       child: Text(
-        'Restoranlar', // Buton metni
+        'food'.tr(), // Buton metni
         style: TextStyle(
-          color: favoriteButtonState
-              ? colorScheme.onSurface // Favori değilse metin rengi yüzeydeki metin rengi
-              : colorScheme.onPrimary, // Favori ise metin rengi ana rengiyle uyumlu
+          color:
+              favoriteButtonState
+                  ? colorScheme
+                      .onSurface // Favori değilse metin rengi yüzeydeki metin rengi
+                  : colorScheme
+                      .onPrimary, // Favori ise metin rengi ana rengiyle uyumlu
           fontWeight: FontWeight.w600, // Yazı kalınlığı
         ),
       ),

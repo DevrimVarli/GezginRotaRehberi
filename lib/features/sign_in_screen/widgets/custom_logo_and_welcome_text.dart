@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,20 +25,26 @@ class CustomLogoAndWelcomeText extends StatelessWidget {
             color: colorScheme.primary, // Tema renk şeması ile uyumlu renk
           ),
         ),
-        SizedBox(height: ekranYuksekligi / 13), // LOGO ve diğer metinler arasında boşluk bırakıyoruz
+        SizedBox(
+          height: ekranYuksekligi / 13,
+        ), // LOGO ve diğer metinler arasında boşluk bırakıyoruz
         // Hoş geldiniz metni
         Text(
-          'Welcome Back!',
+          'welcome'.tr(),
           style: textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold, // Metnin kalın olmasını sağlıyoruz
           ),
         ),
-        const SizedBox(height: 10), // Hoş geldiniz ve giriş metinleri arasında boşluk
+        const SizedBox(
+          height: 10,
+        ), // Hoş geldiniz ve giriş metinleri arasında boşluk
         // "Login to your account" metni
         Text(
-          'Login to your account',
+          'account_text'.tr(),
           style: textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurface.withValues(alpha: 0.7), // Yumuşak bir renk tonu
+            color: colorScheme.onSurface.withValues(
+              alpha: 0.7,
+            ), // Yumuşak bir renk tonu
           ),
         ),
         const SizedBox(height: 30), // Sonra gelen elemanlara boşluk bırakıyoruz
