@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
-
 import 'package:yeni_tasarim/model/adres_bilgisi.dart';
 import 'package:yeni_tasarim/model/adres_yaniti.dart';
-import 'package:yeni_tasarim/model/konum.dart';
 import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 
 /// Adres verileriyle ilgili işlemleri yöneten repository sınıfı.
@@ -12,24 +10,9 @@ class AdresRepo {
   final Dio dio = Dio();
 
   /// Tüm şehir/ilçe konum listesi
-  List<Konum> konumList = <Konum>[];
 
   /// Kullanıcının kaydettiği konum listesi
   List<KullaniciKonumFreezed> kullaniciKonumList = <KullaniciKonumFreezed>[];
-
-  /// Statik olarak birkaç konum ekler ve geri döner
-  List<Konum> konumlar() {
-    Konum konum1 = Konum('Bursa', 'Osmangazi');
-    Konum konum2 = Konum('Bursa', 'Nilüfer');
-    Konum konum3 = Konum('Bursa', 'Mudanya');
-
-    konumList
-      ..add(konum1)
-      ..add(konum2)
-      ..add(konum3);
-
-    return konumList;
-  }
 
   /// Örnek kullanıcı konum listesi oluşturur
   List<KullaniciKonumFreezed> kullaniciKonumkonumlar() {
@@ -51,18 +34,6 @@ class AdresRepo {
 
     kullaniciKonumList.add(konum1);
     return kullaniciKonumList;
-  }
-
-  /// Yeni bir konum ekler
-  List<Konum> konumEkle(Konum konum) {
-    konumList.add(konum);
-    return konumList;
-  }
-
-  /// Var olan konumu listeden siler
-  List<Konum> konumSil(Konum konum) {
-    konumList.remove(konum);
-    return konumList;
   }
 
   /// Verilen latitude & longitude bilgisine göre

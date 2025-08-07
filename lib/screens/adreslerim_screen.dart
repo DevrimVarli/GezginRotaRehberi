@@ -188,9 +188,29 @@ class AdresScreen extends ConsumerWidget {
                                           style: textTheme.titleSmall,
                                         ),
                                         IconButton(
-                                          onPressed: () {
-                                            // Silme işleminde kullanıcı onayı iste
-                                            box.delete(konum.adresBasligi);
+                                          onPressed: () async {
+                                            Konum mevcutKonum =
+                                                ref
+                                                    .read(
+                                                      secilemKonumStateProvider
+                                                          .notifier,
+                                                    )
+                                                    .state;
+
+                                            if (mevcutKonum.sehirAdi ==
+                                                    konum.sehirAdi &&
+                                                mevcutKonum.ilceAdi ==
+                                                    konum.ilceAdi) {
+                                              ref
+                                                  .read(
+                                                    secilemKonumStateProvider
+                                                        .notifier,
+                                                  )
+                                                  .state = Konum('', '');
+                                            }
+                                            await box.delete(
+                                              konum.adresBasligi,
+                                            );
                                           },
                                           icon: const Icon(Icons.delete),
                                         ),

@@ -21,13 +21,42 @@ class KonumSecPage extends ConsumerStatefulWidget {
   ConsumerState<KonumSecPage> createState() => _KonumSecPageState();
 }
 
-class _KonumSecPageState extends ConsumerState<KonumSecPage> {
+class _KonumSecPageState extends ConsumerState<KonumSecPage>
+    with WidgetsBindingObserver {
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _baslangicKonumunuAl();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      isLoading = true;
+      setState(() {});
+      //print('📲 Uygulama ayarlardan geri döndü');
+
+      // Konum servisleri açılmış mı kontrol et
+      Geolocator.isLocationServiceEnabled().then((bool enabled) async {
+        if (enabled) {
+          // print('✅ Konum servisi artık açık');
+          await _baslangicKonumunuAl();
+        } else {
+          //print('❌ Konum servisi hâlâ kapalı');
+          if (!mounted) return;
+          Navigator.pop(context);
+        }
+      });
+    }
   }
 
   /// Cihazın mevcut konumunu alır ve provider'lara set eder.

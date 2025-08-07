@@ -56,7 +56,8 @@ dependencies:
   hive_ce: ^2.2.1
   hive_ce_flutter:
   hive_ce_generator:
-  hive_flutter:
+  hive_flutter: 
+
   flutter_native_splash: ^2.4.6
   flutter_launcher_icons: ^0.14.4
   firebase_messaging: ^15.2.10

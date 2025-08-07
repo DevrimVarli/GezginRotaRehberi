@@ -10,7 +10,6 @@ import 'package:yeni_tasarim/model/konum.dart';
 import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
 import 'package:yeni_tasarim/providers/kullanici_konumlar_notifier.dart';
-import 'package:yeni_tasarim/repository/adres_repo.dart';
 import 'package:yeni_tasarim/repository/icon_repo.dart';
 import 'package:yeni_tasarim/repository/kategori_repo.dart';
 import 'package:yeni_tasarim/repository/otel_repo.dart';
@@ -45,16 +44,8 @@ final Provider<List<String>> kategoriFutureProvider = Provider<List<String>>((
 
 /// Seçili konumu tutan StateProvider (başlangıç: Bursa / Osmangazi)
 final StateProvider<Konum> secilemKonumStateProvider = StateProvider<Konum>(
-  (Ref ref) => Konum('Bursa', 'Osmangazi'),
+  (Ref ref) => Konum('', ''),
 );
-
-/// Tüm konumları sağlayan StateProvider
-final StateProvider<List<Konum>> konumlarProvider = StateProvider<List<Konum>>((
-  Ref ref,
-) {
-  ref.keepAlive();
-  return AdresRepo().konumlar();
-});
 
 /// Kullanıcı konumlarını yöneten StateNotifierProvider
 final StateNotifierProvider<
