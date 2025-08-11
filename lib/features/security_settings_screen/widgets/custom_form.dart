@@ -18,6 +18,12 @@ class CustomForm extends ConsumerStatefulWidget {
   final TextEditingController controllerMail;
   final TextEditingController controllerCurrentPassword;
   final TextEditingController controllerNewPassword;
+  void dispose() {
+    // TextEditingController'ları temizler
+    controllerMail.dispose();
+    controllerCurrentPassword.dispose();
+    controllerNewPassword.dispose();
+  }
 
   @override
   ConsumerState<CustomForm> createState() => _CustomFormState();

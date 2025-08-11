@@ -40,6 +40,22 @@ class CustomElevatedButton extends StatelessWidget {
   final TextEditingController soyad;
   final TextEditingController cepTelefonu;
   final TextEditingController sokak;
+  void dispose() {
+    // TextEditingController'ları temizler
+    adresim.dispose();
+    ilim.dispose();
+    ilcem.dispose();
+    mahallem.dispose();
+    binam.dispose();
+    katm.dispose();
+    dairem.dispose();
+    adresTarifi.dispose();
+    adresBasligi.dispose();
+    ad.dispose();
+    soyad.dispose();
+    cepTelefonu.dispose();
+    sokak.dispose();
+  }
 
   // Hive box nesnesi ve verilerin geldiği konum durumu
   final Box<KullaniciKonumFreezed> box;

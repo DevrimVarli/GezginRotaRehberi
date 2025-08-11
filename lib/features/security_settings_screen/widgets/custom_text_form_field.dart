@@ -18,6 +18,10 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?) validator; // Doğrulama fonksiyonu
   final String hintText; // Placeholder metni
   final ColorScheme colorScheme; // Tema renk düzeni
+  void dispose() {
+    // TextEditingController'ı temizler
+    tfc.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,9 @@ class CustomTextFormField extends StatelessWidget {
         hintText: hintText, // Placeholder metni
         prefixIcon: icon, // Başlangıçta gösterilecek ikon
         filled: true, // Arka plan rengini dolu yapar
-        fillColor: colorScheme.onSurface.withValues(alpha: 0.2), // Arka plan rengi, %20 opaklıkla
+        fillColor: colorScheme.onSurface.withValues(
+          alpha: 0.2,
+        ), // Arka plan rengi, %20 opaklıkla
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12), // Kenar yuvarlama
           borderSide: BorderSide.none, // Sınır çizgisi yok

@@ -15,6 +15,14 @@ class CustomLogInButton extends ConsumerStatefulWidget {
 
 class _CustomLogInButtonState extends ConsumerState<CustomLogInButton> {
   @override
+  void dispose() {
+    super.dispose();
+    // Formda kullanılan tüm TextEditingController'ları temizler
+    ref.read(emailControllerProvider).dispose();
+    ref.read(passwordControllerProvider).dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Ekranın genişliğini ve yüksekliğini alıyoruz
     double ekranGenisligi = MediaQuery.sizeOf(context).width;

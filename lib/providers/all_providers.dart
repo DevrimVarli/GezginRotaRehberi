@@ -4,12 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:yeni_tasarim/model/imkanlar.dart';
-
 import 'package:yeni_tasarim/model/restorantlar.dart';
 import 'package:yeni_tasarim/model/konum.dart';
-import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 import 'package:yeni_tasarim/model/oteller.dart';
-import 'package:yeni_tasarim/providers/kullanici_konumlar_notifier.dart';
 import 'package:yeni_tasarim/repository/icon_repo.dart';
 import 'package:yeni_tasarim/repository/kategori_repo.dart';
 import 'package:yeni_tasarim/repository/otel_repo.dart';
@@ -47,7 +44,7 @@ final StateProvider<Konum> secilemKonumStateProvider = StateProvider<Konum>(
   (Ref ref) => Konum('', ''),
 );
 
-/// Kullanıcı konumlarını yöneten StateNotifierProvider
+/* /// Kullanıcı konumlarını yöneten StateNotifierProvider
 final StateNotifierProvider<
   KullaniciKonumlarNotifier,
   List<KullaniciKonumFreezed>
@@ -56,6 +53,7 @@ kullaniciKonumlarProvider = StateNotifierProvider<
   KullaniciKonumlarNotifier,
   List<KullaniciKonumFreezed>
 >((Ref ref) => KullaniciKonumlarNotifier());
+ */
 
 /// Ana sayfa alt menü seçili index
 final StateProvider<int> selectedIndexProvider = StateProvider<int>(

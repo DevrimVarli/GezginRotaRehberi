@@ -34,6 +34,15 @@ class _SecuritySettingsState extends ConsumerState<SecuritySettings> {
   }
 
   @override
+  void dispose() {
+    // TextEditingController'ları temizler
+    mailController.dispose();
+    passwordController.dispose();
+    newPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
 

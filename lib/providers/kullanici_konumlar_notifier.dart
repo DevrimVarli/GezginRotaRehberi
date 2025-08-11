@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+/*import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yeni_tasarim/model/kullanici_konum_freezed.dart';
 
 /// Kullanıcı konumlarını yöneten StateNotifier sınıfı.
@@ -27,4 +27,4 @@ class KullaniciKonumlarNotifier extends StateNotifier<List<KullaniciKonumFreezed
           konum,
     ];
   }
-}
+}*/

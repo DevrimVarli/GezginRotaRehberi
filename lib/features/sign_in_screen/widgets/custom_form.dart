@@ -17,6 +17,14 @@ class CustomForm extends ConsumerStatefulWidget {
 
 class _CustomFormState extends ConsumerState<CustomForm> {
   @override
+  void dispose() {
+    super.dispose();
+    // Formda kullanılan tüm TextEditingController'ları temizler
+    ref.read(emailControllerProvider).dispose();
+    ref.read(passwordControllerProvider).dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Riverpod ile form elemanlarını kontrol etmek için gerekli olan controller'ları alıyoruz
     TextEditingController emailController = ref.watch(emailControllerProvider);

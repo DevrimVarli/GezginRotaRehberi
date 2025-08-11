@@ -20,6 +20,12 @@ class CustomElevatedButtonSecurityScreen extends ConsumerWidget {
   final TextEditingController newPasswordController;
   final GlobalKey<FormState>
   formKey; // Formun global key'ini alır, formun durumunu yönetmek için kullanılır
+  void dispose() {
+    // TextEditingController'ları temizler
+    mailController.dispose();
+    passwordController.dispose();
+    newPasswordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

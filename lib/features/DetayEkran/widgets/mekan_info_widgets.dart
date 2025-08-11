@@ -42,7 +42,7 @@ class MekanInfoWidgets extends StatelessWidget {
                                   : secilenRestorant!.restoranAd.length) >
                               24
                           ? 14 // Uzun adlar için font boyutu küçültülür
-                          : 24, // Kısa adlar için font boyutu 24
+                          : 20, // Kısa adlar için font boyutu 24
                   color: colorScheme.onSurface, // Yazı rengi tema ile uyumlu
                   fontWeight: FontWeight.bold, // Yazı kalınlığı
                 ),

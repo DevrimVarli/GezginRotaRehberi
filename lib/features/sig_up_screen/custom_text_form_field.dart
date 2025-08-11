@@ -25,6 +25,10 @@ class CustomTextFormField extends ConsumerWidget {
 
   // Giriş alanının başında gösterilecek ikon
   final Icon icon;
+  void dispose() {
+    // TextEditingController'ı temizler
+    tfc.dispose();
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,9 +46,13 @@ class CustomTextFormField extends ConsumerWidget {
         hintText: hintText, // Placeholder metni
         prefixIcon: icon, // Alanın başındaki ikon
         filled: true, // Alanın arka plan rengini aktif eder
-        fillColor: colorScheme.onSurfaceVariant.withValues(alpha: 0.05), // Arka plan rengi, tema ile uyumlu
+        fillColor: colorScheme.onSurfaceVariant.withValues(
+          alpha: 0.05,
+        ), // Arka plan rengi, tema ile uyumlu
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12), // Alanın yuvarlatılmış köşeleri
+          borderRadius: BorderRadius.circular(
+            12,
+          ), // Alanın yuvarlatılmış köşeleri
           borderSide: BorderSide.none, // Sınır çizgisi yok
         ),
       ),

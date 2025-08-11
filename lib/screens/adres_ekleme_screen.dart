@@ -38,6 +38,25 @@ class AdresScreenDetay extends ConsumerStatefulWidget {
 }
 
 class _AdresScreenDetayState extends ConsumerState<AdresScreenDetay> {
+  @override
+  void dispose() {
+    super.dispose();
+    // TextEditingController'ları temizler
+    adresim.dispose();
+    ilim.dispose();
+    ilcem.dispose();
+    mahallem.dispose();
+    binam.dispose();
+    katm.dispose();
+    dairem.dispose();
+    adresTarifi.dispose();
+    adresBasligi.dispose();
+    ad.dispose();
+    soyad.dispose();
+    cepTelefonu.dispose();
+    sokak.dispose();
+  }
+
   // Form alanlarının controller'ları
   final TextEditingController adresim = TextEditingController();
   final TextEditingController ilim = TextEditingController();

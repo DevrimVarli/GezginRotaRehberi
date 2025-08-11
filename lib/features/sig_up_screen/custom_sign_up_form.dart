@@ -16,6 +16,18 @@ class CustomSignUpForm extends ConsumerStatefulWidget {
 
 class _CustomSignUpFormState extends ConsumerState<CustomSignUpForm> {
   @override
+  void dispose() {
+    super.dispose();
+    // Formda kullanılan tüm TextEditingController'ları temizler
+    ref.read(emailControllerProvider).dispose();
+    ref.read(passwordControllerProvider).dispose();
+    ref.read(firstNameControllerProvider).dispose();
+    ref.read(lastNameControllerProvider).dispose();
+    ref.read(userNameControllerProvider).dispose();
+    ref.read(phoneNumberControllerProvider).dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // TextEditingController'ları Riverpod'dan alıyoruz
     TextEditingController emailController = ref.watch(emailControllerProvider);

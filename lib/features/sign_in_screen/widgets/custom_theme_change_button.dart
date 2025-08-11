@@ -14,13 +14,16 @@ class CustomThemeChangeButton extends ConsumerWidget {
       // Tema moduna göre ikon değişir
       icon: Icon(
         themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
-        color: Theme.of(context).colorScheme.primary, // İkonun rengi, tema ile uyumlu
+        color:
+            Theme.of(
+              context,
+            ).colorScheme.primary, // İkonun rengi, tema ile uyumlu
       ),
       onPressed: () {
         // Mevcut tema modunu alır ve tersine çevirir
         ThemeMode current = ref.read(themeModeProvider);
         ref.read(themeModeProvider.notifier).state =
-        current == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+            current == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
       },
     );
   }

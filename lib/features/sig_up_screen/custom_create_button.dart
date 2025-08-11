@@ -15,6 +15,18 @@ class CustomCreateButton extends ConsumerStatefulWidget {
 
 class _CustomCreateButtonState extends ConsumerState<CustomCreateButton> {
   @override
+  void dispose() {
+    super.dispose();
+    // Formda kullanılan tüm TextEditingController'ları temizler
+    ref.read(emailControllerProvider).dispose();
+    ref.read(passwordControllerProvider).dispose();
+    ref.read(firstNameControllerProvider).dispose();
+    ref.read(lastNameControllerProvider).dispose();
+    ref.read(userNameControllerProvider).dispose();
+    ref.read(phoneNumberControllerProvider).dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Form inputları için gerekli olan controller'ları Riverpod provider'dan alıyoruz
     TextEditingController emailController = ref.watch(emailControllerProvider);
