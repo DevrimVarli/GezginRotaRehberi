@@ -6,18 +6,18 @@ import { areImagesEqual } from "config";
 
 declare global {
 	interface Window {
-		openLightbox: (index: number, device: "iphone" | "ipad") => void;
+		openLightbox: (index: number, device: "iphone" | "android") => void;
 	}
 }
 
 const Lightbox = ({ images }: LightboxProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [currentIndex, setCurrentIndex] = useState(0);
-	const [activeDevice, setActiveDevice] = useState<"iphone" | "ipad">("iphone");
+	const [activeDevice, setActiveDevice] = useState<"iphone" | "android">("iphone");
 	const currentImages = images[activeDevice];
 
 	useEffect(() => {
-		window.openLightbox = (index: number, device: "iphone" | "ipad") => {
+		window.openLightbox = (index: number, device: "iphone" | "android") => {
 			setCurrentIndex(index);
 			setActiveDevice(device);
 			setIsOpen(true);

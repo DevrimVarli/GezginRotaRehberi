@@ -4,7 +4,7 @@ import type { DeviceToggleProps } from "config";
 
 const DeviceToggle = ({ activeDevice, onToggle }: DeviceToggleProps) => (
 	<div className="flex items-center justify-center gap-1.5 rounded-lg border border-gray-300 dark:border-white/10 bg-gray-200/80 dark:bg-white/[0.03] p-1 shadow-sm">
-		{(["iphone", "ipad"] as const).map((device) => (
+		{(["iphone", "android"] as const).map((device) => (
 			<DeviceButton
 				key={device}
 				isActive={activeDevice === device}

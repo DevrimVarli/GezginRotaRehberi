@@ -38,7 +38,7 @@
   </tr>
   <tr>
     <td>🖼️ <strong>Device Preview</strong></td>
-    <td>Interactive toggle between iPhone and iPad screenshots with lightbox</td>
+    <td>Interactive toggle between iPhone and android screenshots with lightbox</td>
   </tr>
   <tr>
     <td>🎨 <strong>Modern UI/UX</strong></td>
@@ -153,7 +153,7 @@ export const features = [
 
 1. **Add your screenshots:**
    - iPhone screenshots: `public/screenshots/iphone/` (9:16 aspect ratio, ~260px width recommended)
-   - iPad screenshots: `public/screenshots/ipad/` (4:3 aspect ratio, ~360px width recommended)
+   - android screenshots: `public/screenshots/android/` (4:3 aspect ratio, ~360px width recommended)
 
 2. **Update screenshot paths in `src/config/screenshots.ts`:**
 
@@ -164,10 +164,10 @@ export const screenshots = {
     "screenshots/iphone/2.png",
     "screenshots/iphone/3.png"
   ],
-  ipad: [
-    "screenshots/ipad/1.png",
-    "screenshots/ipad/2.png",
-    "screenshots/ipad/3.png"
+  android: [
+    "screenshots/android/1.png",
+    "screenshots/android/2.png",
+    "screenshots/android/3.png"
   ]
 };
 ```

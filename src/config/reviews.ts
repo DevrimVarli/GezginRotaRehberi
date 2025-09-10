@@ -1,24 +1,24 @@
 import type { Review } from "./types";
 
 export const reviews: Review[] = [
-	{
-		author: "Sarah K.",
-		rating: 5,
-		text: "This app has completely transformed how I manage my daily tasks. The interface is intuitive and the performance is outstanding!",
-	},
-	{
-		author: "James M.",
-		rating: 5,
-		text: "I've tried dozens of similar apps, but this one stands out with its unique features and reliability. Highly recommended!",
-	},
-	{
-		author: "Elena T.",
-		rating: 4,
-		text: "Great app with impressive functionality. The recent update made it even better. Just a few minor UI improvements would make it perfect.",
-	},
-	{
-		author: "Michael R.",
-		rating: 5,
-		text: "Customer support is exceptional. Had an issue and they resolved it within hours. The app itself is fantastic too!",
-	},
+  {
+    author: "Ayşe Y.",
+    rating: 5,
+    text: "Ankara gezimde bu uygulama sayesinde hiç kaybolmadım. Rotalar çok doğru, zamanımı çok verimli kullandım!",
+  },
+  {
+    author: "Mehmet K.",
+    rating: 5,
+    text: "Favori mekan kaydetme özelliği harika. Bir dahaki seyahatimde görmek istediğim yerleri kolayca buluyorum.",
+  },
+  {
+    author: "Elif D.",
+    rating: 4,
+    text: "Offline harita gerçekten hayat kurtarıyor. İnternet çekmediği yerde bile rotaları açabildim. Sadece biraz daha fazla şehir eklenirse süper olur.",
+  },
+  {
+    author: "Can A.",
+    rating: 5,
+    text: "Turist dostu bir uygulama! Hem yerel öneriler veriyor hem de rota çok kolay takip ediliyor. Kesinlikle tavsiye ederim.",
+  },
 ];

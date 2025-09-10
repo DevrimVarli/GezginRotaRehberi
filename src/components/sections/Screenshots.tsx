@@ -5,7 +5,7 @@ import { areImagesEqual } from "config";
 import DeviceToggle from "../ui/DeviceToggle";
 
 const Screenshots = ({ images }: ScreenshotsProps) => {
-	const [activeDevice, setActiveDevice] = useState<"iphone" | "ipad">("iphone");
+	const [activeDevice, setActiveDevice] = useState<"iphone" | "android">("iphone");
 	const currentImages = images[activeDevice];
 	const isIphone = activeDevice === "iphone";
 
@@ -48,7 +48,7 @@ const Screenshots = ({ images }: ScreenshotsProps) => {
 										src={image}
 										alt={`Screenshot ${index + 1}`}
 										className={`rounded-xl border border-gray-300 dark:border-white/10 object-cover shadow-lg ${
-											isIphone ? "aspect-[9/16] w-[260px]" : "aspect-[4/3] w-[360px]"
+											isIphone ? "aspect-[9/16] w-[260px]" : "aspect-[9/16] w-[260px]"
 										}`}
 										loading="lazy"
 									/>

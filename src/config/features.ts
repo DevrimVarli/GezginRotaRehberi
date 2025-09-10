@@ -1,20 +1,23 @@
-import { FiBox, FiStar, FiZap } from "react-icons/fi";
+import { FiMap, FiStar, FiCompass } from "react-icons/fi";
 import type { Feature } from "./types";
 
 export const features: Feature[] = [
-	{
-		title: "Main Feature",
-		description: "Describe your main feature here. What makes it special?",
-		icon: FiStar,
-	},
-	{
-		title: "Another Feature",
-		description: "What else can your app do? Tell users about it here.",
-		icon: FiZap,
-	},
-	{
-		title: "One More Feature",
-		description: "Add another key feature of your application here.",
-		icon: FiBox,
-	},
+  {
+    title: "Akıllı Rota Önerileri",
+    description:
+      "Gezmek istediğin şehre özel en kısa ve en keyifli rotaları keşfet. Zamanını verimli kullan, daha çok yer gör.",
+    icon: FiCompass,
+  },
+  {
+    title: "Favori Mekanlarını Kaydet",
+    description:
+      "Beğendiğin restoran, müze veya parkları tek dokunuşla favorilerine ekle. Sonraki seyahatlerinde kolayca ulaş.",
+    icon: FiStar,
+  },
+  {
+    title: "Offline Harita Desteği",
+    description:
+      "İnternetin olmasa bile rotalarını görüntüle ve kaybolmadan gez. Seyahat ederken özgür ol!",
+    icon: FiMap,
+  },
 ];
